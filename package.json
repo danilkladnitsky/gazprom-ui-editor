@@ -1,8 +1,12 @@
 {
-  "name": "form-editor",
+  "name": "gazprom-ui-editor",
   "version": "1.0.0",
-  "description": "Редактор форм",
+  "description": "Редактор форм | G2 Корпорация",
   "main": "index.js",
+  "homepage": "https://github.com/danyaisyourhomie/gazprom-ui-editor",
+  "repository": {
+    "url": "https://github.com/danyaisyourhomie/gazprom-ui-editor"
+  },
   "scripts": {
     "start": "webpack serve --config webpack.config.js --env env=development",
     "build": "webpack --config webpack.config.js --env env=production",
