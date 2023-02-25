@@ -1,9 +1,5 @@
 name: Deploy React App
-on:
-  push:
-    branches: [ dev ]
-  open_pull_request:
-    branches: [ dev ]
+on: [pull_request, push]
 
 jobs:
   build_test:
