@@ -1,5 +1,5 @@
-import { IFormGroup, IFormItem, ITabPageController } from '../interfaces/form-config';
-import { IFormControl } from '../interfaces/form-control';
+import { IFormGroup, IFormItem, ITabPageController } from '../entities/interfaces/form-config';
+import { IFormControl } from '../entities/interfaces/form-control';
 
 /** Type Guards. */
 
