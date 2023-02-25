@@ -1,10 +1,10 @@
 import React from 'react';
-import { ComponentSettings, ComponentsPanel, ViewConfiguration } from 'widgets';
+import { ComponentSettings, ComponentsPanel, Configuration } from 'widgets';
 
 export const App: React.FC = () => {
   return <div>
     <ComponentsPanel />
-    <ViewConfiguration />
+    <Configuration />
     <ComponentSettings />
   </div>;
 };
