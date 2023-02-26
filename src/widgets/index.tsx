@@ -1,4 +1,5 @@
 import { lazy } from "react";
+
 import withSuspense from "shared/router/suspense";
 
 const CentralView = lazy(() => import("./ViewConfiguration"));
