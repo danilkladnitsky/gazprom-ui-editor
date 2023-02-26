@@ -1,8 +1,8 @@
-import React from 'react'
+import styles from "./styles.module.scss";
 
 const ComponentSettings = () => {
   return (
-    <div>index</div>
+    <div className={styles.settings}>ComponentSettings</div>
   )
 }
 

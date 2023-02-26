@@ -1,8 +1,9 @@
-import React from 'react'
+import styles from "./styles.module.scss";
+
 
 const ViewConfiguration = () => {
   return (
-    <div>ViewConfiguration</div>
+    <div className={styles.configuration}>ViewConfiguration</div>
   )
 }
 
