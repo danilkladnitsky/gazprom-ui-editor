@@ -4,7 +4,7 @@ import { DropdownInput, DropdownItem } from 'shared/ui/DropdownInput';
 
 import styles from "./styles.module.scss";
 import { TextInput } from 'shared/ui/TextInput';
-import { Checkbox, FormControl, FormControlLabel, Typography } from '@mui/material';
+import { Checkbox, FormControlLabel } from '@mui/material';
 import { Header } from 'shared/ui/Header';
 
 const DEFAULT_SOURCE: DropdownItem[] = [
