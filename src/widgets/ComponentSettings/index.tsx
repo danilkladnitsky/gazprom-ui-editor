@@ -7,7 +7,7 @@ const ComponentSettings = () => {
     <div className={styles.settings}>
       <EditComponent />
     </div>
-  )
-}
+  );
+};
 
 export default ComponentSettings;

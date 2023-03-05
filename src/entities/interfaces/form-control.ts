@@ -1,31 +1,31 @@
-import { IFormElement } from './form-element';
+import { IFormElement } from "./form-element";
 
 /** Тип элемента управления. */
 export enum CONTROL_TYPE {
   /** Чекбокс. */
-  CHECKBOX = 'CHECKBOX',
+  CHECKBOX = "CHECKBOX",
   /** Переключатель. */
-  SWITCH = 'SWITCH',
+  SWITCH = "SWITCH",
   /** Поле выбора даты. */
-  DATEPICKER = 'DATEPICKER',
+  DATEPICKER = "DATEPICKER",
   /** Поле выбора даты-времени. */
-  DATETIMEPICKER = 'DATETIMEPICKER',
+  DATETIMEPICKER = "DATETIMEPICKER",
   /** Число. */
-  NUMBER = 'NUMBER',
+  NUMBER = "NUMBER",
   /** Ссылка. */
-  LINK = 'LINK',
+  LINK = "LINK",
   /** Поле выбора файла. */
-  FILE = 'FILE',
+  FILE = "FILE",
   /** Текстовое поле. */
-  TEXT = 'TEXT',
+  TEXT = "TEXT",
   /** Многострочное текстовое поле. */
-  TEXTAREA = 'TEXTAREA',
+  TEXTAREA = "TEXTAREA",
   /** Радио-группа. */
-  RADIOGROUP = 'RADIOGROUP',
+  RADIOGROUP = "RADIOGROUP",
   /** Выпадающий список. */
-  COMBOBOX = 'COMBOBOX',
+  COMBOBOX = "COMBOBOX",
   /** Выпадающий список с текстовым поиском и возможностью множественного выбора. */
-  SELECT = 'SELECT',
+  SELECT = "SELECT",
 }
 
 /** Типы элементов управления. */
