@@ -1,14 +1,14 @@
-import { IFormControl } from './form-control';
-import { IFormElement } from './form-element';
+import { IFormControl } from "./form-control";
+import { IFormElement } from "./form-element";
 
 /** Направление группировки. */
 export enum FORM_GROUP_DIRECTION {
   /** Строго горизонтально. */
-  FORCE_HORIZONTAL = 'FORCE_HORIZONTAL',
+  FORCE_HORIZONTAL = "FORCE_HORIZONTAL",
   /** Горизонтально (возможен перенос на след. Строку (flex)). */
-  HORIZONTAL = 'HORIZONTAL',
+  HORIZONTAL = "HORIZONTAL",
   /** Вертикально. */
-  VERTICAL = 'VERTICAL',
+  VERTICAL = "VERTICAL",
 }
 
 /** Группа формы. */

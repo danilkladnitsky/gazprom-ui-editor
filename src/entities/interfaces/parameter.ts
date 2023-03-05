@@ -1,13 +1,13 @@
 /** Тип параметра операции. */
 export enum PARAMETER_TYPE {
-  STRING = 'string',
-  NUMBER = 'number',
-  INTEGER = 'integer',
-  BOOLEAN = 'boolean',
-  DATE = 'date',
-  DATETIME = 'dateTime',
-  REF = 'ref',
-  FILE = 'file',
+  STRING = "string",
+  NUMBER = "number",
+  INTEGER = "integer",
+  BOOLEAN = "boolean",
+  DATE = "date",
+  DATETIME = "dateTime",
+  REF = "ref",
+  FILE = "file",
 }
 
 /** Типы параметров операции. */

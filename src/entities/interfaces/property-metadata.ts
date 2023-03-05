@@ -2,21 +2,21 @@
  * Модуль содержит модели типов описания метаданных свойств элементов формы.
  */
 
-import { ControlTypes } from './form-control';
-import { ParameterTypes } from './parameter';
+import { ControlTypes } from "./form-control";
+import { ParameterTypes } from "./parameter";
 
 /** Тип значения свойства. */
 export enum PROPERTY_VALUE_TYPE {
   /** Строка. */
-  STRING = 'string',
+  STRING = "string",
   /** Целое число. */
-  INTEGER = 'integer',
+  INTEGER = "integer",
   /** Булево. */
-  BOOLEAN = 'boolean',
+  BOOLEAN = "boolean",
   /** Дата. */
-  DATE = 'date',
+  DATE = "date",
   /** Список выбора. */
-  LIST = 'list',
+  LIST = "list",
 }
 
 /** Конфигурация свойства. */
@@ -34,17 +34,17 @@ export interface IPropertyConfig {
 /** Тип элемента формы. */
 enum ELEMENT_TYPE {
   /** Обобщенный элемент. */
-  ELEMENT = 'ELEMENT',
+  ELEMENT = "ELEMENT",
   /** Форма. */
-  FORM = 'FORM',
+  FORM = "FORM",
   /** Страницы. */
-  PAGES = 'PAGES',
+  PAGES = "PAGES",
   /** Страница. */
-  PAGE = 'PAGE',
+  PAGE = "PAGE",
   /** Группа. */
-  GROUP = 'GROUP',
+  GROUP = "GROUP",
   /** Поле ввода. */
-  CONTROL = 'CONTROL',
+  CONTROL = "CONTROL",
 }
 
 type ElementTypes = keyof typeof ELEMENT_TYPE;
@@ -67,59 +67,124 @@ export interface IPropertyMetadata {
 export const metadata: IPropertyMetadata = {
   byElementType: {
     // Общие свойства для всех элементов.
-    ELEMENT: [{ code: 'title', name: 'Наименование', type: PROPERTY_VALUE_TYPE.STRING }],
+    ELEMENT: [
+      { code: "title", name: "Наименование", type: PROPERTY_VALUE_TYPE.STRING },
+    ],
     PAGES: [],
     PAGE: [],
     GROUP: [
       {
-        code: 'direction',
-        name: 'Ориентация',
+        code: "direction",
+        name: "Ориентация",
         type: PROPERTY_VALUE_TYPE.LIST,
-        options: ['FORCE_HORIZONTAL', 'HORIZONTAL', 'VERTICAL'],
+        options: ["FORCE_HORIZONTAL", "HORIZONTAL", "VERTICAL"],
       },
-      { code: 'showTitle', name: 'Отображать заголовок', type: PROPERTY_VALUE_TYPE.BOOLEAN },
+      {
+        code: "showTitle",
+        name: "Отображать заголовок",
+        type: PROPERTY_VALUE_TYPE.BOOLEAN,
+      },
     ],
     // Общие свойства для всех полей ввода
     CONTROL: [
-      { code: 'readonly', name: 'Только чтение', type: PROPERTY_VALUE_TYPE.BOOLEAN },
-      { code: 'hidden', name: 'Скрытый', type: PROPERTY_VALUE_TYPE.BOOLEAN },
-      { code: 'info', name: 'Информационное поле', type: PROPERTY_VALUE_TYPE.BOOLEAN },
-      { code: 'hint', name: 'Подсказка', type: PROPERTY_VALUE_TYPE.STRING },
+      {
+        code: "readonly",
+        name: "Только чтение",
+        type: PROPERTY_VALUE_TYPE.BOOLEAN,
+      },
+      { code: "hidden", name: "Скрытый", type: PROPERTY_VALUE_TYPE.BOOLEAN },
+      {
+        code: "info",
+        name: "Информационное поле",
+        type: PROPERTY_VALUE_TYPE.BOOLEAN,
+      },
+      { code: "hint", name: "Подсказка", type: PROPERTY_VALUE_TYPE.STRING },
     ],
   },
   byParameterType: {
     STRING: [
-      { code: 'multiline', name: 'Многострочный', type: PROPERTY_VALUE_TYPE.BOOLEAN },
-      { code: 'length', name: 'Длина', type: PROPERTY_VALUE_TYPE.INTEGER },
-      { code: 'counter', name: 'Счетчик символов', type: PROPERTY_VALUE_TYPE.BOOLEAN },
+      {
+        code: "multiline",
+        name: "Многострочный",
+        type: PROPERTY_VALUE_TYPE.BOOLEAN,
+      },
+      { code: "length", name: "Длина", type: PROPERTY_VALUE_TYPE.INTEGER },
+      {
+        code: "counter",
+        name: "Счетчик символов",
+        type: PROPERTY_VALUE_TYPE.BOOLEAN,
+      },
     ],
     INTEGER: [
-      { code: 'minValue', name: 'Минимальное значение', type: PROPERTY_VALUE_TYPE.INTEGER },
-      { code: 'maxValue', name: 'Максимальное значение', type: PROPERTY_VALUE_TYPE.INTEGER },
+      {
+        code: "minValue",
+        name: "Минимальное значение",
+        type: PROPERTY_VALUE_TYPE.INTEGER,
+      },
+      {
+        code: "maxValue",
+        name: "Максимальное значение",
+        type: PROPERTY_VALUE_TYPE.INTEGER,
+      },
     ],
     NUMBER: [
-      { code: 'minValue', name: 'Минимальное значение', type: PROPERTY_VALUE_TYPE.INTEGER },
-      { code: 'maxValue', name: 'Максимальное значение', type: PROPERTY_VALUE_TYPE.INTEGER },
-      { code: 'scale', name: 'Точность', type: PROPERTY_VALUE_TYPE.INTEGER },
+      {
+        code: "minValue",
+        name: "Минимальное значение",
+        type: PROPERTY_VALUE_TYPE.INTEGER,
+      },
+      {
+        code: "maxValue",
+        name: "Максимальное значение",
+        type: PROPERTY_VALUE_TYPE.INTEGER,
+      },
+      { code: "scale", name: "Точность", type: PROPERTY_VALUE_TYPE.INTEGER },
     ],
     BOOLEAN: [
-      { code: 'view', name: 'Вариант отображения', type: PROPERTY_VALUE_TYPE.LIST, options: ['CHECKBOX', 'SWITCH'] },
+      {
+        code: "view",
+        name: "Вариант отображения",
+        type: PROPERTY_VALUE_TYPE.LIST,
+        options: ["CHECKBOX", "SWITCH"],
+      },
     ],
     DATE: [
-      { code: 'minValue', name: 'Минимальное значение', type: PROPERTY_VALUE_TYPE.DATE },
-      { code: 'maxValue', name: 'Максимальное значение', type: PROPERTY_VALUE_TYPE.DATE },
+      {
+        code: "minValue",
+        name: "Минимальное значение",
+        type: PROPERTY_VALUE_TYPE.DATE,
+      },
+      {
+        code: "maxValue",
+        name: "Максимальное значение",
+        type: PROPERTY_VALUE_TYPE.DATE,
+      },
     ],
     DATETIME: [
-      { code: 'minValue', name: 'Минимальное значение', type: PROPERTY_VALUE_TYPE.DATE },
-      { code: 'maxValue', name: 'Максимальное значение', type: PROPERTY_VALUE_TYPE.DATE },
+      {
+        code: "minValue",
+        name: "Минимальное значение",
+        type: PROPERTY_VALUE_TYPE.DATE,
+      },
+      {
+        code: "maxValue",
+        name: "Максимальное значение",
+        type: PROPERTY_VALUE_TYPE.DATE,
+      },
     ],
-    FILE: [{ code: 'multiple', name: 'Выбирать несколько', type: PROPERTY_VALUE_TYPE.BOOLEAN }],
+    FILE: [
+      {
+        code: "multiple",
+        name: "Выбирать несколько",
+        type: PROPERTY_VALUE_TYPE.BOOLEAN,
+      },
+    ],
     REF: [
       {
-        code: 'view',
-        name: 'Вариант отображения',
+        code: "view",
+        name: "Вариант отображения",
         type: PROPERTY_VALUE_TYPE.LIST,
-        options: ['COMBOBOX', 'RADIOGROUP'],
+        options: ["COMBOBOX", "RADIOGROUP"],
       },
     ],
   },
@@ -129,8 +194,16 @@ export const metadata: IPropertyMetadata = {
     DATEPICKER: [],
     DATETIMEPICKER: [],
     FILE: [],
-    TEXT: [{ code: 'mask', name: 'Маска ввода', type: PROPERTY_VALUE_TYPE.STRING }],
-    TEXTAREA: [{ code: 'lineCount', name: 'Количество строк', type: PROPERTY_VALUE_TYPE.INTEGER }],
+    TEXT: [
+      { code: "mask", name: "Маска ввода", type: PROPERTY_VALUE_TYPE.STRING },
+    ],
+    TEXTAREA: [
+      {
+        code: "lineCount",
+        name: "Количество строк",
+        type: PROPERTY_VALUE_TYPE.INTEGER,
+      },
+    ],
     COMBOBOX: [],
     NUMBER: [],
     LINK: [],

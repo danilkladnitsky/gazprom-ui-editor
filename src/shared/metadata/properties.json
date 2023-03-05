@@ -14,11 +14,7 @@
         "code": "direction",
         "name": "Ориентация",
         "type": "list",
-        "options": [
-          "FORCE_HORIZONTAL",
-          "HORIZONTAL",
-          "VERTICAL"
-        ]
+        "options": ["FORCE_HORIZONTAL", "HORIZONTAL", "VERTICAL"]
       },
       {
         "code": "showTitle",
@@ -101,10 +97,7 @@
         "code": "view",
         "name": "Вариант отображения",
         "type": "list",
-        "options": [
-          "CHECKBOX",
-          "SWITCH"
-        ]
+        "options": ["CHECKBOX", "SWITCH"]
       }
     ],
     "DATE": [
@@ -143,10 +136,7 @@
         "code": "view",
         "name": "Вариант отображения",
         "type": "list",
-        "options": [
-          "COMBOBOX",
-          "RADIOGROUP"
-        ]
+        "options": ["COMBOBOX", "RADIOGROUP"]
       }
     ]
   },
