@@ -6,7 +6,6 @@ import styles from "./styles.module.scss";
 const ComponentsPanel = () => {
   return (
     <div className={styles.panel}>
-      <EditorActions />
       <SelectComponent />
     </div>
   )

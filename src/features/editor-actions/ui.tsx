@@ -8,13 +8,18 @@ import {
 } from '@mui/icons-material';
 
 import styles from "./styles.module.scss";
+import classNames from 'classnames';
 
-export const EditorActions = () => {
+type Props = {
+    className?: string;
+}
+
+export const EditorActions = ({ className }: Props) => {
     return (
-        <div className={styles.actions}>
-            <Button startIcon={<RestartAltIcon />} />
-            <Button startIcon={<DownloadIcon />} />
-            <Button startIcon={<UploadIcon />} />
+        <div className={classNames(styles.actions, className)}>
+            {/* <Button startIcon={<RestartAltIcon />} /> */}
+            <Button startIcon={<DownloadIcon />}>Скачать</Button>
+            <Button startIcon={<UploadIcon />}>Загрузить</Button>
         </div>
     )
 };
