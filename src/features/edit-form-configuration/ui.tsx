@@ -1,20 +1,36 @@
 import React from "react";
+import ReactJson from "react-json-view";
 
-import JSONInput from "react-json-editor-ajrm";
-import locale from "react-json-editor-ajrm/locale/ru";
+import { useAppConfigurationModel } from "entities/app-configuration";
 
 import styles from "./styles.module.scss";
+import Loader from "shared/ui/Loader/Loader";
 
 export const EditFormConfiguration = () => {
+  const jsonConfiguration = useAppConfigurationModel(
+    (state) => state.configuration
+  );
+
+  const loadConfigurationStatus = useAppConfigurationModel(
+    (state) => state.loadConfigurationStatus
+  );
+
+  const isLoading = loadConfigurationStatus === "loading";
+
   return (
     <div className={styles.schema}>
-      <JSONInput
-        locale={locale}
-        height="100%"
-        width="100%"
-        theme="default"
-        confirmGood={false}
-      />
+      {isLoading ? (
+        <Loader size={70} />
+      ) : (
+        <ReactJson
+          src={jsonConfiguration}
+          collapsed={false}
+          displayDataTypes={false}
+          displayObjectSize={false}
+          enableClipboard={false}
+          name="config"
+        />
+      )}
     </div>
   );
 };

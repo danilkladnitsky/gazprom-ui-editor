@@ -1,3 +1,5 @@
+import React from "react";
+
 import { EditFormConfiguration } from "features/edit-form-configuration";
 import { EditorActions } from "features/editor-actions";
 import styles from "./styles.module.scss";
