@@ -1,12 +1,22 @@
-import React, { Suspense } from 'react'
+import classNames from 'classnames';
+import React, { ReactNode, Suspense } from 'react'
+import Loader from 'shared/ui/Loader/Loader';
 
-const DEFAULT_FALLBACK = "Loading...";
+const DEFAULT_FALLBACK = <Loader />;
 
-const withSuspense = (Component: React.FunctionComponent, fallback = DEFAULT_FALLBACK) => {
-  return () => (
-    <Suspense fallback={fallback}>
-      <Component />
+import styles from "./styles.module.scss";
+
+type ComponentProps = {
+  className?: string;
+}
+
+const withSuspense = (Component: React.FunctionComponent<ComponentProps>, fallback?:ReactNode) => {
+  return ({ className }:ComponentProps) => (
+    <div className={classNames(styles.suspenseWrapper, className)}>
+      <Suspense fallback={fallback || DEFAULT_FALLBACK}>
+      <Component className={className} />
     </Suspense>
+    </div>
   )
 }
 
