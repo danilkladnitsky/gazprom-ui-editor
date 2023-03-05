@@ -1,5 +1,3 @@
-type ConfigurationSchema = string;
-
 type LoadingStatus = "idle" | "loading" | "success" | "error";
 
 type FunctionsWithRes<F> = {
@@ -7,3 +5,5 @@ type FunctionsWithRes<F> = {
 };
 
 type Model<State, Functions> = FunctionsWithRes<Functions> & State & Functions;
+
+type JsonFile = Record<string, unknown>;

@@ -1,3 +1,4 @@
+import { convertFileToJSON } from "shared/utils/convertJson";
 import { create } from "zustand";
 
 export enum ConfigurationView {
@@ -5,25 +6,37 @@ export enum ConfigurationView {
   TEXT_VIEW,
 }
 
+type ConfigurationSchema = JsonFile;
+
 interface State {
   view: ConfigurationView;
-  configuration: ConfigurationSchema | null;
+  configuration: ConfigurationSchema;
 }
 
 interface Functions {
   changeView: (view: ConfigurationView) => void;
-  loadConfiguration: (config: ConfigurationSchema) => void;
+  loadConfiguration: (file: File) => void;
 }
 
 type ConfigurationModel = Model<State, Functions>;
 
 export const useAppConfigurationModel = create<ConfigurationModel>((set) => ({
   view: ConfigurationView.GUI_VIEW,
-  configuration: null,
+  configuration: {},
   changeView: (view) => set({ view }),
-  loadConfiguration: async (configuration) => {
+  loadConfiguration: async (file) => {
     set({ loadConfigurationStatus: "loading" });
     // do async job
-    set({ configuration, loadConfigurationStatus: "success" });
+
+    convertFileToJSON(file)
+      .then((configuration) => {
+        set({
+          configuration,
+          loadConfigurationStatus: "success",
+        });
+      })
+      .catch(() => {
+        set({ loadConfigurationStatus: "error" });
+      });
   },
 }));
