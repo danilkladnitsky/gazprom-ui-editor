@@ -1,23 +1,33 @@
 import { Tab, Tabs } from '@mui/material';
+import { useState } from 'react';
 
 import styles from "./styles.module.scss";
 
-type Props = {
-    onChange: (key: number) => void;
-}
+export type TabValue = string | number;
 
-const TabMenu = ({ onChange }:Props) => {
-    const handleOnChange = (event: React.SyntheticEvent, value:number) => {
+export type TabItem = {
+    value: TabValue;
+    label: string;
+};
+
+type Props = {
+    onChange: (value: TabValue) => void;
+    tabs: TabItem[];
+};
+
+const TabMenu = ({ onChange, tabs }: Props) => {
+    const [activeTab, setActiveTab] = useState<TabValue | null>(tabs[0].value);
+
+    const handleOnChange = (event: React.SyntheticEvent, value: TabValue) => {
+        setActiveTab(value);
         onChange(value);
     }
     
     return (
-        <Tabs onChange={handleOnChange} className={styles.tabMenu}>
-            <Tab label="Параметры" />
-            <Tab label="Форма" />
-            <Tab label="Компоненты" />
+        <Tabs onChange={handleOnChange} className={styles.tabMenu} value={activeTab}>
+            {tabs.map(tab => <Tab label={tab.label} value={tab.value} key={tab.value} />)}
         </Tabs>
     )
 }
 
-export default TabMenu
+export default TabMenu;
