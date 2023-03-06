@@ -15,13 +15,14 @@ export const UploadConfiguration = () => {
     }
 
     const file = e.target.files[0];
-
+    
     loadConfiguration(file);
+    e.target.value = null;
   };
 
   return (
     <Button startIcon={<UploadIcon />} component="label">
-      <input hidden accept="txt/*" multiple type="file" onChange={uploadJson} />{" "}
+      <input hidden accept="txt/*" multiple type="file" onChange={uploadJson} />
       Загрузить
     </Button>
   );

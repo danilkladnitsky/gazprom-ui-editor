@@ -23,11 +23,12 @@ export const EditFormConfiguration = () => {
         <Loader size={70} />
       ) : (
         <ReactJson
-          src={jsonConfiguration}
+          src={jsonConfiguration || {}}
           collapsed={false}
           displayDataTypes={false}
           displayObjectSize={false}
           enableClipboard={false}
+          displayArrayKey={false}
           name="config"
         />
       )}
