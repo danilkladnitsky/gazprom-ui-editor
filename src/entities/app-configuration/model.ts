@@ -6,7 +6,7 @@ export enum ConfigurationView {
   TEXT_VIEW,
 }
 
-type ConfigurationSchema = JsonFile;
+type ConfigurationSchema = JsonFile | null;
 
 interface State {
   view: ConfigurationView;
@@ -21,8 +21,9 @@ interface Functions {
 type ConfigurationModel = Model<State, Functions>;
 
 export const useAppConfigurationModel = create<ConfigurationModel>((set) => ({
+  
   view: ConfigurationView.GUI_VIEW,
-  configuration: {},
+  configuration: null,
   changeView: (view) => set({ view }),
   loadConfiguration: async (file) => {
     set({ loadConfigurationStatus: "loading" });

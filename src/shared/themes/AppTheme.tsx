@@ -7,6 +7,13 @@ const appTheme = createMuiTheme({
     },
     fontSize: 14,
   },
+  components: {
+    MuiButtonBase: {
+      defaultProps: {
+        disableRipple: true,
+      },
+    },
+  },
 });
 
 export default appTheme;
