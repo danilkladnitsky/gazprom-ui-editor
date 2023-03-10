@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import styles from "./styles.module.scss";
 import TabMenu, { TabItem } from "shared/ui/TabMenu/TabMenu";
 import { SelectParameter } from "features/select-parameter";
+import { SelectForm } from "features/select-form";
+import { SelectComponent } from "features/select-component";
 
 enum TabValues {
   PARAMETERS,
@@ -28,8 +30,11 @@ const navTabs: TabItem<TabValues>[] = [
 const TabContent = ({ tab }: { tab: TabValues }) => {
   switch (tab) {
     case TabValues.PARAMETERS:
+      return <SelectParameter />;
     case TabValues.COMPONENTS:
+      return <SelectComponent />;
     case TabValues.FORM:
+      return <SelectForm />;
     default:
       return <SelectParameter />;
   }
@@ -37,6 +42,9 @@ const TabContent = ({ tab }: { tab: TabValues }) => {
 
 const ComponentsPanel = () => {
   const [selectedTab, setSelectedTab] = useState(navTabs[0].value);
+
+  console.log(selectedTab);
+  
 
   return (
     <div className={styles.panel}>
