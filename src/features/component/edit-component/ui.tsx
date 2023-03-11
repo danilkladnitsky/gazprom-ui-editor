@@ -5,8 +5,9 @@ import { TextInput } from "shared/ui/TextInput";
 import { Header } from "shared/ui/Header";
 import { Parameter, useParameterModel } from "entities/parameter";
 
+import { EditParameterFields } from "../edit-parameter-fields";
+
 import styles from "./styles.module.scss";
-import { EditComponentParameters } from "features/component/edit-component-parameters";
 
 const convertParametersToList = (params: Parameter[]): DropdownItem[] => {
   return params.map(param => ({
@@ -26,7 +27,7 @@ export const EditComponent = () => {
       <div className={styles.form}>
         <DropdownInput list={list} onChange={selectParameter} name="Выберите источник данных" />
         <TextInput fullWidth label="Введите название поля" />
-        <EditComponentParameters />
+        <EditParameterFields />
       </div>
     </div>
   );
