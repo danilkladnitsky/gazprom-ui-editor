@@ -1,7 +1,9 @@
+import React from 'react';
+
 import { useParameterModel } from 'entities/parameter';
-import React from 'react'
 
 import styles from "./styles.module.scss";
+import { EditParameterFields } from '../edit-parameter-fields';
 
 export const EditComponentParameters = () => {
     const { selectedParameter } = useParameterModel();
@@ -10,7 +12,7 @@ export const EditComponentParameters = () => {
     
   return (
     <div className={styles.wrapper}>
-        
+        <EditParameterFields />
     </div>
   )
 }
