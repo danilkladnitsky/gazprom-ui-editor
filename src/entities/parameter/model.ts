@@ -1,5 +1,6 @@
-import { DateProperty, NumberProperty, StringProperty } from "entities/properties";
 import { create } from "zustand";
+
+import { DateProperty, NumberProperty, StringProperty } from "entities/properties";
 
 export enum ParameterType {
   STRING = "string",
@@ -29,13 +30,13 @@ export type DateParameter = ParameterBase & {
   type: ParameterType.DATE,
 }
 
-export type FieldParameter = DateParameter | StringParameter | NumberParameter;
+export type Parameter = DateParameter | StringParameter | NumberParameter;
 
-const DEFAULT_PARAMETERS: FieldParameter[] = [
+const DEFAULT_PARAMETERS: Parameter[] = [
   {
     label: "Параметр: строка",
     type: ParameterType.STRING,
-    property: { lineCount: 2, multiine: false },
+    property: { lineCount: 2, multiline: false },
     id: "string"
   },
   {
@@ -59,8 +60,8 @@ const DEFAULT_PARAMETERS: FieldParameter[] = [
 ];
 
 interface ParameterState {
-  parameters: FieldParameter[];
-  selectedParameter: FieldParameter | null;
+  parameters: Parameter[];
+  selectedParameter: Parameter | null;
   selectParameter: (id: FieldId) => void;
 }
 

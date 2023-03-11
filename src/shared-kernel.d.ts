@@ -7,3 +7,5 @@ type FunctionsWithRes<F> = {
 type Model<State, Functions> = FunctionsWithRes<Functions> & State & Functions;
 
 type JsonFile = Record<string, unknown>;
+
+type EntityId = string;
