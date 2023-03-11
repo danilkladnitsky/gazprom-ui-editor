@@ -1,20 +1,31 @@
 import React from "react";
 
+import { Checkbox, FormControlLabel } from "@mui/material";
+
 import { DropdownInput, DropdownItem } from "shared/ui/DropdownInput";
+import { TextInput } from "shared/ui/TextInput";
+import { Header } from "shared/ui/Header";
+import { FieldId, FieldParameter, useParameterModel } from "entities/parameter";
 
 import styles from "./styles.module.scss";
-import { TextInput } from "shared/ui/TextInput";
-import { Checkbox, FormControlLabel } from "@mui/material";
-import { Header } from "shared/ui/Header";
 
-const DEFAULT_SOURCE: DropdownItem[] = [{ label: "Параметр #1", value: "int" }];
+const convertParametersToList = (params: FieldParameter[]): DropdownItem<FieldId>[] => {
+  return params.map(param => ({
+    label: param.label,
+    value: param.id
+  }))
+}
 
 export const EditComponent = () => {
+  const { parameters, selectParameter } = useParameterModel();
+
+  const list = convertParametersToList(parameters);
+  
   return (
     <div className={styles.wrapper}>
       <Header>Настройки компоненты</Header>
       <div className={styles.form}>
-        <DropdownInput list={DEFAULT_SOURCE} name="Выберите источник данных" />
+        <DropdownInput list={list} onChange={selectParameter} name="Выберите источник данных" />
         <TextInput fullWidth label="Введите название поля" />
         <div>
           <FormControlLabel
