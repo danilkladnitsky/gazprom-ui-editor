@@ -9,7 +9,7 @@ import {
 
 import styles from "./styles.module.scss";
 import classNames from "classnames";
-import { UploadConfiguration } from "features/upload-configuration";
+import { UploadConfiguration } from "features/configuration/upload-configuration";
 import { useAppConfigurationModel } from "entities/app-configuration";
 
 type Props = {

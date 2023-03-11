@@ -1,4 +1,4 @@
-import { EditComponent } from "features/edit-component";
+import { EditComponent } from "features/component/edit-component";
 
 import styles from "./styles.module.scss";
 

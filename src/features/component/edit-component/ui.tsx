@@ -6,7 +6,7 @@ import { Header } from "shared/ui/Header";
 import { Parameter, useParameterModel } from "entities/parameter";
 
 import styles from "./styles.module.scss";
-import { EditComponentParameters } from "features/edit-component-parameters";
+import { EditComponentParameters } from "features/component/edit-component-parameters";
 
 const convertParametersToList = (params: Parameter[]): DropdownItem[] => {
   return params.map(param => ({
