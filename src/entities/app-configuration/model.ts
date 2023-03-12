@@ -1,5 +1,6 @@
-import { convertFileToJSON } from "shared/utils/convertJson";
 import { create } from "zustand";
+
+import { convertFileToJSON } from "shared/utils/convertJson";
 
 export enum ConfigurationView {
   GUI_VIEW,
@@ -27,8 +28,7 @@ export const useAppConfigurationModel = create<ConfigurationModel>((set) => ({
   changeView: (view) => set({ view }),
   loadConfiguration: async (file) => {
     set({ loadConfigurationStatus: "loading" });
-    // do async job
-
+    
     convertFileToJSON(file)
       .then((configuration) => {
         set({

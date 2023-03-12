@@ -4,6 +4,7 @@ import { DropdownInput, DropdownItem } from "shared/ui/DropdownInput";
 import { TextInput } from "shared/ui/TextInput";
 import { Header } from "shared/ui/Header";
 import { Parameter, useParameterModel } from "entities/parameter";
+import { useComponentModel } from "entities/component";
 
 import { EditParameterFields } from "../edit-parameter-fields";
 
@@ -17,9 +18,14 @@ const convertParametersToList = (params: Parameter[]): DropdownItem[] => {
 }
 
 export const EditComponent = () => {
-  const { parameters, selectedParameter, selectParameter, updateParameter } = useParameterModel();
+  const { parameters, selectedParameter, selectParameter } = useParameterModel();
+  const { updateSelectedComponent } = useComponentModel();
 
   const list = convertParametersToList(parameters);
+
+  const updateComponent = (parameter: Parameter) => {
+    updateSelectedComponent(parameter);
+  }
 
   return (
     <div className={styles.wrapper}>
@@ -27,7 +33,7 @@ export const EditComponent = () => {
       <div className={styles.form}>
         <DropdownInput list={list} onChange={selectParameter} name="Выберите источник данных" />
         <TextInput fullWidth label="Введите название поля" />
-        {selectedParameter && <EditParameterFields parameter={selectedParameter} onEdit={updateParameter} />}
+        {selectedParameter && <EditParameterFields parameter={selectedParameter} onEdit={updateComponent} />}
       </div>
     </div>
   );
