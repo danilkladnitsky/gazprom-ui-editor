@@ -2,9 +2,10 @@ import { create } from "zustand";
 
 import { Parameter } from "entities/parameter";
 
-type Component = {
-    id: EntityId;
+export type Component = {
+    code: EntityId;
     parameter: Parameter;
+    name?: string;
 };
 
 interface ComponentState {
@@ -15,7 +16,7 @@ interface ComponentState {
 export const useComponentModel = create<ComponentState>((set) => ({
     selectedComponent: null,
     components: [],
-    selectComponent: (id: EntityId) => (set(state => (
-        { selectedComponent: state.components.find(c => c.id === id) }
+    selectComponent: (code: EntityId) => (set(state => (
+        { selectedComponent: state.components.find(c => c.code === code) }
     )))
 }))
