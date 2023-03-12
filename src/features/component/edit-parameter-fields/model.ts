@@ -1,4 +1,4 @@
-export type ParameterPropertyProps<T> = {
-    onChange: (property: T) => void;
-    property: T;
+export type ParameterPropertyProps<P> = {
+    onChange: (property: P) => void;
+    property: P;
 }

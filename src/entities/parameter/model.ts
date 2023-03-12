@@ -63,6 +63,7 @@ interface ParameterState {
   parameters: Parameter[];
   selectedParameter: Parameter | null;
   selectParameter: (id: FieldId) => void;
+  updateParameter: (parameter: Parameter) => void;
 }
 
 export const useParameterModel = create<ParameterState>((set) => ({
@@ -71,4 +72,7 @@ export const useParameterModel = create<ParameterState>((set) => ({
   selectParameter: (id: FieldId) => set((state) => (
     { selectedParameter: state.parameters.find(p => p.id === id) }
   )),
+  updateParameter: ({ id, ...rest }: Parameter) => set((state) => (
+    { parameters: state.parameters.map((p) => p.id === id ? ({ ...p, ...rest }) : p) }
+  ))
 }));

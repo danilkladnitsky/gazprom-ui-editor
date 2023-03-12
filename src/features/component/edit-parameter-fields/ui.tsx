@@ -10,12 +10,18 @@ import { DatePropertyFields } from './components/DatePropertyFields';
 
 type Props = {
     parameter: Parameter;
+    onEdit: (parameter: Parameter) => void;
 }
-export const EditParameterFields = ({ parameter }: Props) => {
+export const EditParameterFields = ({ parameter, onEdit }: Props) => {
     const { label, property, type } = parameter;
 
-    const updateProperty = (fields: Property) => {
-        console.log(fields);
+    const updateProperty = (property: Property) => {
+        const updatedParameter = {
+            ...parameter,
+            property
+        } as Parameter;
+
+        onEdit(updatedParameter);
     }
 
     const renderParameterFields = () => {
