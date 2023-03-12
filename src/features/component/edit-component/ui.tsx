@@ -12,7 +12,7 @@ import styles from "./styles.module.scss";
 
 const convertParametersToList = (params: Parameter[]): DropdownItem[] => {
   return params.map(param => ({
-    label: param.label,
+    label: param.name,
     value: param.id
   }))
 }
@@ -27,12 +27,24 @@ export const EditComponent = () => {
     updateSelectedComponent(parameter);
   }
 
+  const updateLabel = (label: string) => {
+    console.log(label);
+    updateSelectedComponent({ label });
+  }
+
+  const componentLabel = selectedParameter?.label || "";
+
   return (
     <div className={styles.wrapper}>
       <Header>Настройки компоненты</Header>
       <div className={styles.form}>
         <DropdownInput list={list} onChange={selectParameter} name="Выберите источник данных" />
-        <TextInput fullWidth label="Введите название поля" />
+        <TextInput
+          fullWidth
+          label="Введите название поля"
+          value={componentLabel}
+          onChange={updateLabel}
+        />
         {selectedParameter && <EditParameterFields parameter={selectedParameter} onEdit={updateComponent} />}
       </div>
     </div>

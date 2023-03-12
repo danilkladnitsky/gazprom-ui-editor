@@ -11,7 +11,7 @@ export const ParametersList = ({ list }: Props) => {
   return (
     <div className={styles.list}>
       {list.map((param) => (
-        <Parameter {...param} />
+        <Parameter {...param} key={param.name} />
       ))}
     </div>
   );

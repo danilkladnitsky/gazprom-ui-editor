@@ -12,7 +12,8 @@ export type FieldId = string;
 
 type ParameterBase = {
   id: FieldId;
-  label: string;
+  name: string;
+  label?: string;
 };
 
 export type NumberParameter = ParameterBase & {
@@ -34,13 +35,13 @@ export type Parameter = DateParameter | StringParameter | NumberParameter;
 
 const DEFAULT_PARAMETERS: Parameter[] = [
   {
-    label: "Параметр: строка",
+    name: "Параметр: строка",
     type: ParameterType.STRING,
     property: { lineCount: 2, multiline: false },
     id: "string"
   },
   {
-    label: "Параметр: число",
+    name: "Параметр: число",
     type: ParameterType.NUMBER,
     property: {
       maxValue: 100,
@@ -50,7 +51,7 @@ const DEFAULT_PARAMETERS: Parameter[] = [
 
   },
   {
-    label: "Параметр: дата",
+    name: "Параметр: дата",
     type: ParameterType.DATE,
     property: {
       dateFormat: "LLLL"
