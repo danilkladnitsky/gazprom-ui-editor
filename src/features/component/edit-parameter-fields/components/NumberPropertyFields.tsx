@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 import { NumberProperty } from 'entities/properties'
 
@@ -11,11 +11,14 @@ type Props = ParameterPropertyProps<NumberProperty>;
 export const NumberPropertyFields = ({ property, onChange }: Props) => {
   const [fields, updateField] = useFormFields<NumberProperty>(property);
 
-
+  useEffect(() => {
+    onChange(fields);
+  }, [fields])
+  
   return (
     <div>
-      <TextInput value={fields.minValue} />
-      <TextInput value={fields.maxValue} />
+      <TextInput value={fields.minValue} type="number" onChange={(v) => updateField("minValue", +v)} />
+      <TextInput value={fields.maxValue} type="number" onChange={(v) => updateField("maxValue", +v)} />
     </div>
   )
 }
