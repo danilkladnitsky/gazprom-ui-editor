@@ -20,7 +20,7 @@ export const DatePropertyFields = ({ property, onChange }: Props) => {
   
   return (
     <div className={styles.fieldsWrapper}>
-      <TextInput label="Формат даты" value={fields.dateFormat} onChange={(v) => updateField("dateFormat", v)} />
+      <TextInput label="Формат даты" value={fields.dateFormat} type="text" onChange={(v) => updateField("dateFormat", v)} />
     </div>
   )
 }
