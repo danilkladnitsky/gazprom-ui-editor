@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const ui = () => {
+export const EditViewConfiguration = () => {
     return (
         <div>ui</div>
     )

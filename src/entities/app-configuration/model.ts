@@ -16,12 +16,12 @@ interface State {
 interface Functions {
   changeView: (view: ConfigurationView) => void;
   loadConfiguration: (file: File) => void;
+  toggleView: () => void;
 }
 
 type ConfigurationModel = Model<State, Functions>;
 
 export const useAppConfigurationModel = create<ConfigurationModel>((set) => ({
-  
   view: ConfigurationView.GUI_VIEW,
   configuration: null,
   changeView: (view) => set({ view }),
@@ -40,4 +40,11 @@ export const useAppConfigurationModel = create<ConfigurationModel>((set) => ({
         set({ loadConfigurationStatus: "error" });
       });
   },
+  toggleView: () => set((state) => {
+    const view = state.view === ConfigurationView.GUI_VIEW
+      ? ConfigurationView.TEXT_VIEW
+      : ConfigurationView.GUI_VIEW;
+    
+    return { ...state, view };
+  })
 }));

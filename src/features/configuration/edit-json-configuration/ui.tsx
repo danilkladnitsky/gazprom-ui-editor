@@ -2,11 +2,11 @@ import React from "react";
 import ReactJson from "react-json-view";
 
 import { useAppConfigurationModel } from "entities/app-configuration";
-
-import styles from "./styles.module.scss";
 import Loader from "shared/ui/Loader/Loader";
 
-export const EditFormConfiguration = () => {
+import styles from "./styles.module.scss";
+
+export const EditJsonConfiguration = () => {
   const jsonConfiguration = useAppConfigurationModel(
     (state) => state.configuration
   );
