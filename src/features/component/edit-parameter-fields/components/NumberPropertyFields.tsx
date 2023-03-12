@@ -1,10 +1,12 @@
 import React, { useEffect } from 'react'
 
 import { NumberProperty } from 'entities/properties'
-
-import { ParameterPropertyProps } from '../model'
 import { TextInput } from 'shared/ui/TextInput';
 import { useFormFields } from 'shared/hooks/useFormFields';
+
+import { ParameterPropertyProps } from '../model'
+
+import styles from "./styles.module.scss";
 
 type Props = ParameterPropertyProps<NumberProperty>;
 
@@ -13,12 +15,12 @@ export const NumberPropertyFields = ({ property, onChange }: Props) => {
 
   useEffect(() => {
     onChange(fields);
-  }, [fields])
+  }, [fields]);
   
   return (
-    <div>
-      <TextInput value={fields.minValue} type="number" onChange={(v) => updateField("minValue", +v)} />
-      <TextInput value={fields.maxValue} type="number" onChange={(v) => updateField("maxValue", +v)} />
+    <div className={styles.fieldsWrapper}>
+      <TextInput value={fields.minValue} label="Минимальное значение" type="number" onChange={(v) => updateField("minValue", +v)} />
+      <TextInput value={fields.maxValue} label="Максимальное значение" type="number" onChange={(v) => updateField("maxValue", +v)} />
     </div>
   )
 }
