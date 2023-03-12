@@ -19,8 +19,6 @@ const convertParametersToList = (params: Parameter[]): DropdownItem[] => {
 export const EditComponent = () => {
   const { parameters, selectedParameter, selectParameter, updateParameter } = useParameterModel();
 
-  console.log(parameters);
-
   const list = convertParametersToList(parameters);
 
   return (
