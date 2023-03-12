@@ -1,7 +1,7 @@
 import React from "react";
 
-import { EditFormConfiguration } from "features/edit-form-configuration";
-import { EditorActions } from "features/editor-actions";
+import { EditFormConfiguration } from "features/configuration/edit-form-configuration";
+import { EditorActions } from "features/configuration/editor-actions";
 import styles from "./styles.module.scss";
 
 const ViewConfiguration = () => {
