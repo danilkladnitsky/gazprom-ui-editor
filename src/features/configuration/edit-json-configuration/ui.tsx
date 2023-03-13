@@ -5,6 +5,7 @@ import { useAppConfigurationModel } from "entities/app-configuration";
 import Loader from "shared/ui/Loader/Loader";
 
 import styles from "./styles.module.scss";
+import { useComponentModel } from "entities/component";
 
 export const EditJsonConfiguration = () => {
   const jsonConfiguration = useAppConfigurationModel(
@@ -15,6 +16,8 @@ export const EditJsonConfiguration = () => {
     (state) => state.loadConfigurationStatus
   );
 
+  const selectedComponent = useComponentModel();
+
   const isLoading = loadConfigurationStatus === "loading";
 
   return (
@@ -23,7 +26,7 @@ export const EditJsonConfiguration = () => {
         <Loader size={70} />
       ) : (
         <ReactJson
-          src={jsonConfiguration || {}}
+          src={selectedComponent.selectedComponent || {}}
           collapsed={false}
           displayDataTypes={false}
           displayObjectSize={false}

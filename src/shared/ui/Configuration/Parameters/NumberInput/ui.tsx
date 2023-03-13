@@ -4,12 +4,14 @@ import { NumberParameter } from 'entities/parameter';
 import { TextField } from '@mui/material';
 
 type Props = {
-    parameter: NumberParameter;
+  parameter: NumberParameter;
+  name: string;
 };
 
-export const NumberInput = ({ parameter }: Props) => {
-    const { label, property } = parameter;
+export const NumberInput = ({ parameter, name }: Props) => {
+  const { label, property } = parameter;
+  
   return (
-    <TextField label={label} type="number" />
+    <TextField label={name} type="number" />
   )
 }

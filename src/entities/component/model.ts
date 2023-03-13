@@ -3,10 +3,11 @@ import { create } from "zustand";
 import { Parameter, ParameterType } from "entities/parameter";
 
 const DEFAULT_COMPONENT: Component = {
-      code: "code",
-      parameter: {
+    code: "code",
+    name: "ФИО",
+    parameter: {
         id: "id",
-        label: "My label",
+        name: "My label",
         property: {
           lineCount: 3,
           multiline: true
@@ -18,13 +19,13 @@ const DEFAULT_COMPONENT: Component = {
 export type Component = {
     code: EntityId;
     parameter: Parameter;
-    name?: string;
+    name: string;
 };
 
 interface ComponentState {
     selectedComponent: Component | null;
     components: Component[];
-    updateSelectedComponent: (parameter: Parameter) => void;
+    updateSelectedComponent: (component: Component) => void;
  }
 
 export const useComponentModel = create<ComponentState>((set) => ({
@@ -33,14 +34,12 @@ export const useComponentModel = create<ComponentState>((set) => ({
     selectComponent: (code: EntityId) => (set(state => (
         { selectedComponent: state.components.find(c => c.code === code) }
     ))),
-    updateSelectedComponent: (parameter: Parameter) => {
+    updateSelectedComponent: (updatedComponent: Component) => {
         set((state) => {
             const component = state.selectedComponent;
             if (!component) return state;
 
-            const updatedComponent: Component = { ...component, parameter };
-
-            return { ...state, selectedComponent: updatedComponent };
+            return { ...state, selectedComponent: { ...component, ...updatedComponent } };
             
         })
     }

@@ -4,11 +4,12 @@ import React from 'react'
 
 type Props = {
     parameter: DateParameter;
+    name: string;
 };
 
 
-export const DateInput = ({ parameter }: Props) => {
+export const DateInput = ({ parameter, name }: Props) => {
     return (
-        <TextField type="date" label={parameter.label} />
+        <TextField type="date" label={name} />
     )
 };

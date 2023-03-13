@@ -19,20 +19,20 @@ const convertParametersToList = (params: Parameter[]): DropdownItem[] => {
 
 export const EditComponent = () => {
   const { parameters, selectedParameter, selectParameter } = useParameterModel();
-  const { updateSelectedComponent } = useComponentModel();
+  const { updateSelectedComponent, selectedComponent } = useComponentModel();
 
   const list = convertParametersToList(parameters);
 
   const updateComponent = (parameter: Parameter) => {
-    updateSelectedComponent(parameter);
+    selectParameter(parameter.id);
+    updateSelectedComponent({ parameter });
   }
 
-  const updateLabel = (label: string) => {
-    console.log(label);
-    updateSelectedComponent({ label });
+  const updateLabel = (name: string) => {
+    updateSelectedComponent({ name });
   }
 
-  const componentLabel = selectedParameter?.label || "";
+  const componentLabel = selectedComponent?.name || "";
 
   return (
     <div className={styles.wrapper}>

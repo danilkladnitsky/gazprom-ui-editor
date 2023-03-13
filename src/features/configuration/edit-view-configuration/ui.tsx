@@ -12,6 +12,8 @@ export const EditViewConfiguration = () => {
         return <></>;
     }
 
+    console.log(selectedComponent);
+
     const Component = renderComponent(selectedComponent);
 
     return (

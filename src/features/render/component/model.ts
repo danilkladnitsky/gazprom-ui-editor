@@ -4,9 +4,9 @@ import { Component } from 'entities/component';
 
 import { renderParameter } from '../parameter';
 
-export const renderComponent = ({ code, parameter, name }: Component) => {
+export const renderComponent = ({ parameter, name }: Component) => {
 
-    const parametrizedComponent = renderParameter(parameter);
+    const parametrizedComponent = renderParameter(parameter, name);
 
     return parametrizedComponent;
 };

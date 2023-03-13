@@ -26,7 +26,9 @@ export const StringPropertyFields = ({ property, onChange }: Props) => {
       <TextInput label="Количество строк"
         value={fields.lineCount}
         onChange={(v) => updateField("lineCount", v)}
-        disabled={!fields.multiline} />
+        disabled={!fields.multiline}
+        type="number"
+      />
     </div>
   )
 }
