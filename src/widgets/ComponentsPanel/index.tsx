@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import styles from "./styles.module.scss";
 import TabMenu, { TabItem } from "shared/ui/TabMenu/TabMenu";
 import { SelectParameter } from "features/constructor/select-parameter";
-import { SelectForm } from "features/constructor/select-form";
 import { SelectComponent } from "features/constructor/select-component";
 
 enum TabValues {
@@ -34,7 +33,6 @@ const TabContent = ({ tab }: { tab: TabValues }) => {
     case TabValues.COMPONENTS:
       return <SelectComponent />;
     case TabValues.FORM:
-      return <SelectForm />;
     default:
       return <SelectParameter />;
   }

@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import React from "react";
 
 import { Button } from "@mui/material";
 
@@ -8,10 +8,10 @@ import styles from "./styles.module.scss";
 
 export type ParameterProps = ParameterType;
 
-export const Parameter = ({ label, type }: ParameterProps) => {
+export const Parameter = ({ name }: ParameterProps) => {
   return (
     <Button className={styles.parameter} size="medium" variant="text">
-      Параметр: {label}
+      Параметр: {name}
     </Button>
   );
 };

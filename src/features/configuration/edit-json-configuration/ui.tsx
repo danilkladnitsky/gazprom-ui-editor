@@ -2,11 +2,12 @@ import React from "react";
 import ReactJson from "react-json-view";
 
 import { useAppConfigurationModel } from "entities/app-configuration";
-
-import styles from "./styles.module.scss";
 import Loader from "shared/ui/Loader/Loader";
 
-export const EditFormConfiguration = () => {
+import styles from "./styles.module.scss";
+import { useComponentModel } from "entities/component";
+
+export const EditJsonConfiguration = () => {
   const jsonConfiguration = useAppConfigurationModel(
     (state) => state.configuration
   );
@@ -14,6 +15,8 @@ export const EditFormConfiguration = () => {
   const loadConfigurationStatus = useAppConfigurationModel(
     (state) => state.loadConfigurationStatus
   );
+
+  const selectedComponent = useComponentModel();
 
   const isLoading = loadConfigurationStatus === "loading";
 
@@ -23,7 +26,7 @@ export const EditFormConfiguration = () => {
         <Loader size={70} />
       ) : (
         <ReactJson
-          src={jsonConfiguration || {}}
+          src={selectedComponent.selectedComponent || {}}
           collapsed={false}
           displayDataTypes={false}
           displayObjectSize={false}

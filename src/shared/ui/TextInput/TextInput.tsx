@@ -4,7 +4,7 @@ import { TextField, TextFieldProps } from "@mui/material";
 
 import styles from "./styles.module.scss";
 
-type Props = TextFieldProps & {
+type Props = TextFieldProps | {
   onChange?: (value: string) => void;
 }
 
