@@ -2,12 +2,12 @@ import React, { useEffect } from 'react'
 
 import { StringProperty } from 'entities/properties';
 import { useFormFields } from 'shared/hooks/useFormFields';
+import { TextInput } from 'shared/ui/TextInput';
+import { Checkbox } from 'shared/ui/Checkbox';
 
 import { ParameterPropertyProps } from '../model';
 
 import styles from "./styles.module.scss";
-import { TextInput } from 'shared/ui/TextInput';
-import { Checkbox } from '@mui/material';
 
 type Props = ParameterPropertyProps<StringProperty>;
 
