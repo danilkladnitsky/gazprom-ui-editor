@@ -22,7 +22,10 @@ export const StringPropertyFields = ({ property, onChange }: Props) => {
 
   return (
     <div className={styles.fieldsWrapper}>
-      <Checkbox checked={fields.multiline} onChange={(e) => updateField("multiline", e.target.checked)} />
+      <Checkbox checked={fields.multiline}
+        name="Многострочный"
+        onChange={(e) => updateField("multiline", e.target.checked)}
+      />
       <TextInput label="Количество строк"
         value={fields.lineCount}
         onChange={(v) => updateField("lineCount", v)}
