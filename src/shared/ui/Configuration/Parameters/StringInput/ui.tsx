@@ -1,16 +1,11 @@
 import React from 'react'
 
-import { StringParameter } from 'entities/parameter';
 import { TextField } from '@mui/material';
+import { ComponentElement } from 'entities/component';
 
-type Props = {
-    parameter: StringParameter;
-    name: string;
-};
+export const StringInput = ({ properties, name }: ComponentElement) => {
+    const { multiline, lineCount } = properties || {};
 
-export const StringInput = ({ parameter, name }: Props) => {
-    const { multiline, lineCount } = parameter.property;
-    
     return (
         <TextField label={name} multiline={multiline} minRows={lineCount} />
     )

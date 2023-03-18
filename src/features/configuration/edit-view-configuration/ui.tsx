@@ -1,9 +1,12 @@
 import React from 'react'
 
-import { renderComponent } from 'features/render/component';
+import { renderElement } from 'features/render/component';
 import { useComponentModel } from 'entities/component';
 
 import styles from "./styles.module.scss";
+import { renderRecursiveTree } from '../render-component-tree';
+
+import tree from "shared/metadata/form.json";
 
 export const EditViewConfiguration = () => {
     const { selectedComponent } = useComponentModel();
@@ -12,11 +15,7 @@ export const EditViewConfiguration = () => {
         return <></>;
     }
 
-    console.log(selectedComponent);
-
-    const Component = renderComponent(selectedComponent);
-
     return (
-        <div className={styles.wrapper}>{Component}</div>
+        <div className={styles.wrapper}>{renderRecursiveTree(tree)}</div>
     )
 };

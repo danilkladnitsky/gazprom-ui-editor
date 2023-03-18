@@ -1,15 +1,10 @@
 import React from 'react'
 
-import { NumberParameter } from 'entities/parameter';
 import { TextField } from '@mui/material';
+import { ComponentElement } from 'entities/component';
 
-type Props = {
-  parameter: NumberParameter;
-  name: string;
-};
-
-export const NumberInput = ({ parameter, name }: Props) => {
-  const { label, property } = parameter;
+export const NumberInput = (props: ComponentElement) => {
+  const { name } = props;
   
   return (
     <TextField label={name} type="number" />

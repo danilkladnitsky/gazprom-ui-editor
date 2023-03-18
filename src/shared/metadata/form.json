@@ -1,23 +1,23 @@
 {
-  "code": "FormCode",
+  "code": "form",
   "name": "Пример формы",
   "description": "FormDescription",
   "items": [
     {
-      "code": "TabGroup",
+      "code": "tabs",
       "name": "Группа табы",
-      "pages": [
+      "items": [
         {
-          "code": "Page1",
+          "code": "page",
           "name": "Страница 1",
           "items": [
             {
-              "code": "Group1",
+              "code": "group",
               "name": "Группа 1",
               "direction": "FORCE_HORIZONTAL",
               "items": [
                 {
-                  "code": "Element1",
+                  "code": "element",
                   "name": "Элемент 1",
                   "dataSource": "Parameter1",
                   "type": "NUMBER",
@@ -27,7 +27,34 @@
                   }
                 },
                 {
-                  "code": "Element2",
+                  "code": "element",
+                  "name": "Элемент 2",
+                  "dataSource": "Parameter2",
+                  "type": "TEXT",
+                  "properties": {
+                    "multiline": true,
+                    "lineCount": 2
+                  }
+                }
+              ]
+            },
+            {
+              "code": "group",
+              "name": "Группа 1",
+              "direction": "FORCE_HORIZONTAL",
+              "items": [
+                {
+                  "code": "element",
+                  "name": "Элемент 1",
+                  "dataSource": "Parameter1",
+                  "type": "NUMBER",
+                  "properties": {
+                    "minValue": 0,
+                    "maxValue": 100
+                  }
+                },
+                {
+                  "code": "element",
                   "name": "Элемент 2",
                   "dataSource": "Parameter2",
                   "type": "TEXT",

@@ -3,9 +3,9 @@ import { create } from "zustand";
 import { DateProperty, NumberProperty, StringProperty } from "entities/properties";
 
 export enum ParameterType {
-  STRING = "string",
-  NUMBER = "number",
-  DATE = "date"
+  STRING = "TEXT",
+  NUMBER = "NUMBER",
+  DATE = "DATE"
 }
 
 export type FieldId = string;
@@ -17,17 +17,17 @@ type ParameterBase = {
 };
 
 export type NumberParameter = ParameterBase & {
-  property: NumberProperty,
+  properties: NumberProperty,
   type: ParameterType.NUMBER,
 }
 
 export type StringParameter = ParameterBase & {
-  property: StringProperty,
+  properties: StringProperty,
   type: ParameterType.STRING,
 }
 
 export type DateParameter = ParameterBase & {
-  property: DateProperty,
+  properties: DateProperty,
   type: ParameterType.DATE,
 }
 

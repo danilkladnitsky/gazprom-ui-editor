@@ -1,6 +1,7 @@
 import { create } from "zustand";
 
 import { Parameter, ParameterType } from "entities/parameter";
+import { Property } from "entities/properties";
 
 const DEFAULT_COMPONENT: Component = {
     code: "code",
@@ -16,10 +17,40 @@ const DEFAULT_COMPONENT: Component = {
       }
 };
 
-export type Component = {
-    code: EntityId;
-    parameter: Parameter;
-    name: string;
+type ComponentBase = {
+    code: ComponentCode;   
+    name: ComponentName;
+    description?: ComponentDescription;
+}
+
+export type ComponentForm = ComponentBase & {
+    code: "form";
+}
+
+export type ComponentTabs = ComponentBase & {
+    code: "tabs";
+}
+
+export type ComponentPage = ComponentBase & {
+    code: "page";
+}
+
+export type ComponentGroup = ComponentBase & {
+    code: "group";
+}
+
+export type ComponentElement = ComponentBase & {
+    code: "element";
+} & Parameter;
+
+export type Component = ComponentForm
+    | ComponentTabs
+    | ComponentPage
+    | ComponentGroup
+    | ComponentElement;
+
+export type ComponentTree = ComponentBase & {
+    items?: Component[];
 };
 
 interface ComponentState {

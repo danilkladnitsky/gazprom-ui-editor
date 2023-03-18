@@ -1,14 +1,9 @@
 import { TextField } from '@mui/material';
+import { ComponentElement } from 'entities/component';
 import { DateParameter } from 'entities/parameter';
 import React from 'react'
 
-type Props = {
-    parameter: DateParameter;
-    name: string;
-};
-
-
-export const DateInput = ({ parameter, name }: Props) => {
+export const DateInput = ({ name }: ComponentElement) => {
     return (
         <TextField type="date" label={name} />
     )
