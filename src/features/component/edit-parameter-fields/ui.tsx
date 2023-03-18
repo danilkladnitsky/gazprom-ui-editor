@@ -13,7 +13,7 @@ type Props = {
     onEdit: (parameter: Parameter) => void;
 }
 export const EditParameterFields = ({ parameter, onEdit }: Props) => {
-    const { label, property, type } = parameter;
+    const { name, property, type } = parameter;
 
     const updateProperty = (property: Property) => {
         const updatedParameter = {
@@ -37,7 +37,7 @@ export const EditParameterFields = ({ parameter, onEdit }: Props) => {
     };
 
     return <div>
-        <Header>{label}</Header>
+        <Header>{name}</Header>
         {renderParameterFields()}
     </div>;
 }

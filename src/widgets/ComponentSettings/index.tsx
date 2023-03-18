@@ -1,3 +1,5 @@
+import React from "react";
+
 import { EditComponent } from "features/component/edit-component";
 
 import styles from "./styles.module.scss";

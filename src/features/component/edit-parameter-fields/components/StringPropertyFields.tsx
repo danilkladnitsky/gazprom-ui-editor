@@ -2,12 +2,12 @@ import React, { useEffect } from 'react'
 
 import { StringProperty } from 'entities/properties';
 import { useFormFields } from 'shared/hooks/useFormFields';
+import { TextInput } from 'shared/ui/TextInput';
+import { Checkbox } from 'shared/ui/Checkbox';
 
 import { ParameterPropertyProps } from '../model';
 
 import styles from "./styles.module.scss";
-import { TextInput } from 'shared/ui/TextInput';
-import { Checkbox } from '@mui/material';
 
 type Props = ParameterPropertyProps<StringProperty>;
 
@@ -22,7 +22,10 @@ export const StringPropertyFields = ({ property, onChange }: Props) => {
 
   return (
     <div className={styles.fieldsWrapper}>
-      <Checkbox checked={fields.multiline} onChange={(e) => updateField("multiline", e.target.checked)} />
+      <Checkbox checked={fields.multiline}
+        name="Многострочный"
+        onChange={(e) => updateField("multiline", e.target.checked)}
+      />
       <TextInput label="Количество строк"
         value={fields.lineCount}
         onChange={(v) => updateField("lineCount", v)}
