@@ -1,6 +1,8 @@
-import React, { FC } from 'react'
+import React, { FC, useState } from 'react'
+import { ComponentProps } from './types'
 
-export const Tabs: FC = ({ children }) => {
+export const Tabs = ({ children, component }: ComponentProps) => {
+  
   return (
       <div>{children}</div>
   )

@@ -1,10 +1,9 @@
 import React from 'react'
 
-import { renderElement } from 'features/render/component';
 import { useComponentModel } from 'entities/component';
+import { renderRecursiveTree } from 'features/configuration/render-component-tree';
 
 import styles from "./styles.module.scss";
-import { renderRecursiveTree } from '../render-component-tree';
 
 import tree from "shared/metadata/form.json";
 

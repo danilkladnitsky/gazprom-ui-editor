@@ -12,11 +12,11 @@ type Props = {
 }
 
 export function TreeItem({ component, children }: Props) {
-    const { code } = component;
-    
+  const { code } = component;
+  
     if (code !== "element") {
-        const Wrapper = getComponentWrapper(code);
-        return <Wrapper>
+      const Wrapper = getComponentWrapper(code);
+        return <Wrapper component={component}>
             {children}
         </Wrapper>;
     }

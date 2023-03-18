@@ -1,7 +1,6 @@
 import React from "react";
 
 import { EditJsonConfiguration } from "features/configuration/edit-json-configuration";
-import { EditorActions } from "features/configuration/editor-actions";
 import { ConfigurationView, useAppConfigurationModel } from "entities/app-configuration";
 import { EditViewConfiguration } from "features/configuration/edit-view-configuration";
 
@@ -17,7 +16,6 @@ const ViewConfiguration = () => {
         ? <EditJsonConfiguration />
         : <EditViewConfiguration />
       }
-      <EditorActions className={styles.actions} />
     </div>
   );
 };

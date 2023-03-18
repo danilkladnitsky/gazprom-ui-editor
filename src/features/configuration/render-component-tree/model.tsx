@@ -5,10 +5,7 @@ import { ComponentTree } from "entities/component";
 import { TreeItem } from "./components/TreeItem";
 
 export function renderRecursiveTree(tree: ComponentTree) {
-
   const renderSubTree = (subTree: ComponentTree) => {
-    console.log(subTree);
-    
     return (
       subTree.items &&
       subTree.items.map((component) => (
@@ -19,6 +16,10 @@ export function renderRecursiveTree(tree: ComponentTree) {
     );
   };
 
-  return renderSubTree(tree);
+  const preparedTree = {
+    items: [tree]
+  }
+
+  return renderSubTree(preparedTree);
 }
 

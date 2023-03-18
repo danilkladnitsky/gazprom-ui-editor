@@ -1,9 +1,10 @@
 import { Container } from '@mui/system';
-import React, { FC } from 'react';
+import React from 'react';
 
 import styles from "./Page.module.scss";
+import { ComponentProps } from './types';
 
-const Page: FC = ({ children }) => {
+const Page = ({ children }: ComponentProps) => {
   return (
       <Container className={styles.page}>{children}</Container>
   )
