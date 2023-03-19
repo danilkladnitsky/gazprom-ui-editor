@@ -21,6 +21,7 @@ interface Functions {
   uploadConfiguration: (file: File) => void;
   toggleView: () => void;
   downloadConfiguration: () => void;
+  updateConfiguration: (data: ConfigurationSchema) => void;
 }
 
 type ConfigurationModel = Model<State, Functions>;
@@ -38,6 +39,8 @@ export const useAppConfigurationModel = create<ConfigurationModel>(
 
       fileDownload(JSON.stringify(data), fileName);
     },
+    updateConfiguration: (configuration: ConfigurationSchema) =>
+      set({ configuration }),
     uploadConfiguration: async (file) => {
       set({ uploadConfigurationStatus: "loading" });
 

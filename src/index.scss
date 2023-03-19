@@ -24,3 +24,17 @@ a:visited {
   box-sizing: border-box;
   font-size: 18px;
 }
+
+#json-editor {
+  height: 100%;
+}
+
+div[name="outer-box"] {
+  height: 100% !important;
+  width: 100% !important;
+
+  & div[name="container"] {
+    height: inherit !important;
+    width: inherit !important;
+  }
+}

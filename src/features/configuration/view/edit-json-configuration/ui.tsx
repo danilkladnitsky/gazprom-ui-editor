@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useMemo, useState } from "react";
 
 import ReactJson from "react-json-view";
+import JSONInput from "react-json-editor-ajrm";
+import locale from "react-json-editor-ajrm/locale/en";
 
 import { useAppConfigurationModel } from "entities/app-configuration";
 import Loader from "shared/ui/Loader/Loader";
@@ -16,23 +18,37 @@ export const EditJsonConfiguration = () => {
     (state) => state.uploadConfigurationStatus
   );
 
+  const updateConfiguration = useAppConfigurationModel(
+    (state) => state.updateConfiguration
+  );
+
   const isLoading = uploadConfigurationStatus === "loading";
 
-  return (
-    <div className={styles.schema}>
-      {isLoading ? (
-        <Loader size={70} />
-      ) : (
-        <ReactJson
-          src={jsonConfiguration || {}}
-          collapsed={false}
-          displayDataTypes={false}
-          displayObjectSize={false}
-          enableClipboard={false}
-          displayArrayKey={false}
-          name="config"
-        />
-      )}
-    </div>
-  );
+  const handleConfigurationUpdate = (e) => {
+    const { error, jsObject } = e;
+
+    if (!error) {
+      updateConfiguration(jsObject);
+    }
+  };
+
+  if (isLoading) {
+    return <Loader size={70} />;
+  }
+
+  const Content = useMemo(() => {
+    if (isLoading) {
+      return <Loader size={70} />;
+    }
+
+    return (
+      <JSONInput
+        placeholder={jsonConfiguration}
+        locale={locale}
+        onChange={handleConfigurationUpdate}
+      />
+    );
+  }, [isLoading, jsonConfiguration]);
+
+  return <div className={styles.schema}>{Content}</div>;
 };

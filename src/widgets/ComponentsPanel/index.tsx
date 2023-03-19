@@ -42,17 +42,17 @@ const TabContent = ({ tab }: { tab: TabValues }) => {
 const ComponentsPanel = () => {
   const [selectedTab, setSelectedTab] = useState(navTabs[0].value);
 
-  console.log(selectedTab);
-
   return (
     <div className={styles.panel}>
-      <EditorActions />
-      <TabMenu
-        tabs={navTabs}
-        onChange={setSelectedTab}
-        activeTab={selectedTab}
-      />
-      <TabContent tab={selectedTab} />
+      <div className={styles.content}>
+        <EditorActions />
+        <TabMenu
+          tabs={navTabs}
+          onChange={setSelectedTab}
+          activeTab={selectedTab}
+        />
+        <TabContent tab={selectedTab} />
+      </div>
     </div>
   );
 };
