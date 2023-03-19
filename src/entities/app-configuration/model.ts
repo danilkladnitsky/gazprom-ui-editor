@@ -1,6 +1,8 @@
 import { create } from "zustand";
+import fileDownload from "js-file-download";
 
 import { convertFileToJSON } from "shared/utils/convertJson";
+import { ComponentTree } from "entities/component";
 
 export enum ConfigurationView {
   GUI_VIEW,
@@ -16,28 +18,37 @@ interface State {
 
 interface Functions {
   changeView: (view: ConfigurationView) => void;
-  loadConfiguration: (file: File) => void;
+  uploadConfiguration: (file: File) => void;
   toggleView: () => void;
+  downloadConfiguration: () => void;
 }
 
 type ConfigurationModel = Model<State, Functions>;
 
-export const useAppConfigurationModel = create<ConfigurationModel>((set) => ({
+export const useAppConfigurationModel = create<ConfigurationModel>((set, get) => ({
   view: ConfigurationView.GUI_VIEW,
   configuration: null,
   changeView: (view) => set({ view }),
-  loadConfiguration: async (file) => {
-    set({ loadConfigurationStatus: "loading" });
+  downloadConfiguration: async () => {
+    const data = get().configuration;
+
+    const { name } = (data as ComponentTree);
+    const fileName = `${name}.json`;
+
+    fileDownload(JSON.stringify(data), fileName);
+  },
+  uploadConfiguration: async (file) => {
+    set({ uploadConfigurationStatus: "loading" });
 
     convertFileToJSON(file)
       .then((configuration) => {
         set({
           configuration,
-          loadConfigurationStatus: "success",
+          uploadConfigurationStatus: "success",
         });
       })
       .catch(() => {
-        set({ loadConfigurationStatus: "error" });
+        set({ uploadConfigurationStatus: "error" });
       });
   },
   toggleView: () =>

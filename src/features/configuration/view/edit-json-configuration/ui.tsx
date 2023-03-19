@@ -1,4 +1,5 @@
 import React from "react";
+
 import ReactJson from "react-json-view";
 
 import { useAppConfigurationModel } from "entities/app-configuration";
@@ -11,11 +12,11 @@ export const EditJsonConfiguration = () => {
     (state) => state.configuration
   );
 
-  const loadConfigurationStatus = useAppConfigurationModel(
-    (state) => state.loadConfigurationStatus
+  const uploadConfigurationStatus = useAppConfigurationModel(
+    (state) => state.uploadConfigurationStatus
   );
 
-  const isLoading = loadConfigurationStatus === "loading";
+  const isLoading = uploadConfigurationStatus === "loading";
 
   return (
     <div className={styles.schema}>

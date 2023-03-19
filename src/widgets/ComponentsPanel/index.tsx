@@ -4,7 +4,7 @@ import styles from "./styles.module.scss";
 import TabMenu, { TabItem } from "shared/ui/TabMenu/TabMenu";
 import { SelectParameter } from "features/constructor/select-parameter";
 import { SelectComponent } from "features/constructor/select-component";
-import { EditorActions } from "features/configuration/editor-actions";
+import { EditorActions } from "features/configuration/actions/editor-actions";
 
 enum TabValues {
   PARAMETERS,

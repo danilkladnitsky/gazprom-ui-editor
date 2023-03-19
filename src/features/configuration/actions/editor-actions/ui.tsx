@@ -8,7 +8,7 @@ import {
   Download as DownloadIcon,
 } from "@mui/icons-material";
 
-import { UploadConfiguration } from "features/configuration/upload-configuration";
+import { UploadConfiguration } from "features/configuration/actions/upload-configuration";
 import { useAppConfigurationModel } from "entities/app-configuration";
 
 import styles from "./styles.module.scss";
@@ -18,16 +18,16 @@ type Props = {
 };
 
 export const EditorActions = ({ className }: Props) => {
-  const { configuration, toggleView } = useAppConfigurationModel();
+  const { configuration, toggleView, downloadConfiguration } = useAppConfigurationModel();
 
   const configIsLoaded = Boolean(configuration);
 
   return (
     <div className={classNames(styles.actions, className)}>
-      <Button startIcon={<RestartAltIcon />} onClick={toggleView}>
+      <Button startIcon={<RestartAltIcon />}  disabled={!configIsLoaded} onClick={toggleView}>
         Сменить
       </Button>
-      <Button startIcon={<DownloadIcon />} disabled={!configIsLoaded}>
+      <Button startIcon={<DownloadIcon />} disabled={!configIsLoaded} onClick={downloadConfiguration}>
         Скачать
       </Button>
       <UploadConfiguration />
