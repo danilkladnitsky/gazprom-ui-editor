@@ -1,9 +1,15 @@
 import React from 'react'
 
 import { TextField } from '@mui/material';
-import { ComponentElement } from 'entities/component';
+import { StringParameter } from 'entities/parameter';
 
-export const StringInput = ({ properties, name }: ComponentElement) => {
+type Props = {
+    element: StringParameter;
+}
+
+export const StringInput = ({ element }: Props) => {
+    const { name, properties } = element;
+
     const { multiline, lineCount } = properties || {};
 
     return (

@@ -1,9 +1,10 @@
+import React from 'react';
+
 import { Typography } from '@mui/material';
-import { Container } from '@mui/system';
-import React, { FC } from 'react';
+
+import { ComponentProps } from './types';
 
 import styles from "./Form.module.scss";
-import { ComponentProps } from './types';
 
 
 export const Form = ({ children, component }: ComponentProps) => {

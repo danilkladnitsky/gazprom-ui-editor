@@ -22,7 +22,7 @@ export type NumberParameter = ParameterBase & {
 }
 
 export type StringParameter = ParameterBase & {
-  properties: StringProperty,
+  properties?: StringProperty,
   type: ParameterType.STRING,
 }
 

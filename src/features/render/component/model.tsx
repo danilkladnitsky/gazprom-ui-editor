@@ -7,8 +7,6 @@ import { DateInput } from 'shared/ui/Configuration/Parameters/DateInput';
 import { StringInput } from 'shared/ui/Configuration/Parameters/StringInput';
 
 export const ElementComponent = (element: ComponentElement) => {
-    console.log(element);
-    
     switch (element.type) {
         case ParameterType.NUMBER:
             return <NumberInput element={element} />;

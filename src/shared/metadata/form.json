@@ -18,50 +18,21 @@
               "items": [
                 {
                   "code": "element",
-                  "name": "Элемент 1",
+                  "name": "Имя",
                   "dataSource": "Parameter1",
-                  "type": "NUMBER",
-                  "properties": {
-                    "minValue": 0,
-                    "maxValue": 100
-                  }
+                  "type": "TEXT"
                 },
                 {
                   "code": "element",
-                  "name": "Элемент 2",
-                  "dataSource": "Parameter2",
-                  "type": "TEXT",
-                  "properties": {
-                    "multiline": true,
-                    "lineCount": 2
-                  }
-                }
-              ]
-            },
-            {
-              "code": "group",
-              "name": "Группа 1",
-              "direction": "FORCE_HORIZONTAL",
-              "items": [
-                {
-                  "code": "element",
-                  "name": "Элемент 1",
+                  "name": "Фамилия",
                   "dataSource": "Parameter1",
-                  "type": "NUMBER",
-                  "properties": {
-                    "minValue": 0,
-                    "maxValue": 100
-                  }
+                  "type": "TEXT"
                 },
                 {
                   "code": "element",
-                  "name": "Элемент 2",
-                  "dataSource": "Parameter2",
-                  "type": "TEXT",
-                  "properties": {
-                    "multiline": true,
-                    "lineCount": 2
-                  }
+                  "name": "Отчество",
+                  "dataSource": "Parameter1",
+                  "type": "TEXT"
                 }
               ]
             }

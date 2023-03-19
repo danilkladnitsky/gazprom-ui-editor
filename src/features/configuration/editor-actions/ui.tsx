@@ -24,7 +24,7 @@ export const EditorActions = ({ className }: Props) => {
 
   return (
     <div className={classNames(styles.actions, className)}>
-      <Button startIcon={<RestartAltIcon />} onClick={toggleView}>Сменить вид</Button>
+      <Button startIcon={<RestartAltIcon />} onClick={toggleView}>Сменить</Button>
       <Button startIcon={<DownloadIcon />} disabled={!configIsLoaded}>Скачать</Button>
       <UploadConfiguration />
     </div>
