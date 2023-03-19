@@ -25,39 +25,41 @@ interface Functions {
 
 type ConfigurationModel = Model<State, Functions>;
 
-export const useAppConfigurationModel = create<ConfigurationModel>((set, get) => ({
-  view: ConfigurationView.GUI_VIEW,
-  configuration: null,
-  changeView: (view) => set({ view }),
-  downloadConfiguration: async () => {
-    const data = get().configuration;
+export const useAppConfigurationModel = create<ConfigurationModel>(
+  (set, get) => ({
+    view: ConfigurationView.GUI_VIEW,
+    configuration: null,
+    changeView: (view) => set({ view }),
+    downloadConfiguration: async () => {
+      const data = get().configuration;
 
-    const { name } = (data as ComponentTree);
-    const fileName = `${name}.json`;
+      const { name } = data as ComponentTree;
+      const fileName = `${name}.json`;
 
-    fileDownload(JSON.stringify(data), fileName);
-  },
-  uploadConfiguration: async (file) => {
-    set({ uploadConfigurationStatus: "loading" });
+      fileDownload(JSON.stringify(data), fileName);
+    },
+    uploadConfiguration: async (file) => {
+      set({ uploadConfigurationStatus: "loading" });
 
-    convertFileToJSON(file)
-      .then((configuration) => {
-        set({
-          configuration,
-          uploadConfigurationStatus: "success",
+      convertFileToJSON(file)
+        .then((configuration) => {
+          set({
+            configuration,
+            uploadConfigurationStatus: "success",
+          });
+        })
+        .catch(() => {
+          set({ uploadConfigurationStatus: "error" });
         });
-      })
-      .catch(() => {
-        set({ uploadConfigurationStatus: "error" });
-      });
-  },
-  toggleView: () =>
-    set((state) => {
-      const view =
-        state.view === ConfigurationView.GUI_VIEW
-          ? ConfigurationView.TEXT_VIEW
-          : ConfigurationView.GUI_VIEW;
+    },
+    toggleView: () =>
+      set((state) => {
+        const view =
+          state.view === ConfigurationView.GUI_VIEW
+            ? ConfigurationView.TEXT_VIEW
+            : ConfigurationView.GUI_VIEW;
 
-      return { ...state, view };
-    }),
-}));
+        return { ...state, view };
+      }),
+  })
+);

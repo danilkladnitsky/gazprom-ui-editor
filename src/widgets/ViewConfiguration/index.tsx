@@ -3,7 +3,10 @@ import React from "react";
 import { EditJsonConfiguration } from "features/configuration/view/edit-json-configuration";
 import { EditViewConfiguration } from "features/configuration/view/edit-view-configuration";
 
-import { ConfigurationView, useAppConfigurationModel } from "entities/app-configuration";
+import {
+  ConfigurationView,
+  useAppConfigurationModel,
+} from "entities/app-configuration";
 
 import styles from "./styles.module.scss";
 

@@ -18,16 +18,25 @@ type Props = {
 };
 
 export const EditorActions = ({ className }: Props) => {
-  const { configuration, toggleView, downloadConfiguration } = useAppConfigurationModel();
+  const { configuration, toggleView, downloadConfiguration } =
+    useAppConfigurationModel();
 
   const configIsLoaded = Boolean(configuration);
 
   return (
     <div className={classNames(styles.actions, className)}>
-      <Button startIcon={<RestartAltIcon />}  disabled={!configIsLoaded} onClick={toggleView}>
+      <Button
+        startIcon={<RestartAltIcon />}
+        disabled={!configIsLoaded}
+        onClick={toggleView}
+      >
         Сменить
       </Button>
-      <Button startIcon={<DownloadIcon />} disabled={!configIsLoaded} onClick={downloadConfiguration}>
+      <Button
+        startIcon={<DownloadIcon />}
+        disabled={!configIsLoaded}
+        onClick={downloadConfiguration}
+      >
         Скачать
       </Button>
       <UploadConfiguration />
