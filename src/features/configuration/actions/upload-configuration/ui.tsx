@@ -5,8 +5,8 @@ import { Upload as UploadIcon } from "@mui/icons-material";
 import { useAppConfigurationModel } from "entities/app-configuration";
 
 export const UploadConfiguration = () => {
-  const loadConfiguration = useAppConfigurationModel(
-    (state) => state.loadConfiguration
+  const uploadConfiguration = useAppConfigurationModel(
+    (state) => state.uploadConfiguration
   );
 
   const uploadJson = (e: ChangeEvent<HTMLInputElement>) => {
@@ -15,8 +15,8 @@ export const UploadConfiguration = () => {
     }
 
     const file = e.target.files[0];
-    
-    loadConfiguration(file);
+
+    uploadConfiguration(file);
     e.target.value = null;
   };
 

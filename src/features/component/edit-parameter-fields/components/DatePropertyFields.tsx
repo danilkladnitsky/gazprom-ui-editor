@@ -1,11 +1,11 @@
-import React, { useEffect } from 'react'
+import React, { useEffect } from "react";
 
-import { DateProperty } from 'entities/properties';
+import { DateProperty } from "entities/properties";
 
-import { useFormFields } from 'shared/hooks/useFormFields';
-import { TextInput } from 'shared/ui/TextInput';
+import { useFormFields } from "shared/hooks/useFormFields";
+import { TextInput } from "shared/ui/TextInput";
 
-import { ParameterPropertyProps } from '../model';
+import { ParameterPropertyProps } from "../model";
 
 import styles from "./styles.module.scss";
 
@@ -17,10 +17,15 @@ export const DatePropertyFields = ({ property, onChange }: Props) => {
   useEffect(() => {
     onChange(fields);
   }, [fields]);
-  
+
   return (
     <div className={styles.fieldsWrapper}>
-      <TextInput label="Формат даты" value={fields.dateFormat} type="text" onChange={(v) => updateField("dateFormat", v)} />
+      <TextInput
+        label="Формат даты"
+        value={fields.dateFormat}
+        type="text"
+        onChange={(v) => updateField("dateFormat", v)}
+      />
     </div>
-  )
-}
+  );
+};

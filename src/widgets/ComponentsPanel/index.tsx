@@ -4,6 +4,7 @@ import styles from "./styles.module.scss";
 import TabMenu, { TabItem } from "shared/ui/TabMenu/TabMenu";
 import { SelectParameter } from "features/constructor/select-parameter";
 import { SelectComponent } from "features/constructor/select-component";
+import { EditorActions } from "features/configuration/actions/editor-actions";
 
 enum TabValues {
   PARAMETERS,
@@ -41,17 +42,17 @@ const TabContent = ({ tab }: { tab: TabValues }) => {
 const ComponentsPanel = () => {
   const [selectedTab, setSelectedTab] = useState(navTabs[0].value);
 
-  console.log(selectedTab);
-  
-
   return (
     <div className={styles.panel}>
-      <TabMenu
-        tabs={navTabs}
-        onChange={setSelectedTab}
-        activeTab={selectedTab}
-      />
-      <TabContent tab={selectedTab} />
+      <div className={styles.content}>
+        <EditorActions />
+        <TabMenu
+          tabs={navTabs}
+          onChange={setSelectedTab}
+          activeTab={selectedTab}
+        />
+        <TabContent tab={selectedTab} />
+      </div>
     </div>
   );
 };

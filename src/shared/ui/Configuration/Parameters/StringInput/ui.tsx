@@ -1,17 +1,25 @@
-import React from 'react'
+import React from "react";
 
-import { StringParameter } from 'entities/parameter';
-import { TextField } from '@mui/material';
+import { TextField } from "@mui/material";
+import { StringParameter } from "entities/parameter";
+
+import styles from "./styles.module.scss";
 
 type Props = {
-    parameter: StringParameter;
-    name: string;
+  element: StringParameter;
 };
 
-export const StringInput = ({ parameter, name }: Props) => {
-    const { multiline, lineCount } = parameter.property;
-    
-    return (
-        <TextField label={name} multiline={multiline} minRows={lineCount} />
-    )
+export const StringInput = ({ element }: Props) => {
+  const { name, properties } = element;
+
+  const { multiline, lineCount } = properties || {};
+
+  return (
+    <TextField
+      className={styles.input}
+      label={name}
+      multiline={multiline}
+      minRows={lineCount}
+    />
+  );
 };

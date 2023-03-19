@@ -1,17 +1,15 @@
-import React from 'react'
+import React from "react";
 
-import { NumberParameter } from 'entities/parameter';
-import { TextField } from '@mui/material';
+import { TextField } from "@mui/material";
+import { NumberParameter } from "entities/parameter";
 
 type Props = {
-  parameter: NumberParameter;
-  name: string;
+  element: NumberParameter;
 };
 
-export const NumberInput = ({ parameter, name }: Props) => {
-  const { label, property } = parameter;
-  
-  return (
-    <TextField label={name} type="number" />
-  )
-}
+export const NumberInput = ({ element }: Props) => {
+  const { name } = element;
+  const { maxValue, minValue } = element.properties || {};
+
+  return <TextField label={name} type="number" />;
+};
