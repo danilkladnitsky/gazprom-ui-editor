@@ -5,14 +5,16 @@ import { renderRecursiveTree } from "features/configuration/render-component-tre
 
 import styles from "./styles.module.scss";
 
-import tree from "shared/metadata/form.json";
+import { useAppConfigurationModel } from "entities/app-configuration";
 
 export const EditViewConfiguration = () => {
-  const { selectedComponent } = useComponentModel();
+  const jsonConfiguration = useAppConfigurationModel(
+    (state) => state.configuration
+  );
 
-  if (!selectedComponent) {
+  if (!jsonConfiguration) {
     return <></>;
   }
 
-  return <div className={styles.wrapper}>{renderRecursiveTree(tree)}</div>;
+  return <div className={styles.wrapper}>{renderRecursiveTree(jsonConfiguration)}</div>;
 };

@@ -1,7 +1,7 @@
 {
   "code": "form",
   "name": "Пример формы",
-  "description": "FormDescription",
+  "description": "Заполните данные о себе",
   "items": [
     {
       "code": "tabs",

@@ -5,9 +5,7 @@ export const convertFileToJSON = (file: File): Promise<JsonFile> => {
 
       fileReader.readAsText(file, "UTF-8");
 
-      fileReader.onload = (e) => {
-        setTimeout(() => resolve(JSON.parse(e.target?.result)), 2000);
-      };
+      fileReader.onload = (e) => resolve(JSON.parse(e.target?.result));
     } catch (err) {
       reject(err);
     }
