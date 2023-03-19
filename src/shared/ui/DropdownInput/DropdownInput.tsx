@@ -17,15 +17,19 @@ type Props = {
 };
 
 export const DropdownInput = ({ list, name, id = name, onChange }: Props) => {
-  
   const handleOnChange = (value: ItemValue) => {
     onChange(value);
-  }
+  };
 
   return (
     <FormControl fullWidth>
       <InputLabel id={id}>{name}</InputLabel>
-      <Select labelId={id} id={id} label={name} onChange={(e) => handleOnChange(e.target.value as ItemValue)}>
+      <Select
+        labelId={id}
+        id={id}
+        label={name}
+        onChange={(e) => handleOnChange(e.target.value as ItemValue)}
+      >
         {list.map((item) => (
           <MenuItem value={item.value} key={item.label}>
             {item.label}

@@ -28,7 +28,7 @@ export const useAppConfigurationModel = create<ConfigurationModel>((set) => ({
   changeView: (view) => set({ view }),
   loadConfiguration: async (file) => {
     set({ loadConfigurationStatus: "loading" });
-    
+
     convertFileToJSON(file)
       .then((configuration) => {
         set({
@@ -40,11 +40,13 @@ export const useAppConfigurationModel = create<ConfigurationModel>((set) => ({
         set({ loadConfigurationStatus: "error" });
       });
   },
-  toggleView: () => set((state) => {
-    const view = state.view === ConfigurationView.GUI_VIEW
-      ? ConfigurationView.TEXT_VIEW
-      : ConfigurationView.GUI_VIEW;
-    
-    return { ...state, view };
-  })
+  toggleView: () =>
+    set((state) => {
+      const view =
+        state.view === ConfigurationView.GUI_VIEW
+          ? ConfigurationView.TEXT_VIEW
+          : ConfigurationView.GUI_VIEW;
+
+      return { ...state, view };
+    }),
 }));

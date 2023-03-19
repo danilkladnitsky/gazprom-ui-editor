@@ -17,9 +17,8 @@ export function renderRecursiveTree(tree: ComponentTree) {
   };
 
   const preparedTree = {
-    items: [tree]
-  }
+    items: [tree],
+  };
 
   return renderSubTree(preparedTree);
 }
-

@@ -1,11 +1,15 @@
 import { create } from "zustand";
 
-import { DateProperty, NumberProperty, StringProperty } from "entities/properties";
+import {
+  DateProperty,
+  NumberProperty,
+  StringProperty,
+} from "entities/properties";
 
 export enum ParameterType {
   STRING = "TEXT",
   NUMBER = "NUMBER",
-  DATE = "DATE"
+  DATE = "DATE",
 }
 
 export type FieldId = string;
@@ -17,19 +21,19 @@ type ParameterBase = {
 };
 
 export type NumberParameter = ParameterBase & {
-  properties: NumberProperty,
-  type: ParameterType.NUMBER,
-}
+  properties: NumberProperty;
+  type: ParameterType.NUMBER;
+};
 
 export type StringParameter = ParameterBase & {
-  properties?: StringProperty,
-  type: ParameterType.STRING,
-}
+  properties?: StringProperty;
+  type: ParameterType.STRING;
+};
 
 export type DateParameter = ParameterBase & {
-  properties: DateProperty,
-  type: ParameterType.DATE,
-}
+  properties: DateProperty;
+  type: ParameterType.DATE;
+};
 
 export type Parameter = DateParameter | StringParameter | NumberParameter;
 
@@ -38,25 +42,24 @@ const DEFAULT_PARAMETERS: Parameter[] = [
     name: "Параметр: строка",
     type: ParameterType.STRING,
     property: { lineCount: 2, multiline: false },
-    id: "string"
+    id: "string",
   },
   {
     name: "Параметр: число",
     type: ParameterType.NUMBER,
     property: {
       maxValue: 100,
-      minValue: 0
+      minValue: 0,
     },
-    id: "number"
-
+    id: "number",
   },
   {
     name: "Параметр: дата",
     type: ParameterType.DATE,
     property: {
-      dateFormat: "LLLL"
+      dateFormat: "LLLL",
     },
-    id: "date"
+    id: "date",
   },
 ];
 
@@ -70,10 +73,14 @@ interface ParameterState {
 export const useParameterModel = create<ParameterState>((set) => ({
   parameters: DEFAULT_PARAMETERS,
   selectedParameter: null,
-  selectParameter: (id: FieldId) => set((state) => (
-    { selectedParameter: state.parameters.find(p => p.id === id) }
-  )),
-  updateParameter: ({ id, ...rest }: Parameter) => set((state) => (
-    { parameters: state.parameters.map((p) => p.id === id ? ({ ...p, ...rest }) : p) }
-  ))
+  selectParameter: (id: FieldId) =>
+    set((state) => ({
+      selectedParameter: state.parameters.find((p) => p.id === id),
+    })),
+  updateParameter: ({ id, ...rest }: Parameter) =>
+    set((state) => ({
+      parameters: state.parameters.map((p) =>
+        p.id === id ? { ...p, ...rest } : p
+      ),
+    })),
 }));

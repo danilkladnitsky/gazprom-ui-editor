@@ -43,7 +43,6 @@ const ComponentsPanel = () => {
   const [selectedTab, setSelectedTab] = useState(navTabs[0].value);
 
   console.log(selectedTab);
-  
 
   return (
     <div className={styles.panel}>

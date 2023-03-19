@@ -15,7 +15,7 @@ export const UploadConfiguration = () => {
     }
 
     const file = e.target.files[0];
-    
+
     loadConfiguration(file);
     e.target.value = null;
   };

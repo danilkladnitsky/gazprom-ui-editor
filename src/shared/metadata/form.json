@@ -13,8 +13,8 @@
           "items": [
             {
               "code": "group",
-              "name": "Группа 1",
-              "direction": "FORCE_HORIZONTAL",
+              "name": "Личные данные",
+              "direction": "column",
               "items": [
                 {
                   "code": "element",
@@ -33,6 +33,56 @@
                   "name": "Отчество",
                   "dataSource": "Parameter1",
                   "type": "TEXT"
+                }
+              ]
+            },
+            {
+              "code": "group",
+              "name": "Паспортные реквизиты",
+              "direction": "row",
+              "items": [
+                {
+                  "code": "element",
+                  "name": "Серия",
+                  "dataSource": "Parameter1",
+                  "type": "NUMBER",
+                  "properties": {
+                    "minValue": 0,
+                    "maxValue": 9999
+                  }
+                },
+                {
+                  "code": "element",
+                  "name": "Номер",
+                  "dataSource": "Parameter1",
+                  "type": "NUMBER",
+                  "properties": {
+                    "minValue": 0,
+                    "maxValue": 999999
+                  }
+                },
+                {
+                  "code": "element",
+                  "name": "Дата выпуска",
+                  "dataSource": "Parameter1",
+                  "type": "DATE"
+                }
+              ]
+            },
+            {
+              "code": "group",
+              "name": "О себе",
+              "direction": "row",
+              "items": [
+                {
+                  "code": "element",
+                  "name": "Серия",
+                  "dataSource": "Parameter1",
+                  "type": "TEXT",
+                  "properties": {
+                    "multiline": true,
+                    "lineCount": 4
+                  }
                 }
               ]
             }
