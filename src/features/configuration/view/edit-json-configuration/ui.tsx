@@ -46,6 +46,7 @@ export const EditJsonConfiguration = () => {
         placeholder={jsonConfiguration}
         locale={locale}
         onChange={handleConfigurationUpdate}
+        waitAfterKeyPress={200}
       />
     );
   }, [isLoading, jsonConfiguration]);
