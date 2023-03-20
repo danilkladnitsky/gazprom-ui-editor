@@ -55,7 +55,7 @@ export const useAppConfigurationModel = create<ConfigurationModel>(
         return { ...state, view };
       }),
     generateConfigurationFromParameters: (parameters: Parameter[]) => {
-      set({configuration: {code: "form", items: parameters}})
+      set({configuration: {code: "form", name: "Форма по умолчанию", items: parameters}})
     }
   })
 );

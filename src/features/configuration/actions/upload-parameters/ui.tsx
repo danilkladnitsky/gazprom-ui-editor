@@ -14,7 +14,6 @@ const UploadParameters = () => {
 
   const handleLoadParameters = (data: Parameter[]) => {
     loadParameters(data);
-    enqueueSnackbar("Параметры были загружены");
     generateConfigurationFromParameters(data);
     enqueueSnackbar("Стандартная форма была сгенерирована");
   };

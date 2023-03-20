@@ -20,10 +20,12 @@ const navTabs: TabItem<TabValues>[] = [
   {
     label: "Форма",
     value: TabValues.FORM,
+    disabled: true,
   },
   {
     label: "Компоненты",
     value: TabValues.COMPONENTS,
+    disabled: true,
   },
 ];
 
@@ -45,7 +47,6 @@ const ComponentsPanel = () => {
   return (
     <div className={styles.panel}>
       <div className={styles.content}>
-        <EditorActions />
         <TabMenu
           tabs={navTabs}
           onChange={setSelectedTab}

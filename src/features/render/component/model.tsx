@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import React from "react";
 
 import { ComponentElement } from "entities/component";
 import { ParameterType } from "entities/parameter";

@@ -7,6 +7,7 @@ import styles from "./styles.module.scss";
 export type TabItem<V> = {
   value: V;
   label: string;
+  disabled?: boolean;
 };
 
 type Props<V> = {
@@ -31,6 +32,7 @@ const TabMenu = <V,>({ onChange, tabs, activeTab }: Props<V>) => {
           className={styles.tab}
           label={tab.label}
           value={tab.value}
+          disabled={tab.disabled}
           key={key}
         />
       ))}

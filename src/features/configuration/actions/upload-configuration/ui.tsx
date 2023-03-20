@@ -15,7 +15,7 @@ export const UploadConfiguration = () => {
   return (
     <Button startIcon={<UploadIcon />} component="label">
       <input hidden accept="txt/*" multiple type="file" onChange={uploadFile} />
-      Загрузить
+      Загрузить форму
     </Button>
   );
 };
