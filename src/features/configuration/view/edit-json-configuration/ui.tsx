@@ -45,10 +45,10 @@ export const EditJsonConfiguration = () => {
         placeholder={jsonConfiguration}
         locale={locale}
         onChange={handleConfigurationUpdate}
-        waitAfterKeyPress={200}
+        onKeyPressUpdate={true}
       />
     );
-  }, [isLoading, jsonConfiguration]);
+  }, [isLoading]);
 
   return <div className={styles.schema}>{Content}</div>;
 };

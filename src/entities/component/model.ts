@@ -58,6 +58,7 @@ interface ComponentState {
   selectedComponent: Component | null;
   components: Component[];
   updateSelectedComponent: (component: Component) => void;
+  selectComponent: (code: EntityId) => void;
 }
 
 export const useComponentModel = create<ComponentState>((set) => ({

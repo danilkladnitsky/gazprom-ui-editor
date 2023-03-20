@@ -72,7 +72,7 @@
             {
               "code": "group",
               "name": "О себе",
-              "direction": "row",
+              "direction": "column",
               "items": [
                 {
                   "code": "element",

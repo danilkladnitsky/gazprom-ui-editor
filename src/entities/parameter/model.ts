@@ -1,7 +1,7 @@
 import { create } from "zustand";
-import { enqueueSnackbar } from 'notistack'
 
 import {
+  CheckboxProperty,
   DateProperty,
   NumberProperty,
   StringProperty,
@@ -11,6 +11,7 @@ export enum ParameterType {
   STRING = "TEXT",
   NUMBER = "NUMBER",
   DATE = "DATE",
+  CHECKBOX = "CHECKBOX",
 }
 
 export type FieldId = string;
@@ -35,7 +36,16 @@ export type DateParameter = ParameterBase & {
   type: ParameterType.DATE;
 };
 
-export type Parameter = DateParameter | StringParameter | NumberParameter;
+export type CheckboxParameter = ParameterBase & {
+  properties: CheckboxProperty;
+  type: ParameterType.CHECKBOX;
+};
+
+export type Parameter =
+  | DateParameter
+  | StringParameter
+  | NumberParameter
+  | CheckboxParameter;
 
 interface ParameterState {
   parameters: Parameter[];

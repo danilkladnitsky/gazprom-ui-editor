@@ -2,7 +2,7 @@ import React from "react";
 
 import { ComponentTree } from "entities/component";
 
-import { TreeItem } from "./components/TreeItem";
+import TreeItem from "./components/TreeItem";
 
 export function renderRecursiveTree(tree: ComponentTree) {
   const renderSubTree = (subTree: ComponentTree) => {
