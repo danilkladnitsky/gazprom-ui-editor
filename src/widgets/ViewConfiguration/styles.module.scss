@@ -18,3 +18,10 @@
   box-sizing: border-box;
   gap: 32px;
 }
+
+.uploadFallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}

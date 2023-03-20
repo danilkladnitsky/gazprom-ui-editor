@@ -1,8 +1,7 @@
-import React, { useMemo, useState } from "react";
+import React, { useMemo } from "react";
 
-import ReactJson from "react-json-view";
 import JSONInput from "react-json-editor-ajrm";
-import locale from "react-json-editor-ajrm/locale/en";
+import locale from "react-json-editor-ajrm/locale/ru";
 
 import { useAppConfigurationModel } from "entities/app-configuration";
 import Loader from "shared/ui/Loader/Loader";
@@ -46,10 +45,10 @@ export const EditJsonConfiguration = () => {
         placeholder={jsonConfiguration}
         locale={locale}
         onChange={handleConfigurationUpdate}
-        waitAfterKeyPress={200}
+        onKeyPressUpdate={true}
       />
     );
-  }, [isLoading, jsonConfiguration]);
+  }, [isLoading]);
 
   return <div className={styles.schema}>{Content}</div>;
 };

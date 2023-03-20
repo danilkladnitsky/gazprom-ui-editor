@@ -18,14 +18,12 @@ const convertParametersToList = (params: Parameter[]): DropdownItem[] => {
 };
 
 export const EditComponent = () => {
-  const { parameters, selectedParameter, selectParameter } =
-    useParameterModel();
+  const { parameters, selectedParameter } = useParameterModel();
   const { updateSelectedComponent, selectedComponent } = useComponentModel();
 
   const list = convertParametersToList(parameters);
 
   const updateComponent = (parameter: Parameter) => {
-    selectParameter(parameter.id);
     updateSelectedComponent({ parameter });
   };
 
@@ -41,7 +39,7 @@ export const EditComponent = () => {
       <div className={styles.form}>
         <DropdownInput
           list={list}
-          onChange={selectParameter}
+          onChange={null} // TODO: replace with component analogue
           name="Выберите источник данных"
         />
         <TextInput

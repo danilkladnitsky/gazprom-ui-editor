@@ -30,14 +30,14 @@ export const EditorActions = ({ className }: Props) => {
         disabled={!configIsLoaded}
         onClick={toggleView}
       >
-        Сменить
+        Сменить вид
       </Button>
       <Button
         startIcon={<DownloadIcon />}
         disabled={!configIsLoaded}
         onClick={downloadConfiguration}
       >
-        Скачать
+        Скачать конфигурацию
       </Button>
       <UploadConfiguration />
     </div>

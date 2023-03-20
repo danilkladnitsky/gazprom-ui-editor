@@ -9,19 +9,28 @@ import {
 } from "entities/app-configuration";
 
 import styles from "./styles.module.scss";
+import UploadParameters from "features/configuration/actions/upload-parameters/ui";
 
 const ViewConfiguration = () => {
-  const view = useAppConfigurationModel((state) => state.view);
+  const { view, configuration } = useAppConfigurationModel();
 
-  return (
-    <div className={styles.configuration}>
-      {view === ConfigurationView.TEXT_VIEW ? (
-        <EditJsonConfiguration />
-      ) : (
-        <EditViewConfiguration />
-      )}
-    </div>
-  );
+  const getContent = () => {
+    if (!configuration) {
+      return (
+        <div className={styles.uploadFallback}>
+          <UploadParameters />
+        </div>
+      );
+    }
+
+    return view === ConfigurationView.TEXT_VIEW ? (
+      <EditJsonConfiguration />
+    ) : (
+      <EditViewConfiguration />
+    );
+  };
+
+  return <div className={styles.configuration}>{getContent()}</div>;
 };
 
 export default ViewConfiguration;
