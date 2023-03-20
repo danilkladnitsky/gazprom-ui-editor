@@ -1,12 +1,12 @@
 [
   {
-    "code": "Parameter1",
+    "code": "element",
     "name": "Параметр 1",
-    "type": "number"
+    "type": "NUMBER"
   },
   {
-    "code": "Parameter2",
+    "code": "element",
     "name": "Параметр 2",
-    "type": "string"
+    "type": "TEXT"
   }
 ]

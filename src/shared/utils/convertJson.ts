@@ -1,4 +1,4 @@
-export const convertFileToJSON = (file: File): Promise<JsonFile> => {
+export const convertFileToJSON = <T,>(file: File): Promise<T> => {
   return new Promise((resolve, reject) => {
     try {
       const fileReader = new FileReader();
