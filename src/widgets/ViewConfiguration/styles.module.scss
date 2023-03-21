@@ -1,0 +1,27 @@
+.configuration {
+  @include widget;
+  padding: 0px;
+  background-color: $secondary-background;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.actions {
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  box-sizing: border-box;
+  gap: 32px;
+}
+
+.uploadFallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}

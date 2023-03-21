@@ -1,0 +1,25 @@
+.app {
+  display: flex;
+  height: 100%;
+}
+
+.appWrapper {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.configuration {
+  flex: 1;
+}
+
+.settings,
+.panel {
+  width: 350px;
+}
+
+.panel,
+.configuration,
+.settings {
+  row-gap: 8px;
+}

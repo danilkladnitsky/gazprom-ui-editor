@@ -1,0 +1,11 @@
+.panel {
+  @include widget;
+  padding-top: 0px;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-top: 0px;
+}

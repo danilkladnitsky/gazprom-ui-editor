@@ -1,0 +1,22 @@
+[
+  {
+    "code": "element",
+    "name": "Параметр 1 (Число)",
+    "type": "NUMBER"
+  },
+  {
+    "code": "element",
+    "name": "Параметр 2 (Текст)",
+    "type": "TEXT"
+  },
+  {
+    "code": "element",
+    "name": "Параметр 3 (Дата)",
+    "type": "DATE"
+  },
+  {
+    "code": "element",
+    "name": "Параметр 4 (Чекбокс)",
+    "type": "CHECKBOX"
+  }
+]
