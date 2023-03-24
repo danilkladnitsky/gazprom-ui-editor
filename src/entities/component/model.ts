@@ -1,59 +1,7 @@
 import { create } from "zustand";
 
-import { Parameter, ParameterType } from "entities/parameter";
 import { createJSONStorage, persist } from "zustand/middleware";
-
-const DEFAULT_COMPONENT: Component = {
-  code: "code",
-  name: "ФИО",
-  parameter: {
-    id: "id",
-    name: "My label",
-    property: {
-      lineCount: 3,
-      multiline: true,
-    },
-    type: ParameterType.STRING,
-  },
-};
-
-type ComponentBase = {
-  code: ComponentCode;
-  name: ComponentName;
-  description?: ComponentDescription;
-};
-
-export type ComponentForm = ComponentBase & {
-  code: "form";
-};
-
-export type ComponentTabs = ComponentBase & {
-  code: "tabs";
-};
-
-export type ComponentPage = ComponentBase & {
-  code: "page";
-};
-
-export type ComponentGroup = ComponentBase & {
-  code: "group";
-  direction: "row" | "column";
-};
-
-export type ComponentElement = ComponentBase & {
-  code: "element";
-} & Parameter;
-
-export type Component =
-  | ComponentForm
-  | ComponentTabs
-  | ComponentPage
-  | ComponentGroup
-  | ComponentElement;
-
-export type ComponentTree = ComponentBase & {
-  items?: Component[];
-};
+import { Component } from "./domain";
 
 interface ComponentState {
   selectedComponent: Component | null;
@@ -65,7 +13,7 @@ interface ComponentState {
 export const useComponentModel = create(
   persist<ComponentState>(
     (set) => ({
-      selectedComponent: DEFAULT_COMPONENT,
+      selectedComponent: null,
       components: [],
       selectComponent: (code: EntityId) =>
         set((state) => ({

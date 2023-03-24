@@ -3,7 +3,7 @@ import React from "react";
 import { TextField } from "@mui/material";
 import { StringParameter } from "entities/parameter";
 
-import styles from "./styles.module.scss";
+import styles from "../styles.module.scss";
 
 type Props = {
   element: StringParameter;

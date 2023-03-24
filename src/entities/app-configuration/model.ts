@@ -10,8 +10,6 @@ export enum ConfigurationView {
   TEXT_VIEW,
 }
 
-type ConfigurationSchema = JsonFile | null;
-
 interface State {
   view: ConfigurationView;
   configuration: ComponentTree | null;

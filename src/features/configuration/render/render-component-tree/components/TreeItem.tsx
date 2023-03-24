@@ -1,6 +1,6 @@
 import { Component, useComponentModel } from "entities/component";
 import { ElementComponent } from "features/render/component";
-import React, { ReactNode } from "react";
+import React, { FC, ReactNode } from "react";
 import { Form } from "./Form";
 import { Group } from "./Group";
 import Page from "./Page";
@@ -15,26 +15,30 @@ type Props = {
 
 function TreeItem({ component, children }: Props) {
   const { code } = component;
-  const { selectComponent } = useComponentModel();
 
   if (code !== "element") {
     const Wrapper = getComponentWrapper(code);
     return <Wrapper component={component}>{children}</Wrapper>;
   }
 
-  const handleSelect = () => {
-    selectComponent(code);
-  };
-
   return <ElementComponent {...component} />;
 }
 
-function withWatching(Component: ReactNode, watch: () => void) {
-  return (
-    <div onClick={watch} className={styles.watchedComponent}>
-      {Component}
-    </div>
-  );
+function withWatching(Component: FC<Props>) {
+  return function WatchedComponent(props: Props) {
+    const { component: { code } } = props;
+
+    const { selectComponent } = useComponentModel();
+
+    const handleSelect = () => {
+      selectComponent(props.component.id);
+    }
+
+    return code === "element" ? <div className={styles.watchedComponent} onClick={handleSelect}>
+      <Component {...props} />
+    </div> : <Component {...props} />;
+  }
+  ;
 }
 
 function getComponentWrapper(code: ComponentCode) {
@@ -51,4 +55,4 @@ function getComponentWrapper(code: ComponentCode) {
   }
 }
 
-export default TreeItem;
+export default withWatching(TreeItem);

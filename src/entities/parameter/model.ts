@@ -56,7 +56,7 @@ interface ParameterState {
 
 export const useParameterModel = create(
   persist<ParameterState>(
-    (set, get) => ({
+    (set) => ({
       parameters: [],
       selectedParameter: null,
       loadParameters: (parameters: Parameter[]) => {

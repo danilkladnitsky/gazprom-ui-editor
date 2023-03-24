@@ -2,21 +2,25 @@
   {
     "code": "element",
     "name": "Параметр 1 (Число)",
-    "type": "NUMBER"
+    "type": "NUMBER",
+    "id": 0
   },
   {
     "code": "element",
     "name": "Параметр 2 (Текст)",
-    "type": "TEXT"
+    "type": "TEXT",
+    "id": 1
   },
   {
     "code": "element",
     "name": "Параметр 3 (Дата)",
-    "type": "DATE"
+    "type": "DATE",
+    "id": 2
   },
   {
     "code": "element",
     "name": "Параметр 4 (Чекбокс)",
-    "type": "CHECKBOX"
+    "type": "CHECKBOX",
+    "id": 3
   }
 ]
