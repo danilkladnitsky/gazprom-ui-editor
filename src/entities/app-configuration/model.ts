@@ -3,6 +3,7 @@ import fileDownload from "js-file-download";
 
 import { ComponentTree } from "entities/component";
 import { Parameter } from "entities/parameter";
+import { createJSONStorage, persist } from "zustand/middleware";
 
 export enum ConfigurationView {
   GUI_VIEW,
@@ -13,22 +14,21 @@ type ConfigurationSchema = JsonFile | null;
 
 interface State {
   view: ConfigurationView;
-  configuration: ComponentTree;
+  configuration: ComponentTree | null;
 }
 
 interface Functions {
   changeView: (view: ConfigurationView) => void;
-  uploadConfiguration: (config: ConfigurationSchema) => void;
+  uploadConfiguration: (config: ComponentTree) => void;
   toggleView: () => void;
   downloadConfiguration: () => void;
-  updateConfiguration: (data: ConfigurationSchema) => void;
+  updateConfiguration: (data: ComponentTree) => void;
   generateConfigurationFromParameters: (parameters: Parameter[]) => void;
 }
 
 type ConfigurationModel = Model<State, Functions>;
 
-export const useAppConfigurationModel = create<ConfigurationModel>(
-  (set, get) => ({
+export const useAppConfigurationModel = create(persist<ConfigurationModel>((set, get) => ({
     view: ConfigurationView.GUI_VIEW,
     configuration: null,
     changeView: (view) => set({ view }),
@@ -40,7 +40,7 @@ export const useAppConfigurationModel = create<ConfigurationModel>(
 
       fileDownload(JSON.stringify(data), fileName);
     },
-    updateConfiguration: (configuration: ConfigurationSchema) =>
+    updateConfiguration: (configuration) =>
       set({ configuration }),
     uploadConfiguration: async (configuration) => {
       set({ configuration });
@@ -63,5 +63,7 @@ export const useAppConfigurationModel = create<ConfigurationModel>(
         },
       });
     },
-  })
-);
+}),   {
+      name: "configuration-storage",
+      storage: createJSONStorage(() => localStorage),
+    }));

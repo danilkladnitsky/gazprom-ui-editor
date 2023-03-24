@@ -1,6 +1,7 @@
 import { create } from "zustand";
 
 import { Parameter, ParameterType } from "entities/parameter";
+import { createJSONStorage, persist } from "zustand/middleware";
 
 const DEFAULT_COMPONENT: Component = {
   code: "code",
@@ -61,22 +62,30 @@ interface ComponentState {
   selectComponent: (code: EntityId) => void;
 }
 
-export const useComponentModel = create<ComponentState>((set) => ({
-  selectedComponent: DEFAULT_COMPONENT,
-  components: [],
-  selectComponent: (code: EntityId) =>
-    set((state) => ({
-      selectedComponent: state.components.find((c) => c.code === code),
-    })),
-  updateSelectedComponent: (updatedComponent: Component) => {
-    set((state) => {
-      const component = state.selectedComponent;
-      if (!component) return state;
+export const useComponentModel = create(
+  persist<ComponentState>(
+    (set) => ({
+      selectedComponent: DEFAULT_COMPONENT,
+      components: [],
+      selectComponent: (code: EntityId) =>
+        set((state) => ({
+          selectedComponent: state.components.find((c) => c.code === code),
+        })),
+      updateSelectedComponent: (updatedComponent: Component) => {
+        set((state) => {
+          const component = state.selectedComponent;
+          if (!component) return state;
 
-      return {
-        ...state,
-        selectedComponent: { ...component, ...updatedComponent },
-      };
-    });
-  },
-}));
+          return {
+            ...state,
+            selectedComponent: { ...component, ...updatedComponent },
+          };
+        });
+      },
+    }),
+    {
+      name: "component-storage",
+      storage: createJSONStorage(() => localStorage),
+    }
+  )
+);

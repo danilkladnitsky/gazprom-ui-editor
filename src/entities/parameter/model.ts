@@ -1,4 +1,5 @@
 import { create } from "zustand";
+import { persist, createJSONStorage } from "zustand/middleware";
 
 import {
   CheckboxProperty,
@@ -53,10 +54,18 @@ interface ParameterState {
   loadParameters: (parameters: Parameter[]) => void;
 }
 
-export const useParameterModel = create<ParameterState>((set) => ({
-  parameters: [],
-  selectedParameter: null,
-  loadParameters: (parameters: Parameter[]) => {
-    set({ parameters });
-  },
-}));
+export const useParameterModel = create(
+  persist<ParameterState>(
+    (set, get) => ({
+      parameters: [],
+      selectedParameter: null,
+      loadParameters: (parameters: Parameter[]) => {
+        set({ parameters });
+      },
+    }),
+    {
+      name: "parameter-storage",
+      storage: createJSONStorage(() => localStorage),
+    }
+  )
+);
