@@ -28,21 +28,23 @@ function TreeItem({ component, children }: Props) {
 function withWatching(Component: FC<Props>) {
   return function WatchedComponent(props: Props) {
     const {
-      component: { code },
+      component: { id, code },
     } = props;
 
-    const { selectComponent } = useComponentModel();
+    const selectComponent = useComponentModel((state) => state.selectComponent);
 
-    const handleSelect = () => {
-      selectComponent(props.component.id);
+    if (code !== "element") {
+      return <Component {...props} />;
+    }
+
+    const handleSelect = (e) => {
+      selectComponent(id);
     };
 
-    return code === "element" ? (
+    return (
       <div className={styles.watchedComponent} onClick={handleSelect}>
         <Component {...props} />
       </div>
-    ) : (
-      <Component {...props} />
     );
   };
 }

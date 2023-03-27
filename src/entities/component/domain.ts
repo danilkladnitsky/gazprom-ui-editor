@@ -1,4 +1,4 @@
-import { Parameter } from "entities/parameter";
+import { Parameter } from "entities/parameter/domain";
 
 type ComponentBase = {
   id: EntityId;

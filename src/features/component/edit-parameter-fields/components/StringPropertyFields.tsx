@@ -11,8 +11,8 @@ import styles from "./styles.module.scss";
 
 type Props = ParameterPropertyProps<StringProperty>;
 
-export const StringPropertyFields = ({ property, onChange }: Props) => {
-  const [fields, updateField] = useFormFields<StringProperty>(property);
+export const StringPropertyFields = ({ properties, onChange }: Props) => {
+  const [fields, updateField] = useFormFields<StringProperty>(properties || {});
 
   useEffect(() => {
     onChange(fields);
@@ -21,13 +21,13 @@ export const StringPropertyFields = ({ property, onChange }: Props) => {
   return (
     <div className={styles.fieldsWrapper}>
       <Checkbox
-        checked={fields.multiline}
+        checked={fields?.multiline}
         name="Многострочный"
         onChange={(e) => updateField("multiline", e.target.checked)}
       />
       <TextInput
         label="Количество строк"
-        value={fields.lineCount}
+        value={fields?.lineCount}
         onChange={(v) => updateField("lineCount", v)}
         disabled={!fields.multiline}
         type="number"

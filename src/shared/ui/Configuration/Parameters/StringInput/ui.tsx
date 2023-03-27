@@ -7,10 +7,11 @@ import styles from "../styles.module.scss";
 
 type Props = {
   element: StringParameter;
+  name: string;
 };
 
-export const StringInput = ({ element }: Props) => {
-  const { name, properties } = element;
+export const StringInput = ({ element, name }: Props) => {
+  const { properties } = element;
 
   const { multiline, lineCount } = properties || {};
 

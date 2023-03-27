@@ -10,34 +10,38 @@ import { Parameter, ParameterType } from "entities/parameter/domain";
 
 type Props = {
   parameter: Parameter;
-  onEdit: (parameter: Parameter) => void;
+  onEdit: (dataSource: Parameter) => void;
 };
 export const EditParameterFields = ({ parameter, onEdit }: Props) => {
-  const { name, property, type } = parameter;
+  const { name, properties, type } = parameter;
 
-  const updateProperty = (property: Property) => {
-    const updatedParameter = {
-      ...parameter,
-      property,
-    } as Parameter;
-
-    onEdit(updatedParameter);
+  const handleParameterUpdate = (properties: Property) => {
+    onEdit({ ...parameter, properties });
   };
 
   const renderParameterFields = () => {
     switch (type) {
       case ParameterType.NUMBER:
         return (
-          <NumberPropertyFields property={property} onChange={updateProperty} />
+          <NumberPropertyFields
+            properties={properties}
+            onChange={handleParameterUpdate}
+          />
         );
       case ParameterType.STRING:
         return (
-          <StringPropertyFields property={property} onChange={updateProperty} />
+          <StringPropertyFields
+            properties={properties}
+            onChange={handleParameterUpdate}
+          />
         );
       case ParameterType.DATE:
       default:
         return (
-          <DatePropertyFields property={property} onChange={updateProperty} />
+          <DatePropertyFields
+            properties={properties}
+            onChange={handleParameterUpdate}
+          />
         );
     }
   };

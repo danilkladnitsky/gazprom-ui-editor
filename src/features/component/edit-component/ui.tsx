@@ -3,12 +3,13 @@ import React from "react";
 import { DropdownInput, DropdownItem } from "shared/ui/DropdownInput";
 import { TextInput } from "shared/ui/TextInput";
 import { Header } from "shared/ui/Header";
-import { Parameter, useParameterModel } from "entities/parameter";
+import { useParameterModel } from "entities/parameter";
 import { useComponentModel } from "entities/component";
 
 import { EditParameterFields } from "../edit-parameter-fields";
 
 import styles from "./styles.module.scss";
+import { Parameter } from "entities/parameter/domain";
 
 const convertParametersToList = (params: Parameter[]): DropdownItem[] => {
   return params.map((param) => ({
@@ -18,17 +19,21 @@ const convertParametersToList = (params: Parameter[]): DropdownItem[] => {
 };
 
 export const EditComponent = () => {
-  const { parameters, selectedParameter } = useParameterModel();
+  const { parameters } = useParameterModel();
   const { updateSelectedComponent, selectedComponent } = useComponentModel();
 
   const list = convertParametersToList(parameters);
+  const dataSource = selectedComponent?.dataSource;
 
-  const updateComponent = (parameter: Parameter) => {
-    updateSelectedComponent({ parameter });
+  const updateComponentDatasource = (dataSource: Parameter) => {
+    const updated = { ...selectedComponent, dataSource };
+
+    updateSelectedComponent(updated);
   };
 
   const updateLabel = (name: string) => {
-    updateSelectedComponent({ name });
+    const updated = { ...selectedComponent, name };
+    updateSelectedComponent(updated);
   };
 
   const componentLabel = selectedComponent?.name || "";
@@ -48,10 +53,10 @@ export const EditComponent = () => {
           value={componentLabel}
           onChange={updateLabel}
         />
-        {selectedParameter && (
+        {dataSource && (
           <EditParameterFields
-            parameter={selectedParameter}
-            onEdit={updateComponent}
+            parameter={dataSource}
+            onEdit={updateComponentDatasource}
           />
         )}
       </div>

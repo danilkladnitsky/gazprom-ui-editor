@@ -8,17 +8,17 @@ import { DatasourceComponent as DatasourceComponentProps } from "entities/compon
 import { ParameterType } from "entities/parameter/domain";
 
 export const DatasourceComponent = (component: DatasourceComponentProps) => {
-  const { dataSource } = component;
+  const { dataSource, name } = component;
   const { type } = dataSource;
 
   switch (type) {
     case ParameterType.NUMBER:
-      return <NumberInput element={dataSource} />;
+      return <NumberInput element={dataSource} name={name} />;
     case ParameterType.DATE:
-      return <DateInput element={dataSource} />;
+      return <DateInput element={dataSource} name={name} />;
     case ParameterType.CHECKBOX:
-      return <Checkbox element={dataSource} />;
+      return <Checkbox element={dataSource} name={name} />;
     default:
-      return <StringInput element={dataSource} />;
+      return <StringInput element={dataSource} name={name} />;
   }
 };

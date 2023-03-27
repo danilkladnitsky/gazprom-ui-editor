@@ -6,11 +6,10 @@ import styles from "../styles.module.scss";
 
 type Props = {
   element: DateParameter;
+  name: string;
 };
 
-export const DateInput = ({ element }: Props) => {
-  const { name } = element;
-
+export const DateInput = ({ element, name }: Props) => {
   return (
     <TextField
       type="date"

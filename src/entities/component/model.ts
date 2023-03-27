@@ -6,10 +6,10 @@ import { createJSONStorage, persist } from "zustand/middleware";
 import { Component, DatasourceComponent } from "./domain";
 
 interface ComponentState {
-  selectedComponent: Component | null;
+  selectedComponent: DatasourceComponent | null;
   components: Component[];
   updateSelectedComponent: (component: Component) => void;
-  selectComponent: (code: EntityId) => void;
+  selectComponent: (id: EntityId) => void;
   createComponentsFromParameters: (
     parameters: Parameter[]
   ) => DatasourceComponent[];
@@ -20,23 +20,19 @@ export const useComponentModel = create(
     (set) => ({
       selectedComponent: null,
       components: [],
-      selectComponent: (code: EntityId) =>
-        set((state) => {
-          return {
-            selectedComponent: state.components.find((c) => c.code === code),
-          };
-        }),
-      updateSelectedComponent: (updatedComponent: Component) => {
-        set((state) => {
-          const component = state.selectedComponent;
-          if (!component) return state;
-
-          return {
-            ...state,
-            selectedComponent: { ...component, ...updatedComponent },
-          };
-        });
+      selectComponent: (id: EntityId) => {
+        set((state) => ({
+          selectedComponent: state.components.find((c) => c.id === id),
+        }));
       },
+      updateSelectedComponent: (selectedComponent: Component) =>
+        set((state) => {
+          const components = state.components.map((c) =>
+            c.id === selectedComponent.id ? selectedComponent : c
+          );
+
+          return { components, selectedComponent };
+        }),
       createComponentsFromParameters: (parameters: Parameter[]) => {
         const components: DatasourceComponent[] = parameters.map((param) => ({
           dataSource: param,

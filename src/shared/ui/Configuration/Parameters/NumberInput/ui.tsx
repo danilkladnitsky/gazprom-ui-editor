@@ -7,10 +7,10 @@ import styles from "../styles.module.scss";
 
 type Props = {
   element: NumberParameter;
+  name: string;
 };
 
-export const NumberInput = ({ element }: Props) => {
-  const { name } = element;
+export const NumberInput = ({ element, name }: Props) => {
   const { maxValue, minValue } = element.properties || {};
 
   return <TextField label={name} type="number" className={styles.input} />;

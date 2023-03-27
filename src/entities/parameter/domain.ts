@@ -18,7 +18,7 @@ type ParameterBase = {
 };
 
 export type NumberParameter = ParameterBase & {
-  properties: NumberProperty;
+  properties?: NumberProperty;
   type: ParameterType.NUMBER;
 };
 
@@ -28,12 +28,12 @@ export type StringParameter = ParameterBase & {
 };
 
 export type DateParameter = ParameterBase & {
-  properties: DateProperty;
+  properties?: DateProperty;
   type: ParameterType.DATE;
 };
 
 export type CheckboxParameter = ParameterBase & {
-  properties: CheckboxProperty;
+  properties?: CheckboxProperty;
   type: ParameterType.CHECKBOX;
 };
 

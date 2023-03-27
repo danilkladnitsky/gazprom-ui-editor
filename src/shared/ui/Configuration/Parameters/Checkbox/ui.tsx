@@ -6,10 +6,11 @@ import styles from "../styles.module.scss";
 
 type Props = {
   element: CheckboxParameter;
+  name: string;
 };
 
-export const Checkbox = ({ element }: Props) => {
-  const { properties, name } = element;
+export const Checkbox = ({ element, name }: Props) => {
+  const { properties } = element;
   const { isChecked } = properties || {};
 
   return (
