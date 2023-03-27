@@ -8,8 +8,12 @@ type Model<State, Functions> = FunctionsWithRes<Functions> & State & Functions;
 
 type JsonFile = Record<string, unknown>;
 
-type EntityId = number;
+type EntityId = string;
 
 type ComponentCode = "form" | "tabs" | "page" | "group" | "element";
 type ComponentName = string;
 type ComponentDescription = string;
+
+type UnknownPayload = {
+  [key: string]: any;
+};

@@ -12,5 +12,7 @@ export const Checkbox = ({ element }: Props) => {
   const { properties, name } = element;
   const { isChecked } = properties || {};
 
-  return <UICheckbox checked={isChecked} name={name} className={styles.input} />;
+  return (
+    <UICheckbox checked={isChecked} name={name} className={styles.input} />
+  );
 };

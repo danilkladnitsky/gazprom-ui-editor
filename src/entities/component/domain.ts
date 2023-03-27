@@ -26,14 +26,17 @@ export type ComponentGroup = ComponentBase & {
 
 export type ComponentElement = ComponentBase & {
   code: "element";
-} & Parameter;
+  dataSource: Parameter;
+};
+
+export type DatasourceComponent = ComponentElement;
 
 export type Component =
   | ComponentForm
   | ComponentTabs
   | ComponentPage
   | ComponentGroup
-  | ComponentElement;
+  | DatasourceComponent;
 
 export type ComponentTree = ComponentBase & {
   items?: Component[];

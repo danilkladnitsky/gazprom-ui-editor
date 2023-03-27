@@ -2,11 +2,11 @@ import React from "react";
 
 import { Header } from "shared/ui/Header";
 import { Property } from "entities/properties";
-import { Parameter, ParameterType } from "entities/parameter";
 
 import { NumberPropertyFields } from "./components/NumberPropertyFields";
 import { StringPropertyFields } from "./components/StringPropertyFields";
 import { DatePropertyFields } from "./components/DatePropertyFields";
+import { Parameter, ParameterType } from "entities/parameter/domain";
 
 type Props = {
   parameter: Parameter;

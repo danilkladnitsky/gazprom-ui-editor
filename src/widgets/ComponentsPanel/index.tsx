@@ -25,7 +25,6 @@ const navTabs: TabItem<TabValues>[] = [
   {
     label: "Компоненты",
     value: TabValues.COMPONENTS,
-    disabled: true,
   },
 ];
 

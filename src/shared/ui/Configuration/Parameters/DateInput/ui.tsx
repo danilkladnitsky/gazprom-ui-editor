@@ -11,5 +11,12 @@ type Props = {
 export const DateInput = ({ element }: Props) => {
   const { name } = element;
 
-  return <TextField type="date" label={name} value={new Date()} className={styles.input} />;
+  return (
+    <TextField
+      type="date"
+      label={name}
+      value={new Date()}
+      className={styles.input}
+    />
+  );
 };
