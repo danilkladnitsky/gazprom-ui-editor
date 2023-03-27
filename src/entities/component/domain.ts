@@ -1,6 +1,6 @@
 import { Parameter } from "entities/parameter/domain";
 
-type ComponentBase = {
+export type ComponentBase = {
   id: EntityId;
   code: ComponentCode;
   name: ComponentName;
@@ -37,7 +37,3 @@ export type Component =
   | ComponentPage
   | ComponentGroup
   | DatasourceComponent;
-
-export type ComponentTree = ComponentBase & {
-  items?: Component[];
-};

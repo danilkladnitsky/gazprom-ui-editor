@@ -2,8 +2,9 @@ import { create } from "zustand";
 import fileDownload from "js-file-download";
 
 import { createJSONStorage, persist } from "zustand/middleware";
-import { ComponentTree, DatasourceComponent } from "entities/component/domain";
-import { ConfigurationView } from "./domain";
+import { DatasourceComponent } from "entities/component/domain";
+import { ComponentTree, ConfigurationView } from "./domain";
+import { generateEntityId } from "shared/utils/generateIds";
 
 interface State {
   view: ConfigurationView;
@@ -55,9 +56,8 @@ export const useAppConfigurationModel = create(
       ) => {
         set({
           configuration: {
-            code: "form",
-            name: "Форма по умолчанию",
-            items,
+            id: generateEntityId(),
+            items: items.map(i => ({ id: i.id })),
           },
         });
       },

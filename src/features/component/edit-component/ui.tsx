@@ -9,12 +9,12 @@ import { useComponentModel } from "entities/component";
 import { EditParameterFields } from "../edit-parameter-fields";
 
 import styles from "./styles.module.scss";
-import { Parameter } from "entities/parameter/domain";
+import { Parameter, ParameterType } from "entities/parameter/domain";
 
 const convertParametersToList = (params: Parameter[]): DropdownItem[] => {
   return params.map((param) => ({
     label: param.name,
-    value: param.id,
+    value: param.type,
   }));
 };
 
@@ -27,6 +27,18 @@ export const EditComponent = () => {
 
   const updateComponentDatasource = (dataSource: Parameter) => {
     const updated = { ...selectedComponent, dataSource };
+
+    updateSelectedComponent(updated);
+  };
+
+  const updateDatasourceType = (type: ParameterType) => {
+    const updated = {
+      ...selectedComponent,
+      dataSource: {
+        ...selectedComponent?.dataSource,
+        type,
+      },
+    };
 
     updateSelectedComponent(updated);
   };
@@ -44,7 +56,7 @@ export const EditComponent = () => {
       <div className={styles.form}>
         <DropdownInput
           list={list}
-          onChange={null} // TODO: replace with component analogue
+          onChange={updateDatasourceType} // TODO: replace with component analogue
           name="Выберите источник данных"
         />
         <TextInput
