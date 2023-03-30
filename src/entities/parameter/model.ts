@@ -1,62 +1,23 @@
 import { create } from "zustand";
+import { persist, createJSONStorage } from "zustand/middleware";
 
-import {
-  CheckboxProperty,
-  DateProperty,
-  NumberProperty,
-  StringProperty,
-} from "entities/properties";
-
-export enum ParameterType {
-  STRING = "TEXT",
-  NUMBER = "NUMBER",
-  DATE = "DATE",
-  CHECKBOX = "CHECKBOX",
-}
-
-export type FieldId = string;
-
-type ParameterBase = {
-  code: FieldId;
-  name: string;
-};
-
-export type NumberParameter = ParameterBase & {
-  properties: NumberProperty;
-  type: ParameterType.NUMBER;
-};
-
-export type StringParameter = ParameterBase & {
-  properties?: StringProperty;
-  type: ParameterType.STRING;
-};
-
-export type DateParameter = ParameterBase & {
-  properties: DateProperty;
-  type: ParameterType.DATE;
-};
-
-export type CheckboxParameter = ParameterBase & {
-  properties: CheckboxProperty;
-  type: ParameterType.CHECKBOX;
-};
-
-export type Parameter =
-  | DateParameter
-  | StringParameter
-  | NumberParameter
-  | CheckboxParameter;
+import { generateIds } from "shared/utils/generateIds";
+import { InputParameter, Parameter } from "./domain";
 
 interface ParameterState {
   parameters: Parameter[];
   selectedParameter: Parameter | null;
-  loadParameters: (parameters: Parameter[]) => void;
+  loadParameters: (parameters: InputParameter[]) => Parameter[];
 }
 
 export const useParameterModel = create<ParameterState>((set) => ({
   parameters: [],
   selectedParameter: null,
-  loadParameters: (parameters: Parameter[]) => {
-    set({ parameters });
+  loadParameters: (parameters: InputParameter[]) => {
+    const parametersWithId = generateIds<InputParameter>(
+      parameters
+    ) as Parameter[];
+    set({ parameters: parametersWithId });
+    return parametersWithId;
   },
 }));

@@ -1,21 +1,24 @@
 import React from "react";
 
-import { ComponentElement } from "entities/component";
-import { ParameterType } from "entities/parameter";
 import { NumberInput } from "shared/ui/Configuration/Parameters/NumberInput";
 import { DateInput } from "shared/ui/Configuration/Parameters/DateInput";
 import { StringInput } from "shared/ui/Configuration/Parameters/StringInput";
 import { Checkbox } from "shared/ui/Configuration/Parameters/Checkbox";
+import { DatasourceComponent as DatasourceComponentProps } from "entities/component/domain";
+import { ParameterType } from "entities/parameter/domain";
 
-export const ElementComponent = (element: ComponentElement) => {
-  switch (element.type) {
+export const DatasourceComponent = (component: DatasourceComponentProps) => {
+  const { dataSource, name } = component;
+  const { type } = dataSource;
+
+  switch (type) {
     case ParameterType.NUMBER:
-      return <NumberInput element={element} />;
+      return <NumberInput element={dataSource} name={name} />;
     case ParameterType.DATE:
-      return <DateInput element={element} />;
+      return <DateInput element={dataSource} name={name} />;
     case ParameterType.CHECKBOX:
-      return <Checkbox element={element} />;
+      return <Checkbox element={dataSource} name={name} />;
     default:
-      return <StringInput element={element} />;
+      return <StringInput element={dataSource} name={name} />;
   }
 };

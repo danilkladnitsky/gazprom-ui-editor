@@ -1,9 +1,10 @@
-import { useParameterModel } from "entities/parameter";
 import React from "react";
-import { ParametersList } from "shared/ui/Parameter/ParametersList";
+
+import { useParameterModel } from "entities/parameter";
+import List from "shared/ui/List/List";
 
 export const SelectParameter = () => {
   const parameterModel = useParameterModel();
 
-  return <ParametersList list={parameterModel.parameters} />;
+  return <List data={parameterModel.parameters} />;
 };

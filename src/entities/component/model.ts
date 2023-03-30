@@ -1,82 +1,55 @@
+import { Parameter } from "entities/parameter/domain";
+import { generateEntityId } from "shared/utils/generateIds";
 import { create } from "zustand";
 
-import { Parameter, ParameterType } from "entities/parameter";
-
-const DEFAULT_COMPONENT: Component = {
-  code: "code",
-  name: "ФИО",
-  parameter: {
-    id: "id",
-    name: "My label",
-    property: {
-      lineCount: 3,
-      multiline: true,
-    },
-    type: ParameterType.STRING,
-  },
-};
-
-type ComponentBase = {
-  code: ComponentCode;
-  name: ComponentName;
-  description?: ComponentDescription;
-};
-
-export type ComponentForm = ComponentBase & {
-  code: "form";
-};
-
-export type ComponentTabs = ComponentBase & {
-  code: "tabs";
-};
-
-export type ComponentPage = ComponentBase & {
-  code: "page";
-};
-
-export type ComponentGroup = ComponentBase & {
-  code: "group";
-  direction: "row" | "column";
-};
-
-export type ComponentElement = ComponentBase & {
-  code: "element";
-} & Parameter;
-
-export type Component =
-  | ComponentForm
-  | ComponentTabs
-  | ComponentPage
-  | ComponentGroup
-  | ComponentElement;
-
-export type ComponentTree = ComponentBase & {
-  items?: Component[];
-};
+import { createJSONStorage, persist } from "zustand/middleware";
+import { Component, ComponentForm, DatasourceComponent } from "./domain";
 
 interface ComponentState {
-  selectedComponent: Component | null;
+  selectedComponent: DatasourceComponent | null;
   components: Component[];
   updateSelectedComponent: (component: Component) => void;
-  selectComponent: (code: EntityId) => void;
+  selectComponent: (id: EntityId) => void;
+  createComponentsFromParameters: (
+    parameters: Parameter[]
+  ) => DatasourceComponent[];
 }
 
 export const useComponentModel = create<ComponentState>((set) => ({
-  selectedComponent: DEFAULT_COMPONENT,
+  selectedComponent: null,
   components: [],
-  selectComponent: (code: EntityId) =>
+  selectComponent: (id: EntityId) => {
     set((state) => ({
-      selectedComponent: state.components.find((c) => c.code === code),
-    })),
-  updateSelectedComponent: (updatedComponent: Component) => {
+      selectedComponent: state.components.find((c) => c.id === id),
+    }));
+  },
+  updateSelectedComponent: (selectedComponent: Component) =>
     set((state) => {
-      const component = state.selectedComponent;
-      if (!component) return state;
+      const components = state.components.map((c) =>
+        c.id === selectedComponent.id ? selectedComponent : c
+      );
 
-      return {
-        ...state,
-        selectedComponent: { ...component, ...updatedComponent },
-      };
-    });
+      return { components, selectedComponent };
+    }),
+  createComponentsFromParameters: (parameters: Parameter[]) => {
+    const components: DatasourceComponent[] = parameters.map((param) => ({
+      dataSource: param,
+      id: generateEntityId(),
+      code: "element",
+      name: `Компонент ${param.type}`,
+    }));
+
+    // create root
+    const rootComponent: ComponentForm = {
+      code: "form",
+      id: generateEntityId(),
+      name: "Форма",
+    };
+
+    const result = [rootComponent, ...components];
+
+    set({ components: result });
+
+    return result;
   },
 }));

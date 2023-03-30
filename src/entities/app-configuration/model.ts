@@ -1,28 +1,21 @@
 import { create } from "zustand";
 import fileDownload from "js-file-download";
 
-import { ComponentTree } from "entities/component";
-import { Parameter } from "entities/parameter";
-
-export enum ConfigurationView {
-  GUI_VIEW,
-  TEXT_VIEW,
-}
-
-type ConfigurationSchema = JsonFile | null;
+import { Component } from "entities/component/domain";
+import { ComponentTree, ConfigurationView } from "./domain";
 
 interface State {
   view: ConfigurationView;
-  configuration: ComponentTree;
+  configuration: ComponentTree | null;
 }
 
 interface Functions {
   changeView: (view: ConfigurationView) => void;
-  uploadConfiguration: (config: ConfigurationSchema) => void;
+  uploadConfiguration: (config: ComponentTree) => void;
   toggleView: () => void;
   downloadConfiguration: () => void;
-  updateConfiguration: (data: ConfigurationSchema) => void;
-  generateConfigurationFromParameters: (parameters: Parameter[]) => void;
+  updateConfiguration: (data: ComponentTree) => void;
+  generateAppConfig: (components: Component[]) => void;
 }
 
 type ConfigurationModel = Model<State, Functions>;
@@ -40,8 +33,7 @@ export const useAppConfigurationModel = create<ConfigurationModel>(
 
       fileDownload(JSON.stringify(data), fileName);
     },
-    updateConfiguration: (configuration: ConfigurationSchema) =>
-      set({ configuration }),
+    updateConfiguration: (configuration) => set({ configuration }),
     uploadConfiguration: async (configuration) => {
       set({ configuration });
     },
@@ -54,12 +46,27 @@ export const useAppConfigurationModel = create<ConfigurationModel>(
 
         return { ...state, view };
       }),
-    generateConfigurationFromParameters: (parameters: Parameter[]) => {
+    generateAppConfig: (items: Component[]) => {
+      const root = items.find((i) => i.code === "form");
+
+      if (!root) {
+        throw new Error(
+          "Нельзя сгенерировать конфигурацию без корневого элемента с кодом form"
+        );
+      }
+
+      const rootComponent: ComponentTree = {
+        id: root?.id,
+      };
+
+      const components = items
+        .filter((i) => i.code !== "form")
+        .map((i) => ({ id: i.id }));
+
       set({
         configuration: {
-          code: "form",
-          name: "Форма по умолчанию",
-          items: parameters,
+          ...rootComponent,
+          items: components,
         },
       });
     },
