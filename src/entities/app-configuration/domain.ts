@@ -4,6 +4,6 @@ export enum ConfigurationView {
 }
 
 export type ComponentTree = {
-  id: EntityId;
+  id: EntityId | "root";
   items?: ComponentTree[];
 };

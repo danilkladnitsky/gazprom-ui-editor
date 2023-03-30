@@ -4,14 +4,11 @@ import { renderRecursiveTree } from "features/configuration/render/render-compon
 import { useAppConfigurationModel } from "entities/app-configuration";
 
 import styles from "./styles.module.scss";
-import { useComponentModel } from "entities/component";
 
 export const EditViewConfiguration = () => {
   const jsonConfiguration = useAppConfigurationModel(
     (state) => state.configuration
   );
-
-  const { components } = useComponentModel();
 
   return (
     <div className={styles.wrapper}>

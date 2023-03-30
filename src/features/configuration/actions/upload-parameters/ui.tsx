@@ -15,11 +15,11 @@ const UploadParameters = () => {
   const { loadParameters } = useParameterModel();
   const { createComponentsFromParameters: genenerateComponents } =
     useComponentModel();
-  const { generateConfigFromDatasourceComponents: generateTree } =
-    useAppConfigurationModel();
+
+  const { generateAppConfig } = useAppConfigurationModel();
 
   const handleLoadParameters = (data: InputParameter[]) => {
-    pipe(loadParameters, genenerateComponents, generateTree)(data);
+    pipe(loadParameters, genenerateComponents, generateAppConfig)(data);
 
     enqueueSnackbar("Стандартная форма была сгенерирована");
   };

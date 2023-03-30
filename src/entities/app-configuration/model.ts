@@ -1,17 +1,13 @@
 import { create } from "zustand";
 import fileDownload from "js-file-download";
 
-import { createJSONStorage, persist } from "zustand/middleware";
-import { DatasourceComponent } from "entities/component/domain";
+import { Component } from "entities/component/domain";
 import { ComponentTree, ConfigurationView } from "./domain";
-import { generateEntityId } from "shared/utils/generateIds";
 
 interface State {
   view: ConfigurationView;
   configuration: ComponentTree | null;
 }
-
-type ConfigurationModel = Model<State, Functions>;
 
 interface Functions {
   changeView: (view: ConfigurationView) => void;
@@ -19,52 +15,60 @@ interface Functions {
   toggleView: () => void;
   downloadConfiguration: () => void;
   updateConfiguration: (data: ComponentTree) => void;
-  generateConfigFromDatasourceComponents: (
-    components: DatasourceComponent[]
-  ) => void;
+  generateAppConfig: (components: Component[]) => void;
 }
 
-export const useAppConfigurationModel = create(
-  persist<ConfigurationModel>(
-    (set, get) => ({
-      view: ConfigurationView.GUI_VIEW,
-      configuration: null,
-      changeView: (view) => set({ view }),
-      downloadConfiguration: async () => {
-        const data = get().configuration;
+type ConfigurationModel = Model<State, Functions>;
 
-        const { name } = data as ComponentTree;
-        const fileName = `${name}.json`;
+export const useAppConfigurationModel = create<ConfigurationModel>(
+  (set, get) => ({
+    view: ConfigurationView.GUI_VIEW,
+    configuration: null,
+    changeView: (view) => set({ view }),
+    downloadConfiguration: async () => {
+      const data = get().configuration;
 
-        fileDownload(JSON.stringify(data), fileName);
-      },
-      updateConfiguration: (configuration) => set({ configuration }),
-      uploadConfiguration: async (configuration) => {
-        set({ configuration });
-      },
-      toggleView: () =>
-        set((state) => {
-          const view =
-            state.view === ConfigurationView.GUI_VIEW
-              ? ConfigurationView.TEXT_VIEW
-              : ConfigurationView.GUI_VIEW;
+      const { name } = data as ComponentTree;
+      const fileName = `${name}.json`;
 
-          return { ...state, view };
-        }),
-      generateConfigFromDatasourceComponents: (
-        items: DatasourceComponent[]
-      ) => {
-        set({
-          configuration: {
-            id: generateEntityId(),
-            items: items.map(i => ({ id: i.id })),
-          },
-        });
-      },
-    }),
-    {
-      name: "configuration-storage",
-      storage: createJSONStorage(() => localStorage),
-    }
-  )
+      fileDownload(JSON.stringify(data), fileName);
+    },
+    updateConfiguration: (configuration) => set({ configuration }),
+    uploadConfiguration: async (configuration) => {
+      set({ configuration });
+    },
+    toggleView: () =>
+      set((state) => {
+        const view =
+          state.view === ConfigurationView.GUI_VIEW
+            ? ConfigurationView.TEXT_VIEW
+            : ConfigurationView.GUI_VIEW;
+
+        return { ...state, view };
+      }),
+    generateAppConfig: (items: Component[]) => {
+      const root = items.find((i) => i.code === "form");
+
+      if (!root) {
+        throw new Error(
+          "Нельзя сгенерировать конфигурацию без корневого элемента с кодом form"
+        );
+      }
+
+      const rootComponent: ComponentTree = {
+        id: root?.id,
+      };
+
+      const components = items
+        .filter((i) => i.code !== "form")
+        .map((i) => ({ id: i.id }));
+
+      set({
+        configuration: {
+          ...rootComponent,
+          items: components,
+        },
+      });
+    },
+  })
 );

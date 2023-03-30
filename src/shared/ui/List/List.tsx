@@ -9,7 +9,7 @@ type Props<T> = {
 };
 const List = <T,>({ data }: Props<T>) => {
   return (
-    <div>
+    <div className={styles.list}>
       {data.map((item, index) => (
         <ListItem name={item.name} key={item.id || index} />
       ))}
@@ -20,7 +20,7 @@ const List = <T,>({ data }: Props<T>) => {
 const ListItem = ({ name }: { name: string }) => {
   return (
     <Button className={styles.item} size="medium" variant="text">
-      Параметр: {name}
+      {name}
     </Button>
   );
 };

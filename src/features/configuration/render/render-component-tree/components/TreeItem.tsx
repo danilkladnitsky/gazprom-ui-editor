@@ -1,5 +1,5 @@
+import { ComponentTree } from "entities/app-configuration/domain";
 import { useComponentModel } from "entities/component";
-import { Component } from "entities/component/domain";
 import { DatasourceComponent } from "features/render/component";
 import React, { FC, ReactNode } from "react";
 import { Form } from "./Form";
@@ -10,11 +10,18 @@ import { Tabs } from "./Tabs";
 import styles from "./TreeItem.module.scss";
 
 type Props = {
-  component: Component;
+  item: ComponentTree;
   children: ReactNode;
 };
 
-function TreeItem({ component, children }: Props) {
+function TreeItem({ item, children }: Props) {
+  const { components } = useComponentModel();
+  const component = components.find((c) => c.id === item.id);
+
+  if (!component) {
+    throw new Error(`Компонента с id ${item.id} не существует`);
+  }
+
   const { code } = component;
 
   if (code !== "element") {
@@ -27,9 +34,14 @@ function TreeItem({ component, children }: Props) {
 
 function withWatching(Component: FC<Props>) {
   return function WatchedComponent(props: Props) {
-    const {
-      component: { id, code },
-    } = props;
+    const { components } = useComponentModel();
+    const component = components.find((c) => c.id === props.item.id);
+
+    if (!component) {
+      return <Component {...props} />;
+    }
+
+    const { code, id } = component;
 
     const selectComponent = useComponentModel((state) => state.selectComponent);
 
@@ -37,7 +49,7 @@ function withWatching(Component: FC<Props>) {
       return <Component {...props} />;
     }
 
-    const handleSelect = (e) => {
+    const handleSelect = () => {
       selectComponent(id);
     };
 
