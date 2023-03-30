@@ -2,46 +2,42 @@ import React from "react";
 
 import { Header } from "shared/ui/Header";
 import { Property } from "entities/properties";
+import { Parameter, ParameterType } from "entities/parameter";
 
 import { NumberPropertyFields } from "./components/NumberPropertyFields";
 import { StringPropertyFields } from "./components/StringPropertyFields";
 import { DatePropertyFields } from "./components/DatePropertyFields";
-import { Parameter, ParameterType } from "entities/parameter/domain";
 
 type Props = {
   parameter: Parameter;
-  onEdit: (dataSource: Parameter) => void;
+  onEdit: (parameter: Parameter) => void;
 };
 export const EditParameterFields = ({ parameter, onEdit }: Props) => {
-  const { name, properties, type } = parameter;
+  const { name, property, type } = parameter;
 
-  const handleParameterUpdate = (properties: Property) => {
-    onEdit({ ...parameter, properties });
+  const updateProperty = (property: Property) => {
+    const updatedParameter = {
+      ...parameter,
+      property,
+    } as Parameter;
+
+    onEdit(updatedParameter);
   };
 
   const renderParameterFields = () => {
     switch (type) {
       case ParameterType.NUMBER:
         return (
-          <NumberPropertyFields
-            properties={properties}
-            onChange={handleParameterUpdate}
-          />
+          <NumberPropertyFields property={property} onChange={updateProperty} />
         );
       case ParameterType.STRING:
         return (
-          <StringPropertyFields
-            properties={properties}
-            onChange={handleParameterUpdate}
-          />
+          <StringPropertyFields property={property} onChange={updateProperty} />
         );
       case ParameterType.DATE:
       default:
         return (
-          <DatePropertyFields
-            properties={properties}
-            onChange={handleParameterUpdate}
-          />
+          <DatePropertyFields property={property} onChange={updateProperty} />
         );
     }
   };

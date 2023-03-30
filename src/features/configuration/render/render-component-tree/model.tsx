@@ -1,6 +1,6 @@
 import React from "react";
 
-import { ComponentTree } from "entities/app-configuration/domain";
+import { ComponentTree } from "entities/component";
 
 import TreeItem from "./components/TreeItem";
 
@@ -9,7 +9,7 @@ export function renderRecursiveTree(tree: ComponentTree) {
     return (
       subTree.items &&
       subTree.items.map((component) => (
-        <TreeItem item={component} key={component.id}>
+        <TreeItem component={component} key={component.name}>
           {renderSubTree(component)}
         </TreeItem>
       ))

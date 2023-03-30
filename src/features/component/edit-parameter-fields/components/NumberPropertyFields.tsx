@@ -10,8 +10,8 @@ import styles from "./styles.module.scss";
 
 type Props = ParameterPropertyProps<NumberProperty>;
 
-export const NumberPropertyFields = ({ properties, onChange }: Props) => {
-  const [fields, updateField] = useFormFields<NumberProperty>(properties || {});
+export const NumberPropertyFields = ({ property, onChange }: Props) => {
+  const [fields, updateField] = useFormFields<NumberProperty>(property);
 
   useEffect(() => {
     onChange(fields);
@@ -20,13 +20,13 @@ export const NumberPropertyFields = ({ properties, onChange }: Props) => {
   return (
     <div className={styles.fieldsWrapper}>
       <TextInput
-        value={fields?.minValue}
+        value={fields.minValue}
         label="Минимальное значение"
         type="number"
         onChange={(v) => updateField("minValue", +v)}
       />
       <TextInput
-        value={fields?.maxValue}
+        value={fields.maxValue}
         label="Максимальное значение"
         type="number"
         onChange={(v) => updateField("maxValue", +v)}

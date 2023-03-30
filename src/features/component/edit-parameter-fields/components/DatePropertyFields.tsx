@@ -11,8 +11,8 @@ import styles from "./styles.module.scss";
 
 type Props = ParameterPropertyProps<DateProperty>;
 
-export const DatePropertyFields = ({ properties, onChange }: Props) => {
-  const [fields, updateField] = useFormFields<DateProperty>(properties || {});
+export const DatePropertyFields = ({ property, onChange }: Props) => {
+  const [fields, updateField] = useFormFields<DateProperty>(property);
 
   useEffect(() => {
     onChange(fields);
@@ -22,7 +22,7 @@ export const DatePropertyFields = ({ properties, onChange }: Props) => {
     <div className={styles.fieldsWrapper}>
       <TextInput
         label="Формат даты"
-        value={fields?.dateFormat}
+        value={fields.dateFormat}
         type="text"
         onChange={(v) => updateField("dateFormat", v)}
       />

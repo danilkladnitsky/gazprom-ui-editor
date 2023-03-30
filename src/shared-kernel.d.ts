@@ -13,7 +13,3 @@ type EntityId = string;
 type ComponentCode = "form" | "tabs" | "page" | "group" | "element";
 type ComponentName = string;
 type ComponentDescription = string;
-
-type UnknownPayload = {
-  [key: string]: any;
-};
