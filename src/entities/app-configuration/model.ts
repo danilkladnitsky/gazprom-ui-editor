@@ -27,10 +27,7 @@ export const useAppConfigurationModel = create<ConfigurationModel>(
     changeView: (view) => set({ view }),
     downloadConfiguration: async () => {
       const data = get().configuration;
-
-      const { name } = data as ComponentTree;
-      const fileName = `${name}.json`;
-
+      const fileName = `config.json`;
       fileDownload(JSON.stringify(data), fileName);
     },
     updateConfiguration: (configuration) => set({ configuration }),
