@@ -1,17 +1,25 @@
-import React from "react";
+import React, { FC, ReactNode } from "react";
 
-import { ComponentTree } from "entities/app-configuration/domain";
+import { SchemaTree } from "entities/app-configuration/domain";
 
 import TreeItem from "./components/TreeItem";
 
-export function renderRecursiveTree(tree: ComponentTree) {
-  const renderSubTree = (subTree: ComponentTree) => {
+export type TreeTemplateProps = { item: SchemaTree; children: ReactNode };
+
+type Props = {
+  tree: SchemaTree;
+  template?: FC<TreeTemplateProps>;
+};
+export function RecursiveTree({ tree, template = TreeItem }: Props) {
+  const TemplateItem = template;
+
+  const renderSubTree = (subTree: SchemaTree) => {
     return (
       subTree.items &&
       subTree.items.map((component) => (
-        <TreeItem item={component} key={component.id}>
+        <TemplateItem item={component} key={component.id}>
           {renderSubTree(component)}
-        </TreeItem>
+        </TemplateItem>
       ))
     );
   };
@@ -20,5 +28,5 @@ export function renderRecursiveTree(tree: ComponentTree) {
     items: [tree],
   };
 
-  return renderSubTree(preparedTree);
+  return renderSubTree(preparedTree) ?? null;
 }

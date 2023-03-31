@@ -10,14 +10,22 @@ interface ParameterState {
   loadParameters: (parameters: InputParameter[]) => Parameter[];
 }
 
-export const useParameterModel = create<ParameterState>((set) => ({
-  parameters: [],
-  selectedParameter: null,
-  loadParameters: (parameters: InputParameter[]) => {
-    const parametersWithId = generateIds<InputParameter>(
-      parameters
-    ) as Parameter[];
-    set({ parameters: parametersWithId });
-    return parametersWithId;
-  },
-}));
+export const useParameterModel = create(
+  persist<ParameterState>(
+    (set) => ({
+      parameters: [],
+      selectedParameter: null,
+      loadParameters: (parameters: InputParameter[]) => {
+        const parametersWithId = generateIds<InputParameter>(
+          parameters
+        ) as Parameter[];
+        set({ parameters: parametersWithId });
+        return parametersWithId;
+      },
+    }),
+    {
+      name: "parameter-storage",
+      storage: createJSONStorage(() => localStorage),
+    }
+  )
+);

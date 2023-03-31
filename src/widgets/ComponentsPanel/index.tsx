@@ -4,6 +4,7 @@ import styles from "./styles.module.scss";
 import TabMenu, { TabItem } from "shared/ui/TabMenu/TabMenu";
 import { SelectParameter } from "features/constructor/select-parameter";
 import { SelectComponent } from "features/constructor/select-component";
+import EditForm from "features/constructor/edit-form/ui";
 
 enum TabValues {
   PARAMETERS,
@@ -19,7 +20,6 @@ const navTabs: TabItem<TabValues>[] = [
   {
     label: "Форма",
     value: TabValues.FORM,
-    disabled: true,
   },
   {
     label: "Компоненты",
@@ -35,7 +35,7 @@ const TabContent = ({ tab }: { tab: TabValues }) => {
       return <SelectComponent />;
     case TabValues.FORM:
     default:
-      return <SelectParameter />;
+      return <EditForm />;
   }
 };
 
