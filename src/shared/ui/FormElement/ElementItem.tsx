@@ -15,17 +15,13 @@ type Props = DraggableProps & {
 };
 
 function ElementItem({ title, item, className, isDragging }: Props) {
-  if (isDragging) {
-    return null;
-  }
-
   const draggable = ALLOWED_TYPES_FOR_DND.includes(item.code);
 
   return (
     <div
       className={classNames(
         styles.element,
-        { [styles.draggable]: draggable },
+        { [styles.draggable]: draggable, [styles.isDragging]: isDragging },
         className
       )}
     >

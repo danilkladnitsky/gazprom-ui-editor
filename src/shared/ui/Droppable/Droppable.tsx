@@ -3,17 +3,16 @@ import React, { FC } from "react";
 import { useDrop } from "react-dnd";
 
 export type DroppableProps<I> = {
-  item: I;
+  isHovered?: boolean;
   onDrop: (item: I) => void;
   onHover?: (item: I) => void;
-  isHovered?: boolean;
 };
 
 export const Droppable = <
   Item extends Component,
-  Props extends DroppableProps<Item>
+  Props extends { item: Item } & DroppableProps<Item>
 >(
-  Component: FC<Props>
+  Component: FC<Props & DroppableProps<Item>>
 ) => {
   return function Wrapper(props: Props) {
     const [collectedProps, drop] = useDrop(() => ({
@@ -31,6 +30,7 @@ export const Droppable = <
           {...props}
           onDrop={props.onDrop}
           isHovered={collectedProps.isOver}
+          ref={drop}
         />
       </div>
     );

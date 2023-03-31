@@ -3,17 +3,11 @@ import React, { FC } from "react";
 import { useDrag } from "react-dnd";
 import { ALLOWED_TYPES_FOR_DND } from "shared/constants/drag-and-drop";
 
-export type PropsWithItem<I> = {
-  item: I;
-};
-
 export type DraggableProps = {
   isDragging: boolean;
 };
-export const Draggable = <
-  Item extends Component,
-  Props extends PropsWithItem<Item>
->(
+
+export const Draggable = <Item extends Component, Props extends { item: Item }>(
   type: DragType,
   DragComponent: FC<Props & DraggableProps>
 ) => {

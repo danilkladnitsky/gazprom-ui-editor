@@ -1,7 +1,6 @@
 import React from "react";
 
 import { Skeleton } from "@mui/material";
-import classNames from "classnames";
 
 import { Droppable } from "../Droppable";
 import styles from "./DropZone.module.scss";
@@ -11,11 +10,11 @@ type Props = {
 };
 
 function DropZone({ isHovered }: Props) {
-  return (
-    <div
-      className={classNames(styles.zone, { [styles.isHovered]: isHovered })}
-    ></div>
-  );
+  if (isHovered) {
+    return <Skeleton className={styles.isHovered} animation="pulse" />;
+  }
+
+  return <div className={styles.zone}></div>;
 }
 
 export default Droppable(DropZone);
