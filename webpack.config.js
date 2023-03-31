@@ -52,6 +52,10 @@ module.exports = {
   resolve: {
     extensions: [".tsx", ".ts", ".js", ".jsx"],
     modules: [path.resolve(__dirname, "src"), "node_modules"],
+    fallback: {
+        'react/jsx-runtime': 'react/jsx-runtime.js',
+        'react/jsx-dev-runtime': 'react/jsx-dev-runtime.js',
+    },
   },
   plugins: [
     new HtmlWebpackPlugin({

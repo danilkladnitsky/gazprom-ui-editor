@@ -1,0 +1,15 @@
+.element,
+.skeleton {
+  padding: 8px 12px;
+  border-radius: 4px;
+}
+
+.element {
+  background-color: white;
+  opacity: 0.6;
+}
+
+.draggable {
+  opacity: 1;
+  cursor: pointer;
+}

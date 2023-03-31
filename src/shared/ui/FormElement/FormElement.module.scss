@@ -1,0 +1,15 @@
+.element {
+  position: relative;
+}
+
+.item {
+  padding: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.group {
+  padding-left: 8px;
+}

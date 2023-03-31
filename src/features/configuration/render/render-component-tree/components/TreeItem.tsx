@@ -1,4 +1,4 @@
-import { ComponentTree } from "entities/app-configuration/domain";
+import { SchemaTree } from "entities/app-configuration/domain";
 import { useComponentModel } from "entities/component";
 import { DatasourceComponent } from "features/render/component";
 import React, { FC, ReactNode } from "react";
@@ -10,7 +10,7 @@ import { Tabs } from "./Tabs";
 import styles from "./TreeItem.module.scss";
 
 type Props = {
-  item: ComponentTree;
+  item: SchemaTree;
   children: ReactNode;
 };
 

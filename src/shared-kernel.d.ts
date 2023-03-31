@@ -17,3 +17,9 @@ type ComponentDescription = string;
 type UnknownPayload = {
   [key: string]: any;
 };
+
+type RestProps = {
+  [key: string]: unknown;
+};
+
+type DragType = ComponentCode;

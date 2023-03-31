@@ -1,13 +1,13 @@
-import { ComponentTree } from "./domain";
+import { SchemaTree } from "./domain";
 
 export const findComponentById = (
   id: EntityId,
-  tree: ComponentTree
-): ComponentTree | false => {
+  tree: SchemaTree
+): SchemaTree | false => {
   if (id === tree.id) {
     return tree;
   } else if (tree.items) {
-    let res: ComponentTree | false = false;
+    let res: SchemaTree | false = false;
     for (const subTree of tree.items) {
       res = findComponentById(id, subTree);
     }
