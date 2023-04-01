@@ -1,8 +1,8 @@
-import { Component } from "entities/component/domain";
-
 export enum ConfigurationView {
   GUI_VIEW,
   TEXT_VIEW,
+  GUI_DRAG_AND_DROP,
+  TEXT_DRAG_AND_DROP
 }
 
 export type SchemaTree = {

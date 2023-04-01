@@ -23,7 +23,7 @@ interface Functions {
 type ConfigurationModel = Model<State, Functions>;
 
 export const useAppConfigurationModel = create(
-  persist(
+  persist<ConfigurationModel>(
     (set, get) => ({
       view: ConfigurationView.GUI_VIEW,
       configuration: null,
