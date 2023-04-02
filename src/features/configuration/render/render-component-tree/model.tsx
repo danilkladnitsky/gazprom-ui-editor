@@ -2,7 +2,7 @@ import React, { FC, ReactNode } from "react";
 
 import { SchemaTree } from "entities/app-configuration/domain";
 
-import TreeItem from "./components/TreeItem";
+import TreeItem from "./TreeItem";
 
 export type TreeTemplateProps = { item: SchemaTree; children: ReactNode };
 

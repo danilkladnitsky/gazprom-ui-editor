@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import React from "react";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 
@@ -19,18 +19,6 @@ function EditForm() {
       <RecursiveTree tree={configuration} template={FormElement} />
     </DndProvider>
   );
-}
-
-type ItemProps = {
-  name: string;
-};
-
-function Item({ name }: ItemProps) {
-  return <div>{name}</div>;
-}
-
-function ItemGroup({ children }: { children: ReactNode }) {
-  return <div>{children}</div>;
 }
 
 export default EditForm;

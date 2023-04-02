@@ -67,8 +67,6 @@ export const useComponentModel = create(
             return c;
           });
 
-          console.log(components);
-
           return { components };
         });
       },

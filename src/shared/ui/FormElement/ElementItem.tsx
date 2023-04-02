@@ -1,27 +1,33 @@
-import { Skeleton } from "@mui/material";
-import classNames from "classnames";
-import { Component } from "entities/component/domain";
 import React from "react";
-import { ALLOWED_TYPES_FOR_DND } from "shared/constants/drag-and-drop";
 
-import { Draggable, DraggableProps } from "../Draggable";
+import classNames from "classnames";
+
+import { ALLOWED_TYPES_FOR_DND } from "shared/constants/drag-and-drop";
+import { withDragging, withDraggingProps } from "shared/hocs/withDragging";
 
 import styles from "./ElementItem.module.scss";
+import { useComponent } from "shared/hooks/useComponent";
+import { SchemaTree } from "entities/app-configuration/domain";
 
-type Props = DraggableProps & {
+type Props = {
   title: string;
   className?: string;
-  item: Component;
-};
+  item: SchemaTree;
+} & withDraggingProps;
 
 function ElementItem({ title, item, className, isDragging }: Props) {
-  const draggable = ALLOWED_TYPES_FOR_DND.includes(item.code);
+  const { code } = useComponent(item.id);
+
+  const withDragging = ALLOWED_TYPES_FOR_DND.includes(code);
 
   return (
     <div
       className={classNames(
         styles.element,
-        { [styles.draggable]: draggable, [styles.isDragging]: isDragging },
+        {
+          [styles.withDragging]: withDragging,
+          [styles.isDragging]: isDragging,
+        },
         className
       )}
     >
@@ -30,4 +36,4 @@ function ElementItem({ title, item, className, isDragging }: Props) {
   );
 }
 
-export default Draggable("element", ElementItem);
+export default withDragging(ElementItem, "component-list");

@@ -1,21 +1,26 @@
 import React from "react";
 
-import { RecursiveTree } from "features/configuration/render/render-component-tree";
+import { withWatching } from "shared/hocs";
+
 import { useAppConfigurationModel } from "entities/app-configuration";
 
+import { RecursiveTree } from "features/configuration/render/render-component-tree";
+import TreeItem from "features/configuration/render/render-component-tree/TreeItem";
+
 import styles from "./styles.module.scss";
-import TreeItem from "features/configuration/render/render-component-tree/components/TreeItem";
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
 
 export const EditViewConfiguration = () => {
-  const jsonConfiguration = useAppConfigurationModel(
-    (state) => state.configuration
-  );
+  const { configuration } = useAppConfigurationModel();
 
   return (
     <div className={styles.wrapper}>
-      {jsonConfiguration && (
-        <RecursiveTree tree={jsonConfiguration} template={TreeItem} />
-      )}
+      <DndProvider backend={HTML5Backend}>
+        {configuration && (
+          <RecursiveTree tree={configuration} template={TreeItem} />
+        )}
+      </DndProvider>
     </div>
   );
 };
