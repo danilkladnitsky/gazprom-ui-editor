@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import React, { ReactNode, Suspense } from "react";
+import React, { Suspense } from "react";
 import Loader from "shared/ui/Loader/Loader";
 
 const DEFAULT_FALLBACK = <Loader />;
@@ -12,11 +12,11 @@ type ComponentProps = {
 
 const withSuspense = (
   Component: React.FunctionComponent<ComponentProps>,
-  fallback?: ReactNode
+  fallback = DEFAULT_FALLBACK
 ) => {
   return ({ className }: ComponentProps) => (
     <div className={classNames(styles.suspenseWrapper, className)}>
-      <Suspense fallback={fallback || DEFAULT_FALLBACK}>
+      <Suspense fallback={fallback}>
         <Component className={className} />
       </Suspense>
     </div>

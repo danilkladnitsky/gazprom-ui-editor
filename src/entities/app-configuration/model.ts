@@ -8,6 +8,7 @@ import { createJSONStorage, persist } from "zustand/middleware";
 interface State {
   view: ConfigurationView;
   configuration: SchemaTree | null;
+  guiMode: "edit" | "dnd";
 }
 
 interface Functions {
@@ -26,6 +27,7 @@ export const useAppConfigurationModel = create(
   persist<ConfigurationModel>(
     (set, get) => ({
       view: ConfigurationView.GUI_VIEW,
+      guiMode: "edit",
       configuration: null,
       changeView: (view) => set({ view }),
       downloadConfiguration: async () => {
