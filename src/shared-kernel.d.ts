@@ -23,3 +23,5 @@ type RestProps = {
 };
 
 type DragType = ComponentCode;
+
+type DragAndDropAlias = "app-form" | "component-list";

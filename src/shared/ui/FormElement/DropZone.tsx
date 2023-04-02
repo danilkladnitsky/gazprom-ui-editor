@@ -2,12 +2,12 @@ import React from "react";
 
 import { Skeleton } from "@mui/material";
 
-import { Droppable } from "../Droppable";
-import styles from "./DropZone.module.scss";
+import { withDropping, withDroppingProps } from "shared/hocs/withDropping";
 
-type Props = {
-  isHovered: boolean;
-};
+import styles from "./DropZone.module.scss";
+import { SchemaTree } from "entities/app-configuration/domain";
+
+type Props = withDroppingProps<SchemaTree>;
 
 function DropZone({ isHovered }: Props) {
   if (isHovered) {
@@ -17,4 +17,4 @@ function DropZone({ isHovered }: Props) {
   return <div className={styles.zone}></div>;
 }
 
-export default Droppable(DropZone);
+export default withDropping(DropZone, "component-list");

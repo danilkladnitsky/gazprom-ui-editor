@@ -1,25 +1,18 @@
-import React, { FC, ReactNode } from "react";
+import React, { FC } from "react";
 
 import { useComponentModel } from "entities/component";
 
-import { Component } from "entities/component/domain";
 import { TreeTemplateProps } from "features/configuration/render/render-component-tree";
 
 import styles from "./withWatching.module.scss";
+import { useComponent } from "shared/hooks/useComponent";
 
-type WatchingHocProps = TreeTemplateProps;
-
-export type WatchedComponentProps = {
-  item: Component;
-  children: ReactNode;
-};
-
-export function withWatching<Props extends WatchedComponentProps>(
-  Component: FC<WatchingHocProps>
+export function withWatching<Props extends TreeTemplateProps>(
+  Component: FC<Props>
 ) {
   return function WatchedComponent(props: Props) {
-    const { components } = useComponentModel();
-    const component = components.find((c) => c.id === props.item.id);
+    const component = useComponent(props.item.id);
+
     const selectComponent = useComponentModel((state) => state.selectComponent);
 
     if (!component) {
@@ -38,7 +31,7 @@ export function withWatching<Props extends WatchedComponentProps>(
 
     return (
       <div className={styles.watchedComponent} onClick={handleSelect}>
-        <Component {...props} item={component} />
+        <Component {...props} />
       </div>
     );
   };

@@ -1,19 +1,23 @@
 import React, { ReactNode } from "react";
 
 import { SchemaTree } from "entities/app-configuration/domain";
-import { useComponentModel } from "entities/component";
 import { DatasourceComponent } from "features/render/component";
 
 import { Form, Group, Page, Tabs } from "./components";
+import { useComponent } from "shared/hooks/useComponent";
+import { withWatching } from "shared/hocs";
+import { withDragging, withDraggingProps } from "shared/hocs/withDragging";
+import DropTreeItemArea from "./DropTreeItemArea";
+import { useComponentModel } from "entities/component";
 
 type Props = {
   item: SchemaTree;
   children: ReactNode;
-};
+} & withDraggingProps;
 
 function TreeItem({ item, children }: Props) {
-  const { components } = useComponentModel();
-  const component = components.find((c) => c.id === item.id);
+  const { swapComponents } = useComponentModel();
+  const component = useComponent(item.id);
 
   if (!component) {
     throw new Error(`Компонента с id ${item.id} не существует`);
@@ -26,7 +30,16 @@ function TreeItem({ item, children }: Props) {
     return <Wrapper component={component}>{children}</Wrapper>;
   }
 
-  return <DatasourceComponent {...component} />;
+  const handleDrop = ({ id }: SchemaTree) => {
+    swapComponents(item.id, id);
+  };
+
+  return (
+    <>
+      <DropTreeItemArea item={item} onDrop={handleDrop} />
+      <DatasourceComponent {...component} />
+    </>
+  );
 }
 
 function getComponentWrapper(code: ComponentCode) {
@@ -43,4 +56,4 @@ function getComponentWrapper(code: ComponentCode) {
   }
 }
 
-export default TreeItem;
+export default withWatching(withDragging(TreeItem, "app-form"));

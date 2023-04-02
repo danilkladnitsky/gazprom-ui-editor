@@ -2,13 +2,18 @@ import { create } from "zustand";
 import fileDownload from "js-file-download";
 
 import { Component } from "entities/component/domain";
-import { SchemaTree, ConfigurationView, ComponentTree } from "./domain";
+import {
+  SchemaTree,
+  ConfigurationView,
+  ComponentTree,
+  GuiMode,
+} from "./domain";
 import { createJSONStorage, persist } from "zustand/middleware";
 
 interface State {
   view: ConfigurationView;
   configuration: SchemaTree | null;
-  guiMode: "edit" | "dnd";
+  guiMode: GuiMode;
 }
 
 interface Functions {
@@ -19,6 +24,7 @@ interface Functions {
   updateConfiguration: (data: SchemaTree) => void;
   generateAppConfig: (components: Component[]) => void;
   fillConfigWithComponents: (components: Component[]) => ComponentTree | null;
+  changeGuiMode: (mode: GuiMode) => void;
 }
 
 type ConfigurationModel = Model<State, Functions>;
@@ -27,9 +33,10 @@ export const useAppConfigurationModel = create(
   persist<ConfigurationModel>(
     (set, get) => ({
       view: ConfigurationView.GUI_VIEW,
-      guiMode: "edit",
+      guiMode: "drag-and-drop",
       configuration: null,
       changeView: (view) => set({ view }),
+      changeGuiMode: (mode) => set({ guiMode: mode }),
       downloadConfiguration: async () => {
         const data = get().configuration;
         const fileName = `config.json`;

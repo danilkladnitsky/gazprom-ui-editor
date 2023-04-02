@@ -5,11 +5,11 @@ import { TreeTemplateProps } from "features/configuration/render/render-componen
 
 import ElementItem from "./ElementItem";
 
-import styles from "./FormElement.module.scss";
 import DropZone from "./DropZone";
 import { Component } from "entities/component/domain";
-import { ALLOWED_TYPES_FOR_DND } from "shared/constants/drag-and-drop";
 import { useComponent } from "shared/hooks/useComponent";
+
+import styles from "./FormElement.module.scss";
 
 function FormElement({ children, item }: TreeTemplateProps) {
   const { swapComponents } = useComponentModel();
@@ -24,11 +24,9 @@ function FormElement({ children, item }: TreeTemplateProps) {
     swapComponents(component.id, droppedItem.id);
   };
 
-  const renderDropZone = ALLOWED_TYPES_FOR_DND.includes(component.code);
-
   return (
     <div className={styles.element}>
-      {renderDropZone && <DropZone item={component} onDrop={handleDrop} />}
+      <DropZone item={component} onDrop={handleDrop} />
       <ElementItem item={component} title={component?.name || ""} />
       <ElementChildren list={children} />
     </div>
