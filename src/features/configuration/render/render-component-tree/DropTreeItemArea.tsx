@@ -15,4 +15,4 @@ const DropTreeItemArea = ({ isHovered }: withDroppingProps<SchemaTree>) => {
   return <div className={styles.dropAreaIdle}></div>;
 };
 
-export default withDropping(DropTreeItemArea, "app-form");
+export default withDropping(DropTreeItemArea, ["app-form", "component-list"]);

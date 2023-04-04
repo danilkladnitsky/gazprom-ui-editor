@@ -13,7 +13,7 @@ export const withDropping = <
   Props extends { item: Item } & withDroppingProps<Item>
 >(
   Component: FC<Props & withDroppingProps<Item>>,
-  alias: DragAndDropAlias
+  alias: DragAndDropAlias[]
 ) => {
   return function Wrapper(props: Props) {
     const [collectedProps, drop] = useDrop(() => ({

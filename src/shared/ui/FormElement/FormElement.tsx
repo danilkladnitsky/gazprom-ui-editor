@@ -6,10 +6,10 @@ import { TreeTemplateProps } from "features/configuration/render/render-componen
 import ElementItem from "./ElementItem";
 
 import DropZone from "./DropZone";
-import { Component } from "entities/component/domain";
 import { useComponent } from "shared/hooks/useComponent";
 
 import styles from "./FormElement.module.scss";
+import { SchemaTree } from "entities/app-configuration/domain";
 
 function FormElement({ children, item }: TreeTemplateProps) {
   const { swapComponents } = useComponentModel();
@@ -20,7 +20,7 @@ function FormElement({ children, item }: TreeTemplateProps) {
     return null;
   }
 
-  const handleDrop = (droppedItem: Component) => {
+  const handleDrop = (droppedItem: SchemaTree) => {
     swapComponents(component.id, droppedItem.id);
   };
 
