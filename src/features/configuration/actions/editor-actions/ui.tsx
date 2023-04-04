@@ -20,11 +20,8 @@ type Props = {
 };
 
 export const EditorActions = ({ className }: Props) => {
-  const {
-    configuration,
-    toggleView,
-    downloadConfiguration,
-  } = useAppConfigurationModel();
+  const { configuration, toggleView, downloadConfiguration } =
+    useAppConfigurationModel();
 
   const configIsLoaded = Boolean(configuration);
 
