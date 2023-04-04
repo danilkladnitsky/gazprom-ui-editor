@@ -17,4 +17,4 @@ function DropZone({ isHovered }: Props) {
   return <div className={styles.zone}></div>;
 }
 
-export default withDropping(DropZone, "component-list");
+export default withDropping(DropZone, ["component-list"]);

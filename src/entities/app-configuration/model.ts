@@ -2,13 +2,9 @@ import { create } from "zustand";
 import fileDownload from "js-file-download";
 
 import { Component } from "entities/component/domain";
-import {
-  SchemaTree,
-  ConfigurationView,
-  ComponentTree,
-  GuiMode,
-} from "./domain";
+import { SchemaTree, ConfigurationView, GuiMode } from "./domain";
 import { createJSONStorage, persist } from "zustand/middleware";
+import { insertNodeByNeighbor, swapTreeElements } from "./utils";
 
 interface State {
   view: ConfigurationView;
@@ -23,8 +19,9 @@ interface Functions {
   downloadConfiguration: () => void;
   updateConfiguration: (data: SchemaTree) => void;
   generateAppConfig: (components: Component[]) => void;
-  fillConfigWithComponents: (components: Component[]) => ComponentTree | null;
   changeGuiMode: (mode: GuiMode) => void;
+  swapComponents: (firstId: EntityId, secondId: EntityId) => void;
+  insertComponent: (component: EntityId, neighborId: EntityId) => void;
 }
 
 type ConfigurationModel = Model<State, Functions>;
@@ -80,16 +77,33 @@ export const useAppConfigurationModel = create(
           },
         });
       },
-      fillConfigWithComponents: (components: Component[]) => {
-        const dfs = (tree: SchemaTree): ComponentTree => {
-          return {
-            ...components.find((c) => c.id === tree.id),
-            items: tree.items?.map((subTree) => dfs(subTree)),
-          };
-        };
-
+      swapComponents: (firstId: EntityId, secondId: EntityId) => {
         const { configuration } = get();
-        return configuration ? dfs(configuration) : null;
+        if (!configuration) {
+          return;
+        }
+
+        const updatedConfig = swapTreeElements(
+          configuration,
+          firstId,
+          secondId
+        );
+
+        set({ configuration: updatedConfig });
+      },
+      insertComponent: (componentId: EntityId, neighborId: EntityId) => {
+        const { configuration } = get();
+        if (!configuration) {
+          return;
+        }
+
+        set({
+          configuration: insertNodeByNeighbor(
+            configuration,
+            componentId,
+            neighborId
+          ),
+        });
       },
     }),
     {

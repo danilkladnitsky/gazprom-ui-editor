@@ -1,7 +1,5 @@
 import React from "react";
 
-import { withWatching } from "shared/hocs";
-
 import { useAppConfigurationModel } from "entities/app-configuration";
 
 import { RecursiveTree } from "features/configuration/render/render-component-tree";

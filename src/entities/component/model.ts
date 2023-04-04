@@ -6,14 +6,16 @@ import { createJSONStorage, persist } from "zustand/middleware";
 import { Component, ComponentForm, DatasourceComponent } from "./domain";
 
 interface ComponentState {
-  selectedComponent: DatasourceComponent | null;
+  selectedComponent: Component | null;
   components: Component[];
   updateSelectedComponent: (component: Component) => void;
   selectComponent: (id: EntityId) => void;
   createComponentsFromParameters: (
     parameters: Parameter[]
   ) => DatasourceComponent[];
+  duplicateComponent: (id: EntityId) => Component | null;
   swapComponents: (firstId: EntityId, secondId: EntityId) => void;
+  deleteComponent: (id: EntityId) => void;
 }
 
 export const useComponentModel = create(
@@ -57,17 +59,50 @@ export const useComponentModel = create(
       },
       swapComponents: (firstId: EntityId, secondId: EntityId) => {
         set((state) => {
-          const idsToSwap = [firstId, secondId];
+          const firstComponent = state.components.find((c) => c.id === firstId);
+          const secondComponent = state.components.find(
+            (c) => c.id === secondId
+          );
           const components = state.components.map((c) => {
-            const swap = idsToSwap.includes(c.id);
-
-            if (swap) {
-              return { ...c, id: c.id === firstId ? secondId : firstId };
+            if (c.id === firstId) {
+              return secondComponent;
             }
+
+            if (c.id === secondId) {
+              return firstComponent;
+            }
+
             return c;
           });
 
           return { components };
+        });
+      },
+      duplicateComponent: (id: EntityId) => {
+        const { components } = get();
+        const original = components.find((c) => c.id === id);
+
+        if (!original) {
+          return null;
+        }
+
+        const newComponent = {
+          ...original,
+          name: `дубликат ${original.name}`,
+          id: generateEntityId(),
+        };
+
+        set({
+          components: [...components, newComponent],
+          selectedComponent: newComponent,
+        });
+
+        return newComponent;
+      },
+      deleteComponent: (id) => {
+        set({
+          components: get().components.filter((c) => c.id !== id),
+          selectedComponent: null,
         });
       },
     }),

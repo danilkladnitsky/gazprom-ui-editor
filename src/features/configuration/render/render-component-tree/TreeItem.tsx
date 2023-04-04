@@ -9,6 +9,9 @@ import { withWatching } from "shared/hocs";
 import { withDragging, withDraggingProps } from "shared/hocs/withDragging";
 import DropTreeItemArea from "./DropTreeItemArea";
 import { useComponentModel } from "entities/component";
+import { OnDropFn } from "entities/drag-and-drop/domain";
+import { useAppConfigurationModel } from "entities/app-configuration";
+import { DatasourceComponent as DatasourceComponentType } from "entities/component/domain";
 
 type Props = {
   item: SchemaTree;
@@ -16,28 +19,39 @@ type Props = {
 } & withDraggingProps;
 
 function TreeItem({ item, children }: Props) {
-  const { swapComponents } = useComponentModel();
+  const { swapComponents, insertComponent } = useAppConfigurationModel();
+  const { duplicateComponent } = useComponentModel();
   const component = useComponent(item.id);
 
   if (!component) {
     throw new Error(`Компонента с id ${item.id} не существует`);
   }
 
-  const { code } = component;
-
-  if (code !== "element") {
-    const Wrapper = getComponentWrapper(code);
+  if (component.code !== "element") {
+    const Wrapper = getComponentWrapper(component.code);
     return <Wrapper component={component}>{children}</Wrapper>;
   }
 
-  const handleDrop = ({ id }: SchemaTree) => {
-    swapComponents(item.id, id);
+  const handleDrop: OnDropFn<SchemaTree> = (droppedItem) => {
+    if (droppedItem.alias === "app-form") {
+      swapComponents(item.id, droppedItem.item.id);
+      return;
+    }
+
+    const neighborId = droppedItem.item.id;
+    const createdComponent = duplicateComponent(neighborId);
+
+    if (!createdComponent) {
+      return;
+    }
+
+    insertComponent(createdComponent?.id, item.id);
   };
 
   return (
     <>
       <DropTreeItemArea item={item} onDrop={handleDrop} />
-      <DatasourceComponent {...component} />
+      <DatasourceComponent {...(component as DatasourceComponentType)} />
     </>
   );
 }

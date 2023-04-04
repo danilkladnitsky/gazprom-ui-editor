@@ -10,6 +10,7 @@ import { EditParameterFields } from "../edit-parameter-fields";
 
 import styles from "./styles.module.scss";
 import { Parameter, ParameterType } from "entities/parameter/domain";
+import DeleteComponent from "../delete-component/ui";
 
 const convertParametersToList = (params: Parameter[]): DropdownItem[] => {
   return params.map((param) => ({
@@ -53,25 +54,28 @@ export const EditComponent = () => {
   return (
     <div className={styles.wrapper}>
       <Header>Настройки компоненты</Header>
-      <div className={styles.form}>
-        <DropdownInput
-          list={list}
-          onChange={updateDatasourceType} // TODO: replace with component analogue
-          name="Выберите источник данных"
-        />
-        <TextInput
-          fullWidth
-          label="Введите название поля"
-          value={componentLabel}
-          onChange={updateLabel}
-        />
-        {dataSource && (
-          <EditParameterFields
-            parameter={dataSource}
-            onEdit={updateComponentDatasource}
+      {selectedComponent && (
+        <div className={styles.form}>
+          <DropdownInput
+            list={list}
+            onChange={updateDatasourceType} // TODO: replace with component analogue
+            name="Выберите источник данных"
           />
-        )}
-      </div>
+          <TextInput
+            fullWidth
+            label="Введите название поля"
+            value={componentLabel}
+            onChange={updateLabel}
+          />
+          {dataSource && (
+            <EditParameterFields
+              parameter={dataSource}
+              onEdit={updateComponentDatasource}
+            />
+          )}
+          <DeleteComponent id={selectedComponent?.id} />
+        </div>
+      )}
     </div>
   );
 };

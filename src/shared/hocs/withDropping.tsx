@@ -1,11 +1,18 @@
-import { SchemaTree } from "entities/app-configuration/domain";
 import React, { FC } from "react";
 import { useDrop } from "react-dnd";
 
+import { SchemaTree } from "entities/app-configuration/domain";
+import {
+  DragAndDropAlias,
+  DragItem,
+  OnDropFn,
+} from "entities/drag-and-drop/domain";
+
 export type withDroppingProps<I> = {
   isHovered?: boolean;
-  onDrop: (item: I) => void;
+  onDrop: OnDropFn<I>;
   onHover?: (item: I) => void;
+  droppingItem?: DragItem<SchemaTree>;
 };
 
 export const withDropping = <
@@ -13,18 +20,17 @@ export const withDropping = <
   Props extends { item: Item } & withDroppingProps<Item>
 >(
   Component: FC<Props & withDroppingProps<Item>>,
-  alias: DragAndDropAlias
+  alias: DragAndDropAlias[]
 ) => {
   return function Wrapper(props: Props) {
     const [collectedProps, drop] = useDrop(() => ({
       accept: alias,
       drop: props.onDrop,
       collect: (monitor) => {
-        const hoveredOverSelf = monitor.getItem()?.id === props.item.id;
-
         return {
           isOver: monitor.isOver(),
-          canDrop: monitor.canDrop() && !hoveredOverSelf,
+          canDrop: monitor.canDrop(),
+          droppingItem: monitor.getItem(),
         };
       },
     }));
@@ -35,6 +41,7 @@ export const withDropping = <
           {...props}
           onDrop={props.onDrop}
           isHovered={collectedProps.isOver}
+          droppingItem={collectedProps.droppingItem}
         />
       </div>
     );
