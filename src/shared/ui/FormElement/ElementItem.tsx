@@ -8,6 +8,8 @@ import { withDragging, withDraggingProps } from "shared/hocs/withDragging";
 import styles from "./ElementItem.module.scss";
 import { useComponent } from "shared/hooks/useComponent";
 import { SchemaTree } from "entities/app-configuration/domain";
+import { getComponentIcon } from "shared/utils/getComponentIcon";
+import { useComponentModel } from "entities/component";
 
 type Props = {
   title: string;
@@ -16,21 +18,34 @@ type Props = {
 } & withDraggingProps;
 
 function ElementItem({ title, item, className, isDragging }: Props) {
-  const { code } = useComponent(item.id);
+  const component = useComponent(item.id);
+  const { selectedComponent, selectComponent } = useComponentModel();
 
-  const withDragging = ALLOWED_TYPES_FOR_DND.includes(code);
+  if (!component) {
+    return;
+  }
+
+  const withDragging = ALLOWED_TYPES_FOR_DND.includes(component?.code);
+  const Icon = getComponentIcon(component.code);
+
+  const handleSelect = () => {
+    selectComponent(component.id);
+  };
 
   return (
     <div
+      onClick={handleSelect}
       className={classNames(
         styles.element,
         {
           [styles.withDragging]: withDragging,
           [styles.isDragging]: isDragging,
+          [styles.selectedComponent]: selectedComponent?.id === component.id,
         },
         className
       )}
     >
+      <Icon fontSize="small" />
       {title}
     </div>
   );

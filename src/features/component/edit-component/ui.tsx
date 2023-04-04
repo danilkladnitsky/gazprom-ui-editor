@@ -54,26 +54,28 @@ export const EditComponent = () => {
   return (
     <div className={styles.wrapper}>
       <Header>Настройки компоненты</Header>
-      <div className={styles.form}>
-        <DropdownInput
-          list={list}
-          onChange={updateDatasourceType} // TODO: replace with component analogue
-          name="Выберите источник данных"
-        />
-        <TextInput
-          fullWidth
-          label="Введите название поля"
-          value={componentLabel}
-          onChange={updateLabel}
-        />
-        {dataSource && (
-          <EditParameterFields
-            parameter={dataSource}
-            onEdit={updateComponentDatasource}
+      {selectedComponent && (
+        <div className={styles.form}>
+          <DropdownInput
+            list={list}
+            onChange={updateDatasourceType} // TODO: replace with component analogue
+            name="Выберите источник данных"
           />
-        )}
-        <DeleteComponent id={selectedComponent?.id} />
-      </div>
+          <TextInput
+            fullWidth
+            label="Введите название поля"
+            value={componentLabel}
+            onChange={updateLabel}
+          />
+          {dataSource && (
+            <EditParameterFields
+              parameter={dataSource}
+              onEdit={updateComponentDatasource}
+            />
+          )}
+          <DeleteComponent id={selectedComponent?.id} />
+        </div>
+      )}
     </div>
   );
 };

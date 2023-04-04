@@ -11,6 +11,7 @@ import DropTreeItemArea from "./DropTreeItemArea";
 import { useComponentModel } from "entities/component";
 import { OnDropFn } from "entities/drag-and-drop/domain";
 import { useAppConfigurationModel } from "entities/app-configuration";
+import { DatasourceComponent as DatasourceComponentType } from "entities/component/domain";
 
 type Props = {
   item: SchemaTree;
@@ -26,10 +27,8 @@ function TreeItem({ item, children }: Props) {
     throw new Error(`Компонента с id ${item.id} не существует`);
   }
 
-  const { code } = component;
-
-  if (code !== "element") {
-    const Wrapper = getComponentWrapper(code);
+  if (component.code !== "element") {
+    const Wrapper = getComponentWrapper(component.code);
     return <Wrapper component={component}>{children}</Wrapper>;
   }
 
@@ -52,7 +51,7 @@ function TreeItem({ item, children }: Props) {
   return (
     <>
       <DropTreeItemArea item={item} onDrop={handleDrop} />
-      <DatasourceComponent {...component} />
+      <DatasourceComponent {...(component as DatasourceComponentType)} />
     </>
   );
 }

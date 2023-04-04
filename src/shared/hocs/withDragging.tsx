@@ -16,14 +16,17 @@ export type withDraggingProps = {
 };
 
 export const withDragging = <Props extends withDraggingProps>(
-  DraggedComponent: FC<Props>,
+  DraggedComponent: FC<Props> | undefined,
   alias: DragAndDropAlias
 ) => {
   return function Wrapper(props: Props) {
     const component = useComponent(props.item.id);
-    const { code } = component;
 
-    const canBeDragged = ALLOWED_TYPES_FOR_DND.includes(code);
+    if (!component) {
+      return null;
+    }
+
+    const canBeDragged = ALLOWED_TYPES_FOR_DND.includes(component?.code);
 
     const [{ isDragging }, drag] = useDrag(() => ({
       type: alias,
@@ -36,7 +39,9 @@ export const withDragging = <Props extends withDraggingProps>(
 
     return (
       <div ref={drag} className={styles.draggedComponent}>
-        <DraggedComponent {...props} isDragging={isDragging} />
+        {DraggedComponent && (
+          <DraggedComponent {...props} isDragging={isDragging} />
+        )}
       </div>
     );
   };

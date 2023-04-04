@@ -6,7 +6,7 @@ import { createJSONStorage, persist } from "zustand/middleware";
 import { Component, ComponentForm, DatasourceComponent } from "./domain";
 
 interface ComponentState {
-  selectedComponent: DatasourceComponent | null;
+  selectedComponent: Component | null;
   components: Component[];
   updateSelectedComponent: (component: Component) => void;
   selectComponent: (id: EntityId) => void;
@@ -86,9 +86,16 @@ export const useComponentModel = create(
           return null;
         }
 
-        const newComponent = { ...original, id: generateEntityId() };
+        const newComponent = {
+          ...original,
+          name: `дубликат ${original.name}`,
+          id: generateEntityId(),
+        };
 
-        set({ components: [...components, newComponent] });
+        set({
+          components: [...components, newComponent],
+          selectedComponent: newComponent,
+        });
 
         return newComponent;
       },
