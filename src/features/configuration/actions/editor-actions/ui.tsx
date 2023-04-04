@@ -6,7 +6,6 @@ import classNames from "classnames";
 import {
   RestartAlt as RestartAltIcon,
   Download as DownloadIcon,
-  SwipeRightAltOutlined,
   PanTool,
 } from "@mui/icons-material";
 
@@ -14,6 +13,7 @@ import { UploadConfiguration } from "features/configuration/actions/upload-confi
 import { useAppConfigurationModel } from "entities/app-configuration";
 
 import styles from "./styles.module.scss";
+import ResetForm from "../reset-form/ui";
 
 type Props = {
   className?: string;
@@ -24,17 +24,9 @@ export const EditorActions = ({ className }: Props) => {
     configuration,
     toggleView,
     downloadConfiguration,
-    changeGuiMode,
-    guiMode,
   } = useAppConfigurationModel();
 
   const configIsLoaded = Boolean(configuration);
-
-  const isDragAndDropMode = guiMode === "drag-and-drop";
-
-  const handleGuiMode = () => {
-    changeGuiMode(isDragAndDropMode ? "edit" : "drag-and-drop");
-  };
 
   return (
     <div className={classNames(styles.actions, className)}>
@@ -52,14 +44,8 @@ export const EditorActions = ({ className }: Props) => {
       >
         Скачать конфигурацию
       </Button>
-      <Button
-        startIcon={<PanTool />}
-        disabled={!configIsLoaded}
-        onClick={handleGuiMode}
-      >
-        {isDragAndDropMode ? "Режим перетаскивания" : "Режим редактирования"}
-      </Button>
       <UploadConfiguration />
+      <ResetForm />
     </div>
   );
 };
