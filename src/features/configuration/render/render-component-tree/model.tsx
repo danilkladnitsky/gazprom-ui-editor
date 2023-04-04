@@ -28,5 +28,5 @@ export function RecursiveTree({ tree, template = TreeItem }: Props) {
     items: [tree],
   };
 
-  return renderSubTree(preparedTree) ?? null;
+  return renderSubTree(preparedTree);
 }

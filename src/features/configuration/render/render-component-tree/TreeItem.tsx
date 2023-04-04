@@ -9,6 +9,8 @@ import { withWatching } from "shared/hocs";
 import { withDragging, withDraggingProps } from "shared/hocs/withDragging";
 import DropTreeItemArea from "./DropTreeItemArea";
 import { useComponentModel } from "entities/component";
+import { OnDropFn } from "entities/drag-and-drop/domain";
+import { useAppConfigurationModel } from "entities/app-configuration";
 
 type Props = {
   item: SchemaTree;
@@ -16,7 +18,8 @@ type Props = {
 } & withDraggingProps;
 
 function TreeItem({ item, children }: Props) {
-  const { swapComponents } = useComponentModel();
+  const { swapComponents } = useAppConfigurationModel();
+  const { duplicateComponent } = useComponentModel();
   const component = useComponent(item.id);
 
   if (!component) {
@@ -30,8 +33,12 @@ function TreeItem({ item, children }: Props) {
     return <Wrapper component={component}>{children}</Wrapper>;
   }
 
-  const handleDrop = ({ id }: SchemaTree) => {
-    swapComponents(item.id, id);
+  const handleDrop: OnDropFn<SchemaTree> = (droppedItem) => {
+    if (droppedItem.alias === "app-form") {
+      swapComponents(item.id, droppedItem.item.id);
+    } else {
+      duplicateComponent(droppedItem.item.id);
+    }
   };
 
   return (

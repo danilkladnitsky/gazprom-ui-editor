@@ -13,7 +13,9 @@ interface ComponentState {
   createComponentsFromParameters: (
     parameters: Parameter[]
   ) => DatasourceComponent[];
+  duplicateComponent: (id: EntityId) => void;
   swapComponents: (firstId: EntityId, secondId: EntityId) => void;
+  deleteComponent: (id: EntityId) => void;
 }
 
 export const useComponentModel = create(
@@ -57,17 +59,45 @@ export const useComponentModel = create(
       },
       swapComponents: (firstId: EntityId, secondId: EntityId) => {
         set((state) => {
-          const idsToSwap = [firstId, secondId];
+          const firstComponent = state.components.find((c) => c.id === firstId);
+          const secondComponent = state.components.find(
+            (c) => c.id === secondId
+          );
           const components = state.components.map((c) => {
-            const swap = idsToSwap.includes(c.id);
-
-            if (swap) {
-              return { ...c, id: c.id === firstId ? secondId : firstId };
+            if (c.id === firstId) {
+              return secondComponent;
             }
+
+            if (c.id === secondId) {
+              return firstComponent;
+            }
+
             return c;
           });
 
           return { components };
+        });
+      },
+      duplicateComponent: (id) => {
+        const { components } = get();
+        const original = components.find((c) => c.id === id);
+
+        if (!original) {
+          return;
+        }
+
+        const newId = generateEntityId();
+        const newComponent = { ...original, id: newId };
+        const updatedComponents = [...components, newComponent];
+
+        set({ components: updatedComponents });
+
+        return newId;
+      },
+      deleteComponent: (id) => {
+        set({
+          components: get().components.filter((c) => c.id !== id),
+          selectedComponent: null,
         });
       },
     }),

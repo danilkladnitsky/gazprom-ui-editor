@@ -9,6 +9,7 @@ import DropZone from "./DropZone";
 import { useComponent } from "shared/hooks/useComponent";
 
 import styles from "./FormElement.module.scss";
+import { OnDragFn } from "entities/drag-and-drop/domain";
 import { SchemaTree } from "entities/app-configuration/domain";
 
 function FormElement({ children, item }: TreeTemplateProps) {
@@ -20,8 +21,8 @@ function FormElement({ children, item }: TreeTemplateProps) {
     return null;
   }
 
-  const handleDrop = (droppedItem: SchemaTree) => {
-    swapComponents(component.id, droppedItem.id);
+  const handleDrop: OnDragFn<SchemaTree> = (droppedItem) => {
+    swapComponents(component.id, droppedItem.item.id);
   };
 
   return (

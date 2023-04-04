@@ -9,6 +9,7 @@ import {
   GuiMode,
 } from "./domain";
 import { createJSONStorage, persist } from "zustand/middleware";
+import { swapTreeElements } from "./utils";
 
 interface State {
   view: ConfigurationView;
@@ -23,8 +24,8 @@ interface Functions {
   downloadConfiguration: () => void;
   updateConfiguration: (data: SchemaTree) => void;
   generateAppConfig: (components: Component[]) => void;
-  fillConfigWithComponents: (components: Component[]) => ComponentTree | null;
   changeGuiMode: (mode: GuiMode) => void;
+  swapComponents: (firstId: EntityId, secondId: EntityId) => void;
 }
 
 type ConfigurationModel = Model<State, Functions>;
@@ -80,16 +81,22 @@ export const useAppConfigurationModel = create(
           },
         });
       },
-      fillConfigWithComponents: (components: Component[]) => {
-        const dfs = (tree: SchemaTree): ComponentTree => {
-          return {
-            ...components.find((c) => c.id === tree.id),
-            items: tree.items?.map((subTree) => dfs(subTree)),
-          };
-        };
-
+      swapComponents: (firstId: EntityId, secondId: EntityId) => {
         const { configuration } = get();
-        return configuration ? dfs(configuration) : null;
+        if (!configuration) {
+          return;
+        }
+        console.log(configuration);
+
+        const updatedConfig = swapTreeElements(
+          configuration,
+          firstId,
+          secondId
+        );
+
+        console.log(updatedConfig);
+
+        set({ configuration: updatedConfig });
       },
     }),
     {

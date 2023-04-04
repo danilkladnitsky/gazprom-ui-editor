@@ -10,6 +10,7 @@ import { EditParameterFields } from "../edit-parameter-fields";
 
 import styles from "./styles.module.scss";
 import { Parameter, ParameterType } from "entities/parameter/domain";
+import DeleteComponent from "../delete-component/ui";
 
 const convertParametersToList = (params: Parameter[]): DropdownItem[] => {
   return params.map((param) => ({
@@ -71,6 +72,7 @@ export const EditComponent = () => {
             onEdit={updateComponentDatasource}
           />
         )}
+        <DeleteComponent id={selectedComponent?.id} />
       </div>
     </div>
   );
