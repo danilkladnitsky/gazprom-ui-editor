@@ -2,13 +2,17 @@ import React, { FC } from "react";
 import { useDrop } from "react-dnd";
 
 import { SchemaTree } from "entities/app-configuration/domain";
-import { DragAndDropAlias, OnDropFn } from "entities/drag-and-drop/domain";
+import {
+  DragAndDropAlias,
+  DragItem,
+  OnDropFn,
+} from "entities/drag-and-drop/domain";
 
 export type withDroppingProps<I> = {
   isHovered?: boolean;
   onDrop: OnDropFn<I>;
   onHover?: (item: I) => void;
-  droppingAlias: DragAndDropAlias;
+  droppingItem?: DragItem<SchemaTree>;
 };
 
 export const withDropping = <
@@ -26,7 +30,7 @@ export const withDropping = <
         return {
           isOver: monitor.isOver(),
           canDrop: monitor.canDrop(),
-          droppingAlias: alias,
+          droppingItem: monitor.getItem(),
         };
       },
     }));
@@ -37,7 +41,7 @@ export const withDropping = <
           {...props}
           onDrop={props.onDrop}
           isHovered={collectedProps.isOver}
-          droppingAlias={alias}
+          droppingItem={collectedProps.droppingItem}
         />
       </div>
     );
