@@ -18,7 +18,7 @@ type Props = {
 } & withDraggingProps;
 
 function TreeItem({ item, children }: Props) {
-  const { swapComponents } = useAppConfigurationModel();
+  const { swapComponents, insertComponent } = useAppConfigurationModel();
   const { duplicateComponent } = useComponentModel();
   const component = useComponent(item.id);
 
@@ -36,9 +36,17 @@ function TreeItem({ item, children }: Props) {
   const handleDrop: OnDropFn<SchemaTree> = (droppedItem) => {
     if (droppedItem.alias === "app-form") {
       swapComponents(item.id, droppedItem.item.id);
-    } else {
-      duplicateComponent(droppedItem.item.id);
+      return;
     }
+
+    const neighborId = droppedItem.item.id;
+    const createdComponent = duplicateComponent(neighborId);
+
+    if (!createdComponent) {
+      return;
+    }
+
+    insertComponent(createdComponent?.id, item.id);
   };
 
   return (

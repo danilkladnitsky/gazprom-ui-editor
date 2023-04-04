@@ -2,14 +2,9 @@ import { create } from "zustand";
 import fileDownload from "js-file-download";
 
 import { Component } from "entities/component/domain";
-import {
-  SchemaTree,
-  ConfigurationView,
-  ComponentTree,
-  GuiMode,
-} from "./domain";
+import { SchemaTree, ConfigurationView, GuiMode } from "./domain";
 import { createJSONStorage, persist } from "zustand/middleware";
-import { swapTreeElements } from "./utils";
+import { insertNodeByNeighbor, swapTreeElements } from "./utils";
 
 interface State {
   view: ConfigurationView;
@@ -26,6 +21,7 @@ interface Functions {
   generateAppConfig: (components: Component[]) => void;
   changeGuiMode: (mode: GuiMode) => void;
   swapComponents: (firstId: EntityId, secondId: EntityId) => void;
+  insertComponent: (component: EntityId, neighborId: EntityId) => void;
 }
 
 type ConfigurationModel = Model<State, Functions>;
@@ -86,7 +82,6 @@ export const useAppConfigurationModel = create(
         if (!configuration) {
           return;
         }
-        console.log(configuration);
 
         const updatedConfig = swapTreeElements(
           configuration,
@@ -94,9 +89,21 @@ export const useAppConfigurationModel = create(
           secondId
         );
 
-        console.log(updatedConfig);
-
         set({ configuration: updatedConfig });
+      },
+      insertComponent: (componentId: EntityId, neighborId: EntityId) => {
+        const { configuration } = get();
+        if (!configuration) {
+          return;
+        }
+
+        set({
+          configuration: insertNodeByNeighbor(
+            configuration,
+            componentId,
+            neighborId
+          ),
+        });
       },
     }),
     {

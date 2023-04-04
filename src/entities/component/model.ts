@@ -13,7 +13,7 @@ interface ComponentState {
   createComponentsFromParameters: (
     parameters: Parameter[]
   ) => DatasourceComponent[];
-  duplicateComponent: (id: EntityId) => void;
+  duplicateComponent: (id: EntityId) => Component | null;
   swapComponents: (firstId: EntityId, secondId: EntityId) => void;
   deleteComponent: (id: EntityId) => void;
 }
@@ -78,21 +78,19 @@ export const useComponentModel = create(
           return { components };
         });
       },
-      duplicateComponent: (id) => {
+      duplicateComponent: (id: EntityId) => {
         const { components } = get();
         const original = components.find((c) => c.id === id);
 
         if (!original) {
-          return;
+          return null;
         }
 
-        const newId = generateEntityId();
-        const newComponent = { ...original, id: newId };
-        const updatedComponents = [...components, newComponent];
+        const newComponent = { ...original, id: generateEntityId() };
 
-        set({ components: updatedComponents });
+        set({ components: [...components, newComponent] });
 
-        return newId;
+        return newComponent;
       },
       deleteComponent: (id) => {
         set({
