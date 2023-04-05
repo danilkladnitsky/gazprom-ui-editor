@@ -1,4 +1,5 @@
 import React, { ComponentType } from "react";
+import { useAutoAnimate } from "@formkit/auto-animate/react";
 
 import { Button } from "@mui/material";
 
@@ -12,9 +13,11 @@ type Props = {
   listItem?: ComponentType<ListItemProps>;
 };
 const List = ({ data, listItem }: Props) => {
+  const [parent] = useAutoAnimate();
+
   const CustomListItem = listItem;
   return (
-    <div className={styles.list}>
+    <div className={styles.list} ref={parent}>
       {data.map(({ item }) =>
         CustomListItem ? (
           <CustomListItem item={item} key={item.id} />
