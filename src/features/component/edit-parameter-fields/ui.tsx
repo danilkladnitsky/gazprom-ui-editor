@@ -36,13 +36,14 @@ export const EditParameterFields = ({ parameter, onEdit }: Props) => {
           />
         );
       case ParameterType.DATE:
-      default:
         return (
           <DatePropertyFields
             properties={properties}
             onChange={handleParameterUpdate}
           />
         );
+      default:
+        return null;
     }
   };
 
