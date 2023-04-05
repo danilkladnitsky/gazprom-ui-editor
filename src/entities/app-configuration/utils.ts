@@ -43,6 +43,16 @@ export const insertNodeByNeighbor = (
   return tree;
 };
 
+export const deleteNode = (tree: SchemaTree, id: EntityId): SchemaTree => {
+  const node = dfsFindNodeRoot(tree, id);
+
+  if (!node?.items) return tree;
+
+  node.items = node?.items?.filter((n) => n.id !== id);
+
+  return tree;
+};
+
 const dfsFindNodeRoot = (tree: SchemaTree, id: EntityId): SchemaTree | null => {
   if (tree.id === id) return tree;
 

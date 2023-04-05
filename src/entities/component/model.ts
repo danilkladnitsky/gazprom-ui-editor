@@ -15,7 +15,6 @@ interface ComponentState {
   ) => DatasourceComponent[];
   duplicateComponent: (id: EntityId) => Component | null;
   swapComponents: (firstId: EntityId, secondId: EntityId) => void;
-  deleteComponent: (id: EntityId) => void;
 }
 
 export const useComponentModel = create(
@@ -88,7 +87,7 @@ export const useComponentModel = create(
 
         const newComponent = {
           ...original,
-          name: `дубликат ${original.name}`,
+          name: original.name,
           id: generateEntityId(),
         };
 
@@ -98,12 +97,6 @@ export const useComponentModel = create(
         });
 
         return newComponent;
-      },
-      deleteComponent: (id) => {
-        set({
-          components: get().components.filter((c) => c.id !== id),
-          selectedComponent: null,
-        });
       },
     }),
     {

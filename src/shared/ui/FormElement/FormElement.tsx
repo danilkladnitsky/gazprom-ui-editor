@@ -14,6 +14,7 @@ import { SchemaTree } from "entities/app-configuration/domain";
 
 function FormElement({ children, item }: TreeTemplateProps) {
   const { swapComponents } = useComponentModel();
+  // const { swa } = useAppConfigurationModel();
 
   const component = useComponent(item.id);
 

@@ -32,6 +32,8 @@ function ElementItem({ title, item, className, isDragging }: Props) {
     selectComponent(component.id);
   };
 
+  const isSelected = selectedComponent?.id === component.id;
+
   return (
     <div
       onClick={handleSelect}
@@ -40,12 +42,12 @@ function ElementItem({ title, item, className, isDragging }: Props) {
         {
           [styles.withDragging]: withDragging,
           [styles.isDragging]: isDragging,
-          [styles.selectedComponent]: selectedComponent?.id === component.id,
+          [styles.isSelected]: isSelected,
         },
         className
       )}
     >
-      <Icon fontSize="small" />
+      <Icon fontSize={"small"} />
       {title}
     </div>
   );

@@ -4,7 +4,7 @@ import fileDownload from "js-file-download";
 import { Component } from "entities/component/domain";
 import { SchemaTree, ConfigurationView, GuiMode } from "./domain";
 import { createJSONStorage, persist } from "zustand/middleware";
-import { insertNodeByNeighbor, swapTreeElements } from "./utils";
+import { deleteNode, insertNodeByNeighbor, swapTreeElements } from "./utils";
 
 interface State {
   view: ConfigurationView;
@@ -22,6 +22,7 @@ interface Functions {
   changeGuiMode: (mode: GuiMode) => void;
   swapComponents: (firstId: EntityId, secondId: EntityId) => void;
   insertComponent: (component: EntityId, neighborId: EntityId) => void;
+  deleteComponent: (id: EntityId) => void;
 }
 
 type ConfigurationModel = Model<State, Functions>;
@@ -103,6 +104,16 @@ export const useAppConfigurationModel = create(
             componentId,
             neighborId
           ),
+        });
+      },
+      deleteComponent: (componentId: EntityId) => {
+        const { configuration } = get();
+        if (!configuration) {
+          return;
+        }
+
+        set({
+          configuration: deleteNode(configuration, componentId),
         });
       },
     }),
