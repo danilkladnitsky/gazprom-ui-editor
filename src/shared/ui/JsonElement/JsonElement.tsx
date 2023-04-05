@@ -8,12 +8,14 @@ import { useComponent } from "shared/hooks/useComponent";
 import styles from "./styles.module.scss";
 import { useComponentModel } from "entities/component";
 import classNames from "classnames";
+import { Component } from "entities/component/domain";
 
 type Props = TreeTemplateProps;
 
 export default function JsonElement({ item, children }: Props) {
   const component = useComponent(item.id);
-  const { selectComponent, selectedComponent } = useComponentModel();
+  const { selectComponent, updateSelectedComponent, selectedComponent } =
+    useComponentModel();
 
   if (!component) {
     return null;
@@ -29,9 +31,23 @@ export default function JsonElement({ item, children }: Props) {
     selectComponent(item.id);
   };
 
+  const handleComponentUpdate = ({
+    jsObject,
+  }: {
+    jsObject: Component | undefined;
+  }) => {
+    if (!jsObject || !selectedComponent) {
+      return;
+    }
+
+    updateSelectedComponent({ ...jsObject, id: selectedComponent.id });
+  };
+
   const selectedClassname =
     Boolean(selectedComponent) &&
     (isSelected ? styles.isSelected : styles.notSelected);
+
+  const showValidation = isSelected && Boolean(selectedComponent);
 
   return (
     <div className={styles.jsonWrapper}>
@@ -42,8 +58,10 @@ export default function JsonElement({ item, children }: Props) {
         <JSONInput
           placeholder={JSON.parse(json)}
           style={{ labelColumn: { display: "none" } }}
-          confirmGood={false}
-          height={0}
+          confirmGood={showValidation}
+          onKeyPressUpdate={true}
+          viewOnly={!isSelected}
+          onChange={handleComponentUpdate}
         />
       </div>
       <div className={styles.childrenInput}>{children}</div>

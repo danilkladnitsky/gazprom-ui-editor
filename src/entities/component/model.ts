@@ -34,7 +34,18 @@ export const useComponentModel = create(
             c.id === selectedComponent.id ? selectedComponent : c
           );
 
-          return { components, selectedComponent };
+          const currentComponent = components.find(
+            (c) => c.id === selectedComponent.id
+          );
+
+          const updatedComponent = {
+            ...currentComponent,
+            ...selectedComponent,
+          };
+
+          console.log(selectedComponent, updatedComponent);
+
+          return { components, selectedComponent: updatedComponent };
         }),
       createComponentsFromParameters: (parameters: Parameter[]) => {
         const components: DatasourceComponent[] = parameters.map((param) => ({
