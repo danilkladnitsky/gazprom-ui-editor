@@ -34,7 +34,7 @@ function TreeItem({ item, children }: Props) {
 
   const handleDrop: OnDropFn<SchemaTree> = (droppedItem) => {
     if (droppedItem.alias === "app-form") {
-      swapComponents(item.id, droppedItem.item.id);
+      swapComponents(droppedItem.item.id, item.id);
       return;
     }
 

@@ -6,7 +6,12 @@ import { useComponent } from "shared/hooks/useComponent";
 import { ListItemProps } from "../List";
 import { TimeAgo } from "../TimeAgo";
 
-function ComponentElement({ item }: ListItemProps & withDraggingProps) {
+import styles from "./styles.module.scss";
+
+function ComponentElement({
+  item,
+  isDragging,
+}: ListItemProps & withDraggingProps) {
   const component = useComponent(item.id);
 
   if (!component) {
@@ -14,9 +19,14 @@ function ComponentElement({ item }: ListItemProps & withDraggingProps) {
   }
 
   return (
-    <Button endIcon={<TimeAgo date={component.timestamp} />}>
-      {item.name}
-    </Button>
+    <div className={styles.component}>
+      <Button
+        variant={isDragging ? "outlined" : "contained"}
+        endIcon={<TimeAgo date={component.timestamp} />}
+      >
+        {item.name}
+      </Button>
+    </div>
   );
 }
 
