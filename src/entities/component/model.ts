@@ -41,6 +41,7 @@ export const useComponentModel = create(
           id: generateEntityId(),
           code: "element",
           name: `Компонент ${param.type}`,
+          timestamp: Date.now(),
         }));
 
         // create root
@@ -48,6 +49,7 @@ export const useComponentModel = create(
           code: "form",
           id: generateEntityId(),
           name: "Форма",
+          timestamp: Date.now(),
         };
 
         const result = [rootComponent, ...components];
@@ -89,6 +91,7 @@ export const useComponentModel = create(
           ...original,
           name: original.name,
           id: generateEntityId(),
+          timestamp: Date.now(),
         };
 
         set({

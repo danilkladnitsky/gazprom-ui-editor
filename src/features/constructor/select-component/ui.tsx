@@ -10,7 +10,8 @@ export const SelectComponent = () => {
 
   const list = components
     .filter((c) => c.code === "element")
-    .map((item) => ({ item }));
+    .map((item) => ({ item }))
+    .sort((a, b) => b.item.timestamp - a.item.timestamp);
 
   return <List data={list} listItem={ComponentElement} />;
 };

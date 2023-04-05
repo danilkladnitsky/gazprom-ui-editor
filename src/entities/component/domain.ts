@@ -5,6 +5,7 @@ export type ComponentBase = {
   code: ComponentCode;
   name: ComponentName;
   description?: ComponentDescription;
+  timestamp: number;
 };
 
 export type ComponentForm = ComponentBase & {
