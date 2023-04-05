@@ -35,11 +35,11 @@ a:visited {
 }
 
 div[name="outer-box"] {
-  height: 100% !important;
-  width: 100% !important;
+  height: unset !important;
+  width: unset !important;
 
   & div[name="container"] {
-    height: inherit !important;
+    height: unset !important;
     width: inherit !important;
   }
 }

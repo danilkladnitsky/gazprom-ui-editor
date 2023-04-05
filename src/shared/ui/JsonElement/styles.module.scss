@@ -1,0 +1,19 @@
+.jsonInput {
+  margin-left: 20px;
+  z-index: 2;
+  transition: all 0.2s ease-in-out;
+}
+
+.childrenInput {
+}
+
+.isSelected {
+  opacity: 1;
+  margin-left: 40px;
+  filter: unset;
+}
+
+.notSelected {
+  opacity: 0.4;
+  filter: blur(1px);
+}

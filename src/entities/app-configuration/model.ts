@@ -51,7 +51,7 @@ export const useAppConfigurationModel = create(
               ? ConfigurationView.TEXT_VIEW
               : ConfigurationView.GUI_VIEW;
 
-          return { ...state, view };
+          return { view };
         });
       },
       generateAppConfig: (items: Component[]) => {

@@ -10,6 +10,7 @@ interface ComponentState {
   components: Component[];
   updateSelectedComponent: (component: Component) => void;
   selectComponent: (id: EntityId) => void;
+  deselectComponent: () => void;
   createComponentsFromParameters: (
     parameters: Parameter[]
   ) => DatasourceComponent[];
@@ -100,6 +101,9 @@ export const useComponentModel = create(
         });
 
         return newComponent;
+      },
+      deselectComponent: () => {
+        set({ selectedComponent: null });
       },
     }),
     {

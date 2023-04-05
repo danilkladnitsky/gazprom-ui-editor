@@ -1,3 +1,4 @@
+import { Component } from "entities/component/domain";
 import { insertElementToArray } from "shared/utils/insertElementToArray";
 import { SchemaTree } from "./domain";
 
@@ -71,4 +72,18 @@ const dfsFindNode = (tree: SchemaTree, id: EntityId): SchemaTree | null => {
   const node = tree.items?.find((t) => t.id === dfsFindNode(t, id)?.id) || null;
 
   return node;
+};
+
+export const extractJsonBody = (component: Component): string => {
+  const prohibitedFields = ["id", "timestamp"];
+
+  try {
+    return JSON.stringify(component, (key, value) =>
+      prohibitedFields.includes(key) ? undefined : value
+    );
+  } catch (error) {
+    console.log(error);
+
+    return "error";
+  }
 };

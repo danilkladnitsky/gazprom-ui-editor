@@ -23,6 +23,8 @@ module.exports = {
         use: ["babel-loader"],
         exclude: /node_modules/,
       },
+      { test: /\.css$/, loader: "css-loader" },
+      { test: /\.svg$/, loader: "file-loader" },
       {
         test: /\.scss$/,
         use: [

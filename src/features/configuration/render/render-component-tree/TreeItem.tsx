@@ -39,13 +39,17 @@ function TreeItem({ item, children }: Props) {
     }
 
     const neighborId = droppedItem.item.id;
-    const createdComponent = duplicateComponent(neighborId);
 
-    if (!createdComponent) {
+    const shouldDuplicate = true;
+    const componentId = shouldDuplicate
+      ? duplicateComponent(neighborId)?.id
+      : droppedItem.item.id;
+
+    if (!componentId) {
       return;
     }
 
-    insertComponent(createdComponent?.id, item.id);
+    insertComponent(componentId, item.id);
   };
 
   const isSelected = selectedComponent?.id === item.id;
