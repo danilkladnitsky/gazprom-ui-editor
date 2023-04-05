@@ -9,7 +9,8 @@ body {
 }
 
 #root {
-  height: inherit;
+  height: 100vh;
+  overflow: hidden;
 }
 
 a {

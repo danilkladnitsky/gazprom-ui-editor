@@ -8,7 +8,7 @@ export type ListItem = object & { name: string; id: EntityId };
 export type ListItemProps = { item: object & ListItem };
 
 type Props = {
-  data: Array<ListItem>;
+  data: Array<ListItemProps>;
   listItem?: ComponentType<ListItemProps>;
 };
 const List = ({ data, listItem }: Props) => {
