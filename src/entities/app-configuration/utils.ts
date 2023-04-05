@@ -1,3 +1,4 @@
+import { Component } from "entities/component/domain";
 import { insertElementToArray } from "shared/utils/insertElementToArray";
 import { SchemaTree } from "./domain";
 
@@ -43,6 +44,16 @@ export const insertNodeByNeighbor = (
   return tree;
 };
 
+export const deleteNode = (tree: SchemaTree, id: EntityId): SchemaTree => {
+  const node = dfsFindNodeRoot(tree, id);
+
+  if (!node?.items) return tree;
+
+  node.items = node?.items?.filter((n) => n.id !== id);
+
+  return tree;
+};
+
 const dfsFindNodeRoot = (tree: SchemaTree, id: EntityId): SchemaTree | null => {
   if (tree.id === id) return tree;
 
@@ -61,4 +72,18 @@ const dfsFindNode = (tree: SchemaTree, id: EntityId): SchemaTree | null => {
   const node = tree.items?.find((t) => t.id === dfsFindNode(t, id)?.id) || null;
 
   return node;
+};
+
+export const extractJsonBody = (component: Component): string => {
+  const prohibitedFields = ["id", "timestamp"];
+
+  try {
+    return JSON.stringify(component, (key, value) =>
+      prohibitedFields.includes(key) ? undefined : value
+    );
+  } catch (error) {
+    console.log(error);
+
+    return "error";
+  }
 };

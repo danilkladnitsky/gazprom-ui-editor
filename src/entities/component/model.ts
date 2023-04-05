@@ -10,12 +10,12 @@ interface ComponentState {
   components: Component[];
   updateSelectedComponent: (component: Component) => void;
   selectComponent: (id: EntityId) => void;
+  deselectComponent: () => void;
   createComponentsFromParameters: (
     parameters: Parameter[]
   ) => DatasourceComponent[];
   duplicateComponent: (id: EntityId) => Component | null;
   swapComponents: (firstId: EntityId, secondId: EntityId) => void;
-  deleteComponent: (id: EntityId) => void;
 }
 
 export const useComponentModel = create(
@@ -34,7 +34,18 @@ export const useComponentModel = create(
             c.id === selectedComponent.id ? selectedComponent : c
           );
 
-          return { components, selectedComponent };
+          const currentComponent = components.find(
+            (c) => c.id === selectedComponent.id
+          );
+
+          const updatedComponent = {
+            ...currentComponent,
+            ...selectedComponent,
+          };
+
+          console.log(selectedComponent, updatedComponent);
+
+          return { components, selectedComponent: updatedComponent };
         }),
       createComponentsFromParameters: (parameters: Parameter[]) => {
         const components: DatasourceComponent[] = parameters.map((param) => ({
@@ -42,6 +53,7 @@ export const useComponentModel = create(
           id: generateEntityId(),
           code: "element",
           name: `Компонент ${param.type}`,
+          timestamp: Date.now(),
         }));
 
         // create root
@@ -49,6 +61,7 @@ export const useComponentModel = create(
           code: "form",
           id: generateEntityId(),
           name: "Форма",
+          timestamp: Date.now(),
         };
 
         const result = [rootComponent, ...components];
@@ -88,8 +101,9 @@ export const useComponentModel = create(
 
         const newComponent = {
           ...original,
-          name: `дубликат ${original.name}`,
+          name: original.name,
           id: generateEntityId(),
+          timestamp: Date.now(),
         };
 
         set({
@@ -99,11 +113,8 @@ export const useComponentModel = create(
 
         return newComponent;
       },
-      deleteComponent: (id) => {
-        set({
-          components: get().components.filter((c) => c.id !== id),
-          selectedComponent: null,
-        });
+      deselectComponent: () => {
+        set({ selectedComponent: null });
       },
     }),
     {

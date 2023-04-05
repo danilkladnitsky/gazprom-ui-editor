@@ -1,54 +1,32 @@
-import React, { useMemo } from "react";
-
-import JSONInput from "react-json-editor-ajrm";
-import locale from "react-json-editor-ajrm/locale/ru";
+import React from "react";
 
 import { useAppConfigurationModel } from "entities/app-configuration";
-import Loader from "shared/ui/Loader/Loader";
 
 import styles from "./styles.module.scss";
+import { RecursiveTree } from "features/configuration/render/render-component-tree";
+import JsonElement from "shared/ui/JsonElement/JsonElement";
+import { useComponentModel } from "entities/component";
+import { DatasourceComponent } from "features/render/component";
 
 export const EditJsonConfiguration = () => {
-  const jsonConfiguration = useAppConfigurationModel(
+  const configuration = useAppConfigurationModel(
     (state) => state.configuration
   );
 
-  const uploadConfigurationStatus = useAppConfigurationModel(
-    (state) => state.uploadConfigurationStatus
+  const { deselectComponent, selectedComponent } = useComponentModel();
+
+  return (
+    <div className={styles.schema} onClick={deselectComponent}>
+      <div className={styles.jsonPreview}>
+        <RecursiveTree tree={configuration} template={JsonElement} />
+      </div>
+      <div className={styles.preview}>
+        {selectedComponent && (
+          <div className={styles.previewComponent}>
+            <DatasourceComponent {...selectedComponent} />
+          </div>
+        )}
+      </div>
+    </div>
   );
-
-  const updateConfiguration = useAppConfigurationModel(
-    (state) => state.updateConfiguration
-  );
-
-  const isLoading = uploadConfigurationStatus === "loading";
-
-  const handleConfigurationUpdate = (e) => {
-    const { error, jsObject } = e;
-
-    if (!error) {
-      updateConfiguration(jsObject);
-    }
-  };
-
-  if (isLoading) {
-    return <Loader size={70} />;
-  }
-
-  const Content = useMemo(() => {
-    if (isLoading) {
-      return <Loader size={70} />;
-    }
-
-    return (
-      <JSONInput
-        placeholder={jsonConfiguration}
-        locale={locale}
-        onChange={handleConfigurationUpdate}
-        onKeyPressUpdate={true}
-      />
-    );
-  }, [isLoading]);
-
-  return <div className={styles.schema}>{Content}</div>;
 };

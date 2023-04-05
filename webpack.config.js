@@ -23,11 +23,20 @@ module.exports = {
         use: ["babel-loader"],
         exclude: /node_modules/,
       },
+      { test: /\.css$/, loader: "css-loader" },
+      { test: /\.svg$/, loader: "file-loader" },
       {
         test: /\.scss$/,
         use: [
-          "style-loader",
-          "css-loader",
+          { loader: "style-loader" },
+          {
+            loader: "css-loader",
+            options: {
+              modules: {
+                localIdentName: "[name]__[local]___[hash:base64:5]",
+              },
+            },
+          },
           {
             loader: "sass-loader",
             options: {
@@ -53,8 +62,8 @@ module.exports = {
     extensions: [".tsx", ".ts", ".js", ".jsx"],
     modules: [path.resolve(__dirname, "src"), "node_modules"],
     fallback: {
-        'react/jsx-runtime': 'react/jsx-runtime.js',
-        'react/jsx-dev-runtime': 'react/jsx-dev-runtime.js',
+      "react/jsx-runtime": "react/jsx-runtime.js",
+      "react/jsx-dev-runtime": "react/jsx-dev-runtime.js",
     },
   },
   plugins: [

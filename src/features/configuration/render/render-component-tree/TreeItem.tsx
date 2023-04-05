@@ -20,7 +20,7 @@ type Props = {
 
 function TreeItem({ item, children }: Props) {
   const { swapComponents, insertComponent } = useAppConfigurationModel();
-  const { duplicateComponent } = useComponentModel();
+  const { duplicateComponent, selectedComponent } = useComponentModel();
   const component = useComponent(item.id);
 
   if (!component) {
@@ -34,19 +34,25 @@ function TreeItem({ item, children }: Props) {
 
   const handleDrop: OnDropFn<SchemaTree> = (droppedItem) => {
     if (droppedItem.alias === "app-form") {
-      swapComponents(item.id, droppedItem.item.id);
+      swapComponents(droppedItem.item.id, item.id);
       return;
     }
 
     const neighborId = droppedItem.item.id;
-    const createdComponent = duplicateComponent(neighborId);
 
-    if (!createdComponent) {
+    const shouldDuplicate = true;
+    const componentId = shouldDuplicate
+      ? duplicateComponent(neighborId)?.id
+      : droppedItem.item.id;
+
+    if (!componentId) {
       return;
     }
 
-    insertComponent(createdComponent?.id, item.id);
+    insertComponent(componentId, item.id);
   };
+
+  const isSelected = selectedComponent?.id === item.id;
 
   return (
     <>

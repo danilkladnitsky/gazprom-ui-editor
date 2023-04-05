@@ -1,4 +1,5 @@
 import React from "react";
+import { useAutoAnimate } from "@formkit/auto-animate/react";
 
 import { Header } from "shared/ui/Header";
 import { Property } from "entities/properties";
@@ -14,6 +15,7 @@ type Props = {
 };
 export const EditParameterFields = ({ parameter, onEdit }: Props) => {
   const { name, properties, type } = parameter;
+  const [parent] = useAutoAnimate();
 
   const handleParameterUpdate = (properties: Property) => {
     onEdit({ ...parameter, properties });
@@ -36,18 +38,19 @@ export const EditParameterFields = ({ parameter, onEdit }: Props) => {
           />
         );
       case ParameterType.DATE:
-      default:
         return (
           <DatePropertyFields
             properties={properties}
             onChange={handleParameterUpdate}
           />
         );
+      default:
+        return null;
     }
   };
 
   return (
-    <div>
+    <div ref={parent}>
       <Header>{name}</Header>
       {renderParameterFields()}
     </div>

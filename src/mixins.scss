@@ -1,5 +1,6 @@
 @mixin widget {
-  height: 100%;
+  max-height: 100%;
+  min-height: 100%;
   width: 100%;
   position: relative;
   padding: 24px;
@@ -8,4 +9,13 @@
 }
 
 @mixin input {
+}
+
+@mixin noScroll {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }

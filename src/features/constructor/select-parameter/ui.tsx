@@ -6,5 +6,5 @@ import List from "shared/ui/List/List";
 export const SelectParameter = () => {
   const parameterModel = useParameterModel();
 
-  return <List data={parameterModel.parameters} />;
+  return <List data={parameterModel.parameters.map((p) => ({ item: p }))} />;
 };

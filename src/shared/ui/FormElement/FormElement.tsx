@@ -11,9 +11,11 @@ import { useComponent } from "shared/hooks/useComponent";
 import styles from "./FormElement.module.scss";
 import { OnDragFn } from "entities/drag-and-drop/domain";
 import { SchemaTree } from "entities/app-configuration/domain";
+import { useAppConfigurationModel } from "entities/app-configuration";
 
 function FormElement({ children, item }: TreeTemplateProps) {
-  const { swapComponents } = useComponentModel();
+  // const { swapComponents } = useComponentModel();
+  const { swapComponents } = useAppConfigurationModel();
 
   const component = useComponent(item.id);
 
