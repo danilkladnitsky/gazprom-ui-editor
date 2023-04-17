@@ -1,6 +1,5 @@
-import React, { ReactNode } from "react";
+import React, { ReactNode, useState } from "react";
 
-import { useComponentModel } from "entities/component";
 import { TreeTemplateProps } from "features/configuration/render/render-component-tree";
 
 import ElementItem from "./ElementItem";
@@ -8,13 +7,17 @@ import ElementItem from "./ElementItem";
 import DropZone from "./DropZone";
 import { useComponent } from "shared/hooks/useComponent";
 
-import styles from "./FormElement.module.scss";
 import { OnDragFn } from "entities/drag-and-drop/domain";
 import { SchemaTree } from "entities/app-configuration/domain";
 import { useAppConfigurationModel } from "entities/app-configuration";
+import { KeyboardArrowDown, KeyboardArrowUp } from "@mui/icons-material";
+import { ListItem } from "@mui/material";
+
+import styles from "./FormElement.module.scss";
+import { ToggleArrow } from "../ToggleArrow";
 
 function FormElement({ children, item }: TreeTemplateProps) {
-  // const { swapComponents } = useComponentModel();
+  const [expanded, setExpanded] = useState(true);
   const { swapComponents } = useAppConfigurationModel();
 
   const component = useComponent(item.id);
@@ -30,8 +33,16 @@ function FormElement({ children, item }: TreeTemplateProps) {
   return (
     <div className={styles.element}>
       <DropZone item={component} onDrop={handleDrop} />
-      <ElementItem item={component} title={component?.name || ""} />
-      <ElementChildren list={children} />
+      <ListItem direction={"row"}>
+        <ElementItem item={component} title={component?.name || ""} />
+        {children && (
+          <ToggleArrow
+            expanded={expanded}
+            onClick={() => setExpanded(!expanded)}
+          />
+        )}
+      </ListItem>
+      {expanded && <ElementChildren list={children} />}
     </div>
   );
 }

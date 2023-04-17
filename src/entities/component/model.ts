@@ -16,7 +16,10 @@ interface ComponentState {
   ) => DatasourceComponent[];
   duplicateComponent: (id: EntityId) => Component | null;
   swapComponents: (firstId: EntityId, secondId: EntityId) => void;
-  createComponent: (code: ComponentCode) => Component;
+  createComponent: (
+    code: ComponentCode,
+    fields?: Omit<Component, "id">
+  ) => Component;
 }
 
 export const useComponentModel = create(
@@ -69,13 +72,17 @@ export const useComponentModel = create(
 
         return result;
       },
-      createComponent: (code: ComponentCode): EntityId => {
+      createComponent: (
+        code: ComponentCode,
+        fields?: Omit<Component, "id">
+      ): EntityId => {
         const newComponent = {
           code,
           id: generateEntityId(),
           timestamp: Date.now(),
-          name: code,
+          ...fields,
         };
+
         set((state) => ({ components: [...state.components, newComponent] }));
         return newComponent.id;
       },

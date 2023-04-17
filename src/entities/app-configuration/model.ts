@@ -72,14 +72,24 @@ export const useAppConfigurationModel = create(
           .filter((i) => i.code !== "form")
           .map((i) => ({ id: i.id }));
 
-        const pageId = useComponentModel.getState().createComponent("page");
+        const pageId = useComponentModel
+          .getState()
+          .createComponent("page", { name: "Страница №1" });
+        const groupId = useComponentModel
+          .getState()
+          .createComponent("group", { name: "Группа №1" });
 
         const configuration = {
           ...rootComponent,
           items: [
             {
               id: pageId,
-              items: components,
+              items: [
+                {
+                  id: groupId,
+                  items: components,
+                },
+              ],
             },
           ],
         };
@@ -93,8 +103,6 @@ export const useAppConfigurationModel = create(
         if (!configuration) {
           return;
         }
-
-        console.log(configuration, firstId, secondId);
 
         const updatedConfig = swapTreeElements(
           configuration,
