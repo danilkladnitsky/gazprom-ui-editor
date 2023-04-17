@@ -75,9 +75,14 @@ export const useAppConfigurationModel = create(
         const pageId = useComponentModel
           .getState()
           .createComponent("page", { name: "Страница №1" });
-        const groupId = useComponentModel
+
+        const group1 = useComponentModel
           .getState()
           .createComponent("group", { name: "Группа №1" });
+
+        const group2 = useComponentModel
+          .getState()
+          .createComponent("group", { name: "Группа №2" });
 
         const configuration = {
           ...rootComponent,
@@ -86,8 +91,12 @@ export const useAppConfigurationModel = create(
               id: pageId,
               items: [
                 {
-                  id: groupId,
-                  items: components,
+                  id: group1,
+                  items: components.filter((v, i) => i % 2 === 0),
+                },
+                {
+                  id: group2,
+                  items: components.filter((v, i) => i % 2 !== 0),
                 },
               ],
             },
