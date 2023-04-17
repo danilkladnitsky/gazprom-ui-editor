@@ -65,13 +65,25 @@ const dfsFindNodeRoot = (tree: SchemaTree, id: EntityId): SchemaTree | null => {
 };
 
 const dfsFindNode = (tree: SchemaTree, id: EntityId): SchemaTree | null => {
-  if (tree.id === id) return tree;
+  if (tree.id === id) {
+    return tree;
+  }
 
   if (!tree) return null;
 
-  const node = tree.items?.find((t) => t.id === dfsFindNode(t, id)?.id) || null;
+  const items = tree.items || [];
 
-  return node;
+  for (let i = 0; i < items.length; i++) {
+    const result = dfsFindNode(items[i], id);
+
+    const hasResult = result?.id === id;
+
+    if (hasResult) {
+      return result;
+    }
+  }
+
+  return null;
 };
 
 export const extractJsonBody = (component: Component): string => {

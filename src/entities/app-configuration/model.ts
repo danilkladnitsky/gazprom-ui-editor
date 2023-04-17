@@ -5,6 +5,7 @@ import { Component } from "entities/component/domain";
 import { SchemaTree, ConfigurationView, GuiMode } from "./domain";
 import { createJSONStorage, persist } from "zustand/middleware";
 import { deleteNode, insertNodeByNeighbor, swapTreeElements } from "./utils";
+import { useComponentModel } from "entities/component";
 
 interface State {
   view: ConfigurationView;
@@ -71,11 +72,20 @@ export const useAppConfigurationModel = create(
           .filter((i) => i.code !== "form")
           .map((i) => ({ id: i.id }));
 
+        const pageId = useComponentModel.getState().createComponent("page");
+
+        const configuration = {
+          ...rootComponent,
+          items: [
+            {
+              id: pageId,
+              items: components,
+            },
+          ],
+        };
+
         set({
-          configuration: {
-            ...rootComponent,
-            items: components,
-          },
+          configuration,
         });
       },
       swapComponents: (firstId: EntityId, secondId: EntityId) => {
@@ -83,6 +93,8 @@ export const useAppConfigurationModel = create(
         if (!configuration) {
           return;
         }
+
+        console.log(configuration, firstId, secondId);
 
         const updatedConfig = swapTreeElements(
           configuration,

@@ -20,7 +20,7 @@ type Props = {
 
 function TreeItem({ item, children }: Props) {
   const { swapComponents, insertComponent } = useAppConfigurationModel();
-  const { duplicateComponent, selectedComponent } = useComponentModel();
+  const { duplicateComponent } = useComponentModel();
   const component = useComponent(item.id);
 
   if (!component) {
@@ -51,8 +51,6 @@ function TreeItem({ item, children }: Props) {
 
     insertComponent(componentId, item.id);
   };
-
-  const isSelected = selectedComponent?.id === item.id;
 
   return (
     <>

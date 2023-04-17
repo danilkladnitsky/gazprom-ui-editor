@@ -16,6 +16,7 @@ interface ComponentState {
   ) => DatasourceComponent[];
   duplicateComponent: (id: EntityId) => Component | null;
   swapComponents: (firstId: EntityId, secondId: EntityId) => void;
+  createComponent: (code: ComponentCode) => Component;
 }
 
 export const useComponentModel = create(
@@ -43,8 +44,6 @@ export const useComponentModel = create(
             ...selectedComponent,
           };
 
-          console.log(selectedComponent, updatedComponent);
-
           return { components, selectedComponent: updatedComponent };
         }),
       createComponentsFromParameters: (parameters: Parameter[]) => {
@@ -69,6 +68,16 @@ export const useComponentModel = create(
         set({ components: result });
 
         return result;
+      },
+      createComponent: (code: ComponentCode): EntityId => {
+        const newComponent = {
+          code,
+          id: generateEntityId(),
+          timestamp: Date.now(),
+          name: code,
+        };
+        set((state) => ({ components: [...state.components, newComponent] }));
+        return newComponent.id;
       },
       swapComponents: (firstId: EntityId, secondId: EntityId) => {
         set((state) => {
@@ -99,19 +108,7 @@ export const useComponentModel = create(
           return null;
         }
 
-        const newComponent = {
-          ...original,
-          name: original.name,
-          id: generateEntityId(),
-          timestamp: Date.now(),
-        };
-
-        set({
-          components: [...components, newComponent],
-          selectedComponent: newComponent,
-        });
-
-        return newComponent;
+        return original;
       },
       deselectComponent: () => {
         set({ selectedComponent: null });
