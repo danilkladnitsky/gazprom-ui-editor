@@ -8,6 +8,7 @@ import { NumberPropertyFields } from "./components/NumberPropertyFields";
 import { StringPropertyFields } from "./components/StringPropertyFields";
 import { DatePropertyFields } from "./components/DatePropertyFields";
 import { Parameter, ParameterType } from "entities/parameter/domain";
+import { TextareaPropertyFields } from "./components/TextareaPropertyFields";
 
 type Props = {
   parameter: Parameter;
@@ -30,9 +31,16 @@ export const EditParameterFields = ({ parameter, onEdit }: Props) => {
             onChange={handleParameterUpdate}
           />
         );
-      case ParameterType.STRING:
+      case ParameterType.TEXT:
         return (
           <StringPropertyFields
+            properties={properties}
+            onChange={handleParameterUpdate}
+          />
+        );
+      case ParameterType.TEXTAREA:
+        return (
+          <TextareaPropertyFields
             properties={properties}
             onChange={handleParameterUpdate}
           />

@@ -6,10 +6,18 @@ import {
 } from "entities/properties";
 
 export enum ParameterType {
-  STRING = "TEXT",
   NUMBER = "NUMBER",
   DATE = "DATE",
   CHECKBOX = "CHECKBOX",
+  TEXT = "TEXT",
+  TEXTAREA = "TEXTAREA",
+  SWITCH = "SWITCH",
+  DATEPICKER = "DATEPICKER",
+  FILE = "FILE",
+  LINK = "LINK",
+  COMBOBOX = "COMBOBOX",
+  SELECT = "SELECT",
+  RADIOGROUP = "RADIOGROUP",
 }
 
 type ParameterBase = {
@@ -24,7 +32,7 @@ export type NumberParameter = ParameterBase & {
 
 export type StringParameter = ParameterBase & {
   properties?: StringProperty;
-  type: ParameterType.STRING;
+  type: ParameterType.TEXT;
 };
 
 export type DateParameter = ParameterBase & {
@@ -35,6 +43,11 @@ export type DateParameter = ParameterBase & {
 export type CheckboxParameter = ParameterBase & {
   properties?: CheckboxProperty;
   type: ParameterType.CHECKBOX;
+};
+
+export type TextareaParameter = ParameterBase & {
+  properties?: TextareaProperty;
+  type: ParameterType.TEXTAREA;
 };
 
 export type Parameter =

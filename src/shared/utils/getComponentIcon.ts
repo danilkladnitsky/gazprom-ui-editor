@@ -35,7 +35,7 @@ const getElementIcon = (element: ComponentElement) => {
       return CalendarToday;
     case ParameterType.NUMBER:
       return Numbers;
-    case ParameterType.STRING:
+    case ParameterType.TEXT:
     default:
       return TextFormat;
   }
