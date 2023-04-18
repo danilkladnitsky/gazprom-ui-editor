@@ -14,7 +14,18 @@ export const swapTreeElements = (
     return tree;
   }
 
-  [secondNode.id, firstNode.id] = [firstNode.id, secondNode.id];
+  const firstParent = dfsFindNodeRoot(tree, firstNode.id);
+  const secondParent = dfsFindNodeRoot(tree, secondNode.id);
+
+  const hasCommonParent = firstParent?.id === secondParent?.id;
+
+  if (hasCommonParent) {
+    [secondNode.id, firstNode.id] = [firstNode.id, secondNode.id];
+    [secondNode.items, firstNode.items] = [firstNode.items, secondNode.items];
+  } else {
+    insertNodeByNeighbor(tree, firstId, secondId);
+    secondParent?.items?.filter((i) => i.id !== secondId);
+  }
 
   return tree;
 };
@@ -55,13 +66,23 @@ export const deleteNode = (tree: SchemaTree, id: EntityId): SchemaTree => {
 };
 
 const dfsFindNodeRoot = (tree: SchemaTree, id: EntityId): SchemaTree | null => {
-  if (tree.id === id) return tree;
-
   if (!tree) return null;
 
-  const node = tree.items?.find((t) => t.id === dfsFindNode(t, id)?.id) || null;
+  const child = tree.items?.find((t) => t.id === id);
 
-  return node ? tree : null;
+  if (child) {
+    return tree;
+  }
+
+  const items = tree.items || [];
+  for (let i = 0; i < items.length; i++) {
+    const element = dfsFindNodeRoot(items[i], id);
+    if (element) {
+      return element;
+    }
+  }
+
+  return null;
 };
 
 const dfsFindNode = (tree: SchemaTree, id: EntityId): SchemaTree | null => {

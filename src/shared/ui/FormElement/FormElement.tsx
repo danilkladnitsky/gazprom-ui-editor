@@ -10,7 +10,6 @@ import { useComponent } from "shared/hooks/useComponent";
 import { OnDragFn } from "entities/drag-and-drop/domain";
 import { SchemaTree } from "entities/app-configuration/domain";
 import { useAppConfigurationModel } from "entities/app-configuration";
-import { KeyboardArrowDown, KeyboardArrowUp } from "@mui/icons-material";
 import { ListItem } from "@mui/material";
 
 import styles from "./FormElement.module.scss";
@@ -27,7 +26,7 @@ function FormElement({ children, item }: TreeTemplateProps) {
   }
 
   const handleDrop: OnDragFn<SchemaTree> = (droppedItem) => {
-    swapComponents(component.id, droppedItem.item.id);
+    swapComponents(droppedItem.item.id, component.id);
   };
 
   return (
