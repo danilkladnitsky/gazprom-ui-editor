@@ -41,7 +41,7 @@ export const EditorActions = ({ className }: Props) => {
       >
         Скачать конфигурацию
       </Button>
-      <UploadConfiguration />
+      {/* <UploadConfiguration /> */}
       <ResetForm />
     </div>
   );

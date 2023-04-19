@@ -2,6 +2,8 @@ import { Component } from "entities/component/domain";
 import { insertElementToArray } from "shared/utils/insertElementToArray";
 import { SchemaTree } from "./domain";
 
+const prohibitedFields = ["id", "timestamp"];
+
 export const swapTreeElements = (
   tree: SchemaTree,
   firstId: EntityId,
@@ -114,8 +116,6 @@ const dfsFindNode = (tree: SchemaTree, id: EntityId): SchemaTree | null => {
 };
 
 export const extractJsonBody = (component: Component): string => {
-  const prohibitedFields = ["id", "timestamp"];
-
   try {
     return JSON.stringify(component, (key, value) =>
       prohibitedFields.includes(key) ? undefined : value
@@ -125,4 +125,15 @@ export const extractJsonBody = (component: Component): string => {
 
     return "error";
   }
+};
+
+export const removeMetadata = (key: string, value: unknown) =>
+  prohibitedFields.includes(key) ? undefined : value;
+
+export const fillTreeData = (tree: SchemaTree[], components: Component[]) => {
+  return tree.map((t) => {
+    const component = components.find((c) => c.id === t.id);
+
+    return { ...component, items: fillTreeData(t.items || [], components) };
+  });
 };

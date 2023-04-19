@@ -23,7 +23,7 @@
     "type": "TEXTAREA",
     "id": 4
   },
-   {
+  {
     "code": "element",
     "name": "Параметр 6 (Календарь)",
     "type": "DATEPICKER",

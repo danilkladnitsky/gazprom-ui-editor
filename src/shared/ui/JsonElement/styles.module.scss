@@ -1,5 +1,9 @@
+.jsonWrapper {
+  margin-left: 16px;
+  position: relative;
+}
+
 .jsonInput {
-  margin-left: 20px;
   z-index: 2;
   transition: all 0.2s ease-in-out;
 }
@@ -16,4 +20,12 @@
 .notSelected {
   opacity: 0.4;
   filter: blur(1px);
+}
+
+.hiddenChildren {
+  display: none;
+}
+
+.expandIcon {
+  z-index: 3;
 }

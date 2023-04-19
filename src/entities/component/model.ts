@@ -18,7 +18,7 @@ interface ComponentState {
   swapComponents: (firstId: EntityId, secondId: EntityId) => void;
   createComponent: (
     code: ComponentCode,
-    fields?: Omit<Component, "id">
+    fields?: Partial<Component>
   ) => Component;
 }
 

@@ -15,7 +15,7 @@ import { DatasourceComponent as DatasourceComponentType } from "entities/compone
 
 type Props = {
   item: SchemaTree;
-  children: ReactNode;
+  children: ReactNode[];
 } & withDraggingProps;
 
 function TreeItem({ item, children }: Props) {
@@ -29,7 +29,11 @@ function TreeItem({ item, children }: Props) {
 
   if (component.code !== "element") {
     const Wrapper = getComponentWrapper(component.code);
-    return <Wrapper component={component}>{children}</Wrapper>;
+    return (
+      <Wrapper component={component} subTree={item}>
+        {children}
+      </Wrapper>
+    );
   }
 
   const handleDrop: OnDropFn<SchemaTree> = (droppedItem) => {
