@@ -10,7 +10,7 @@ import styles from "./styles.module.scss";
 
 type Props = ParameterPropertyProps<StringProperty>;
 
-export const StringPropertyFields = ({ properties, onChange }: Props) => {
+export const TextareaPropertyFields = ({ properties, onChange }: Props) => {
   const [fields, updateField] = useFormFields<StringProperty>(properties || {});
 
   useEffect(() => {
@@ -20,10 +20,10 @@ export const StringPropertyFields = ({ properties, onChange }: Props) => {
   return (
     <div className={styles.fieldsWrapper}>
       <TextInput
-        label="Маска"
-        value={fields.mask}
-        onChange={(v) => updateField("mask", v)}
-        type="string"
+        label="Количество строк"
+        value={fields?.lineCount}
+        onChange={(v) => updateField("lineCount", v)}
+        type="number"
       />
     </div>
   );

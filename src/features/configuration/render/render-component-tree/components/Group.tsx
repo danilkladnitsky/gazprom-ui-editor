@@ -10,7 +10,7 @@ export const Group = ({ children, component }: GroupProps) => {
   return (
     <div className={styles.groupWrapper}>
       {name && <Typography variant="subtitle1">{name}</Typography>}
-      <Grid className={styles.group} direction={direction}>
+      <Grid className={styles.group} direction={direction || "column"}>
         {children}
       </Grid>
     </div>

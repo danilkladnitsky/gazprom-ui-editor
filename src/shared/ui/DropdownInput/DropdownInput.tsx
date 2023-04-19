@@ -14,9 +14,16 @@ type Props = {
   list: DropdownItem[];
   onChange: (value: ItemValue) => void;
   id?: string;
+  value?: ItemValue;
 };
 
-export const DropdownInput = ({ list, name, id = name, onChange }: Props) => {
+export const DropdownInput = ({
+  list,
+  name,
+  id = name,
+  onChange,
+  value,
+}: Props) => {
   const handleOnChange = (value: ItemValue) => {
     onChange(value);
   };
@@ -27,6 +34,7 @@ export const DropdownInput = ({ list, name, id = name, onChange }: Props) => {
       <Select
         labelId={id}
         id={id}
+        value={value}
         label={name}
         onChange={(e) => handleOnChange(e.target.value as ItemValue)}
       >

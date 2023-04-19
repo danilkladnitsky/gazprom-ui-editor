@@ -28,7 +28,7 @@ const DropTreeItemArea = ({
   if (shouldRenderPreview && isHovered && component) {
     return (
       <div className={styles.preview}>
-        <DatasourceComponent {...component} />
+        {component.code === "element" && <DatasourceComponent {...component} />}
       </div>
     );
   }

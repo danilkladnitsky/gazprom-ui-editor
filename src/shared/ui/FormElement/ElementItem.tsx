@@ -26,7 +26,7 @@ function ElementItem({ title, item, className, isDragging }: Props) {
   }
 
   const withDragging = ALLOWED_TYPES_FOR_DND.includes(component?.code);
-  const Icon = getComponentIcon(component.code);
+  const Icon = getComponentIcon(component);
 
   const handleSelect = () => {
     selectComponent(component.id);

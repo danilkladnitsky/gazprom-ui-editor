@@ -4,7 +4,14 @@ import fileDownload from "js-file-download";
 import { Component } from "entities/component/domain";
 import { SchemaTree, ConfigurationView, GuiMode } from "./domain";
 import { createJSONStorage, persist } from "zustand/middleware";
-import { deleteNode, insertNodeByNeighbor, swapTreeElements } from "./utils";
+import {
+  deleteNode,
+  fillTreeData,
+  insertNodeByNeighbor,
+  removeMetadata,
+  swapTreeElements,
+} from "./utils";
+import { useComponentModel } from "entities/component";
 
 interface State {
   view: ConfigurationView;
@@ -37,8 +44,17 @@ export const useAppConfigurationModel = create(
       changeGuiMode: (mode) => set({ guiMode: mode }),
       downloadConfiguration: async () => {
         const data = get().configuration;
+        if (!data) {
+          return;
+        }
+
+        const componentList = useComponentModel.getState().components;
         const fileName = `config.json`;
-        fileDownload(JSON.stringify(data), fileName);
+
+        fileDownload(
+          JSON.stringify(fillTreeData([data], componentList), removeMetadata),
+          fileName
+        );
       },
       updateConfiguration: (configuration) => set({ configuration }),
       uploadConfiguration: async (configuration) => {
@@ -71,11 +87,66 @@ export const useAppConfigurationModel = create(
           .filter((i) => i.code !== "form")
           .map((i) => ({ id: i.id }));
 
+        const tabsId = useComponentModel
+          .getState()
+          .createComponent("tabs", { name: "Табы" });
+
+        const page1Id = useComponentModel
+          .getState()
+          .createComponent("page", { name: "Паспортные данные" });
+        const page2Id = useComponentModel
+          .getState()
+          .createComponent("page", { name: "О себе" });
+
+        const group1 = useComponentModel
+          .getState()
+          .createComponent("group", { name: "Личные данные" });
+
+        const group2 = useComponentModel
+          .getState()
+          .createComponent("group", { name: "Место жительства" });
+
+        const group3 = useComponentModel
+          .getState()
+          .createComponent("group", { name: "Био" });
+
+        const configuration = {
+          ...rootComponent,
+          items: [
+            {
+              id: tabsId,
+              items: [
+                {
+                  id: page1Id,
+                  items: [
+                    {
+                      id: group1,
+                      items: components.filter((v, i) => i % 2 === 0),
+                    },
+                    {
+                      id: group2,
+                      items: components.filter((v, i) => i % 2 !== 0),
+                    },
+                  ],
+                },
+                {
+                  id: page2Id,
+                  items: [
+                    {
+                      id: group3,
+                      items: components.filter((v, i) => i % 2 !== 0),
+                    },
+                  ],
+                },
+              ],
+            },
+          ],
+        };
+
+        console.log(configuration);
+
         set({
-          configuration: {
-            ...rootComponent,
-            items: components,
-          },
+          configuration,
         });
       },
       swapComponents: (firstId: EntityId, secondId: EntityId) => {

@@ -15,12 +15,12 @@ import { DatasourceComponent as DatasourceComponentType } from "entities/compone
 
 type Props = {
   item: SchemaTree;
-  children: ReactNode;
+  children: ReactNode[];
 } & withDraggingProps;
 
 function TreeItem({ item, children }: Props) {
   const { swapComponents, insertComponent } = useAppConfigurationModel();
-  const { duplicateComponent, selectedComponent } = useComponentModel();
+  const { duplicateComponent } = useComponentModel();
   const component = useComponent(item.id);
 
   if (!component) {
@@ -29,7 +29,11 @@ function TreeItem({ item, children }: Props) {
 
   if (component.code !== "element") {
     const Wrapper = getComponentWrapper(component.code);
-    return <Wrapper component={component}>{children}</Wrapper>;
+    return (
+      <Wrapper component={component} subTree={item}>
+        {children}
+      </Wrapper>
+    );
   }
 
   const handleDrop: OnDropFn<SchemaTree> = (droppedItem) => {
@@ -51,8 +55,6 @@ function TreeItem({ item, children }: Props) {
 
     insertComponent(componentId, item.id);
   };
-
-  const isSelected = selectedComponent?.id === item.id;
 
   return (
     <>

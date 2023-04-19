@@ -21,7 +21,7 @@ export const EditJsonConfiguration = () => {
         <RecursiveTree tree={configuration} template={JsonElement} />
       </div>
       <div className={styles.preview}>
-        {selectedComponent && (
+        {selectedComponent?.code === "element" && (
           <div className={styles.previewComponent}>
             <DatasourceComponent {...selectedComponent} />
           </div>
