@@ -17,6 +17,10 @@ export const swapTreeElements = (
   const firstParent = dfsFindNodeRoot(tree, firstNode.id);
   const secondParent = dfsFindNodeRoot(tree, secondNode.id);
 
+  if (!firstParent || !secondParent) {
+    return tree;
+  }
+
   const hasCommonParent = firstParent?.id === secondParent?.id;
 
   if (hasCommonParent) {
@@ -24,7 +28,7 @@ export const swapTreeElements = (
     [secondNode.items, firstNode.items] = [firstNode.items, secondNode.items];
   } else {
     insertNodeByNeighbor(tree, firstId, secondId);
-    secondParent?.items?.filter((i) => i.id !== secondId);
+    firstParent.items = firstParent?.items?.filter((n) => n.id !== firstId);
   }
 
   return tree;
@@ -36,7 +40,9 @@ export const insertNodeByNeighbor = (
   neighborId: EntityId
 ) => {
   const neighborNode = dfsFindNode(tree, neighborId);
-  if (!neighborNode) return tree;
+  const insertedNode = dfsFindNode(tree, nodeId);
+
+  if (!neighborNode || !insertedNode) return tree;
 
   const neighborParent = dfsFindNodeRoot(tree, neighborId);
   const neigborIndex = neighborParent?.items?.findIndex(
@@ -48,7 +54,7 @@ export const insertNodeByNeighbor = (
 
   neighborParent.items = insertElementToArray(
     neighborParent.items,
-    { id: nodeId },
+    insertedNode,
     neigborIndex
   );
 

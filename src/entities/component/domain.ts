@@ -8,6 +8,8 @@ export type ComponentBase = {
   timestamp: number;
 };
 
+export type GroupDirection = "row" | "column";
+
 export type ComponentForm = ComponentBase & {
   code: "form";
 };
@@ -22,7 +24,7 @@ export type ComponentPage = ComponentBase & {
 
 export type ComponentGroup = ComponentBase & {
   code: "group";
-  direction: "row" | "column";
+  direction: GroupDirection;
 };
 
 export type ComponentElement = ComponentBase & {

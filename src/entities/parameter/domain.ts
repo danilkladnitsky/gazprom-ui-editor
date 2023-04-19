@@ -1,8 +1,11 @@
 import {
   CheckboxProperty,
+  DatePickerProperty,
   DateProperty,
+  FileProperty,
   NumberProperty,
   StringProperty,
+  TextareaProperty,
 } from "entities/properties";
 
 export enum ParameterType {
@@ -37,7 +40,7 @@ export type StringParameter = ParameterBase & {
 
 export type DateParameter = ParameterBase & {
   properties?: DateProperty;
-  type: ParameterType.DATE;
+  type: ParameterType.DATEPICKER;
 };
 
 export type CheckboxParameter = ParameterBase & {
@@ -50,10 +53,23 @@ export type TextareaParameter = ParameterBase & {
   type: ParameterType.TEXTAREA;
 };
 
+export type DatePickerParameter = ParameterBase & {
+  properties?: DatePickerProperty;
+  type: ParameterType.DATEPICKER;
+};
+
+export type FileParameter = ParameterBase & {
+  properties?: FileProperty;
+  type: ParameterType.FILE;
+};
+
 export type Parameter =
   | DateParameter
   | StringParameter
   | NumberParameter
-  | CheckboxParameter;
+  | CheckboxParameter
+  | TextareaParameter
+  | DatePickerParameter
+  | FileParameter;
 
 export type InputParameter = Omit<Parameter, "id">;

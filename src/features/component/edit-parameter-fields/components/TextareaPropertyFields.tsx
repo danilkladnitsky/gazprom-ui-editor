@@ -23,7 +23,6 @@ export const TextareaPropertyFields = ({ properties, onChange }: Props) => {
         label="Количество строк"
         value={fields?.lineCount}
         onChange={(v) => updateField("lineCount", v)}
-        disabled={!fields.multiline}
         type="number"
       />
     </div>

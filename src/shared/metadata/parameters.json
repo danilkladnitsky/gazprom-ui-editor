@@ -13,20 +13,20 @@
   },
   {
     "code": "element",
-    "name": "Параметр 3 (Дата)",
-    "type": "DATE",
-    "id": 2
-  },
-  {
-    "code": "element",
     "name": "Параметр 4 (Чекбокс)",
     "type": "CHECKBOX",
     "id": 3
   },
-   {
+  {
     "code": "element",
     "name": "Параметр 5 (Многострочное поле ввода)",
     "type": "TEXTAREA",
     "id": 4
+  },
+   {
+    "code": "element",
+    "name": "Параметр 6 (Календарь)",
+    "type": "DATEPICKER",
+    "id": 5
   }
 ]

@@ -23,7 +23,8 @@ export default function JsonElement({ item, children }: Props) {
 
   const json = extractJsonBody(component);
 
-  const isElement = component.code === "element";
+  const canBeEdited =
+    component.code === "element" || component.code === "group";
   const isSelected = selectedComponent?.id === item.id;
 
   const handleSelect = (e) => {
@@ -53,7 +54,7 @@ export default function JsonElement({ item, children }: Props) {
     <div className={styles.jsonWrapper}>
       <div
         className={classNames(styles.jsonInput, selectedClassname)}
-        onClick={isElement && handleSelect}
+        onClick={canBeEdited && handleSelect}
       >
         <JSONInput
           placeholder={JSON.parse(json)}

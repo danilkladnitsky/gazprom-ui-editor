@@ -7,6 +7,8 @@ import {
   CalendarToday,
   Numbers,
   TextFormat,
+  Notes,
+  ShortText,
 } from "@mui/icons-material";
 import { Component, ComponentElement } from "entities/component/domain";
 import { ParameterType } from "entities/parameter/domain";
@@ -31,12 +33,14 @@ const getElementIcon = (element: ComponentElement) => {
   switch (element.dataSource.type) {
     case ParameterType.CHECKBOX:
       return CheckBox;
-    case ParameterType.DATE:
+    case ParameterType.DATEPICKER:
       return CalendarToday;
     case ParameterType.NUMBER:
       return Numbers;
+    case ParameterType.TEXTAREA:
+      return Notes;
     case ParameterType.TEXT:
     default:
-      return TextFormat;
+      return ShortText;
   }
 };

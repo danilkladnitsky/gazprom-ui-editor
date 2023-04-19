@@ -45,7 +45,7 @@ export const EditParameterFields = ({ parameter, onEdit }: Props) => {
             onChange={handleParameterUpdate}
           />
         );
-      case ParameterType.DATE:
+      case ParameterType.DATEPICKER:
         return (
           <DatePropertyFields
             properties={properties}

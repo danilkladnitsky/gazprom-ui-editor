@@ -11,6 +11,7 @@ import { EditParameterFields } from "../edit-parameter-fields";
 import styles from "./styles.module.scss";
 import { Parameter, ParameterType } from "entities/parameter/domain";
 import DeleteComponent from "../delete-component/ui";
+import { EditGroup } from "../edit-group";
 
 const convertParametersToList = (params: Parameter[]): DropdownItem[] => {
   return params.map((param) => ({
@@ -24,7 +25,8 @@ export const EditComponent = () => {
   const { updateSelectedComponent, selectedComponent } = useComponentModel();
 
   const list = convertParametersToList(parameters);
-  const dataSource = selectedComponent?.dataSource;
+  const dataSource =
+    selectedComponent?.code === "element" && selectedComponent?.dataSource;
 
   const updateComponentDatasource = (dataSource: Parameter) => {
     const updated = { ...selectedComponent, dataSource };
@@ -36,7 +38,7 @@ export const EditComponent = () => {
     const updated = {
       ...selectedComponent,
       dataSource: {
-        ...selectedComponent?.dataSource,
+        ...dataSource,
         type,
       },
     };
@@ -56,11 +58,14 @@ export const EditComponent = () => {
       <Header>Настройки компоненты</Header>
       {selectedComponent && (
         <div className={styles.form}>
-          <DropdownInput
-            list={list}
-            onChange={updateDatasourceType} // TODO: replace with component analogue
-            name="Выберите источник данных"
-          />
+          {dataSource && (
+            <DropdownInput
+              list={list}
+              onChange={updateDatasourceType} // TODO: replace with component analogue
+              name="Выберите источник данных"
+            />
+          )}
+          {selectedComponent.code === "group" && <EditGroup />}
           <TextInput
             fullWidth
             label="Введите название поля"
