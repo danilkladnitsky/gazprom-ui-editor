@@ -1,17 +1,28 @@
-import { ConfigReader } from "app/config";
+import { ConfigReader } from 'app/config';
 
-import { IParameter } from "domain/parameter";
+import { IParameter } from 'domain/parameter';
 
-import { generateCode } from "shared/utils/generateIds";
+import { generateCode } from 'shared/utils/generateIds';
 
 export class ParameterService {
-  public async readParametersFile(file: File): Promise<IParameter[]> {
-    const rawParameters = await ConfigReader.read<IParameter[]>(file);
-    const preparedParameters = rawParameters.map((p) => ({
-      ...p,
-      code: generateCode(),
-    }));
+  parameters: IParameter[] = [];
 
-    return preparedParameters;
+  constructor() {
+    this.parameters = [];
+  }
+
+  public async readParametersFile(file: File): Promise<IParameter[]> {
+    try {
+      const rawParameters = await ConfigReader.read<IParameter[]>(file);
+      const preparedParameters = rawParameters.map((p) => ({
+        ...p,
+        code: generateCode(),
+      }));
+
+      this.parameters = preparedParameters;
+      return preparedParameters;
+    } catch (err) {
+      return [];
+    }
   }
 }

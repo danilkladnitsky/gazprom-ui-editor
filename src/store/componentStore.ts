@@ -1,19 +1,26 @@
-import { create } from "zustand";
+import { create } from 'zustand';
 
-import { IComponent } from "domain/component";
+import { IComponent } from 'domain/component';
+
+import { ComponentService } from 'application/component';
 
 type State = {
   components: IComponent[];
 };
 
-type Actions = {};
+type Actions = {
+  setComponents: (components: IComponent[]) => void
+};
 
 const initialState: State = {
   components: [],
 };
 
-const service = new ParameterService();
+const service = new ComponentService();
 
-const useComponents = create<State & Actions>()((set) => ({
+export const useComponentsStore = create<State & Actions>()((set) => ({
   ...initialState,
+  setComponents: (components) => {
+    set({ components });
+  },
 }));

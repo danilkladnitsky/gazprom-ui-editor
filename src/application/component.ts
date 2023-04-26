@@ -1,6 +1,6 @@
-import { ELEMENT_TYPE, IElement, IGroup, IPage, ITab } from "domain/component";
+import { ELEMENT_TYPE, IComponent, IElement, IGroup, IPage, ITab } from 'domain/component';
 
-import { generateCode } from "shared/utils/generateIds";
+import { generateCode } from 'shared/utils/generateIds';
 
 type CreatedComponent<T extends ELEMENT_TYPE> = T extends ELEMENT_TYPE.ELEMENT
   ? IElement
@@ -13,14 +13,19 @@ type CreatedComponent<T extends ELEMENT_TYPE> = T extends ELEMENT_TYPE.ELEMENT
   : never;
 
 export class ComponentService {
-  static createComponent<T extends ELEMENT_TYPE>(
+  components: IComponent[] = [];
+  createComponent<T extends ELEMENT_TYPE>(
     type: T,
-    componentDto: Omit<CreatedComponent<T>, "code" | "type">
+    componentDto: Omit<CreatedComponent<T>, 'code' | 'type'>,
   ) {
     return {
       ...componentDto,
       type,
       code: generateCode(),
     } as CreatedComponent<T>;
+  }
+
+  saveComponents(components: IComponent[]): void {
+    this.components = components;
   }
 }
