@@ -1,4 +1,5 @@
-import { ELEMENT_TYPE } from 'domain/component';
+import { ELEMENT_TYPE, IComponent } from 'domain/component';
+import { IFormTree, initialForm } from 'domain/tree';
 
 import { ComponentService } from './component';
 import { ParameterService } from './parameter';
@@ -13,7 +14,7 @@ export class AppService {
       this.componentService = componentService;
     }
 
-    generateForm() {
+    generateForm(): [IComponent[], IFormTree] {
       const parameters = this.parameterService.parameters;
       const components = parameters.map(parameter => {
         const component = this.componentService.
@@ -23,9 +24,11 @@ export class AppService {
         return component;
       });
 
+      const form = { ...initialForm, items: components };
+
       this.componentService.saveComponents(components);
 
-      return [components];
+      return [components, form];
     }
 
 }

@@ -1,32 +1,32 @@
-import { PARAMETER_TYPE } from "./parameter";
+import { PARAMETER_TYPE } from './parameter';
 
 export enum PROPERTY_VALUE_TYPE {
-  STRING = "string",
-  INTEGER = "integer",
-  BOOLEAN = "boolean",
-  DATE = "date",
-  LIST = "list",
+  STRING = 'string',
+  INTEGER = 'integer',
+  BOOLEAN = 'boolean',
+  DATE = 'date',
+  LIST = 'list',
 }
 
 export enum PROPERTY_CODE {
-  TITLE = "title",
-  DIRECTION = "direction",
-  SHOW_TITLE = "showTitle",
-  DATASOURCE = "dataSource",
-  READONLY = "readonly",
-  HIDDEN = "hidden",
-  INFO = "info",
-  HINT = "hint",
-  MULTILINE = "multiLine",
-  LENGTH = "length",
-  COUNTER = "counter",
-  MIN_VALUE = "minValue",
-  MAX_VALUE = "maxValue",
-  SCALE = "scale",
-  VIEW = "view",
-  MULTIPLE = "multiple",
-  MASK = "mask",
-  LINE_COUNT = "lineCount",
+  TITLE = 'title',
+  DIRECTION = 'direction',
+  SHOW_TITLE = 'showTitle',
+  DATASOURCE = 'dataSource',
+  READONLY = 'readonly',
+  HIDDEN = 'hidden',
+  INFO = 'info',
+  HINT = 'hint',
+  MULTILINE = 'multiLine',
+  LENGTH = 'length',
+  COUNTER = 'counter',
+  MIN_VALUE = 'minValue',
+  MAX_VALUE = 'maxValue',
+  SCALE = 'scale',
+  VIEW = 'view',
+  MULTIPLE = 'multiple',
+  MASK = 'mask',
+  LINE_COUNT = 'lineCount',
 }
 
 export type Property = {

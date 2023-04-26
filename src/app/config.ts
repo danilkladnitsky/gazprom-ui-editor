@@ -4,7 +4,7 @@ export class ConfigReader {
       try {
         const fileReader = new FileReader();
 
-        fileReader.readAsText(file, "UTF-8");
+        fileReader.readAsText(file, 'UTF-8');
 
         fileReader.onload = (e) => resolve(JSON.parse(e.target?.result));
       } catch (err) {

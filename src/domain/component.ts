@@ -1,18 +1,23 @@
-import { IParameter } from "./parameter";
+import { IParameter } from './parameter';
 
 export enum ELEMENT_TYPE {
-  ELEMENT = "ELEMENT",
-  FORM = "FORM",
-  PAGE = "PAGE",
-  GROUP = "GROUP",
-  TAB = "TAB",
-  CONTROL = "CONTROL",
+  ELEMENT = 'ELEMENT',
+  FORM = 'FORM',
+  PAGE = 'PAGE',
+  GROUP = 'GROUP',
+  TAB = 'TAB',
+  CONTROL = 'CONTROL',
 }
 
 export interface IBaseComponent {
   code: EntityId;
   name: string;
 }
+
+export type IForm = IBaseComponent & {
+  type: ELEMENT_TYPE.FORM;
+  items: IPage[] | ITab[];
+};
 
 export type ITab = IBaseComponent & {
   type: ELEMENT_TYPE.TAB;
@@ -34,4 +39,4 @@ export type IElement = IBaseComponent & {
   dataSource: IParameter;
 };
 
-export type IComponent = IElement | IGroup | IPage | ITab;
+export type IComponent = IElement | IGroup | IPage | ITab | IForm;
