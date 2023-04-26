@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import EditForm from 'features/constructor/edit-form/ui';
 import { useParametersStore } from 'store/parameterStore';
 import { ComponentsList } from 'ui/ComponentsList';
+import { HierarchyForm } from 'ui/HierarchyForm';
 import { ParametersList } from 'ui/ParametersList';
 import { UploadParameters } from 'ui/UploadParameters';
 
@@ -38,7 +38,7 @@ const TabContent = ({ tab }: { tab: TabValues }) => {
     return <ComponentsList />;
   case TabValues.FORM:
   default:
-    return <EditForm />;
+    return <HierarchyForm />;
   }
 };
 
