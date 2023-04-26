@@ -7,3 +7,7 @@ export const generateIds = <T extends UnknownPayload>(data: T[]) => {
 export const generateEntityId = () => {
   return uuidv4();
 };
+
+export const generateCode = () => {
+  return uuidv4();
+};

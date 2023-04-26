@@ -1,10 +1,11 @@
 import React, { useState } from "react";
+import EditForm from "features/constructor/edit-form/ui";
+import { SelectComponent } from "features/constructor/select-component";
+import { ParametersList } from "ui/ParametersList";
+
+import TabMenu, { TabItem } from "shared/ui/TabMenu/TabMenu";
 
 import styles from "./styles.module.scss";
-import TabMenu, { TabItem } from "shared/ui/TabMenu/TabMenu";
-import { SelectParameter } from "features/constructor/select-parameter";
-import { SelectComponent } from "features/constructor/select-component";
-import EditForm from "features/constructor/edit-form/ui";
 
 enum TabValues {
   PARAMETERS,
@@ -30,7 +31,7 @@ const navTabs: TabItem<TabValues>[] = [
 const TabContent = ({ tab }: { tab: TabValues }) => {
   switch (tab) {
     case TabValues.PARAMETERS:
-      return <SelectParameter />;
+      return <ParametersList />;
     case TabValues.COMPONENTS:
       return <SelectComponent />;
     case TabValues.FORM:
