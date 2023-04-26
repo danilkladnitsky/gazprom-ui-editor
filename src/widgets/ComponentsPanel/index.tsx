@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import EditForm from "features/constructor/edit-form/ui";
 import { SelectComponent } from "features/constructor/select-component";
+import { useParametersStore } from "store/parameterStore";
 import { ParametersList } from "ui/ParametersList";
+import { UploadParameters } from "ui/UploadParameters";
 
 import TabMenu, { TabItem } from "shared/ui/TabMenu/TabMenu";
 
@@ -42,6 +44,9 @@ const TabContent = ({ tab }: { tab: TabValues }) => {
 
 const ComponentsPanel = () => {
   const [selectedTab, setSelectedTab] = useState(navTabs[0].value);
+  const { parameters } = useParametersStore();
+
+  const hasParameters = Boolean(parameters.length);
 
   return (
     <div className={styles.panel}>
@@ -51,7 +56,11 @@ const ComponentsPanel = () => {
           onChange={setSelectedTab}
           activeTab={selectedTab}
         />
-        <TabContent tab={selectedTab} />
+        {hasParameters ? (
+          <TabContent tab={selectedTab} />
+        ) : (
+          <UploadParameters />
+        )}
       </div>
     </div>
   );

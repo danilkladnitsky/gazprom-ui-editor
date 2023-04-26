@@ -1,15 +1,16 @@
-import { ThemeProvider } from "@mui/system";
 import React from "react";
-import { SnackbarProvider } from "notistack";
-
-import appTheme from "shared/themes/AppTheme";
-import { ComponentSettings, ComponentsPanel, Configuration } from "widgets";
-
-import styles from "./styles.module.scss";
-import { useAppConfigurationModel } from "entities/app-configuration";
-import { AppHeader } from "widgets/AppHeader";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
+import { ThemeProvider } from "@mui/system";
+import { useAppConfigurationModel } from "entities/app-configuration";
+import { SnackbarProvider } from "notistack";
+import { UploadParameters } from "ui/UploadParameters";
+import { ComponentSettings, ComponentsPanel, Configuration } from "widgets";
+import { AppHeader } from "widgets/AppHeader";
+
+import appTheme from "shared/themes/AppTheme";
+
+import styles from "./styles.module.scss";
 
 export const App: React.FC = () => {
   const { configuration } = useAppConfigurationModel();
@@ -23,9 +24,9 @@ export const App: React.FC = () => {
           <div className={styles.appWrapper}>
             <AppHeader />
             <div className={styles.app}>
-              {canEditForm && <ComponentsPanel className={styles.panel} />}
-              <Configuration className={styles.configuration} />
-              {canEditForm && <ComponentSettings className={styles.settings} />}
+              <ComponentsPanel className={styles.panel} />
+              {/* <Configuration className={styles.configuration} />
+              {canEditForm && <ComponentSettings className={styles.settings} />} */}
             </div>
           </div>
         </DndProvider>
