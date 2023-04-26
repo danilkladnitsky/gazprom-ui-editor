@@ -1,7 +1,7 @@
-import React, { ChangeEvent } from "react";
-import { Upload as UploadIcon } from "@mui/icons-material";
-import { Button } from "@mui/material";
-import { useParametersStore } from "store/parameterStore";
+import React, { ChangeEvent } from 'react';
+import { Upload as UploadIcon } from '@mui/icons-material';
+import { Button } from '@mui/material';
+import { useParametersStore } from 'store/parameterStore';
 
 export const UploadParameters = () => {
   const { parseFromFile } = useParametersStore();
