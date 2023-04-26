@@ -15,7 +15,7 @@
     "prepare": "husky install"
   },
   "lint-staged": {
-    "*.{js,ts,tsx,scss}": "eslint --fix"
+    "*.{js,ts,tsx}": "eslint --fix"
   },
   "author": "",
   "license": "MIT",

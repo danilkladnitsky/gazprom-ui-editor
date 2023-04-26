@@ -15,21 +15,23 @@ type Props<TreeData> = {
 }
 
 export const TreeStructure = <P,>(
-  { data, template }: Props<P>) => {
+  { data, template }: Props<P>): JSX.Element => {
 
   const TreeComponent = template;
 
   const renderSubTree = (subTree: TreeProps<P>) => {
     if (!subTree?.items) {
-      return null;
+      return <></>;
     }
 
     return (
-      subTree.items.map((item, index) => (
-        <TreeComponent item={item} key={index}>
-          {renderSubTree(item)}
-        </TreeComponent>
-      ))
+      <>{
+        subTree.items.map((item, index) => (
+          <TreeComponent item={item} key={index}>
+            {renderSubTree(item)}
+          </TreeComponent>
+        ))
+      }</>
     );
   };
 

@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { useParametersStore } from 'store/parameterStore';
-import { ComponentsList } from 'ui/ComponentsList';
-import { HierarchyForm } from 'ui/HierarchyForm';
-import { ParametersList } from 'ui/ParametersList';
-import { UploadParameters } from 'ui/UploadParameters';
+import { ComponentsList } from 'ui/components/ComponentsList';
+import { HierarchyForm } from 'ui/components/HierarchyForm';
+import { ParametersList } from 'ui/components/ParametersList';
+import { UploadParameters } from 'ui/components/UploadParameters';
 
 import TabMenu, { TabItem } from 'shared/ui/TabMenu/TabMenu';
 
@@ -21,12 +21,12 @@ const navTabs: TabItem<TabValues>[] = [
     value: TabValues.PARAMETERS,
   },
   {
-    label: 'Компоненты',
-    value: TabValues.COMPONENTS,
-  },
-  {
     label: 'Форма',
     value: TabValues.FORM,
+  },
+  {
+    label: 'Компоненты',
+    value: TabValues.COMPONENTS,
   },
 ];
 

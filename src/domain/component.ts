@@ -12,6 +12,7 @@ export enum ELEMENT_TYPE {
 export interface IBaseComponent {
   code: EntityId;
   name: string;
+  items?: IBaseComponent[];
 }
 
 export type IForm = IBaseComponent & {
@@ -37,6 +38,7 @@ export type IGroup = IBaseComponent & {
 export type IElement = IBaseComponent & {
   type: ELEMENT_TYPE.ELEMENT;
   dataSource: IParameter;
+  items?: never;
 };
 
 export type IComponent = IElement | IGroup | IPage | ITab | IForm;

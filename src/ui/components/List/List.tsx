@@ -1,8 +1,8 @@
-import React, { ComponentType } from "react";
-import { useAutoAnimate } from "@formkit/auto-animate/react";
-import { Button } from "@mui/material";
+import React, { ComponentType } from 'react';
+import { useAutoAnimate } from '@formkit/auto-animate/react';
+import { Button } from '@mui/material';
 
-import styles from "./styles.module.scss";
+import styles from './styles.module.scss';
 
 export type ListItem = object & { name: string; id: EntityId };
 export type ListItemProps = { item: object & ListItem };
@@ -11,7 +11,7 @@ type Props = {
   data: Array<ListItemProps>;
   listItem?: ComponentType<ListItemProps>;
 };
-const List = ({ data, listItem }: Props) => {
+export const List = ({ data, listItem }: Props) => {
   const [parent] = useAutoAnimate();
 
   const CustomListItem = listItem;
@@ -22,7 +22,7 @@ const List = ({ data, listItem }: Props) => {
           <CustomListItem item={item} key={item.id} />
         ) : (
           <ListItem name={item.name} key={item.id} />
-        )
+        ),
       )}
     </div>
   );
@@ -35,5 +35,3 @@ const ListItem = ({ name }: { name: string }) => {
     </Button>
   );
 };
-
-export default List;
