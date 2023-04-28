@@ -5,7 +5,7 @@ import { ComponentService } from './component';
 import { ParameterService } from './parameter';
 import { TreeService } from './tree';
 
-export class AppService extends TreeService {
+export class AppService extends TreeService<IForm> {
   private parameterService: ParameterService;
   private componentService: ComponentService;
   private formTree: IForm;
@@ -18,7 +18,7 @@ export class AppService extends TreeService {
     this.formTree = initialForm;
   }
 
-  generateForm(): [IComponent[], IFormTree] {
+  generateForm(): [IComponent[], IForm] {
     const parameters = this.parameterService.parameters;
     const components = parameters.map(parameter => {
       const component = this.componentService.
@@ -36,10 +36,22 @@ export class AppService extends TreeService {
     return [components, form];
   }
 
-  insertComponent(component: IComponent, rootCode: EntityId): void {
-    const rootNode = this.findNode(this.formTree, rootCode);
+  insertComponent(component: IComponent, targetCode: EntityId): IForm {
+    const fromRoot = this.findNode(this.formTree, component.code);
+    const toRoot = this.findNode(this.formTree, targetCode);
 
-    console.log(rootNode);
+    if (!fromRoot || !toRoot) {
+      return this.formTree;
+    }
+
+    const tree = this.swapTreeElements(
+      this.formTree,
+      fromRoot?.code, toRoot?.code,
+    );
+
+    this.formTree = tree;
+
+    return this.formTree;
 
   }
 

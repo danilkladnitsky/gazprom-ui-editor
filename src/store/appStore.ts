@@ -23,7 +23,8 @@ export const useAppStore = create<State & Actions>()((set) => ({
     set({ form });
   },
   replaceComponent: (component: IComponent, target: EntityId) => {
-    appService.insertComponent(component, target);
+    const updatedTree = appService.insertComponent(component, target);
+    set({ form: updatedTree });
   },
 
 }));

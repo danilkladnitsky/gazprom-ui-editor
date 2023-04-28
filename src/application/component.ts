@@ -18,11 +18,34 @@ export class ComponentService {
     type: T,
     componentDto: Omit<CreatedComponent<T>, 'code' | 'type'>,
   ) {
-    return {
+
+    const createdComponent = {
       ...componentDto,
       type,
       code: generateCode(),
     } as CreatedComponent<T>;
+
+    this.components.push(createdComponent);
+
+    return createdComponent;
+  }
+
+  updateComponent(code: EntityId, componentDto: Partial<IComponent>)
+    : [IComponent | null, IComponent[]] {
+    const componentToUpdate = this.components.find(c => c.code === code);
+
+    if (!componentToUpdate) {
+      return [null, this.components];
+    }
+
+    const updatedComponent = {
+      ...componentToUpdate,
+      ...componentDto,
+    } as IComponent;
+
+    this.components.map(c => c.code === code ? updatedComponent : c);
+
+    return [updatedComponent, this.components];
   }
 
   saveComponents(components: IComponent[]): void {

@@ -27,7 +27,12 @@ export const createInitialForm = (components: IElement[]): IForm => ({
           type: ELEMENT_TYPE.PAGE,
           code: generateCode(),
           name: 'Страница №1',
-          items: [...components],
+          items: [{
+            name: 'Группа',
+            code: generateCode(),
+            type: ELEMENT_TYPE.GROUP,
+            items: [...components],
+          }],
         },
       ],
     },

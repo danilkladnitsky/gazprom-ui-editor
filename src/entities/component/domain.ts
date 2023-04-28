@@ -1,4 +1,4 @@
-import { Parameter } from "entities/parameter/domain";
+import { Parameter } from 'entities/parameter/domain';
 
 export type ComponentBase = {
   id: EntityId;
@@ -8,27 +8,27 @@ export type ComponentBase = {
   timestamp: number;
 };
 
-export type GroupDirection = "row" | "column";
+export type GroupDirection = 'row' | 'column';
 
 export type ComponentForm = ComponentBase & {
-  code: "form";
+  code: 'form';
 };
 
 export type ComponentTabs = ComponentBase & {
-  code: "tabs";
+  code: 'tabs';
 };
 
 export type ComponentPage = ComponentBase & {
-  code: "page";
+  code: 'page';
 };
 
 export type ComponentGroup = ComponentBase & {
-  code: "group";
+  code: 'group';
   direction: GroupDirection;
 };
 
 export type ComponentElement = ComponentBase & {
-  code: "element";
+  code: 'element';
   dataSource: Parameter;
 };
 

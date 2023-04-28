@@ -27,7 +27,7 @@ export type ITab = IBaseComponent & {
 
 export type IPage = IBaseComponent & {
   type: ELEMENT_TYPE.PAGE;
-  items: IElement[];
+  items: IElement[] | IGroup[];
 };
 
 export type IGroup = IBaseComponent & {
@@ -41,4 +41,6 @@ export type IElement = IBaseComponent & {
   items?: never;
 };
 
-export type IComponent = IElement | IGroup | IPage | ITab | IForm;
+export type IExtendableComponent = IGroup | IPage | ITab | IForm;
+
+export type IComponent = IElement | IExtendableComponent;

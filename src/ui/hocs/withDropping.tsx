@@ -1,4 +1,4 @@
-import React, { ComponentType } from 'react';
+import React, { ComponentType, ReactNode } from 'react';
 import { useDrop } from 'react-dnd';
 
 export type DropFn<Item> = (item: Item) => void
@@ -8,11 +8,16 @@ type DroppingProps<Item> = {
     onDrop?: (item: Item) => void;
 }
 
+export type DropComponentProps = {
+  isHovered: boolean;
+}
+
 export const withDropping =
     <Item,>({ allowedAliases, onDrop }: DroppingProps<Item>) => {
-      return <P extends object>(Component: ComponentType<P>) => {
-        return function Wrapped(props: P) {
-          const [, drop] = useDrop(() => ({
+      return <P extends DropComponentProps>(Component: ComponentType<P>)
+        : ComponentType<Omit<P, 'isHovered'>> => {
+        return function Wrapped(props: P): ReactNode {
+          const [{ isOver }, drop] = useDrop(() => ({
             accept: allowedAliases,
             drop: onDrop,
             collect: (monitor) => {
@@ -25,7 +30,7 @@ export const withDropping =
           }));
 
           return <div ref={drop}>
-            <Component {...props} />
+            <Component {...props} isHovered={isOver} />
           </div>;
 
         };

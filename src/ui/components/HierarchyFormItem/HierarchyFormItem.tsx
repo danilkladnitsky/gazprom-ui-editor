@@ -1,10 +1,15 @@
 import React from 'react';
+import classNames from 'classnames';
 import { useAppStore } from 'store/appStore';
 import { TreeTemplateProps } from 'ui/components/TreeStructure';
 import { withDragging } from 'ui/hocs/withDragging';
-import { withDropping } from 'ui/hocs/withDropping';
+import { DropComponentProps, withDropping } from 'ui/hocs/withDropping';
 
 import { ELEMENT_TYPE, IComponent } from 'domain/component';
+
+import { getComponentIcon } from 'shared/utils/getComponentIcon';
+
+import styles from './HierarchyFormItem.module.scss';
 
 type Props = TreeTemplateProps<IComponent>;
 
@@ -20,43 +25,54 @@ export const HierarchyFormItem = (props: Props) => {
     replaceComponent(droppedItem, item.code);
   };
 
-  if (isDraggable) {
-    const DraggedComponent = withDragging(
-      {
-        item,
-        dragAlias: item.type,
-      })(DraggedItem);
-    return <DraggedComponent {...props} />;
-  }
-
   const DropZone = withDropping(
     {
       allowedAliases: [ELEMENT_TYPE.ELEMENT],
       onDrop,
     })(DroppedItem);
 
+  const DraggedComponent = withDragging(
+    {
+      item,
+      dragAlias: item.type,
+    })(DraggedItem);
+
+  const FormItem = isDraggable ?
+    <DraggedComponent {...props} />
+    : <>{item.name}</>;
+
   return (
     <div>
-      {item.name}
-      {children}
+      {FormItem}
       <DropZone item={props.item} />
+      <div className={styles.childrenItem}>
+        {children}
+      </div>
     </div>
   );
 };
 
 const DraggedItem = ({ item, children }: Props) => {
+  const Icon = getComponentIcon(item);
+
   return (
-    <div>
-     + {item.name}
+    <div className={styles.item}>
+      <div className={styles.itemContent}>
+        <Icon />
+        {item.name}
+      </div>
       {children}
     </div>
   );
 };
 
-const DroppedItem = ({ item }: {item: IComponent}) => {
+type DroppedItemProps = { item: IComponent } & DropComponentProps;
+
+const DroppedItem = ({ isHovered }:
+  DroppedItemProps) => {
   return (
-    <div>
-      Drop her {item.name}
+    <div className={classNames(styles.dropPlaceholder,
+      { [styles.isDropping]: isHovered })}>
     </div>
   );
 };

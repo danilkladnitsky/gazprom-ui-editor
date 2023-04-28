@@ -1,0 +1,19 @@
+.itemContent {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.dropPlaceholder {
+    height: 5px;
+}
+
+.isDropping {
+    height: 10px;
+    border-radius: 2px;
+    background-color: rgb(187, 187, 251);
+}
+
+.childrenItem {
+    margin-left: 8px;
+}
