@@ -1,8 +1,9 @@
 import React, { ComponentType } from 'react';
+import { useComponentsStore } from 'store/componentStore';
+import { HierarchyElement } from 'ui/components/HierarchyElement';
 
 import { ELEMENT_TYPE, IComponent } from 'domain/component';
 
-import { Element } from './Element';
 import { Form } from './Form';
 import { Group } from './Group';
 import { Page } from './Page';
@@ -11,6 +12,12 @@ import { ViewFormItemProps } from './types';
 
 export const ComponentItem = ({ item, children }
   : ViewFormItemProps<IComponent>) => {
+  const { selectComponent } = useComponentsStore();
+
+  const handleComponentPick = (component: IComponent) => {
+    selectComponent(component.code);
+  };
+
   const { type } = item;
 
   const ElementView = getElementByType(type) as
@@ -20,15 +27,16 @@ export const ComponentItem = ({ item, children }
     return null;
   }
 
-  return <ElementView item={item}>
+  return <ElementView onClick={handleComponentPick} item={item}>
     {children}
-  </ElementView>;
+  </ElementView>
+  ;
 };
 
 const getElementByType = <T extends ELEMENT_TYPE>(type: T) => {
   switch (type) {
   case ELEMENT_TYPE.ELEMENT:
-    return Element;
+    return HierarchyElement;
   case ELEMENT_TYPE.GROUP:
     return Group;
   case ELEMENT_TYPE.TAB:

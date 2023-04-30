@@ -1,3 +1,5 @@
+export type ParameterName = string;
+
 export enum PARAMETER_TYPE {
   STRING = 'STRING',
   NUMBER = 'NUMBER',
@@ -9,7 +11,7 @@ export enum PARAMETER_TYPE {
   FILE = 'FILE',
 }
 
-export enum DATASOURCE_TYPE {
+export enum CONTROL_TYPE {
   NUMBER = 'NUMBER',
   DATE = 'DATE',
   CHECKBOX = 'CHECKBOX',
@@ -25,9 +27,9 @@ export enum DATASOURCE_TYPE {
 }
 
 export interface IBaseParameter {
-  code: string;
-  name: string;
-  type: DATASOURCE_TYPE;
+  code: EntityId;
+  name: ParameterName;
+  type: PARAMETER_TYPE;
   required?: boolean;
   validate?: boolean;
 }

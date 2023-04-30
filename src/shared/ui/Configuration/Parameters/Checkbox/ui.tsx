@@ -1,19 +1,14 @@
-import { CheckboxParameter } from "entities/parameter";
-import { Checkbox as UICheckbox } from "shared/ui/Checkbox";
-import React from "react";
+import React from 'react';
+import { Checkbox as UICheckbox } from 'ui/shared/Checkbox';
 
-import styles from "../styles.module.scss";
+import styles from '../styles.module.scss';
 
 type Props = {
-  element: CheckboxParameter;
   name: string;
 };
 
-export const Checkbox = ({ element, name }: Props) => {
-  const { properties } = element;
-  const { isChecked } = properties || {};
-
+export const Checkbox = ({ name }: Props) => {
   return (
-    <UICheckbox checked={isChecked} name={name} className={styles.input} />
+    <UICheckbox name={name} className={styles.input} />
   );
 };

@@ -1,8 +1,15 @@
 import React from 'react';
-import { TextField } from '@mui/material';
+import { TextInput } from 'ui/shared/TextInput';
 
-export const Number = () => {
+import { IBaseParameter } from 'domain/parameter';
+
+import { ElementProps } from './types';
+
+export const Number = ({ dataSource, element }
+  : ElementProps<IBaseParameter>) => {
+  const { name } = element;
+
   return (
-    <TextField />
+    <TextInput label={name} />
   );
 };

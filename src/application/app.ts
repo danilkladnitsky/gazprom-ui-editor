@@ -1,20 +1,26 @@
-import { ELEMENT_TYPE, IComponent, IForm } from 'domain/component';
+import { ELEMENT_PARAMETER_MAP, ELEMENT_TYPE, IComponent, IForm } from 'domain/component';
 import { createInitialForm, initialForm } from 'domain/tree';
 
 import { ComponentService } from './component';
 import { ParameterService } from './parameter';
+import { PropertiesService } from './properties';
 import { TreeService } from './tree';
 
 export class AppService extends TreeService<IForm> {
   private parameterService: ParameterService;
   private componentService: ComponentService;
+  private propertiesService: PropertiesService;
   private formTree: IForm;
 
-  constructor(parameterService: ParameterService,
-    componentService: ComponentService) {
+  constructor(
+    parameterService: ParameterService,
+    componentService: ComponentService,
+    propertiesService: PropertiesService,
+  ) {
     super();
     this.parameterService = parameterService;
     this.componentService = componentService;
+    this.propertiesService = propertiesService;
     this.formTree = initialForm;
   }
 
@@ -23,7 +29,12 @@ export class AppService extends TreeService<IForm> {
     const components = parameters.map(parameter => {
       const component = this.componentService.
         createComponent(ELEMENT_TYPE.ELEMENT,
-          { dataSource: parameter, name: `Компонент ${parameter.name}` });
+          {
+            dataSource: parameter.name,
+            name: `Компонент ${parameter.name}`,
+            properties: {},
+            as: ELEMENT_PARAMETER_MAP[parameter.type][0],
+          });
 
       return component;
     });

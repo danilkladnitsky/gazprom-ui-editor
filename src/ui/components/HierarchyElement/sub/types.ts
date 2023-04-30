@@ -1,5 +1,5 @@
-import { IBaseParameter } from 'domain/parameter';
+import { IElement } from 'domain/component';
 
-export type ElementProps<Parameter extends IBaseParameter> = {
-    element: Parameter;
+export type ElementProps = {
+    element: IElement;
 }

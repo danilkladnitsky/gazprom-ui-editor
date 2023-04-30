@@ -1,5 +1,11 @@
 import { PARAMETER_TYPE } from './parameter';
 
+/** Тип значения свойства. */
+type PropertyValue = string | number | boolean | null;
+
+/** Свойства элемента формы. */
+export type Properties = Record<string, PropertyValue>;
+
 export enum PROPERTY_VALUE_TYPE {
   STRING = 'string',
   INTEGER = 'integer',

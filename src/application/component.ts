@@ -44,7 +44,8 @@ export class ComponentService {
       ...componentDto,
     } as IComponent;
 
-    this.components.map(c => c.code === code ? updatedComponent : c);
+    this.components = this.components
+      .map(c => c.code === code ? updatedComponent : c);
 
     return [updatedComponent, this.components];
   }

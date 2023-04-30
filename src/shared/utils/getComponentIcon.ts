@@ -11,7 +11,7 @@ import {
 } from '@mui/icons-material';
 
 import { ELEMENT_TYPE, IComponent, IElement } from 'domain/component';
-import { DATASOURCE_TYPE, PARAMETER_TYPE } from 'domain/parameter';
+import { CONTROL_TYPE } from 'domain/parameter';
 
 export const getComponentIcon = (component: IComponent) => {
   switch (component.type) {
@@ -30,15 +30,15 @@ export const getComponentIcon = (component: IComponent) => {
 };
 
 const getElementIcon = (element: IElement) => {
-  switch (element.dataSource.type) {
-  case DATASOURCE_TYPE.CHECKBOX:
+  switch (element.as) {
+  case CONTROL_TYPE.CHECKBOX:
     return CheckBox;
-  case DATASOURCE_TYPE.DATE:
-  case DATASOURCE_TYPE.DATEPICKER:
+  case CONTROL_TYPE.DATE:
+  case CONTROL_TYPE.DATEPICKER:
     return CalendarToday;
-  case DATASOURCE_TYPE.NUMBER:
+  case CONTROL_TYPE.NUMBER:
     return Numbers;
-  case DATASOURCE_TYPE.TEXTAREA:
+  case CONTROL_TYPE.TEXTAREA:
     return Notes;
   default:
     return ShortText;

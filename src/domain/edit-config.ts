@@ -1,77 +1,69 @@
-/**
- * Модуль содержит модели типов описания метаданных свойств элементов формы.
- */
-
-import { ControlTypes } from './form-control';
-import { ParameterTypes } from './parameter';
+import { ELEMENT_TYPE } from './component';
+import { CONTROL_TYPE, PARAMETER_TYPE } from './parameter';
 
 /** Тип значения свойства. */
 export enum PROPERTY_VALUE_TYPE {
-  /** Строка. */
   STRING = 'string',
-  /** Целое число. */
   INTEGER = 'integer',
-  /** Булево. */
   BOOLEAN = 'boolean',
-  /** Дата. */
   DATE = 'date',
-  /** Список выбора. */
   LIST = 'list',
 }
 
 /** Конфигурация свойства. */
 export interface IPropertyConfig {
-  /** Код свойства. */
   code: string;
-  /** Наименование свойства. */
   name: string;
-  /** Тип свойства. */
   type: PROPERTY_VALUE_TYPE;
-  /** Опции (для варианта отображения). */
   options?: string[];
 }
 
-/** Тип элемента формы. */
-enum ELEMENT_TYPE {
-  /** Обобщенный элемент. */
-  ELEMENT = 'ELEMENT',
-  /** Форма. */
-  FORM = 'FORM',
-  /** Страницы. */
-  PAGES = 'PAGES',
-  /** Страница. */
-  PAGE = 'PAGE',
-  /** Группа. */
-  GROUP = 'GROUP',
-  /** Поле ввода. */
-  CONTROL = 'CONTROL',
+export interface IEditConfig {
+  title: string;
+  fields: IPropertyConfig[];
 }
 
+type ParameterTypes = keyof typeof PARAMETER_TYPE;
 type ElementTypes = keyof typeof ELEMENT_TYPE;
+type ControlTypes = keyof typeof CONTROL_TYPE;
 
 type KeyType = number | string | symbol;
 
-type ParameterConfigMap<T extends KeyType> = { [key in T]?: IPropertyConfig[] };
+type ParameterConfigMap<T extends KeyType> =
+  { [key in T]?: IPropertyConfig[] };
+
+export enum METADATA_SECTION {
+  ELEMENT_TYPE = 'byElementType',
+  PARAMETER_TYPE = 'byParameterType',
+  CONTROL_TYPE = 'byControlType',
+}
 
 /** Метаданные свойств. */
 export interface IPropertyMetadata {
   /** Свойства по типу элемента формы. */
-  byElementType: ParameterConfigMap<ElementTypes>;
+  [METADATA_SECTION.ELEMENT_TYPE]: ParameterConfigMap<ElementTypes>;
   /** Свойства по типу параметра операции. */
-  byParameterType: ParameterConfigMap<ParameterTypes>;
+  [METADATA_SECTION.PARAMETER_TYPE]: ParameterConfigMap<ParameterTypes>;
   /** Свойства по типу поля ввода. */
-  byControlType: ParameterConfigMap<ControlTypes>;
+  [METADATA_SECTION.CONTROL_TYPE]: ParameterConfigMap<ControlTypes>;
 }
 
+export type MetadataSectionKey<T extends METADATA_SECTION> = T extends
+  METADATA_SECTION.ELEMENT_TYPE
+  ? ElementTypes
+  : T extends METADATA_SECTION.CONTROL_TYPE
+  ? ControlTypes
+  : T extends METADATA_SECTION.PARAMETER_TYPE
+  ? ParameterTypes
+  : never;
+
 /** Пример объекта. */
-export const metadata: IPropertyMetadata = {
-  byElementType: {
+export const EDIT_CONFIG_METADATA: IPropertyMetadata = {
+  [METADATA_SECTION.ELEMENT_TYPE]: {
     // Общие свойства для всех элементов.
     ELEMENT: [
       { code: 'title', name: 'Наименование', type: PROPERTY_VALUE_TYPE.STRING },
     ],
-    PAGES: [],
-    PAGE: [],
     GROUP: [
       {
         code: 'direction',
@@ -101,7 +93,7 @@ export const metadata: IPropertyMetadata = {
       { code: 'hint', name: 'Подсказка', type: PROPERTY_VALUE_TYPE.STRING },
     ],
   },
-  byParameterType: {
+  [METADATA_SECTION.PARAMETER_TYPE]: {
     STRING: [
       {
         code: 'multiline',
@@ -188,12 +180,7 @@ export const metadata: IPropertyMetadata = {
       },
     ],
   },
-  byControlType: {
-    CHECKBOX: [],
-    SWITCH: [],
-    DATEPICKER: [],
-    DATETIMEPICKER: [],
-    FILE: [],
+  [METADATA_SECTION.CONTROL_TYPE]: {
     TEXT: [
       { code: 'mask', name: 'Маска ввода', type: PROPERTY_VALUE_TYPE.STRING },
     ],
@@ -204,10 +191,15 @@ export const metadata: IPropertyMetadata = {
         type: PROPERTY_VALUE_TYPE.INTEGER,
       },
     ],
+    CHECKBOX: [],
     COMBOBOX: [],
-    NUMBER: [],
+    DATE: [],
+    DATEPICKER: [],
+    FILE: [],
     LINK: [],
+    NUMBER: [],
     RADIOGROUP: [],
     SELECT: [],
+    SWITCH: [],
   },
 };

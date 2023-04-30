@@ -2,11 +2,12 @@ import { create } from 'zustand';
 
 import { IComponent } from 'domain/component';
 
-import { ComponentService } from 'application/component';
+import { componentService } from 'application';
 
 type State = {
   components: IComponent[];
   selectedComponentId: EntityId | null;
+  selectedComponent: IComponent | null;
 };
 
 type Actions = {
@@ -18,9 +19,8 @@ type Actions = {
 const initialState: State = {
   components: [],
   selectedComponentId: null,
+  selectedComponent: null,
 };
-
-const service = new ComponentService();
 
 export const useComponentsStore = create<State & Actions>()((set, state) => ({
   ...initialState,
@@ -31,6 +31,8 @@ export const useComponentsStore = create<State & Actions>()((set, state) => ({
     set({ selectedComponentId: id });
 
     const selected = state().components.find(c => c.code === id);
+
+    set({ selectedComponent: selected });
     return selected;
   },
   updateSelectedComponent: (payload) => {
@@ -40,10 +42,10 @@ export const useComponentsStore = create<State & Actions>()((set, state) => ({
       return;
     }
 
-    const [, allComponents] = service
+    const [updatedComponent, allComponents] = componentService
       .updateComponent(selectedComponentId, payload);
 
-    set({ components: allComponents });
+    set({ components: allComponents, selectedComponent: updatedComponent });
 
   },
 }

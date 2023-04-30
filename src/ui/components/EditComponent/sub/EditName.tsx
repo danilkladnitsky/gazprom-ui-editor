@@ -1,8 +1,19 @@
 import React from 'react';
+import { useComponentsStore } from 'store/componentStore';
 import { TextInput } from 'ui/shared/TextInput';
 
 export const EditName = () => {
+  const { selectedComponent, updateSelectedComponent } = useComponentsStore();
+
+  const updateName = (name: string) => {
+    updateSelectedComponent({ name });
+  };
+
   return (
-    <TextInput label="Имя компонента" placeholder="Введите имя компонента" />
+    <TextInput
+      placeholder="Введите имя компонента"
+      value={selectedComponent?.name}
+      onChange={updateName}
+    />
   );
 };

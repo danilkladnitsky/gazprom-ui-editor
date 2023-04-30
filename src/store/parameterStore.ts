@@ -2,7 +2,7 @@ import { create } from 'zustand';
 
 import { IParameter } from 'domain/parameter';
 
-import { parameterService } from 'application';
+import { parameterService, propertiesService } from 'application';
 type State = {
   parameters: IParameter[];
 };
@@ -19,6 +19,8 @@ export const useParametersStore = create<State & Actions>()((set) => ({
   parseFromFile: async (file: File) => {
     const parsedParameters = await parameterService.
       readParametersFile(file);
+
+    propertiesService.setParameters(parsedParameters);
 
     set({ parameters: parsedParameters });
 
