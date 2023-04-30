@@ -1,12 +1,13 @@
-import React from "react";
+import React from 'react';
+import { Button } from '@mui/material';
 
-import { Button } from "@mui/material";
-import { withDragging, withDraggingProps } from "shared/hocs/withDragging";
-import { useComponent } from "shared/hooks/useComponent";
-import { ListItemProps } from "../List";
-import { TimeAgo } from "../TimeAgo";
+import { withDragging, withDraggingProps } from 'shared/hocs/withDragging';
+import { useComponent } from 'shared/hooks/useComponent';
 
-import styles from "./styles.module.scss";
+import { ListItemProps } from '../List';
+import { TimeAgo } from '../TimeAgo';
+
+import styles from './styles.module.scss';
 
 function ComponentElement({
   item,
@@ -21,7 +22,7 @@ function ComponentElement({
   return (
     <div className={styles.component}>
       <Button
-        variant={isDragging ? "outlined" : "contained"}
+        variant={isDragging ? 'outlined' : 'contained'}
         endIcon={<TimeAgo date={component.timestamp} />}
       >
         {item.name}
@@ -30,4 +31,4 @@ function ComponentElement({
   );
 }
 
-export default withDragging(ComponentElement, "component-list");
+export default withDragging(ComponentElement, 'component-list');

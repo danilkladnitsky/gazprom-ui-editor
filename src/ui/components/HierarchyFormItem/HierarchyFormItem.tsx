@@ -13,7 +13,7 @@ import styles from './HierarchyFormItem.module.scss';
 
 type Props = TreeTemplateProps<IComponent>;
 
-const DRAGGABLE_TYPES = [ELEMENT_TYPE.ELEMENT, ELEMENT_TYPE.GROUP];
+const DRAGGABLE_TYPES = [ELEMENT_TYPE.ELEMENT];
 
 export const HierarchyFormItem = (props: Props) => {
   const { replaceComponent } = useAppStore();
@@ -29,6 +29,8 @@ export const HierarchyFormItem = (props: Props) => {
     {
       allowedAliases: [ELEMENT_TYPE.ELEMENT],
       onDrop,
+      item,
+      className: styles.itemToDrop,
     })(DroppedItem);
 
   const DraggedComponent = withDragging(
@@ -39,12 +41,12 @@ export const HierarchyFormItem = (props: Props) => {
 
   const FormItem = isDraggable ?
     <DraggedComponent {...props} />
-    : <>{item.name}</>;
+    : item.name;
 
   return (
-    <div>
+    <div className={styles.itemWrapper}>
       {FormItem}
-      <DropZone item={props.item} />
+      <DropZone />
       <div className={styles.childrenItem}>
         {children}
       </div>
@@ -66,13 +68,13 @@ const DraggedItem = ({ item, children }: Props) => {
   );
 };
 
-type DroppedItemProps = { item: IComponent } & DropComponentProps;
+const DroppedItem = ({ isHovered, originalItem, droppingItem }:
+  DropComponentProps<IComponent>) => {
+  const showHoverEffect = isHovered && originalItem.code !== droppingItem.code;
 
-const DroppedItem = ({ isHovered }:
-  DroppedItemProps) => {
   return (
     <div className={classNames(styles.dropPlaceholder,
-      { [styles.isDropping]: isHovered })}>
+      { [styles.isDropping]: showHoverEffect })}>
     </div>
   );
 };

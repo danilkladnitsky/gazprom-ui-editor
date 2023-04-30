@@ -15,9 +15,6 @@ export const ComponentsList = () => {
   const { components } = useComponentsStore();
 
   return (
-    <>
       <List data={convertToList(components)} />
-      <GenerateForm />
-    </>
   );
 };

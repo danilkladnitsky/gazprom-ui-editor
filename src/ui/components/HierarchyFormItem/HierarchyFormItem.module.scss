@@ -1,3 +1,7 @@
+.itemWrapper {
+    position: relative;
+}
+
 .itemContent {
     display: flex;
     align-items: center;
@@ -5,15 +9,22 @@
 }
 
 .dropPlaceholder {
-    height: 5px;
+    width: 100%;
+    position: absolute;
+    left: 0px;
+    top: 0px;
 }
 
 .isDropping {
-    height: 10px;
+    height: 100%;
     border-radius: 2px;
     background-color: rgb(187, 187, 251);
 }
 
 .childrenItem {
     margin-left: 8px;
+}
+
+.itemToDrop {
+    width: 100%;
 }

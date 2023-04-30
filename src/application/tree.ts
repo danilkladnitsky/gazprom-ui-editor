@@ -22,17 +22,35 @@ export class TreeService<Tree extends IComponent> {
       return tree;
     }
 
-    const hasCommonParent = firstParent?.code === secondParent?.code;
+    const inCommonParent = firstParent === secondParent;
 
-    if (hasCommonParent) {
-      [secondNode.code, firstNode.code] = [firstNode.code, secondNode.code];
-      [secondNode.items, firstNode.items] = [firstNode.items, secondNode.items];
-    } else {
-      this.insertNodeByNeighbor(tree, firstId, secondId);
-      firstParent.items = firstParent?.items?.filter((n) => n.code !== firstId);
+    if (inCommonParent) {
+      this.swapInParent(firstParent, firstNode, secondNode);
+      return tree;
     }
 
     return tree;
+  }
+
+  swapInParent(
+    root: IComponent,
+    first: IComponent,
+    second: IComponent,
+  ): IComponent {
+    if (!root.items) {
+      return root;
+    }
+
+    const items = root.items;
+
+    const firstPos = items.indexOf(first);
+    const secondPos = items.indexOf(second);
+
+    const temp = items[firstPos];
+    items[firstPos] = items[secondPos];
+    items[secondPos] = temp;
+
+    return root;
   }
 
   insertNodeByNeighbor(

@@ -1,15 +1,21 @@
-import React from 'react';
+import React, { ComponentType } from 'react';
 import { useAppStore } from 'store/appStore';
 
-import { HierarchyFormItem } from '../HierarchyFormItem';
-import { TreeStructure } from '../TreeStructure';
+import { TreeStructure, TreeTemplateProps } from '../TreeStructure';
 
-export const HierarchyForm = () => {
+type Props<I> = {
+  template: ComponentType<TreeTemplateProps<I>>;
+}
+
+export const HierarchyForm = <I,>({ template }: Props<I>) => {
   const { form } = useAppStore();
 
   return (
     <div>
-      {form && <TreeStructure data={form} template={HierarchyFormItem} />}
+      {form && <TreeStructure
+        data={form}
+        template={template}
+      />}
     </div>
   );
 };

@@ -1,5 +1,5 @@
 import { ELEMENT_TYPE, IComponent, IForm } from 'domain/component';
-import { createInitialForm, IFormTree, initialForm } from 'domain/tree';
+import { createInitialForm, initialForm } from 'domain/tree';
 
 import { ComponentService } from './component';
 import { ParameterService } from './parameter';

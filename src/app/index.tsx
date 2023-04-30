@@ -20,7 +20,7 @@ export const App: React.FC = () => {
             <AppHeader />
             <div className={styles.app}>
               <ComponentsPanel className={styles.panel} />
-              {/* <Configuration className={styles.configuration} /> */}
+              <Configuration className={styles.configuration} />
               <ComponentSettings className={styles.settings} />
             </div>
           </div>

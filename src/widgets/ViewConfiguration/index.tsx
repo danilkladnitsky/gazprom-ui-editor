@@ -1,32 +1,25 @@
 import React from 'react';
-import { useAppConfigurationModel } from 'entities/app-configuration';
-import { ConfigurationView } from 'entities/app-configuration/domain';
-import UploadParameters from 'features/configuration/actions/upload-parameters/ui';
-import { EditJsonConfiguration } from 'features/configuration/view/edit-json-configuration';
-import { EditViewConfiguration } from 'features/configuration/view/edit-view-configuration';
+import { useAppStore } from 'store/appStore';
+import { useParametersStore } from 'store/parameterStore';
+import { GenerateForm } from 'ui/components/GenerateForm';
+import { HierarchyForm } from 'ui/components/HierarchyForm';
+import { ViewFormItem } from 'ui/components/ViewFormItem';
 
 import styles from './styles.module.scss';
 
 const ViewConfiguration = () => {
-  const { view, configuration } = useAppConfigurationModel();
+  const { form } = useAppStore();
+  const { parameters } = useParametersStore();
 
-  const getContent = () => {
-    if (!configuration) {
-      return (
-        <div className={styles.uploadFallback}>
-          <UploadParameters />
-        </div>
-      );
-    }
+  const canGenerateForm = !form && parameters.length;
 
-    return view === ConfigurationView.TEXT_VIEW ? (
-      <EditJsonConfiguration />
-    ) : (
-      <EditViewConfiguration />
-    );
-  };
+  if (canGenerateForm) {
+    return <GenerateForm />;
+  }
 
-  return <div className={styles.configuration}>{getContent()}</div>;
+  return <div className={styles.configuration}>
+    <HierarchyForm template={ViewFormItem} />
+  </div>;
 };
 
 export default ViewConfiguration;
