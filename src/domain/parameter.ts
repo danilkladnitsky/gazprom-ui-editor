@@ -24,7 +24,7 @@ export enum DATASOURCE_TYPE {
   RADIOGROUP = 'RADIOGROUP',
 }
 
-interface IBaseParameter {
+export interface IBaseParameter {
   code: string;
   name: string;
   type: DATASOURCE_TYPE;
@@ -32,8 +32,10 @@ interface IBaseParameter {
   validate?: boolean;
 }
 
-interface IFileParameter extends IBaseParameter {
+export interface IFileParameter extends IBaseParameter {
   multiselect?: boolean;
 }
+
+export type ICheckboxParameter = IBaseParameter
 
 export type IParameter = IBaseParameter | IFileParameter;

@@ -8,9 +8,8 @@ import { ComponentItem } from './sub/ComponentItem';
 
 export const ViewFormItem = ({ children, item }
   : TreeTemplateProps<IComponent>) => {
-  return <>
-    <ComponentItem item={item}>
-      {children}
-    </ComponentItem>
-  </>;
+  return <ComponentItem item={item}>
+    {children}
+  </ComponentItem>
+  ;
 };
