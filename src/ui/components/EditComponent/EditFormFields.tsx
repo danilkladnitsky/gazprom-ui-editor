@@ -14,11 +14,13 @@ type Props = {
   component: IComponent;
 }
 
+export type PropertyUpdateFn = (code: string, value: PropertyValue) => void;
+
 export const EditFormFields = ({ component }: Props) => {
   const { updateSelectedComponent, selectedComponent } = useComponentsStore();
   const fields = propertiesService.getComponentFields(component);
 
-  const handleComponentUpdate = (code: string, value: PropertyValue) => {
+  const handleComponentUpdate: PropertyUpdateFn = (code, value) => {
     updateSelectedComponent({
       properties: {
         ...selectedComponent?.properties,

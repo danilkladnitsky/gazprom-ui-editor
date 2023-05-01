@@ -1,5 +1,4 @@
 import React from 'react';
-import { useParametersStore } from 'store/parameterStore';
 
 import { IElement } from 'domain/component';
 import { CONTROL_TYPE } from 'domain/parameter';
@@ -23,11 +22,7 @@ import {
 
 export const HierarchyElement = ({ item, onClick }
   : ViewFormItemProps<IElement>) => {
-  const parameters = useParametersStore(state => state.parameters);
-
-  const { as, dataSource } = item;
-
-  const currentParameter = parameters.find(p => p.name === dataSource);
+  const { as } = item;
 
   const handleComponentPick = () => {
     onClick?.(item);
