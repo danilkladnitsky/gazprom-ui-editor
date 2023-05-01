@@ -36,7 +36,8 @@ export const EditFormFields = ({ component }: Props) => {
       .map((field) => <MetadataSection
         onChange={handleComponentUpdate}
         data={field}
-        key={field.title} />)}
+        key={field.title}
+      />)}
   </Stack>;
 
 };

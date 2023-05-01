@@ -2,9 +2,6 @@ import React from 'react';
 import { Stack, Typography } from '@mui/material';
 
 import { IEditConfig, IPropertyConfig } from 'domain/edit-config';
-import { PropertyValue } from 'domain/property';
-
-import { generateEntityId } from 'shared/utils/generateIds';
 
 import { PropertyUpdateFn } from '../EditFormFields';
 
@@ -30,8 +27,8 @@ export const MetadataSection = ({ data, onChange }: Props) => {
 const getInputByCode = (property: IPropertyConfig, onChange: PropertyUpdateFn) => {
   switch (property.code) {
   case 'view':
-    return <ChangeView property={property} key={generateEntityId()} />;
+    return <ChangeView property={property} key={property.code} />;
   default:
-    return <MetadataInput onChange={onChange} property={property} key={generateEntityId()} />;
+    return <MetadataInput onChange={onChange} property={property} key={property.code} />;
   }
 };
