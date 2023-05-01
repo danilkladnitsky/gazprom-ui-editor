@@ -1,4 +1,6 @@
 import React from 'react';
+import { useAutoAnimate } from '@formkit/auto-animate/react';
+import { Stack } from '@mui/system';
 import classNames from 'classnames';
 import { useAppStore } from 'store/appStore';
 import { TreeTemplateProps } from 'ui/components/TreeStructure';
@@ -17,6 +19,8 @@ const DRAGGABLE_TYPES = [ELEMENT_TYPE.ELEMENT];
 
 export const HierarchyFormItem = (props: Props) => {
   const { replaceComponent } = useAppStore();
+
+  const [ref] = useAutoAnimate();
 
   const { item, children } = props;
   const isDraggable = DRAGGABLE_TYPES.includes(item.type);
@@ -47,15 +51,19 @@ export const HierarchyFormItem = (props: Props) => {
     <div className={styles.itemWrapper}>
       {FormItem}
       <DropZone />
-      <div className={styles.childrenItem}>
+      <Stack className={styles.childrenItem} ref={ref}>
         {children}
-      </div>
+      </Stack>
     </div>
   );
 };
 
-const DraggedItem = ({ item, children }: Props) => {
+const DraggedItem = ({ item, children, isDragging }: Props) => {
   const Icon = getComponentIcon(item);
+
+  if (isDragging) {
+    return <></>;
+  }
 
   return (
     <div className={styles.item}>

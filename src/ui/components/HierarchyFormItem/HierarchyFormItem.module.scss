@@ -2,6 +2,7 @@
     position: relative;
 }
 
+
 .itemContent {
     display: flex;
     align-items: center;
@@ -10,14 +11,14 @@
 
 .dropPlaceholder {
     width: 100%;
-    position: absolute;
-    left: 0px;
-    top: 0px;
+    height: 8px;
+    transition: all 0.3s ease-in;
 }
 
 .isDropping {
     height: 100%;
     border-radius: 2px;
+    height: 24px;
     background-color: rgb(187, 187, 251);
 }
 

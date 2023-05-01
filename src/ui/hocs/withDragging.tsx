@@ -10,7 +10,7 @@ export const withDragging =
   <Item,>({ dragAlias,item }: DraggingProps<Item>) => {
     return <P extends object>(Component: ComponentType<P>) => {
       return function Wrapped(props: P) {
-        const [, drag] = useDrag(() => ({
+        const [{ isDragging }, drag] = useDrag(() => ({
           type: dragAlias,
           item,
           collect: (monitor) => ({
@@ -19,7 +19,7 @@ export const withDragging =
         }));
 
         return <div ref={drag}>
-          <Component {...props} />
+          <Component {...props} isDragging={isDragging} />
         </div>;
 
       };

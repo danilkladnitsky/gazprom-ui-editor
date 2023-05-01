@@ -10,7 +10,7 @@ type Props<I> = {
 export const HierarchyForm = <I,>({ template }: Props<I>) => {
   const { form } = useAppStore();
 
-  const formTree = { items: [form] };
+  const formTree = { items: form ? [form] : [] };
 
   return (
     form && <TreeStructure
