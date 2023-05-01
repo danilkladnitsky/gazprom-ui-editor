@@ -4,6 +4,8 @@ import { Stack, Typography } from '@mui/material';
 import { IEditConfig } from 'domain/edit-config';
 import { PropertyValue } from 'domain/property';
 
+import { generateEntityId } from 'shared/utils/generateIds';
+
 import { MetadataInput } from './MetadataInput';
 
 type Props = {
@@ -19,7 +21,7 @@ export const MetadataSection = ({ data, onChange }: Props) => {
         {data.fields.map((property) => <MetadataInput
           property={property}
           onChange={onChange}
-          key={property.code}
+          key={generateEntityId()}
         />)}
       </Stack>
     </Stack>

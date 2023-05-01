@@ -28,10 +28,10 @@ export const EditFormFields = ({ component }: Props) => {
 
   return <Stack spacing={2}>
     {fields.filter(f => f.fields.length)
-      .map((field, index) => <MetadataSection
+      .map((field) => <MetadataSection
         onChange={handleComponentUpdate}
         data={field}
-        key={index} />)}
+        key={field.title} />)}
   </Stack>;
 
 };

@@ -12,7 +12,7 @@ export const Checkbox = ({ element }
 
   return (
     <FormControlLabel
-      label={name}
+      label={properties?.title || name}
       control={<MUICheckbox className={styles.checkbox} />}
     />
   );

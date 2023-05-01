@@ -51,7 +51,11 @@ export class ComponentService {
     return [updatedComponent, this.components];
   }
 
-  saveComponents(components: IComponent[]): void {
+  public saveComponents(components: IComponent[]): void {
     this.components = components;
+  }
+
+  public getComponents(): IComponent[] {
+    return this.components;
   }
 }

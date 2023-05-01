@@ -26,5 +26,4 @@ export const useAppStore = create<State & Actions>()((set) => ({
     const updatedTree = appService.insertComponent(component, target);
     set({ form: updatedTree });
   },
-
 }));

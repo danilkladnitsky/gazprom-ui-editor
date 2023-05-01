@@ -23,7 +23,7 @@ import {
 export const HierarchyElement = ({ item, onClick }
   : ViewFormItemProps<IElement>) => {
 
-  const { dataSource, code, properties, as } = item;
+  const { as } = item;
 
   const handleComponentPick = () => {
     onClick?.(item);
