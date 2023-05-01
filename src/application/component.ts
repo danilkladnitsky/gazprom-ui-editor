@@ -33,6 +33,7 @@ export class ComponentService {
 
   updateComponent(code: EntityId, componentDto: Partial<IComponent>)
     : [IComponent | null, IComponent[]] {
+
     const componentToUpdate = this.components.find(c => c.code === code);
 
     if (!componentToUpdate) {

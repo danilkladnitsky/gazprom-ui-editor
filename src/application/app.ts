@@ -39,12 +39,14 @@ export class AppService extends TreeService<IForm> {
       return component;
     });
 
-    this.componentService.saveComponents(components);
+    const componentsToSave = [...Object.values(DEFAULT_COMPONENTS),
+      ...components];
 
     const form = createInitialForm(components);
     this.formTree = form;
+    this.componentService.saveComponents(componentsToSave);
 
-    return [[...Object.values(DEFAULT_COMPONENTS), ...components], form];
+    return [componentsToSave, form];
   }
 
   insertComponent(component: IComponent, targetCode: EntityId): IForm {
