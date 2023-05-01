@@ -11,7 +11,7 @@ type Props = {
 
 export const MetadataSection = ({ data }: Props) => {
   return (
-    <div>
+    <Stack spacing={1}>
       <Typography>{data.title}</Typography>
       <Stack spacing={2}>
         {data.fields.map((property) => <MetadataInput
@@ -19,6 +19,6 @@ export const MetadataSection = ({ data }: Props) => {
           key={property.code}
         />)}
       </Stack>
-    </div>
+    </Stack>
   );
 };
