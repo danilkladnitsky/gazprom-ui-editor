@@ -14,6 +14,7 @@ export interface IBaseComponent {
   code: EntityId;
   name: string;
   items?: IBaseComponent[];
+  properties?: Properties;
 }
 
 export type IForm = IBaseComponent & {
