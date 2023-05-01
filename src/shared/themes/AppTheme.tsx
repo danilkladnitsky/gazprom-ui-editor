@@ -1,9 +1,9 @@
-import { createMuiTheme } from "@mui/material";
+import { createMuiTheme } from '@mui/material';
 
-const appTheme = createMuiTheme({
+export const appTheme = createMuiTheme({
   typography: {
     button: {
-      textTransform: "none",
+      textTransform: 'none',
     },
     fontSize: 14,
   },
@@ -16,4 +16,23 @@ const appTheme = createMuiTheme({
   },
 });
 
-export default appTheme;
+export const themeFonts = {
+  h1: {
+    fontSize: '32px',
+  },
+  h2: {
+    fontSize: '24px',
+  },
+  h3: {
+    fontSize: '20px',
+  },
+  h4: {
+    fontSize: '18px',
+  },
+  h5: {
+    fontSize: '16px',
+  },
+  h6: {
+    fontSize: '14px',
+  },
+};
