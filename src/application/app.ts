@@ -1,5 +1,5 @@
 import { ELEMENT_PARAMETER_MAP, ELEMENT_TYPE, IComponent, IForm } from 'domain/component';
-import { createInitialForm, initialForm } from 'domain/tree';
+import { createInitialForm, DEFAULT_COMPONENTS, initialForm } from 'domain/tree';
 
 import { ComponentService } from './component';
 import { ParameterService } from './parameter';
@@ -44,7 +44,7 @@ export class AppService extends TreeService<IForm> {
     const form = createInitialForm(components);
     this.formTree = form;
 
-    return [components, form];
+    return [[...Object.values(DEFAULT_COMPONENTS), ...components], form];
   }
 
   insertComponent(component: IComponent, targetCode: EntityId): IForm {

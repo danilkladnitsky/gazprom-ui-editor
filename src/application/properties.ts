@@ -16,7 +16,7 @@ export class PropertiesService {
 
   private extractProperties<T extends METADATA_SECTION>(metadataSection: T,
     metadataKey: MetadataSectionKey<T>): IPropertyConfig[] {
-    return this.metadata[metadataSection][metadataKey];
+    return this.metadata[metadataSection][metadataKey] || [];
   }
 
   private extractParameterProperties(element: IElement): IEditConfig[] {

@@ -16,25 +16,50 @@ export const initialForm: IForm = {
   name: 'app-root',
 };
 
-export const createInitialForm = (components: IElement[]): IForm => ({
-  code: generateCode(),
-  name: 'Форма по умолчанию',
-  type: ELEMENT_TYPE.FORM,
-  items: [
-    {
-      type: ELEMENT_TYPE.TAB, code: generateCode(), name: 'Таб №1', items: [
-        {
-          type: ELEMENT_TYPE.PAGE,
-          code: generateCode(),
-          name: 'Страница №1',
-          items: [{
-            name: 'Группа',
-            code: generateCode(),
-            type: ELEMENT_TYPE.GROUP,
-            items: [...components],
-          }],
-        },
-      ],
-    },
-  ],
-});
+export const DEFAULT_COMPONENTS: { [key: string]: IComponent } = {
+  'FORM': {
+    code: generateCode(),
+    name: 'Форма по умолчанию',
+    type: ELEMENT_TYPE.FORM,
+    items: [],
+  },
+  'TAB': {
+    type: ELEMENT_TYPE.TAB,
+    code: generateCode(),
+    name: 'Таб №1',
+    items: [],
+  },
+  'PAGE': {
+    type: ELEMENT_TYPE.PAGE,
+    code: generateCode(),
+    name: 'Страница №1', items: [],
+  },
+  'GROUP': {
+    name: 'Группа',
+    code: generateCode(),
+    type: ELEMENT_TYPE.GROUP,
+    items: [],
+  },
+};
+
+export const createInitialForm = (components: IElement[]): IForm => {
+  return ({
+    ...DEFAULT_COMPONENTS['FORM'],
+    items: [
+      {
+        ...DEFAULT_COMPONENTS['TAB'],
+        items: [
+          {
+            ...DEFAULT_COMPONENTS['PAGE'],
+            items: [
+              {
+                ...DEFAULT_COMPONENTS['GROUP'],
+                items: [...components],
+              },
+            ],
+          },
+        ],
+      },
+    ],
+  });
+};
