@@ -1,6 +1,20 @@
 .zoomPanel {
     position: absolute;
+    padding: 24px;
     bottom: 0px;
     left: 0px;
     z-index: 3;
+
+    width: 100%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+}
+
+.sliderZoom {
+    height: 80px;
+}
+
+.centerBtn {
+    height: 30px;
 }
