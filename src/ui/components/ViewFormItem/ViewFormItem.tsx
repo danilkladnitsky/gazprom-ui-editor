@@ -5,7 +5,7 @@ import { TreeItem } from 'domain/tree';
 
 import { TreeTemplateProps } from '../TreeStructure';
 
-import { ComponentItem } from './sub/ComponentItem';
+import { ComponentItem } from './ComponentItem';
 
 export const ViewFormItem = ({ children, item }
   : TreeTemplateProps<TreeItem>) => {

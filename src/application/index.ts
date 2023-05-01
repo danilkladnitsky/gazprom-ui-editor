@@ -10,5 +10,4 @@ export const propertiesService = new PropertiesService();
 export const appService = new AppService(
   parameterService,
   componentService,
-  propertiesService,
 );

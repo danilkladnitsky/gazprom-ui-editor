@@ -1,6 +1,6 @@
-import { createMuiTheme } from '@mui/material';
+import { createTheme } from '@mui/material';
 
-export const appTheme = createMuiTheme({
+export const appTheme = createTheme({
   typography: {
     button: {
       textTransform: 'none',

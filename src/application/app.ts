@@ -3,24 +3,20 @@ import { createInitialForm, DEFAULT_COMPONENTS, initialForm } from 'domain/tree'
 
 import { ComponentService } from './component';
 import { ParameterService } from './parameter';
-import { PropertiesService } from './properties';
 import { TreeService } from './tree';
 
 export class AppService extends TreeService<IForm> {
   private parameterService: ParameterService;
   private componentService: ComponentService;
-  private propertiesService: PropertiesService;
   private formTree: IForm;
 
   constructor(
     parameterService: ParameterService,
     componentService: ComponentService,
-    propertiesService: PropertiesService,
   ) {
     super();
     this.parameterService = parameterService;
     this.componentService = componentService;
-    this.propertiesService = propertiesService;
     this.formTree = initialForm;
   }
 

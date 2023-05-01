@@ -4,11 +4,11 @@ import { HierarchyElement } from 'ui/components/HierarchyElement';
 
 import { ELEMENT_TYPE, IComponent } from 'domain/component';
 
-import { Form } from './Form';
-import { Group } from './Group';
-import { Page } from './Page';
-import { Tab } from './Tab';
-import { ViewFormItemProps } from './types';
+import { Form } from './sub/Form';
+import { Group } from './sub/Group';
+import { Page } from './sub/Page';
+import { Tab } from './sub/Tab';
+import { ViewFormItemProps } from './sub/types';
 
 export const ComponentItem = ({ item, children }
   : ViewFormItemProps<IComponent>) => {

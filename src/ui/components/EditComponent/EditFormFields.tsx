@@ -2,11 +2,12 @@ import React from 'react';
 import { Stack } from '@mui/system';
 import { useComponentsStore } from 'store/componentStore';
 
-import { IComponent } from 'domain/component';
+import { ELEMENT_TYPE, IComponent } from 'domain/component';
 import { PropertyValue } from 'domain/property';
 
 import { propertiesService } from 'application';
 
+import { ChangeParameter } from './sub/ChangeParameter';
 import { MetadataSection } from './sub/MetadataSection';
 
 type Props = {
@@ -23,10 +24,12 @@ export const EditFormFields = ({ component }: Props) => {
         ...selectedComponent?.properties,
         [code]: value,
       } });
-
   };
 
+  const hasParameter = selectedComponent?.type === ELEMENT_TYPE.ELEMENT;
+
   return <Stack spacing={2}>
+    {hasParameter && <ChangeParameter element={selectedComponent} />}
     {fields.filter(f => f.fields.length)
       .map((field) => <MetadataSection
         onChange={handleComponentUpdate}
