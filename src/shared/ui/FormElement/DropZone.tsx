@@ -1,11 +1,10 @@
-import React from "react";
+import React from 'react';
+import { Skeleton } from '@mui/material';
+import { SchemaTree } from 'entities/app-configuration/domain';
 
-import { Skeleton } from "@mui/material";
+import { withDropping, withDroppingProps } from 'shared/hocs/withDropping';
 
-import { withDropping, withDroppingProps } from "shared/hocs/withDropping";
-
-import styles from "./DropZone.module.scss";
-import { SchemaTree } from "entities/app-configuration/domain";
+import styles from './DropZone.module.scss';
 
 type Props = withDroppingProps<SchemaTree>;
 
@@ -17,4 +16,4 @@ function DropZone({ isHovered }: Props) {
   return <div className={styles.zone}></div>;
 }
 
-export default withDropping(DropZone, ["component-list"]);
+export default withDropping(DropZone, ['component-list']);

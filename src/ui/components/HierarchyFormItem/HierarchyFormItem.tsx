@@ -88,7 +88,7 @@ const DraggedItem = ({ item, children, isDragging }
 
 const DroppedItem = ({ isHovered, originalItem, droppingItem }:
   DropComponentProps<IComponent>) => {
-  const showHoverEffect = isHovered && originalItem.code !== droppingItem.code;
+  const showHoverEffect = isHovered && originalItem.code !== droppingItem?.code;
 
   return (
     <div className={classNames(styles.dropPlaceholder,

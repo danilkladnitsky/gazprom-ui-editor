@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useParametersStore } from 'store/parameterStore';
 import { ComponentsList } from 'ui/components/ComponentsList';
+import GuiForm from 'ui/components/GuiForm/GuiForm';
 import { HierarchyForm } from 'ui/components/HierarchyForm';
 import { HierarchyFormItem } from 'ui/components/HierarchyFormItem';
 import { ParametersList } from 'ui/components/ParametersList';

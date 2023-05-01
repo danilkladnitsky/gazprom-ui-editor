@@ -13,7 +13,7 @@ type DroppingProps<Item> = {
 export type DropComponentProps<Item> = {
   isHovered: boolean;
   originalItem: Item;
-  droppingItem: Item;
+  droppingItem?: Item;
 }
 
 export const withDropping =

@@ -2,8 +2,7 @@ import React from 'react';
 import { useAppStore } from 'store/appStore';
 import { useParametersStore } from 'store/parameterStore';
 import { GenerateForm } from 'ui/components/GenerateForm';
-import { HierarchyForm } from 'ui/components/HierarchyForm';
-import { ViewFormItem } from 'ui/components/ViewFormItem';
+import GuiForm from 'ui/components/GuiForm/GuiForm';
 
 import styles from './styles.module.scss';
 
@@ -18,7 +17,7 @@ const ViewConfiguration = () => {
   }
 
   return <div className={styles.configuration}>
-    <HierarchyForm template={ViewFormItem} />
+    <GuiForm />
   </div>;
 };
 
