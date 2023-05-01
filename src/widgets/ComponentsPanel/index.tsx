@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import { useParametersStore } from 'store/parameterStore';
 import { ComponentsList } from 'ui/components/ComponentsList';
-import GuiForm from 'ui/components/GuiForm/GuiForm';
-import { HierarchyForm } from 'ui/components/HierarchyForm';
-import { HierarchyFormItem } from 'ui/components/HierarchyFormItem';
+import { FormList } from 'ui/components/FormList';
 import { ParametersList } from 'ui/components/ParametersList';
 import { UploadParameters } from 'ui/components/UploadParameters';
 
@@ -40,7 +38,7 @@ const TabContent = ({ tab }: { tab: TabValues }) => {
     return <ComponentsList />;
   case TabValues.FORM:
   default:
-    return <HierarchyForm template={HierarchyFormItem} />;
+    return <FormList />;
   }
 };
 

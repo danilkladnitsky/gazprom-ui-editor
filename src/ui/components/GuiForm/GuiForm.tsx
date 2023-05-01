@@ -1,7 +1,7 @@
 import React from 'react';
 import { withZooming } from 'ui/hocs/withZooming';
 
-import { HierarchyForm } from '../HierarchyForm';
+import { HierarchyForm } from '../../shared/HierarchyForm';
 import { ViewFormItem } from '../ViewFormItem';
 
 const GuiForm = () => {

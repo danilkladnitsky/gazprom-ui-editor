@@ -1,7 +1,7 @@
 import React, { ComponentType } from 'react';
 import { useAppStore } from 'store/appStore';
 
-import { TreeStructure, TreeTemplateProps } from '../TreeStructure';
+import { TreeStructure, TreeTemplateProps } from '../../components/TreeStructure';
 
 type Props<I> = {
   template: ComponentType<TreeTemplateProps<I>>;

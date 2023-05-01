@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useControls } from 'react-zoom-pan-pinch';
 import FilterCenterFocusIcon from '@mui/icons-material/FilterCenterFocus';
 import RestartAltIcon from '@mui/icons-material/RestartAlt';

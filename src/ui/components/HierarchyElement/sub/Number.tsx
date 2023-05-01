@@ -1,15 +1,13 @@
 import React from 'react';
 import { TextInput } from 'ui/shared/TextInput';
 
-import { IBaseParameter } from 'domain/parameter';
-
 import { ElementProps } from './types';
 
-export const Number = ({ dataSource, element }
-  : ElementProps<IBaseParameter>) => {
+export const Number = ({ element }
+  : ElementProps) => {
   const { name } = element;
 
   return (
-    <TextInput label={name} />
+    <TextInput label={name} type="number" />
   );
 };
