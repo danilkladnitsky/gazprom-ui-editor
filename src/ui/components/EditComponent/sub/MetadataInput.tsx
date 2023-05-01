@@ -16,12 +16,14 @@ export const MetadataInput = ({ property }: Props) => {
   switch (type) {
   case PROPERTY_VALUE_TYPE.BOOLEAN:
     return <Checkbox name={name} />;
-  case PROPERTY_VALUE_TYPE.INTEGER:
   case PROPERTY_VALUE_TYPE.LIST:
     return <DropdownInput name={name} list={toDropdownList(options || [])} />;
+  case PROPERTY_VALUE_TYPE.INTEGER:
+    return <TextInput label={name} type="number" />;
+  case PROPERTY_VALUE_TYPE.DATE:
+    return <TextInput label={name} type="date" />;
   case PROPERTY_VALUE_TYPE.STRING:
-    return <TextInput label={name} />;
   default:
-    return <></>;
+    return <TextInput label={name} />;
   }
 };
