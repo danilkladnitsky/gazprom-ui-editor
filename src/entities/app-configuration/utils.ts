@@ -1,13 +1,15 @@
-import { Component } from "entities/component/domain";
-import { insertElementToArray } from "shared/utils/insertElementToArray";
-import { SchemaTree } from "./domain";
+import { Component } from 'entities/component/domain';
 
-const prohibitedFields = ["id", "timestamp"];
+import { insertElementToArray } from 'shared/utils/insertElementToArray';
+
+import { SchemaTree } from './domain';
+
+const prohibitedFields = ['id', 'timestamp'];
 
 export const swapTreeElements = (
   tree: SchemaTree,
   firstId: EntityId,
-  secondId: EntityId
+  secondId: EntityId,
 ): SchemaTree => {
   const firstNode = dfsFindNode(tree, firstId);
   const secondNode = dfsFindNode(tree, secondId);
@@ -39,7 +41,7 @@ export const swapTreeElements = (
 export const insertNodeByNeighbor = (
   tree: SchemaTree,
   nodeId: EntityId,
-  neighborId: EntityId
+  neighborId: EntityId,
 ) => {
   const neighborNode = dfsFindNode(tree, neighborId);
   const insertedNode = dfsFindNode(tree, nodeId);
@@ -48,16 +50,16 @@ export const insertNodeByNeighbor = (
 
   const neighborParent = dfsFindNodeRoot(tree, neighborId);
   const neigborIndex = neighborParent?.items?.findIndex(
-    (i) => i.id === neighborId
+    (i) => i.id === neighborId,
   );
 
-  if (!neighborParent?.items || typeof neigborIndex === "undefined")
+  if (!neighborParent?.items || typeof neigborIndex === 'undefined')
     return tree;
 
   neighborParent.items = insertElementToArray(
     neighborParent.items,
     insertedNode,
-    neigborIndex
+    neigborIndex,
   );
 
   return tree;
@@ -118,12 +120,12 @@ const dfsFindNode = (tree: SchemaTree, id: EntityId): SchemaTree | null => {
 export const extractJsonBody = (component: Component): string => {
   try {
     return JSON.stringify(component, (key, value) =>
-      prohibitedFields.includes(key) ? undefined : value
+      prohibitedFields.includes(key) ? undefined : value,
     );
   } catch (error) {
     console.log(error);
 
-    return "error";
+    return 'error';
   }
 };
 

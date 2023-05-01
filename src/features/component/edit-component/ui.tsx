@@ -1,17 +1,17 @@
-import React from "react";
+import React from 'react';
+import { useComponentModel } from 'entities/component';
+import { useParameterModel } from 'entities/parameter';
+import { Parameter, ParameterType } from 'entities/parameter/domain';
 
-import { DropdownInput, DropdownItem } from "shared/ui/DropdownInput";
-import { TextInput } from "shared/ui/TextInput";
-import { Header } from "shared/ui/Header";
-import { useParameterModel } from "entities/parameter";
-import { useComponentModel } from "entities/component";
+import { DropdownInput, DropdownItem } from 'shared/ui/DropdownInput';
+import { Header } from 'shared/ui/Header';
+import { TextInput } from 'shared/ui/TextInput';
 
-import { EditParameterFields } from "../edit-parameter-fields";
+import DeleteComponent from '../delete-component/ui';
+import { EditGroup } from '../edit-group';
+import { EditParameterFields } from '../edit-parameter-fields';
 
-import styles from "./styles.module.scss";
-import { Parameter, ParameterType } from "entities/parameter/domain";
-import DeleteComponent from "../delete-component/ui";
-import { EditGroup } from "../edit-group";
+import styles from './styles.module.scss';
 
 const convertParametersToList = (params: Parameter[]): DropdownItem[] => {
   return params.map((param) => ({
@@ -26,7 +26,7 @@ export const EditComponent = () => {
 
   const list = convertParametersToList(parameters);
   const dataSource =
-    selectedComponent?.code === "element" && selectedComponent?.dataSource;
+    selectedComponent?.code === 'element' && selectedComponent?.dataSource;
 
   const updateComponentDatasource = (dataSource: Parameter) => {
     const updated = { ...selectedComponent, dataSource };
@@ -51,7 +51,7 @@ export const EditComponent = () => {
     updateSelectedComponent(updated);
   };
 
-  const componentLabel = selectedComponent?.name || "";
+  const componentLabel = selectedComponent?.name || '';
 
   return (
     <div className={styles.wrapper}>
@@ -65,7 +65,7 @@ export const EditComponent = () => {
               name="Выберите источник данных"
             />
           )}
-          {selectedComponent.code === "group" && <EditGroup />}
+          {selectedComponent.code === 'group' && <EditGroup />}
           <TextInput
             fullWidth
             label="Введите название поля"

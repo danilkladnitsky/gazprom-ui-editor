@@ -1,8 +1,7 @@
-import React from "react";
+import React from 'react';
+import { EditComponent } from 'ui/components/EditComponent';
 
-import { EditComponent } from "features/component/edit-component";
-
-import styles from "./styles.module.scss";
+import styles from './styles.module.scss';
 
 const ComponentSettings = () => {
   return (

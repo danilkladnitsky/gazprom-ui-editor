@@ -6,21 +6,23 @@ import {
   NumberProperty,
   StringProperty,
   TextareaProperty,
-} from "entities/properties";
+} from 'entities/properties';
+
+import { DATASOURCE_TYPE } from 'domain/parameter';
 
 export enum ParameterType {
-  NUMBER = "NUMBER",
-  DATE = "DATE",
-  CHECKBOX = "CHECKBOX",
-  TEXT = "TEXT",
-  TEXTAREA = "TEXTAREA",
-  SWITCH = "SWITCH",
-  DATEPICKER = "DATEPICKER",
-  FILE = "FILE",
-  LINK = "LINK",
-  COMBOBOX = "COMBOBOX",
-  SELECT = "SELECT",
-  RADIOGROUP = "RADIOGROUP",
+  NUMBER = 'NUMBER',
+  DATE = 'DATE',
+  CHECKBOX = 'CHECKBOX',
+  TEXT = 'TEXT',
+  TEXTAREA = 'TEXTAREA',
+  SWITCH = 'SWITCH',
+  DATEPICKER = 'DATEPICKER',
+  FILE = 'FILE',
+  LINK = 'LINK',
+  COMBOBOX = 'COMBOBOX',
+  SELECT = 'SELECT',
+  RADIOGROUP = 'RADIOGROUP',
 }
 
 type ParameterBase = {
@@ -30,37 +32,37 @@ type ParameterBase = {
 
 export type NumberParameter = ParameterBase & {
   properties?: NumberProperty;
-  type: ParameterType.NUMBER;
+  type: DATASOURCE_TYPE.NUMBER;
 };
 
 export type StringParameter = ParameterBase & {
   properties?: StringProperty;
-  type: ParameterType.TEXT;
+  type: DATASOURCE_TYPE.TEXT;
 };
 
 export type DateParameter = ParameterBase & {
   properties?: DateProperty;
-  type: ParameterType.DATEPICKER;
+  type: DATASOURCE_TYPE.DATEPICKER;
 };
 
 export type CheckboxParameter = ParameterBase & {
   properties?: CheckboxProperty;
-  type: ParameterType.CHECKBOX;
+  type: DATASOURCE_TYPE.CHECKBOX;
 };
 
 export type TextareaParameter = ParameterBase & {
   properties?: TextareaProperty;
-  type: ParameterType.TEXTAREA;
+  type: DATASOURCE_TYPE.TEXTAREA;
 };
 
 export type DatePickerParameter = ParameterBase & {
   properties?: DatePickerProperty;
-  type: ParameterType.DATEPICKER;
+  type: DATASOURCE_TYPE.DATEPICKER;
 };
 
 export type FileParameter = ParameterBase & {
   properties?: FileProperty;
-  type: ParameterType.FILE;
+  type: DATASOURCE_TYPE.FILE;
 };
 
 export type Parameter =
@@ -72,4 +74,4 @@ export type Parameter =
   | DatePickerParameter
   | FileParameter;
 
-export type InputParameter = Omit<Parameter, "id">;
+export type InputParameter = Omit<Parameter, 'id'>;

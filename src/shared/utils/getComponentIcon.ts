@@ -1,46 +1,46 @@
 import {
+  Article,
+  CalendarToday,
+  CheckBox,
   Description,
   Menu,
-  WebAsset,
-  Article,
-  CheckBox,
-  CalendarToday,
-  Numbers,
-  TextFormat,
   Notes,
+  Numbers,
   ShortText,
-} from "@mui/icons-material";
-import { Component, ComponentElement } from "entities/component/domain";
-import { ParameterType } from "entities/parameter/domain";
+  WebAsset,
+} from '@mui/icons-material';
 
-export const getComponentIcon = (component: Component) => {
-  switch (component.code) {
-    case "form":
-      return WebAsset;
-    case "tabs":
-      return Menu;
-    case "group":
-      return Article;
-    case "page":
-      return Description;
-    case "element":
-    default:
-      return getElementIcon(component);
+import { ELEMENT_TYPE, IComponent, IElement } from 'domain/component';
+import { CONTROL_TYPE } from 'domain/parameter';
+
+export const getComponentIcon = (component: IComponent) => {
+  switch (component.type) {
+  case ELEMENT_TYPE.FORM:
+    return WebAsset;
+  case ELEMENT_TYPE.TAB:
+    return Menu;
+  case ELEMENT_TYPE.GROUP:
+    return Article;
+  case ELEMENT_TYPE.PAGE:
+    return Description;
+  case ELEMENT_TYPE.ELEMENT:
+  default:
+    return getElementIcon(component);
   }
 };
 
-const getElementIcon = (element: ComponentElement) => {
-  switch (element.dataSource.type) {
-    case ParameterType.CHECKBOX:
-      return CheckBox;
-    case ParameterType.DATEPICKER:
-      return CalendarToday;
-    case ParameterType.NUMBER:
-      return Numbers;
-    case ParameterType.TEXTAREA:
-      return Notes;
-    case ParameterType.TEXT:
-    default:
-      return ShortText;
+const getElementIcon = (element: IElement) => {
+  switch (element.as) {
+  case CONTROL_TYPE.CHECKBOX:
+    return CheckBox;
+  case CONTROL_TYPE.DATE:
+  case CONTROL_TYPE.DATEPICKER:
+    return CalendarToday;
+  case CONTROL_TYPE.NUMBER:
+    return Numbers;
+  case CONTROL_TYPE.TEXTAREA:
+    return Notes;
+  default:
+    return ShortText;
   }
 };

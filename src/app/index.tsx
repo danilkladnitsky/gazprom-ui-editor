@@ -1,31 +1,29 @@
-import { ThemeProvider } from "@mui/system";
-import React from "react";
-import { SnackbarProvider } from "notistack";
+import React from 'react';
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
+import { GlobalStyles } from '@mui/material';
+import { ThemeProvider } from '@mui/system';
+import { SnackbarProvider } from 'notistack';
+import { ComponentSettings, ComponentsPanel, Configuration } from 'widgets';
+import { AppHeader } from 'widgets/AppHeader';
 
-import appTheme from "shared/themes/AppTheme";
-import { ComponentSettings, ComponentsPanel, Configuration } from "widgets";
+import { appTheme, themeFonts } from 'shared/themes/AppTheme';
 
-import styles from "./styles.module.scss";
-import { useAppConfigurationModel } from "entities/app-configuration";
-import { AppHeader } from "widgets/AppHeader";
-import { DndProvider } from "react-dnd";
-import { HTML5Backend } from "react-dnd-html5-backend";
+import styles from './styles.module.scss';
 
 export const App: React.FC = () => {
-  const { configuration } = useAppConfigurationModel();
-
-  const canEditForm = Boolean(configuration);
 
   return (
     <ThemeProvider theme={appTheme}>
+      <GlobalStyles styles={themeFonts} />
       <SnackbarProvider>
         <DndProvider backend={HTML5Backend}>
           <div className={styles.appWrapper}>
             <AppHeader />
             <div className={styles.app}>
-              {canEditForm && <ComponentsPanel className={styles.panel} />}
+              <ComponentsPanel className={styles.panel} />
               <Configuration className={styles.configuration} />
-              {canEditForm && <ComponentSettings className={styles.settings} />}
+              <ComponentSettings className={styles.settings} />
             </div>
           </div>
         </DndProvider>

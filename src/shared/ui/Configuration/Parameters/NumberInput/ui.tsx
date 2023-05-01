@@ -1,9 +1,8 @@
-import React from "react";
+import React from 'react';
+import { TextField } from '@mui/material';
+import { NumberParameter } from 'entities/parameter';
 
-import { TextField } from "@mui/material";
-import { NumberParameter } from "entities/parameter";
-
-import styles from "../styles.module.scss";
+import styles from '../styles.module.scss';
 
 type Props = {
   element: NumberParameter;

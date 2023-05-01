@@ -1,32 +1,34 @@
-import React from "react";
+import React from 'react';
+import { DatasourceComponent as DatasourceComponentProps } from 'entities/component/domain';
+import { ParameterType } from 'entities/parameter/domain';
 
-import { DatasourceComponent as DatasourceComponentProps } from "entities/component/domain";
-import { ParameterType } from "entities/parameter/domain";
+import { DATASOURCE_TYPE } from 'domain/parameter';
+
 import {
+  Checkbox,
   DateInput,
+  File,
   NumberInput,
   StringInput,
-  Checkbox,
-  File,
   TextArea,
-} from "shared/ui/Configuration/Parameters";
+} from 'shared/ui/Configuration/Parameters';
 
 export const DatasourceComponent = (component: DatasourceComponentProps) => {
   const { dataSource, name } = component;
   const { type } = dataSource;
 
   switch (type) {
-    case ParameterType.NUMBER:
-      return <NumberInput element={dataSource} name={name} />;
-    case ParameterType.DATEPICKER:
-      return <DateInput element={dataSource} name={name} />;
-    case ParameterType.CHECKBOX:
-      return <Checkbox element={dataSource} name={name} />;
-    case ParameterType.FILE:
-      return <File element={dataSource} name={name} />;
-    case ParameterType.TEXTAREA:
-      return <TextArea element={dataSource} name={name} />;
-    default:
-      return <StringInput element={dataSource} name={name} />;
+  case DATASOURCE_TYPE.NUMBER:
+    return <NumberInput name={name} />;
+  case DATASOURCE_TYPE.DATEPICKER:
+    return <DateInput name={name} />;
+  case DATASOURCE_TYPE.CHECKBOX:
+    return <Checkbox name={name} />;
+  case DATASOURCE_TYPE.FILE:
+    return <File element={dataSource} name={name} />;
+  case DATASOURCE_TYPE.TEXTAREA:
+    return <TextArea element={dataSource} name={name} />;
+  default:
+    return <StringInput element={dataSource} name={name} />;
   }
 };

@@ -1,5 +1,6 @@
-import classNames from "classnames";
 import React, { Suspense } from "react";
+import classNames from "classnames";
+
 import Loader from "shared/ui/Loader/Loader";
 
 const DEFAULT_FALLBACK = <Loader />;
@@ -14,6 +15,7 @@ const withSuspense = (
   Component: React.FunctionComponent<ComponentProps>,
   fallback = DEFAULT_FALLBACK
 ) => {
+  // eslint-disable-next-line react/display-name
   return ({ className }: ComponentProps) => (
     <div className={classNames(styles.suspenseWrapper, className)}>
       <Suspense fallback={fallback}>

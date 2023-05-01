@@ -1,32 +1,32 @@
 [
   {
     "code": "element",
-    "name": "Параметр 1 (Число)",
+    "name": "Параметр 1 (NUMBER)",
     "type": "NUMBER",
     "id": 0
   },
   {
     "code": "element",
-    "name": "Параметр 2 (Текст)",
-    "type": "TEXT",
+    "name": "Параметр 2 (STRING)",
+    "type": "STRING",
     "id": 1
   },
   {
     "code": "element",
-    "name": "Параметр 4 (Чекбокс)",
-    "type": "CHECKBOX",
+    "name": "Параметр 4 (BOOLEAN)",
+    "type": "BOOLEAN",
     "id": 3
   },
   {
     "code": "element",
-    "name": "Параметр 5 (Многострочное поле ввода)",
-    "type": "TEXTAREA",
+    "name": "Параметр 5 (INTEGER)",
+    "type": "INTEGER",
     "id": 4
   },
   {
     "code": "element",
-    "name": "Параметр 6 (Календарь)",
-    "type": "DATEPICKER",
+    "name": "Параметр 6 (FILE)",
+    "type": "FILE",
     "id": 5
   }
 ]
