@@ -179,8 +179,7 @@ export class AppService extends TreeService<IForm> {
       return this.formTree;
     }
 
-    const component = this.componentService.components
-      .find(component => component.code === childId);
+    const component = this.findNode(this.formTree, childId);
 
     if (!component) {
       return this.formTree;

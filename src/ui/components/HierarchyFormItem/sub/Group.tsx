@@ -5,7 +5,7 @@ import { DragElement } from 'ui/components/DragElement';
 import { WithDragging } from 'ui/hocs/withDragging';
 import { WithDropping } from 'ui/hocs/withDropping';
 
-import { ELEMENT_TYPE, IComponent, IElement, IGroup } from 'domain/component';
+import { ELEMENT_TYPE, IComponent, IGroup } from 'domain/component';
 import { TREE_ACTIONS } from 'domain/tree';
 
 import { DropZone } from './DropZone';
