@@ -2,7 +2,7 @@ import { SchemaTree } from "entities/app-configuration/domain";
 import { useComponentModel } from "entities/component";
 import { Component } from "entities/component/domain";
 import React, { useState } from "react";
-import TabMenu, { TabItem } from "shared/ui/TabMenu/TabMenu";
+import TabMenu, { TabItem } from "ui/shared/TabMenu/TabMenu";
 import { RecursiveTree } from "../model";
 import { ComponentProps } from "./types";
 

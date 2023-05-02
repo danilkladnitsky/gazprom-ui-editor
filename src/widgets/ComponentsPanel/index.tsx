@@ -4,8 +4,7 @@ import { ComponentsList } from 'ui/components/ComponentsList';
 import { FormList } from 'ui/components/FormList';
 import { ParametersList } from 'ui/components/ParametersList';
 import { UploadParameters } from 'ui/components/UploadParameters';
-
-import TabMenu, { TabItem } from 'shared/ui/TabMenu/TabMenu';
+import TabMenu, { TabItem } from 'ui/shared/TabMenu/TabMenu';
 
 import styles from './styles.module.scss';
 
