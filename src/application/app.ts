@@ -80,7 +80,7 @@ export class AppService extends TreeService<IForm> {
 
       return {
         ...component,
-        items: this.fillConfigData(t.items || []),
+        items: t.items ? this.fillConfigData(t.items) : undefined,
       };
     });
   }
@@ -102,7 +102,7 @@ export class AppService extends TreeService<IForm> {
         const { items, ...dto } = element;
 
         if (dto.type) {
-          const component = { ...dto, code: generateCode(), items: [] };
+          const component = { ...dto, code: generateCode(), items: items ? items : undefined };
           parsedComponents.push(component);
           head.items.push(component);
         }
