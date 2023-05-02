@@ -16,7 +16,7 @@ export const HierarchyTitle = ({ item }: Props) => {
   return (
     <Stack direction={'row'} spacing={1}>
       <Icon />
-      <Typography variant="body1">{item.name}</Typography>
+      <Typography variant="body2">{item.name}</Typography>
     </Stack>
   );
 };

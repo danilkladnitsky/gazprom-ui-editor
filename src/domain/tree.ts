@@ -55,10 +55,15 @@ export const DEFAULT_COMPONENTS: { [key: string]: IComponent } = {
     name: 'Таб №1',
     items: [],
   },
-  'PAGE': {
+  'PAGE1': {
     type: ELEMENT_TYPE.PAGE,
     code: generateCode(),
     name: 'Страница №1', items: [],
+  },
+  'PAGE2': {
+    type: ELEMENT_TYPE.PAGE,
+    code: generateCode(),
+    name: 'Страница №2', items: [],
   },
   'GROUP1': {
     name: 'Группа #1',
@@ -82,7 +87,7 @@ export const createInitialForm = (components: IElement[]): IForm => {
         ...DEFAULT_COMPONENTS['TAB'],
         items: [
           {
-            ...DEFAULT_COMPONENTS['PAGE'],
+            ...DEFAULT_COMPONENTS['PAGE1'],
             items: [
               {
                 ...DEFAULT_COMPONENTS['GROUP1'],
@@ -93,6 +98,10 @@ export const createInitialForm = (components: IElement[]): IForm => {
                 items: [...components.filter((v, i) => i % 2 === 0)],
               },
             ],
+          },
+          {
+            ...DEFAULT_COMPONENTS['PAGE2'],
+            items: [],
           },
         ],
       },

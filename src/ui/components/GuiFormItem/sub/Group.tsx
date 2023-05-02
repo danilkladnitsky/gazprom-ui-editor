@@ -12,7 +12,7 @@ const mapGroupModeToCss =(align: string): StackProps => {
   case 'FORCE_HORIZONTAL':
     return { direction: 'row', alignItems: 'center' };
   case 'HORIZONTAL':
-    return { useFlexGap: true, rowGap: 2, flexWrap: 'wrap', direction: 'row', alignItems: 'center' };
+    return { rowGap: 2, flexWrap: 'wrap', direction: 'row', alignItems: 'center' };
   case 'VERTICAL':
   default:
     return { direction: 'column' };
@@ -31,7 +31,7 @@ export const Group = ({ item, children, onClick }: ViewFormItemProps<IGroup>) =>
 
   return (
     <Stack spacing={1}>
-      <Typography variant="body1" onClick={handleClick}>{item.name}</Typography>
+      <Typography variant="body2" onClick={handleClick}>{item.name}</Typography>
       {!isHidden &&
         <Stack spacing={2} {...mapGroupModeToCss(properties?.direction || 'VERTICAL')} ref={animRef}>
           {children}

@@ -7,7 +7,7 @@ import { TreeTemplateProps } from '../TreeStructure';
 
 import { ComponentItem } from './ComponentItem';
 
-export const GuiFormItem = ({ children, item }
+export const GuiFormItem = ({ children, item, position }
   : TreeTemplateProps<TreeItem>) => {
   const components = useComponentsStore((state) => state.components);
 
@@ -17,7 +17,7 @@ export const GuiFormItem = ({ children, item }
     return children;
   }
 
-  return <ComponentItem item={component}>
+  return <ComponentItem position={position} item={component}>
     {children}
   </ComponentItem>
   ;

@@ -8,18 +8,21 @@ type State = {
   components: IComponent[];
   selectedComponentId: EntityId | null;
   selectedComponent: IComponent | null;
+  activePageIndex: number;
 };
 
 type Actions = {
   setComponents: (components: IComponent[]) => void;
   selectComponent: (id: EntityId) => IComponent | undefined;
   updateSelectedComponent: (component: Partial<IComponent>) => void;
+  setActivePageIndex: (page: number) => void;
 };
 
 const initialState: State = {
   components: [],
   selectedComponentId: null,
   selectedComponent: null,
+  activePageIndex: 0,
 };
 
 export const useComponentsStore = create<State & Actions>()((set, state) => ({
@@ -47,6 +50,9 @@ export const useComponentsStore = create<State & Actions>()((set, state) => ({
 
     set({ components: allComponents, selectedComponent: updatedComponent });
 
+  },
+  setActivePageIndex: (index) => {
+    set({ activePageIndex: index });
   },
 }
 ));
