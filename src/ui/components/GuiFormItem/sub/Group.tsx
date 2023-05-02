@@ -1,4 +1,5 @@
 import React from 'react';
+import { useAutoAnimate } from '@formkit/auto-animate/react';
 import { Typography } from '@mui/material';
 import { Stack, StackProps } from '@mui/system';
 
@@ -17,8 +18,8 @@ const mapGroupModeToCss =(align: string): StackProps => {
     return { direction: 'column' };
   }
 };
-export const Group = ({ item, children, onClick }
-  : ViewFormItemProps<IGroup>) => {
+export const Group = ({ item, children, onClick }: ViewFormItemProps<IGroup>) => {
+  const [animRef] = useAutoAnimate();
 
   const { properties } = item;
 
@@ -26,10 +27,15 @@ export const Group = ({ item, children, onClick }
     onClick?.(item);
   };
 
+  const isHidden = properties?.hidden;
+
   return (
-    <Stack spacing={2} {...mapGroupModeToCss(properties?.direction)}>
+    <Stack spacing={1}>
       <Typography variant="body1" onClick={handleClick}>{item.name}</Typography>
-      {children}
+      {!isHidden &&
+        <Stack spacing={2} {...mapGroupModeToCss(properties?.direction || 'VERTICAL')} ref={animRef}>
+          {children}
+        </Stack>}
     </Stack>
   );
 };

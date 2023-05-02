@@ -1,20 +1,27 @@
 import React from 'react';
-import { Typography } from '@mui/material';
+import { useAutoAnimate } from '@formkit/auto-animate/react';
+import { Stack, Typography } from '@mui/material';
 
 import { IPage } from 'domain/component';
 
 import { ViewFormItemProps } from './types';
 
 export const Page = ({ item, children, onClick }: ViewFormItemProps<IPage>) => {
+  const [animRef] = useAutoAnimate();
+  const { properties } = item;
 
   const handleClick = () => {
     onClick?.(item);
   };
 
+  const isHidden = properties?.hidden;
+
   return (
-    <div>
-      <Typography variant="h6" onClick={handleClick}>{item.name}</Typography>
-      {children}
-    </div>
+    <Stack spacing={2}>
+      <Typography variant="body1" onClick={handleClick}>{item.name}</Typography>
+      {!isHidden && <Stack ref={animRef}>
+        {children}
+      </Stack>}
+    </Stack>
   );
 };

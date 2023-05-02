@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ChangeEvent } from 'react';
 import {
   Download as DownloadIcon,
   RestartAlt as RestartAltIcon,
@@ -6,34 +6,62 @@ import {
 } from '@mui/icons-material';
 import { Button, Stack } from '@mui/material';
 import { useAppStore } from 'store/appStore';
+import { useParametersStore } from 'store/parameterStore';
+
+import { ConfigReader } from 'app/config';
+
+import { IForm } from 'domain/component';
 
 import { appService } from 'application';
 
 export const EditorActions = () => {
   const form = useAppStore(state => state.form);
+  const uploadAppConfig = useAppStore(state => state.uploadAppConfig);
+  const parameters = useParametersStore(state => state.parameters);
+
   const toggleEditorMode = useAppStore(state => state.toggleEditorMode);
 
   const handleDownload = () => {
     appService.downloadConfig();
   };
 
-  const editorButtonsActive = Boolean(form);
+  const handleUpload = async ({ target }: ChangeEvent<HTMLInputElement>) => {
+    const file = target?.files?.[0];
+    if (!file) {
+      return;
+    }
+
+    const config = await ConfigReader.read<IForm>(target?.files?.[0] as File);
+    uploadAppConfig(config);
+  };
+
+  const canChangeView = Boolean(form);
+  const candownloadView = Boolean(form);
+  const canUploadView = Boolean(form) || Boolean(parameters.length);
 
   return (
     <Stack direction={'row'} spacing={2}>
       <Button
         startIcon={<RestartAltIcon />}
-        disabled={!editorButtonsActive}
+        disabled={!canChangeView}
         onClick={toggleEditorMode}
-      >Сменить вид</Button>
+      >
+        Сменить вид
+      </Button>
       <Button startIcon={<DownloadIcon />}
-        disabled={!editorButtonsActive}
+        disabled={!candownloadView}
         onClick={handleDownload}
-      >Скачать конфигурацию</Button>
+      >
+        Скачать конфигурацию
+      </Button>
       <Button
         startIcon={<UploadIcon />}
-        disabled={!editorButtonsActive}
-      >Загрузить конфигурацию</Button>
+        disabled={!canUploadView}
+        component="label"
+      >
+        <input hidden accept="json/*" type="file" onChange={handleUpload} />
+        Загрузить конфигурацию
+      </Button>
     </Stack>
   );
 };

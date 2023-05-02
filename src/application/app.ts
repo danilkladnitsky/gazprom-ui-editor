@@ -66,7 +66,7 @@ export class AppService extends TreeService<IForm> {
   }
 
   downloadConfig(): void {
-    const fileName = `${this.formTree.name}.txt`;
+    const fileName = `${this.formTree.name}.json`;
     const resolvedTree = this.fillConfigData([this.formTree]);
 
     fileDownload(JSON.stringify(resolvedTree, this.removeTreeKeys), fileName);
@@ -83,8 +83,12 @@ export class AppService extends TreeService<IForm> {
     });
   }
 
+  uploadConfig(config: IForm): void {
+
+  }
+
   private removeTreeKeys(key: string, value: unknown) {
-    const keysToRemove = ['code'];
+    const keysToRemove = ['code', 'items'];
 
     return keysToRemove.includes(key) ? undefined : value;
   }
