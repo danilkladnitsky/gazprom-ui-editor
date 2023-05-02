@@ -1,9 +1,8 @@
-import React, { ComponentType } from "react";
-import { useAutoAnimate } from "@formkit/auto-animate/react";
+import React, { ComponentType } from 'react';
+import { useAutoAnimate } from '@formkit/auto-animate/react';
+import { Button, Stack } from '@mui/material';
 
-import { Button } from "@mui/material";
-
-import styles from "./styles.module.scss";
+import styles from './styles.module.scss';
 
 export type ListItem = object & { name: string; id: EntityId };
 export type ListItemProps = { item: object & ListItem };
@@ -17,15 +16,15 @@ const List = ({ data, listItem }: Props) => {
 
   const CustomListItem = listItem;
   return (
-    <div className={styles.list} ref={parent}>
+    <Stack spacing={1} className={styles.list} ref={parent}>
       {data.map(({ item }) =>
         CustomListItem ? (
           <CustomListItem item={item} key={item.id} />
         ) : (
           <ListItem name={item.name} key={item.id} />
-        )
+        ),
       )}
-    </div>
+    </Stack>
   );
 };
 

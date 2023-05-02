@@ -6,4 +6,5 @@ export type FormItemProps<Component extends IBaseComponent> = {
     element: Component;
     children?: ReactNode;
     dropPosition: number;
+    onClick: () => void;
 };

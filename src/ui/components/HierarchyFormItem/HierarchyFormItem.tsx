@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import AddIcon from '@mui/icons-material/Add';
 import { useComponentsStore } from 'store/componentStore';
 import { TreeTemplateProps } from 'ui/components/TreeStructure';
 
@@ -13,10 +14,13 @@ import { Tab } from './sub/Tab';
 
 type Props = TreeTemplateProps<TreeItem>;
 
+import { IconButton } from '@mui/material';
+
 import styles from './HierarchyFormItem.module.scss';
 
 export const HierarchyFormItem = ({ children, item, position }: Props) => {
   const { components } = useComponentsStore();
+  const [expanded ] = useState(true);
 
   const currentComponent = components.find(c => c.code === item.code);
 
@@ -27,11 +31,10 @@ export const HierarchyFormItem = ({ children, item, position }: Props) => {
   const Item = getItem(currentComponent.type);
 
   return <Item element={currentComponent} dropPosition={position}>
-    <div className={styles.childrenItem}>
-      {children}
-    </div>
+    {<div className={styles.childrenItem}>
+      {expanded ? children : '...'}
+    </div>}
   </Item>;
-
 };
 
 const getItem = (type: ELEMENT_TYPE) => {
