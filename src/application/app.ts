@@ -1,7 +1,7 @@
 import fileDownload from 'js-file-download';
 
 import { ELEMENT_PARAMETER_MAP, ELEMENT_TYPE, IComponent, IForm } from 'domain/component';
-import { createInitialForm, DEFAULT_COMPONENTS, initialForm, Tree } from 'domain/tree';
+import { createInitialForm, DEFAULT_COMPONENTS, initialForm, Tree, TREE_ACTIONS,TreeActionPayload } from 'domain/tree';
 
 import { generateCode } from 'shared/utils/generateIds';
 
@@ -31,7 +31,7 @@ export class AppService extends TreeService<IForm> {
         createComponent(ELEMENT_TYPE.ELEMENT,
           {
             dataSource: parameter.name,
-            name: `Компонент ${parameter.name}`,
+            name: `Компонент ${parameter.type}`,
             properties: {},
             as: ELEMENT_PARAMETER_MAP[parameter.type][0],
           });
@@ -131,6 +131,37 @@ export class AppService extends TreeService<IForm> {
     const keysToRemove = ['code'];
 
     return keysToRemove.includes(key) ? undefined : value;
+  }
+
+  placeComponent(payload: TreeActionPayload<TREE_ACTIONS.PLACE_NODE>): IForm {
+    const { itemId, pos } = payload;
+    const parent = this.findNodeRoot(this.formTree, itemId);
+
+    if (!parent) {
+      return this.formTree;
+    }
+
+    if (!parent.items) {
+      parent.items = [];
+      const component = this.componentService.components.find(c => c.code === itemId);
+
+      parent.items.push(component);
+
+      return this.formTree;
+    }
+
+    const origItemIndex = parent.items.findIndex(c => c.code === itemId);
+
+    [
+      parent.items[origItemIndex],
+      parent.items[pos],
+    ] = [
+      parent.items[pos],
+      parent.items[origItemIndex],
+    ];
+
+    return this.formTree;
+
   }
 
 }

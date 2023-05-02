@@ -13,35 +13,39 @@ import { Tab } from './sub/Tab';
 
 type Props = TreeTemplateProps<TreeItem>;
 
-export const HierarchyFormItem = (props: Props) => {
-  const { components } = useComponentsStore();
+import styles from './HierarchyFormItem.module.scss';
 
-  const { item, children } = props;
+export const HierarchyFormItem = ({ children, item, position }: Props) => {
+  const { components } = useComponentsStore();
 
   const currentComponent = components.find(c => c.code === item.code);
 
   if (!currentComponent) {
-    return props.children;
+    return children;
   }
 
-  switch (currentComponent?.type) {
-  case ELEMENT_TYPE.ELEMENT:
-    return <Element element={currentComponent} />;
+  const Item = getItem(currentComponent.type);
+
+  return <Item element={currentComponent} dropPosition={position}>
+    <div className={styles.childrenItem}>
+      {children}
+    </div>
+  </Item>;
+
+};
+
+const getItem = (type: ELEMENT_TYPE) => {
+  switch (type) {
   case ELEMENT_TYPE.FORM:
-    return <Form element={currentComponent}>
-      {children}
-    </Form>;
+    return Form;
   case ELEMENT_TYPE.GROUP:
-    return <Group element={currentComponent}>
-      {children}
-    </Group>;
+    return Group;
   case ELEMENT_TYPE.PAGE:
-    return <Page element={currentComponent}>
-      {children}
-    </Page>;
+    return Page;
   case ELEMENT_TYPE.TAB:
-    return <Tab element={currentComponent}>
-      {children}
-    </Tab>;
+    return Tab;
+  case ELEMENT_TYPE.ELEMENT:
+  default:
+    return Element;
   }
 };

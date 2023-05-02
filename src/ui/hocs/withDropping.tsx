@@ -4,6 +4,7 @@ import { ELEMENT_TYPE, IBaseComponent } from 'domain/component';
 
 export type DroppingComponentProps<Item extends IBaseComponent> = {
   isOver: boolean;
+  canDrop: boolean;
   droppingItem?: Item;
   dropRef: ConnectDropTarget;
 }

@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 
 import { IComponent, IForm } from 'domain/component';
+import { TREE_ACTIONS,TreeActionPayload } from 'domain/tree';
 
 import { appService } from 'application';
 
@@ -16,6 +17,7 @@ type Actions = {
   toggleEditorMode: () => void;
   uploadAppConfig: (config: IForm) => [IComponent[], IForm];
   setFullScreen: (value: boolean) => void;
+  modifyTree: <T extends TREE_ACTIONS>(type: T, payload: TreeActionPayload<T>) => void;
 };
 
 const initialState: State = {
@@ -43,5 +45,21 @@ export const useAppStore = create<State & Actions>()((set, state) => ({
   },
   setFullScreen: (value) => {
     set({ fullScreen:value });
+  },
+  modifyTree: <T extends TREE_ACTIONS>(type: T, payload: TreeActionPayload<T>) => {
+    switch (type) {
+    case TREE_ACTIONS.ADD_CHILDREN:
+      set({ form: appService.addIntoComponent(payload) });
+      return;
+    case TREE_ACTIONS.REMOVE_NODE:
+      set({ form: appService.removeComponent(payload) });
+      return;
+    case TREE_ACTIONS.PLACE_NODE:
+      set({ form: appService.placeComponent(payload) });
+      return;
+    case TREE_ACTIONS.REPLACE_NODES:
+    default:
+      set({ form: appService.replaceComponents(payload) });
+    }
   },
 }));

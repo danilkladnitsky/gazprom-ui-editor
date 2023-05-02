@@ -7,6 +7,7 @@ type TreeProps<P> = P & {
 export type TreeTemplateProps<P > = {
   children: ReactNode;
   item: P;
+  position: number;
 }
 
 type Props<TreeData> = {
@@ -25,8 +26,8 @@ export const TreeStructure = <P,>(
     }
     return (
       <>{
-        subTree.items.map((item) => {
-          return <TreeComponent item={item} key={item.code}>
+        subTree.items.map((item, pos) => {
+          return <TreeComponent position={pos} item={item} key={item.code}>
             {renderSubTree(item)}
           </TreeComponent>;
         })
