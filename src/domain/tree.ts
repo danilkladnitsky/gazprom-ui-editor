@@ -2,6 +2,11 @@ import { generateCode } from 'shared/utils/generateIds';
 
 import { ELEMENT_TYPE, IComponent, IElement, IForm } from './component';
 
+export type Tree = {
+  code: EntityId;
+  items?: Tree[];
+}
+
 export type TreeItem = {
   code: EntityId;
 }

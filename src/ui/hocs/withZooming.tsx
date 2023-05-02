@@ -10,7 +10,7 @@ export const withZooming = <P extends object>(Component: ComponentType<P>) => {
   return function ZoomedComponent(props: P) {
 
     return <TransformWrapper initialScale={DEFAULT_SCALE}>
-      <ZoomPanel/>
+      <ZoomPanel />
       <TransformComponent
         wrapperClass={styles.zoomWrapper}
         contentClass={styles.zoomComponent}

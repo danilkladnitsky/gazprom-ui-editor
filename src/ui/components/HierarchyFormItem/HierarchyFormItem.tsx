@@ -1,98 +1,43 @@
 import React from 'react';
-import { useAutoAnimate } from '@formkit/auto-animate/react';
-import { Stack } from '@mui/system';
-import classNames from 'classnames';
-import { useAppStore } from 'store/appStore';
 import { useComponentsStore } from 'store/componentStore';
 import { TreeTemplateProps } from 'ui/components/TreeStructure';
-import { withDragging } from 'ui/hocs/withDragging';
-import { DropComponentProps, withDropping } from 'ui/hocs/withDropping';
 
-import { ELEMENT_TYPE, IComponent } from 'domain/component';
+import { ELEMENT_TYPE } from 'domain/component';
 import { TreeItem } from 'domain/tree';
 
-import { getComponentIcon } from 'shared/utils/getComponentIcon';
-
-import styles from './HierarchyFormItem.module.scss';
+import { Element } from './sub/Element';
+import { Form } from './sub/Form';
+import { Group } from './sub/Group';
+import { Page } from './sub/Page';
+import { Tab } from './sub/Tab';
 
 type Props = TreeTemplateProps<TreeItem>;
 
-const DRAGGABLE_TYPES = [ELEMENT_TYPE.ELEMENT];
-
 export const HierarchyFormItem = (props: Props) => {
-  const { replaceComponent } = useAppStore();
   const components = useComponentsStore((state) => state.components);
 
-  const [ref] = useAutoAnimate();
-
   const { item, children } = props;
+
   const currentComponent = components.find(c => c.code === item.code);
 
-  if (!currentComponent) {
-    return props.children;
-  }
-
-  const isDraggable = DRAGGABLE_TYPES.includes(currentComponent.type);
-
-  const onDrop = (droppedItem: IComponent) => {
-    replaceComponent(droppedItem, currentComponent.code);
-  };
-
-  const DropZone = withDropping(
-    {
-      allowedAliases: [ELEMENT_TYPE.ELEMENT],
-      onDrop,
-      item: currentComponent,
-      className: styles.itemToDrop,
-    })(DroppedItem);
-
-  const DraggedComponent = withDragging(
-    {
-      item: currentComponent,
-      dragAlias: currentComponent.type,
-    })(DraggedItem);
-
-  const FormItem = isDraggable ?
-    <DraggedComponent {...props} />
-    : currentComponent.name;
-
-  return (
-    <div className={styles.itemWrapper}>
-      {FormItem}
-      <DropZone />
-      <Stack className={styles.childrenItem} ref={ref}>
-        {children}
-      </Stack>
-    </div>
-  );
-};
-
-const DraggedItem = ({ item, children, isDragging }
-  : TreeTemplateProps<IComponent>) => {
-  const Icon = getComponentIcon(item);
-
-  if (isDragging) {
-    return <></>;
-  }
-
-  return (
-    <div className={styles.item}>
-      <div className={styles.itemContent}>
-        <Icon />
-        {item.name}
-      </div>
+  switch (currentComponent?.type) {
+  case ELEMENT_TYPE.ELEMENT:
+    return <Element element={currentComponent} />;
+  case ELEMENT_TYPE.FORM:
+    return <Form element={currentComponent}>
       {children}
-    </div>
-  );
-};
-
-const DroppedItem = ({ isHovered, originalItem, droppingItem }:
-  DropComponentProps<IComponent>) => {
-  const showHoverEffect = isHovered && originalItem.code !== droppingItem?.code;
-
-  return (
-    <div className={classNames(styles.dropPlaceholder,
-      { [styles.isDropping]: showHoverEffect })}>
-    </div>
-  );
+    </Form>;
+  case ELEMENT_TYPE.GROUP:
+    return <Group element={currentComponent}>
+      {children}
+    </Group>;
+  case ELEMENT_TYPE.PAGE:
+    return <Page element={currentComponent}>
+      {children}
+    </Page>;
+  case ELEMENT_TYPE.TAB:
+    return <Tab element={currentComponent}>
+      {children}
+    </Tab>;
+  }
 };

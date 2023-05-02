@@ -1,27 +1,28 @@
-import React, { ComponentType } from 'react';
-import { useDrag } from 'react-dnd';
+import { ConnectDropTarget, useDrag } from 'react-dnd';
 
-export type DraggingProps<Item> = {
-  item: Item;
-  dragAlias: string;
+import { ELEMENT_TYPE, IBaseComponent } from 'domain/component';
+
+export type DraggingComponentProps = {
+  isDragging: boolean;
+  dragRef: ConnectDropTarget;
 }
 
-export const withDragging =
-  <Item,>({ dragAlias,item }: DraggingProps<Item>) => {
-    return <P extends object>(Component: ComponentType<P>) => {
-      return function Wrapped(props: P) {
-        const [{ isDragging }, drag] = useDrag(() => ({
-          type: dragAlias,
-          item,
-          collect: (monitor) => ({
-            isDragging: !!monitor.isDragging(),
-          }),
-        }));
+export type DragRenderProps<Item extends IBaseComponent> = {
+  type: ELEMENT_TYPE;
+  item: Item;
+  children: (props: DraggingComponentProps) => JSX.Element;
 
-        return <div ref={drag}>
-          <Component {...props} isDragging={isDragging} />
-        </div>;
+};
 
-      };
-    };
-  };
+export const WithDragging = <T extends IBaseComponent>({ children, type, item }
+  : DragRenderProps<T>) => {
+  const [{ isDragging }, dragRef] = useDrag(() => ({
+    type,
+    item,
+    collect: (monitor) => ({
+      isDragging: !!monitor.isDragging(),
+    }),
+  }));
+
+  return children({ isDragging, dragRef });
+};

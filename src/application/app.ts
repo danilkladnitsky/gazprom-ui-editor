@@ -1,5 +1,7 @@
+import fileDownload from 'js-file-download';
+
 import { ELEMENT_PARAMETER_MAP, ELEMENT_TYPE, IComponent, IForm } from 'domain/component';
-import { createInitialForm, DEFAULT_COMPONENTS, initialForm } from 'domain/tree';
+import { createInitialForm, DEFAULT_COMPONENTS, initialForm, Tree } from 'domain/tree';
 
 import { ComponentService } from './component';
 import { ParameterService } from './parameter';
@@ -61,7 +63,30 @@ export class AppService extends TreeService<IForm> {
     this.formTree = tree;
 
     return this.formTree;
+  }
 
+  downloadConfig(): void {
+    const fileName = `${this.formTree.name}.txt`;
+    const resolvedTree = this.fillConfigData([this.formTree]);
+
+    fileDownload(JSON.stringify(resolvedTree, this.removeTreeKeys), fileName);
+  }
+
+  fillConfigData(tree: Tree[]) {
+    return tree.map((t) => {
+      const component = this.componentService.components.find((c) => c.code === t.code);
+
+      return {
+        ...component,
+        items: this.fillConfigData(t.items || []),
+      };
+    });
+  }
+
+  private removeTreeKeys(key: string, value: unknown) {
+    const keysToRemove = ['code'];
+
+    return keysToRemove.includes(key) ? undefined : value;
   }
 
 }

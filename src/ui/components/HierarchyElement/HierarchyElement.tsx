@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import { IElement } from 'domain/component';
 import { CONTROL_TYPE } from 'domain/parameter';
 
-import { ViewFormItemProps } from '../ViewFormItem/sub/types';
+import { ViewFormItemProps } from '../GuiFormItem/sub/types';
 
 import {
   Checkbox,

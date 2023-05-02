@@ -17,6 +17,11 @@ export interface IBaseComponent {
   properties?: Properties;
 }
 
+export type IFormTree = {
+  code: EntityId;
+  items?: IFormTree[];
+}
+
 export type IForm = IBaseComponent & {
   type: ELEMENT_TYPE.FORM;
   items: IPage[] | ITab[];
