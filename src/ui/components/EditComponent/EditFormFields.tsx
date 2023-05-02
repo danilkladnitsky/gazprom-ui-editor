@@ -1,4 +1,5 @@
 import React from 'react';
+import { useAutoAnimate } from '@formkit/auto-animate/react';
 import { Stack } from '@mui/system';
 import { useComponentsStore } from 'store/componentStore';
 
@@ -20,6 +21,8 @@ export const EditFormFields = ({ component }: Props) => {
   const { updateSelectedComponent, selectedComponent } = useComponentsStore();
   const fields = propertiesService.getComponentFields(component);
 
+  const [animRef] = useAutoAnimate();
+
   const handleComponentUpdate: PropertyUpdateFn = (code, value) => {
     updateSelectedComponent({
       properties: {
@@ -30,7 +33,7 @@ export const EditFormFields = ({ component }: Props) => {
 
   const hasParameter = selectedComponent?.type === ELEMENT_TYPE.ELEMENT;
 
-  return <Stack spacing={2}>
+  return <Stack spacing={2} ref={animRef}>
     {hasParameter && <ChangeParameter element={selectedComponent} />}
     {fields.filter(f => f.fields.length)
       .map((field) => <MetadataSection
