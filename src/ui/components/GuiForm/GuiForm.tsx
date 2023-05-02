@@ -6,16 +6,20 @@ import { withZooming } from 'ui/hocs/withZooming';
 import { HierarchyForm } from '../../shared/HierarchyForm';
 import { GuiFormItem } from '../GuiFormItem';
 
+import styles from './GuiForm.module.scss';
+
 const GuiForm = () => {
-  const { form, editorMode } = useAppStore();
+  const { form, editorMode, fullScreen } = useAppStore();
   const { resetTransform, centerView } = useControls();
 
   useEffect(() => {
     resetTransform();
     centerView();
-  }, [form ,editorMode]);
+  }, [form ,editorMode, fullScreen]);
 
-  return <HierarchyForm template={GuiFormItem} />;
+  return <div className={styles.form}>
+    <HierarchyForm template={GuiFormItem} />
+  </div>;
 };
 
 export default withZooming(GuiForm);

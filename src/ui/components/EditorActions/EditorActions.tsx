@@ -1,9 +1,9 @@
 import React, { ChangeEvent } from 'react';
 import {
+  DeleteForever as DeleteIcon,
   Download as DownloadIcon,
   RestartAlt as RestartAltIcon,
-  Upload as UploadIcon,
-} from '@mui/icons-material';
+  Upload as UploadIcon } from '@mui/icons-material';
 import { Button, Stack } from '@mui/material';
 import { useAppStore } from 'store/appStore';
 import { useComponentsStore } from 'store/componentStore';
@@ -16,7 +16,7 @@ import { IForm } from 'domain/component';
 import { appService } from 'application';
 
 export const EditorActions = () => {
-  const { form, uploadAppConfig } = useAppStore();
+  const { form, uploadAppConfig, setForm } = useAppStore();
   const { setComponents } = useComponentsStore();
 
   const parameters = useParametersStore(state => state.parameters);
@@ -37,6 +37,10 @@ export const EditorActions = () => {
     const [components] = uploadAppConfig(config[0]);
 
     setComponents(components);
+  };
+
+  const clearForm = () => {
+    setForm(null);
   };
 
   const canChangeView = Boolean(form);
@@ -65,6 +69,14 @@ export const EditorActions = () => {
       >
         <input hidden accept="json/*" type="file" onChange={handleUpload} />
         Загрузить конфигурацию
+      </Button>
+      <Button
+        startIcon={<DeleteIcon />}
+        disabled={!candownloadView}
+        component="label"
+        onClick={clearForm}
+      >
+        Очистить форму
       </Button>
     </Stack>
   );

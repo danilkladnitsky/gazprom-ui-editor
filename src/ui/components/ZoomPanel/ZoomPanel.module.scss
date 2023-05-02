@@ -1,6 +1,6 @@
 .zoomPanel {
     position: absolute;
-    padding: 24px;
+    padding: 8px;
     bottom: 0px;
     left: 0px;
     z-index: 3;
@@ -18,4 +18,8 @@
 
 .centerBtn {
     height: 24px;
+}
+
+.buttons {
+    align-items: center;
 }

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useControls } from 'react-zoom-pan-pinch';
+import AspectRatioIcon from '@mui/icons-material/AspectRatio';
 import FilterCenterFocusIcon from '@mui/icons-material/FilterCenterFocus';
 import RestartAltIcon from '@mui/icons-material/RestartAlt';
 import { Button, Slider, Stack } from '@mui/material';
@@ -9,7 +10,7 @@ import { DEFAULT_SCALE } from 'ui/hocs/withZooming';
 import styles from './ZoomPanel.module.scss';
 
 export const ZoomPanel = () => {
-  const form = useAppStore(state => state.form);
+  const { form, fullScreen, setFullScreen } = useAppStore();
   const { resetTransform, centerView, setTransform, instance } = useControls();
   const [scale, setScale] = useState(DEFAULT_SCALE);
 
@@ -30,12 +31,16 @@ export const ZoomPanel = () => {
     resetTransform();
   };
 
+  const handleFullScreen = () => {
+    setFullScreen(!fullScreen);
+  };
+
   if (!form) {
     return null;
   }
 
   return <div className={styles.zoomPanel}>
-    <Stack direction={'row'} spacing={3}>
+    <Stack direction={'row'} spacing={3} className={styles.buttons}>
       <Button
         className={styles.centerBtn}
         onClick={() => centerView()}
@@ -49,6 +54,9 @@ export const ZoomPanel = () => {
         startIcon={<RestartAltIcon />}
       >
       Сбросить
+      </Button>
+      <Button startIcon={<AspectRatioIcon />} onClick={handleFullScreen}>
+        Полноэкранный режим
       </Button>
     </Stack>
     <Slider

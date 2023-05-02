@@ -10,9 +10,9 @@ import { ViewFormItemProps } from './types';
 const mapGroupModeToCss =(align: string): StackProps => {
   switch (align) {
   case 'FORCE_HORIZONTAL':
-    return { direction: 'row' };
+    return { direction: 'row', alignItems: 'center' };
   case 'HORIZONTAL':
-    return { useFlexGap: true, rowGap: 2, flexWrap: 'wrap', direction: 'row' };
+    return { useFlexGap: true, rowGap: 2, flexWrap: 'wrap', direction: 'row', alignItems: 'center' };
   case 'VERTICAL':
   default:
     return { direction: 'column' };

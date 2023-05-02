@@ -7,18 +7,21 @@ import { appService } from 'application';
 type State = {
   form: IForm | null;
   editorMode: 'text' | 'gui';
+  fullScreen: boolean;
 };
 
 type Actions = {
-  setForm: (form: IForm) => void
+  setForm: (form: IForm | null) => void
   replaceComponent: (component: IComponent, target: EntityId) => void;
   toggleEditorMode: () => void;
-  uploadAppConfig: (config: IForm) => [IComponent[], IForm] ;
+  uploadAppConfig: (config: IForm) => [IComponent[], IForm];
+  setFullScreen: (value: boolean) => void;
 };
 
 const initialState: State = {
   form: null,
   editorMode: 'gui',
+  fullScreen: false,
 };
 
 export const useAppStore = create<State & Actions>()((set, state) => ({
@@ -37,5 +40,8 @@ export const useAppStore = create<State & Actions>()((set, state) => ({
     const [components, newForm] = appService.uploadConfig(form);
     set({ form: newForm });
     return [components, newForm];
+  },
+  setFullScreen: (value) => {
+    set({ fullScreen:value });
   },
 }));
