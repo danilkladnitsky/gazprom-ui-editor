@@ -1,0 +1,99 @@
+[
+    {
+        "name": "Форма по умолчанию",
+        "type": "FORM",
+        "items": [
+            {
+                "type": "TAB",
+                "name": "Таб",
+                "items": [
+                    {
+                        "type": "PAGE",
+                        "name": "Страница №1",
+                        "items": [
+                            {
+                                "name": "Группа #2",
+                                "type": "GROUP",
+                                "items": [
+                                    {
+                                        "dataSource": "Параметр 1 (NUMBER)",
+                                        "name": "Компонент NUMBER",
+                                        "properties": {},
+                                        "as": "NUMBER",
+                                        "type": "ELEMENT"
+                                    },
+                                    {
+                                        "dataSource": "Параметр 4 (BOOLEAN)",
+                                        "name": "Компонент BOOLEAN",
+                                        "properties": {},
+                                        "as": "CHECKBOX",
+                                        "type": "ELEMENT"
+                                    },
+                                    {
+                                        "dataSource": "Параметр 6 (FILE)",
+                                        "name": "Компонент FILE",
+                                        "properties": {},
+                                        "as": "FILE",
+                                        "type": "ELEMENT"
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "Группа #1",
+                                "type": "GROUP",
+                                "items": [
+                                    {
+                                        "dataSource": "Параметр 2 (STRING)",
+                                        "name": "Компонент STRING",
+                                        "properties": {},
+                                        "as": "TEXT",
+                                        "type": "ELEMENT"
+                                    },
+                                    {
+                                        "dataSource": "Параметр 5 (INTEGER)",
+                                        "name": "Компонент INTEGER",
+                                        "properties": {},
+                                        "as": "NUMBER",
+                                        "type": "ELEMENT"
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "Группа #2",
+                                "type": "GROUP",
+                                "items": [
+                                    {
+                                        "dataSource": "Параметр 1 (NUMBER)",
+                                        "name": "Компонент NUMBER",
+                                        "properties": {},
+                                        "as": "NUMBER",
+                                        "type": "ELEMENT"
+                                    },
+                                    {
+                                        "dataSource": "Параметр 4 (BOOLEAN)",
+                                        "name": "Компонент BOOLEAN",
+                                        "properties": {},
+                                        "as": "CHECKBOX",
+                                        "type": "ELEMENT"
+                                    },
+                                    {
+                                        "dataSource": "Параметр 6 (FILE)",
+                                        "name": "Компонент FILE",
+                                        "properties": {},
+                                        "as": "FILE",
+                                        "type": "ELEMENT"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "PAGE",
+                        "name": "Страница №2",
+                        "items": []
+                    }
+                ]
+            }
+        ]
+    }
+]

@@ -1,4 +1,5 @@
 import React, { ChangeEvent } from 'react';
+import { useAutoAnimate } from '@formkit/auto-animate/react';
 import {
   DeleteForever as DeleteIcon,
   Download as DownloadIcon,
@@ -15,9 +16,13 @@ import { IForm } from 'domain/component';
 
 import { appService } from 'application';
 
+import { DeleteComponent } from '../DeleteComponent';
+
 export const EditorActions = () => {
   const { form, uploadAppConfig, setForm } = useAppStore();
   const { setComponents } = useComponentsStore();
+
+  const [ref] = useAutoAnimate();
 
   const parameters = useParametersStore(state => state.parameters);
 
@@ -48,7 +53,8 @@ export const EditorActions = () => {
   const canUploadView = Boolean(form) || Boolean(parameters.length);
 
   return (
-    <Stack direction={'row'} spacing={2}>
+    <Stack direction={'row'} spacing={2} ref={ref}>
+      <DeleteComponent />
       <Button
         startIcon={<RestartAltIcon />}
         disabled={!canChangeView}

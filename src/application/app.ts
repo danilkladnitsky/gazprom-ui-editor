@@ -219,4 +219,17 @@ export class AppService extends TreeService<IForm> {
     return this.formTree;
   }
 
+  removeComponent(payload: TreeActionPayload<TREE_ACTIONS.REMOVE_NODE>) {
+    const { itemId } = payload;
+    const parent = this.findNodeRoot(this.formTree, itemId);
+
+    if (!parent || !parent.items) {
+      return this.formTree;
+    }
+
+    parent.items = parent.items.filter(i => i.code !== itemId);
+
+    return this.formTree;
+  }
+
 }

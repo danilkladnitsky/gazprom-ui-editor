@@ -25,10 +25,13 @@ export const ZoomPanel = () => {
       value,
     );
 
+    setTimeout(centerView, 1000);
+
   };
 
   const resetZoom = () => {
     setScale(DEFAULT_SCALE);
+
     resetTransform();
   };
 
@@ -60,17 +63,5 @@ export const ZoomPanel = () => {
         Полноэкранный режим
       </Button>
     </Stack>
-    <Slider
-      className={styles.sliderZoom}
-      aria-label="Zoom"
-      orientation="vertical"
-      defaultValue={zoomInstance.props.initialScale}
-      valueLabelDisplay="auto"
-      value={scale}
-      onChange={(e, v) => zoom(v as number)}
-      min={0}
-      max={2}
-      step={0.1}
-    />
   </div>;
 };
