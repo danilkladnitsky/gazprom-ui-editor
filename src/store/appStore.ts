@@ -9,6 +9,7 @@ type State = {
   form: IForm | null;
   editorMode: 'text' | 'gui';
   fullScreen: boolean;
+  previewIsActive: boolean;
 };
 
 type Actions = {
@@ -18,12 +19,14 @@ type Actions = {
   uploadAppConfig: (config: IForm) => [IComponent[], IForm];
   setFullScreen: (value: boolean) => void;
   modifyTree: <T extends TREE_ACTIONS>(type: T, payload: TreeActionPayload<T>) => void;
+  togglePreview: () => void;
 };
 
 const initialState: State = {
   form: null,
   editorMode: 'gui',
   fullScreen: false,
+  previewIsActive: false,
 };
 
 export const useAppStore = create<State & Actions>()((set, state) => ({
@@ -64,5 +67,8 @@ export const useAppStore = create<State & Actions>()((set, state) => ({
     default:
       set({ form: appService.replaceComponents(payload) });
     }
+  },
+  togglePreview: () => {
+    set({ previewIsActive: !state().previewIsActive });
   },
 }));

@@ -3,6 +3,8 @@ import { useAutoAnimate } from '@formkit/auto-animate/react';
 import {
   DeleteForever as DeleteIcon,
   Download as DownloadIcon,
+  InsertPhoto,
+  InsertPhoto as InsertPhotoIcon,
   RestartAlt as RestartAltIcon,
   Upload as UploadIcon } from '@mui/icons-material';
 import { Button, Stack } from '@mui/material';
@@ -19,7 +21,7 @@ import { appService } from 'application';
 import { DeleteComponent } from '../DeleteComponent';
 
 export const EditorActions = () => {
-  const { form, uploadAppConfig, setForm } = useAppStore();
+  const { form, uploadAppConfig, setForm, togglePreview, previewIsActive } = useAppStore();
   const { setComponents } = useComponentsStore();
 
   const [ref] = useAutoAnimate();
@@ -83,6 +85,13 @@ export const EditorActions = () => {
         onClick={clearForm}
       >
         Очистить форму
+      </Button>
+      <Button
+        startIcon={<InsertPhoto />}
+        disabled={!canChangeView}
+        onClick={togglePreview}
+      >
+        Превью
       </Button>
     </Stack>
   );
