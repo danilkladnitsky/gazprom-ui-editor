@@ -201,4 +201,23 @@ export class AppService extends TreeService<IForm> {
 
   }
 
+  copyToParentComponent(payload: TreeActionPayload<TREE_ACTIONS.COPY_TO_PARENT>) {
+    const { nodeId, parentId } = payload;
+    const parent = this.findNode(this.formTree, parentId);
+    const node = this.findNode(this.formTree, nodeId);
+
+    if (!parent || !node) {
+      return this.formTree;
+    }
+
+    if (!parent.items) {
+      parent.items = [node];
+    } else {
+      parent.items.unshift(node);
+    }
+
+    this.componentService.saveComponents([...this.componentService.components, node]);
+    return this.formTree;
+  }
+
 }

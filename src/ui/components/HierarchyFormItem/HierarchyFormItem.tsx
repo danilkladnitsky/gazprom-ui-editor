@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import AddIcon from '@mui/icons-material/Add';
 import { useComponentsStore } from 'store/componentStore';
 import { TreeTemplateProps } from 'ui/components/TreeStructure';
 
@@ -13,8 +12,6 @@ import { Page } from './sub/Page';
 import { Tab } from './sub/Tab';
 
 type Props = TreeTemplateProps<TreeItem>;
-
-import { IconButton } from '@mui/material';
 
 import styles from './HierarchyFormItem.module.scss';
 

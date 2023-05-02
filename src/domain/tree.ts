@@ -7,6 +7,7 @@ export enum TREE_ACTIONS {
   REPLACE_NODES = 'replace-nodes',
   REMOVE_NODE = 'remove-node',
   PLACE_NODE = 'place-node',
+  COPY_TO_PARENT = 'copy-to-parent',
 }
 
 export type TreeActionPayload<T extends TREE_ACTIONS> = T extends TREE_ACTIONS.ADD_CHILDREN
@@ -14,9 +15,11 @@ export type TreeActionPayload<T extends TREE_ACTIONS> = T extends TREE_ACTIONS.A
   : T extends TREE_ACTIONS.REMOVE_NODE
   ? { itemId: EntityId }
   : T extends TREE_ACTIONS.REPLACE_NODES
-? { firstId: EntityId, secondId: EntityId }
-: T extends TREE_ACTIONS.PLACE_NODE
-  ? {itemId: EntityId, pos: number}
+  ? { firstId: EntityId, secondId: EntityId }
+  : T extends TREE_ACTIONS.PLACE_NODE
+  ? { itemId: EntityId, pos: number }
+  : T extends TREE_ACTIONS.COPY_TO
+  ? {parentId: EntityId, nodeId: EntityId}
   : never;
 
 export type Tree = {

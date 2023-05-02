@@ -57,6 +57,9 @@ export const useAppStore = create<State & Actions>()((set, state) => ({
     case TREE_ACTIONS.PLACE_NODE:
       set({ form: appService.placeComponent(payload) });
       return;
+    case TREE_ACTIONS.COPY_TO_PARENT:
+      set({ form: appService.copyToParentComponent(payload) });
+      return;
     case TREE_ACTIONS.REPLACE_NODES:
     default:
       set({ form: appService.replaceComponents(payload) });
