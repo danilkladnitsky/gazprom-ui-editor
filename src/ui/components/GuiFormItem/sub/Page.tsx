@@ -17,9 +17,9 @@ export const Page = ({ item, children, onClick }: ViewFormItemProps<IPage>) => {
   const isHidden = properties?.hidden;
 
   return (
-    <Stack spacing={2}>
+    <Stack spacing={1}>
       <Typography variant="body1" onClick={handleClick}>{item.name}</Typography>
-      {!isHidden && <Stack ref={animRef}>
+      {!isHidden && <Stack ref={animRef} spacing={2}>
         {children}
       </Stack>}
     </Stack>

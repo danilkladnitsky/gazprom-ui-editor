@@ -49,7 +49,7 @@ export const useAppStore = create<State & Actions>()((set, state) => ({
   modifyTree: <T extends TREE_ACTIONS>(type: T, payload: TreeActionPayload<T>) => {
     switch (type) {
     case TREE_ACTIONS.ADD_CHILDREN:
-      set({ form: appService.addIntoComponent(payload) });
+      set({ form: appService.addChildren(payload) });
       return;
     case TREE_ACTIONS.REMOVE_NODE:
       set({ form: appService.removeComponent(payload) });

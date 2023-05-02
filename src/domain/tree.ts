@@ -10,7 +10,7 @@ export enum TREE_ACTIONS {
 }
 
 export type TreeActionPayload<T extends TREE_ACTIONS> = T extends TREE_ACTIONS.ADD_CHILDREN
-  ? { parent: EntityId, item: IElement }
+  ? { parentId: EntityId, childId: EntityId }
   : T extends TREE_ACTIONS.REMOVE_NODE
   ? { itemId: EntityId }
   : T extends TREE_ACTIONS.REPLACE_NODES
@@ -60,8 +60,14 @@ export const DEFAULT_COMPONENTS: { [key: string]: IComponent } = {
     code: generateCode(),
     name: 'Страница №1', items: [],
   },
-  'GROUP': {
-    name: 'Группа',
+  'GROUP1': {
+    name: 'Группа #1',
+    code: generateCode(),
+    type: ELEMENT_TYPE.GROUP,
+    items: [],
+  },
+  'GROUP2': {
+    name: 'Группа #2',
     code: generateCode(),
     type: ELEMENT_TYPE.GROUP,
     items: [],
@@ -79,8 +85,12 @@ export const createInitialForm = (components: IElement[]): IForm => {
             ...DEFAULT_COMPONENTS['PAGE'],
             items: [
               {
-                ...DEFAULT_COMPONENTS['GROUP'],
-                items: [...components],
+                ...DEFAULT_COMPONENTS['GROUP1'],
+                items: [...components.filter((v, i) => i % 2 === 1)],
+              },
+              {
+                ...DEFAULT_COMPONENTS['GROUP2'],
+                items: [...components.filter((v, i) => i % 2 === 0)],
               },
             ],
           },

@@ -164,4 +164,42 @@ export class AppService extends TreeService<IForm> {
 
   }
 
+  addChildren(payload: TreeActionPayload<TREE_ACTIONS.ADD_CHILDREN>) {
+    const { childId, parentId } = payload;
+    const parent = this.findNode(this.formTree, parentId);
+    const childParent = this.findNodeRoot(this.formTree, childId);
+
+    const inSameParent = childParent !== parent;
+
+    if (!inSameParent) {
+      return this.formTree;
+    }
+
+    if (!parent) {
+      return this.formTree;
+    }
+
+    const component = this.componentService.components
+      .find(component => component.code === childId);
+
+    if (!component) {
+      return this.formTree;
+    }
+
+    if (!parent.items) {
+      parent.items = [component];
+    } else {
+      parent.items.push(component);
+    }
+
+    const canRemoveFromParent = childParent && childParent?.items;
+
+    if (canRemoveFromParent) {
+      childParent.items = childParent?.items?.filter(i => i.code !== childId);
+    }
+
+    return this.formTree;
+
+  }
+
 }
