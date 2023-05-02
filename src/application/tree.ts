@@ -1,6 +1,6 @@
-import { IComponent } from 'domain/component';
+import { insertElementToArray } from 'ui/utils/insertElementToArray';
 
-import { insertElementToArray } from 'shared/utils/insertElementToArray';
+import { IComponent } from 'domain/component';
 
 export class TreeService<Tree extends IComponent> {
   swapTreeElements (

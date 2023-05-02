@@ -3,11 +3,11 @@ import { Typography } from '@mui/material';
 import { Stack } from '@mui/system';
 import { useComponentsStore } from 'store/componentStore';
 import { WithDragging } from 'ui/hocs/withDragging';
+import { getComponentIcon } from 'ui/utils/getComponentIcon';
 
 import { IComponent } from 'domain/component';
 
 import { ListItemProps } from 'shared/ui/List';
-import { getComponentIcon } from 'shared/utils/getComponentIcon';
 
 import { List } from '../../shared/List';
 

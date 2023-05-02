@@ -1,8 +1,8 @@
+import { generateCode } from 'ui/utils/generateIds';
+
 import { ConfigReader } from 'app/config';
 
 import { IParameter } from 'domain/parameter';
-
-import { generateCode } from 'shared/utils/generateIds';
 
 export class ParameterService {
   parameters: IParameter[] = [];

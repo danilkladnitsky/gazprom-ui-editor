@@ -1,6 +1,6 @@
-import { ELEMENT_TYPE, IComponent, IElement, IGroup, IPage, ITab } from 'domain/component';
+import { generateCode } from 'ui/utils/generateIds';
 
-import { generateCode } from 'shared/utils/generateIds';
+import { ELEMENT_TYPE, IComponent, IElement, IGroup, IPage, ITab } from 'domain/component';
 
 export type TypeComponent<T extends ELEMENT_TYPE> = T extends
   ELEMENT_TYPE.ELEMENT

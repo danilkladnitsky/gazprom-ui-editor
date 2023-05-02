@@ -1,4 +1,4 @@
-import { generateCode } from 'shared/utils/generateIds';
+import { generateCode } from 'ui/utils/generateIds';
 
 import { ELEMENT_TYPE, IComponent, IElement, IForm } from './component';
 

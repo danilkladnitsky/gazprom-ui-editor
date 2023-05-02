@@ -1,6 +1,6 @@
 import { lazy } from 'react';
 
-import withSuspense from 'shared/router/suspense';
+import withSuspense from 'app/router/suspense';
 
 const CentralView = lazy(() => import('./ViewConfiguration'));
 const LeftPanel = lazy(() => import('./ComponentsPanel'));

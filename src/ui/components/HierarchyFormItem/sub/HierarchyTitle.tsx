@@ -1,11 +1,9 @@
 import React from 'react';
-import AddIcon from '@mui/icons-material/Add';
 import { Typography } from '@mui/material';
 import { Stack } from '@mui/system';
+import { getComponentIcon } from 'ui/utils/getComponentIcon';
 
 import { IComponent } from 'domain/component';
-
-import { getComponentIcon } from 'shared/utils/getComponentIcon';
 
 import styles from './HierarchyTitle.module.scss';
 

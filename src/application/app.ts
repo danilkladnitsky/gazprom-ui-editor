@@ -1,9 +1,8 @@
 import fileDownload from 'js-file-download';
+import { generateCode } from 'ui/utils/generateIds';
 
 import { ELEMENT_PARAMETER_MAP, ELEMENT_TYPE, IComponent, IForm } from 'domain/component';
 import { createInitialForm, DEFAULT_COMPONENTS, initialForm, Tree, TREE_ACTIONS,TreeActionPayload } from 'domain/tree';
-
-import { generateCode } from 'shared/utils/generateIds';
 
 import { ComponentService } from './component';
 import { ParameterService } from './parameter';
