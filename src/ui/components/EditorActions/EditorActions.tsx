@@ -6,6 +6,7 @@ import {
 } from '@mui/icons-material';
 import { Button, Stack } from '@mui/material';
 import { useAppStore } from 'store/appStore';
+import { useComponentsStore } from 'store/componentStore';
 import { useParametersStore } from 'store/parameterStore';
 
 import { ConfigReader } from 'app/config';
@@ -15,8 +16,9 @@ import { IForm } from 'domain/component';
 import { appService } from 'application';
 
 export const EditorActions = () => {
-  const form = useAppStore(state => state.form);
-  const uploadAppConfig = useAppStore(state => state.uploadAppConfig);
+  const { form, uploadAppConfig } = useAppStore();
+  const { setComponents } = useComponentsStore();
+
   const parameters = useParametersStore(state => state.parameters);
 
   const toggleEditorMode = useAppStore(state => state.toggleEditorMode);
@@ -31,8 +33,10 @@ export const EditorActions = () => {
       return;
     }
 
-    const config = await ConfigReader.read<IForm>(target?.files?.[0] as File);
-    uploadAppConfig(config);
+    const config = await ConfigReader.read<[IForm]>(target?.files?.[0] as File);
+    const [components] = uploadAppConfig(config[0]);
+
+    setComponents(components);
   };
 
   const canChangeView = Boolean(form);

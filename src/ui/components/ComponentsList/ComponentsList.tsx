@@ -1,6 +1,5 @@
 import React from 'react';
 import { useComponentsStore } from 'store/componentStore';
-import { GenerateForm } from 'ui/components/GenerateForm';
 
 import { IComponent } from 'domain/component';
 
@@ -15,6 +14,6 @@ export const ComponentsList = () => {
   const { components } = useComponentsStore();
 
   return (
-      <List data={convertToList(components)} />
+    <List data={convertToList(components)} />
   );
 };

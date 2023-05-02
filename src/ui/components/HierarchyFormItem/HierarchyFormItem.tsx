@@ -14,11 +14,15 @@ import { Tab } from './sub/Tab';
 type Props = TreeTemplateProps<TreeItem>;
 
 export const HierarchyFormItem = (props: Props) => {
-  const components = useComponentsStore((state) => state.components);
+  const { components } = useComponentsStore();
 
   const { item, children } = props;
 
   const currentComponent = components.find(c => c.code === item.code);
+
+  if (!currentComponent) {
+    return props.children;
+  }
 
   switch (currentComponent?.type) {
   case ELEMENT_TYPE.ELEMENT:

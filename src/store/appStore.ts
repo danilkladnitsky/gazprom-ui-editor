@@ -13,7 +13,7 @@ type Actions = {
   setForm: (form: IForm) => void
   replaceComponent: (component: IComponent, target: EntityId) => void;
   toggleEditorMode: () => void;
-  uploadAppConfig: (config: IForm) => void;
+  uploadAppConfig: (config: IForm) => [IComponent[], IForm] ;
 };
 
 const initialState: State = {
@@ -34,7 +34,8 @@ export const useAppStore = create<State & Actions>()((set, state) => ({
     set({ editorMode: state().editorMode === 'gui' ? 'text': 'gui' });
   },
   uploadAppConfig: (form) => {
-    appService.uploadConfig(form);
-    set({ form });
+    const [components, newForm] = appService.uploadConfig(form);
+    set({ form: newForm });
+    return [components, newForm];
   },
 }));
