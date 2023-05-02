@@ -1,47 +1,34 @@
-import React, { ComponentType } from 'react';
-import { useDrop } from 'react-dnd';
+import { ConnectDropTarget, useDrop } from 'react-dnd';
 
-export type DropFn<Item> = (item: Item) => void
+import { ELEMENT_TYPE, IBaseComponent } from 'domain/component';
 
-type DroppingProps<Item> = {
-  item?: Item;
-  allowedAliases: string[];
-  className?: string;
-  onDrop?: (item: Item) => void;
-}
-
-export type DropComponentProps<Item> = {
-  isHovered: boolean;
-  originalItem: Item;
+export type DroppingComponentProps<Item extends IBaseComponent> = {
+  isOver: boolean;
+  canDrop: boolean;
   droppingItem?: Item;
+  dropRef: ConnectDropTarget;
 }
 
-export const withDropping =
-    <Item,>({ allowedAliases, onDrop, item, className }: DroppingProps<Item>) => {
-      return <P extends DropComponentProps<Item>>(Component: ComponentType<P>)
-        : ComponentType<Omit<P, keyof DropComponentProps<Item>>> => {
-        return function Wrapped(props: P) {
-          const [{ isOver, droppingItem }, drop] = useDrop(() => ({
-            accept: allowedAliases,
-            drop: onDrop,
-            collect: (monitor) => {
-              return {
-                isOver: monitor.isOver(),
-                canDrop: monitor.canDrop(),
-                droppingItem: monitor.getItem(),
-              };
-            },
-          }));
+export type DropRenderProps<Item extends IBaseComponent> = {
+  accept: ELEMENT_TYPE[];
+  onDrop: (item: Item) => void;
+  children: (props: DroppingComponentProps<Item>) => JSX.Element;
 
-          return <div ref={drop} className={className}>
-            <Component
-              {...props}
-              isHovered={isOver}
-              originalItem={item}
-              droppingItem={droppingItem}
-            />
-          </div>;
+};
 
-        };
+export const WithDropping = <Item extends IBaseComponent>({ accept, onDrop, children }
+  : DropRenderProps<Item>) => {
+  const [props, dropRef] = useDrop(() => ({
+    accept,
+    drop: onDrop,
+    collect: (monitor) => {
+      return {
+        isOver: monitor.isOver(),
+        canDrop: monitor.canDrop(),
+        droppingItem: monitor.getItem(),
       };
-    };
+    },
+  }));
+
+  return children({ ...props, dropRef });
+};

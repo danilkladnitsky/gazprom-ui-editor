@@ -1,4 +1,5 @@
 import React from 'react';
+import { Stack } from '@mui/system';
 import { useAppStore } from 'store/appStore';
 import { HierarchyForm } from 'ui/shared/HierarchyForm';
 
@@ -13,6 +14,8 @@ export const FormList = () => {
   }
 
   return (
-    <HierarchyForm template={HierarchyFormItem} />
+    <Stack>
+      <HierarchyForm template={HierarchyFormItem} />
+    </Stack>
   );
 };

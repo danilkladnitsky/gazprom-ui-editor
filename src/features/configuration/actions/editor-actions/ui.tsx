@@ -6,7 +6,7 @@ import classNames from "classnames";
 import {
   RestartAlt as RestartAltIcon,
   Download as DownloadIcon,
-  PanTool,
+  Upload as UploadIcon,
 } from "@mui/icons-material";
 
 import { UploadConfiguration } from "features/configuration/actions/upload-configuration";

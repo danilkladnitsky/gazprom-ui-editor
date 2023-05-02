@@ -1,10 +1,7 @@
-import { PARAMETER_TYPE } from './parameter';
+import { CONTROL_TYPE, PARAMETER_TYPE } from './parameter';
 
 /** Тип значения свойства. */
 export type PropertyValue = string | number | boolean | null;
-
-/** Свойства элемента формы. */
-export type Properties = Record<string, PropertyValue>;
 
 export enum PROPERTY_VALUE_TYPE {
   STRING = 'string',
@@ -42,3 +39,12 @@ export type Property = {
   options: [PARAMETER_TYPE];
   isOwnProperty?: boolean;
 };
+
+/** Свойства элемента формы. */
+type TypedProperties = {
+  view: CONTROL_TYPE;
+  title: string;
+  hidden: boolean;
+};
+
+export type Properties = Record<string, PropertyValue> & Partial<TypedProperties>;

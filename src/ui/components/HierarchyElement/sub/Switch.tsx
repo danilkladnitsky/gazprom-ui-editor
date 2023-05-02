@@ -1,7 +1,12 @@
 import React from 'react';
+import { FormControlLabel, Switch as MuiSwitch } from '@mui/material';
 
-export const Switch = () => {
+import { ElementProps } from './types';
+
+export const Switch = ({ element }: ElementProps) => {
+  const { name } = element;
+
   return (
-    <div>Switch</div>
+    <FormControlLabel control={<MuiSwitch name={name} defaultChecked />} label={name} />
   );
 };

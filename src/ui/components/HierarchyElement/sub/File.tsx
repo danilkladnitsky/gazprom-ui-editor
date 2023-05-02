@@ -1,8 +1,11 @@
 import React from 'react';
-import { Input } from '@mui/material';
 
 export const File = () => {
+  const preventBubbling = (e: React.MouseEventHandler) => {
+    e.preventDefault();
+  };
+
   return (
-    <Input type="file" />
+    <input type="file" onClick={preventBubbling} />
   );
 };

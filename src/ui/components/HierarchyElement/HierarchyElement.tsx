@@ -1,10 +1,10 @@
 import React from 'react';
-import { useParametersStore } from 'store/parameterStore';
+import classNames from 'classnames';
 
 import { IElement } from 'domain/component';
 import { CONTROL_TYPE } from 'domain/parameter';
 
-import { ViewFormItemProps } from '../ViewFormItem/sub/types';
+import { ViewFormItemProps } from '../GuiFormItem/sub/types';
 
 import {
   Checkbox,
@@ -21,13 +21,11 @@ import {
   TextArea,
 } from './sub';
 
+import styles from './HierarchyElement.module.scss';
+
 export const HierarchyElement = ({ item, onClick }
   : ViewFormItemProps<IElement>) => {
-  const parameters = useParametersStore(state => state.parameters);
-
-  const { as, dataSource } = item;
-
-  const currentParameter = parameters.find(p => p.name === dataSource);
+  const { as, properties } = item;
 
   const handleComponentPick = () => {
     onClick?.(item);
@@ -35,7 +33,10 @@ export const HierarchyElement = ({ item, onClick }
 
   const ParameterElement = getParameterByType(as);
 
-  return <div onClick={handleComponentPick}>
+  return <div onClick={handleComponentPick}
+    className={classNames(styles.element,
+      { [styles.hidden]: properties?.hidden === true })}
+  >
     <ParameterElement element={item} />
   </div>;
 };

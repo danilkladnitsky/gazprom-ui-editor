@@ -1,0 +1,9 @@
+.dropZone {
+    height: 10px;
+    background-color: $hover-color;
+    transition: all 0.2s ease;
+}
+
+.emptyDrop {
+    height: 2px;
+}

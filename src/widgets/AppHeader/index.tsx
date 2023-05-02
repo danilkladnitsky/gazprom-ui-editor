@@ -1,8 +1,7 @@
-import React from "react";
+import React from 'react';
+import { EditorActions } from 'ui/components/EditorActions';
 
-import { EditorActions } from "features/configuration/actions/editor-actions";
-
-import styles from "./styles.module.scss";
+import styles from './styles.module.scss';
 
 export const AppHeader = () => {
   return (

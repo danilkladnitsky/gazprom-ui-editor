@@ -10,7 +10,7 @@ import { Page } from './sub/Page';
 import { Tab } from './sub/Tab';
 import { ViewFormItemProps } from './sub/types';
 
-export const ComponentItem = ({ item, children }
+export const ComponentItem = ({ item, children, position }
   : ViewFormItemProps<IComponent>) => {
   const { selectComponent } = useComponentsStore();
 
@@ -27,7 +27,7 @@ export const ComponentItem = ({ item, children }
     return null;
   }
 
-  return <ElementView onClick={handleComponentPick} item={item}>
+  return <ElementView position={position} onClick={handleComponentPick} item={item}>
     {children}
   </ElementView>
   ;

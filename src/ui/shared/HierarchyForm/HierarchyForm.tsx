@@ -13,9 +13,11 @@ export const HierarchyForm = <I,>({ template }: Props<I>) => {
   const formTree = { items: form ? [form] : [] };
 
   return (
-    form && <TreeStructure
-      data={formTree}
-      template={template}
-    />
+    <>
+      {form && <TreeStructure
+        data={formTree}
+        template={template}
+      />}
+    </>
   );
 };

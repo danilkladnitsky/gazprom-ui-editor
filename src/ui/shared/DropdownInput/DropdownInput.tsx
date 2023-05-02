@@ -9,9 +9,9 @@ export type DropdownItem = {
 };
 
 type Props = {
-  name: string;
   list: DropdownItem[];
   onChange: (value: ItemValue) => void;
+  name?: string;
   id?: string;
   value?: ItemValue;
 };
@@ -29,7 +29,7 @@ export const DropdownInput = ({
 
   return (
     <FormControl fullWidth>
-      <InputLabel id={id}>{name}</InputLabel>
+      {name && <InputLabel id={id}>{name}</InputLabel>}
       <Select
         labelId={id}
         id={id}
