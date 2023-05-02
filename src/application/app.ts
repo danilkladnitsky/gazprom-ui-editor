@@ -216,7 +216,6 @@ export class AppService extends TreeService<IForm> {
       parent.items.unshift(node);
     }
 
-    this.componentService.saveComponents([...this.componentService.components, node]);
     return this.formTree;
   }
 
