@@ -57,6 +57,8 @@ export type MetadataSectionKey<T extends METADATA_SECTION> = T extends
   ? ParameterTypes
   : never;
 
+export const GROUP_DIRECTION = ['FORCE_HORIZONTAL', 'HORIZONTAL', 'VERTICAL'];
+
 /** Пример объекта. */
 export const EDIT_CONFIG_METADATA: IPropertyMetadata = {
   [METADATA_SECTION.ELEMENT_TYPE]: {
@@ -69,7 +71,7 @@ export const EDIT_CONFIG_METADATA: IPropertyMetadata = {
         code: 'direction',
         name: 'Ориентация',
         type: PROPERTY_VALUE_TYPE.LIST,
-        options: ['FORCE_HORIZONTAL', 'HORIZONTAL', 'VERTICAL'],
+        options: GROUP_DIRECTION,
       },
       {
         code: 'showTitle',

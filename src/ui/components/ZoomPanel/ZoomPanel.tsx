@@ -39,8 +39,9 @@ export const ZoomPanel = () => {
       <Button
         className={styles.centerBtn}
         onClick={() => centerView()}
+        startIcon={ <FilterCenterFocusIcon />}
       >
-        <FilterCenterFocusIcon />
+      Отцентровать
       </Button>
       <Button
         className={styles.centerBtn}
