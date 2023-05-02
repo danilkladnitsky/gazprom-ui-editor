@@ -26,7 +26,9 @@ export const Tab = ({ item, children, onClick }: ViewFormItemProps<ITab>) => {
 
   return (
     <Stack spacing={2}>
-      <Tabs value={activePage} onChange={changeTab} onClick={handleClick}>
+      <Tabs value={activePage} onChange={changeTab} onClick={handleClick} TabIndicatorProps={{
+        style: { display: 'none' },
+      }}>
         {pageList.map((page, pos) => <MuiTab value={pos} label={page} key={page} />)}
       </Tabs>
       {children}

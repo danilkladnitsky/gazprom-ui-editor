@@ -5,9 +5,9 @@ import { ElementProps } from './types';
 
 export const Number = ({ element }
   : ElementProps) => {
-  const { name } = element;
+  const { name, properties } = element;
 
   return (
-    <TextInput label={name} type="number" />
+    <TextInput label={properties?.title || name} type="number" />
   );
 };
