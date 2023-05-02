@@ -4,7 +4,7 @@ import { ZoomPanel } from 'ui/components/ZoomPanel';
 
 import styles from './withZooming.module.scss';
 
-export const DEFAULT_SCALE = 1;
+export const DEFAULT_SCALE = 0.9;
 
 export const MIN_SCALE = 0.5;
 

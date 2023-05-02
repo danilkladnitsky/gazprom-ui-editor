@@ -1,7 +1,13 @@
 import React from 'react';
+import { Link as MuiLink } from '@mui/material';
 
-export const Link = () => {
+import { ElementProps } from './types';
+
+export const Link = ({ element }: ElementProps) => {
+  const { properties, name } = element;
   return (
-    <div>Link</div>
+    <MuiLink>{
+      properties?.title || name
+    }</MuiLink>
   );
 };

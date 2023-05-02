@@ -7,7 +7,7 @@ import { JsonForm } from 'ui/components/JsonForm';
 import styles from './styles.module.scss';
 
 const ViewConfiguration = () => {
-  const { editorMode, previewIsActive } = useAppStore();
+  const { editorMode, previewIsActive, form } = useAppStore();
 
   return <div className={styles.configuration}>
     {editorMode === 'text' ? <JsonForm /> : <GuiForm />}
