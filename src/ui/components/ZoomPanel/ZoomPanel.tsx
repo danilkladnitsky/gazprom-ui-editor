@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useControls } from 'react-zoom-pan-pinch';
 import FilterCenterFocusIcon from '@mui/icons-material/FilterCenterFocus';
 import RestartAltIcon from '@mui/icons-material/RestartAlt';
@@ -35,7 +35,7 @@ export const ZoomPanel = () => {
   }
 
   return <div className={styles.zoomPanel}>
-    <Stack direction={'row'}>
+    <Stack direction={'row'} spacing={3}>
       <Button
         className={styles.centerBtn}
         onClick={() => centerView()}
