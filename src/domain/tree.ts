@@ -52,7 +52,7 @@ export const DEFAULT_COMPONENTS: { [key: string]: IComponent } = {
   'TAB': {
     type: ELEMENT_TYPE.TAB,
     code: generateCode(),
-    name: 'Таб №1',
+    name: 'Таб',
     items: [],
   },
   'PAGE1': {
