@@ -1,0 +1,15 @@
+.configWrapper {
+    position: relative;
+}
+
+.config {
+    transition: all 0.2s ease;
+}
+
+.activeConfig {
+    margin-left: 12px;
+}
+
+.configChildren {
+    margin-left: 12px;
+}

@@ -1,11 +1,20 @@
 import React from 'react';
 import JSONInput from 'react-json-editor-ajrm';
+import locale from 'react-json-editor-ajrm/locale/ru';
+import classNames from 'classnames';
 import { useComponentsStore } from 'store/componentStore';
+import { clearJson } from 'ui/utils/jsonReplacer';
 
 import { IComponent } from 'domain/component';
 import { TreeItem } from 'domain/tree';
 
 import { TreeTemplateProps } from '../TreeStructure';
+
+import styles from './JsonFormItem.module.scss';
+
+const clearJsonConfig = (config: IComponent) => {
+  return JSON.parse(JSON.stringify(config, clearJson(['code', 'items'])));
+};
 
 export const JsonFormItem = ({ item, children }: TreeTemplateProps<TreeItem>) => {
   const {
@@ -37,17 +46,25 @@ export const JsonFormItem = ({ item, children }: TreeTemplateProps<TreeItem>) =>
     selectComponent(item.code);
   };
 
+  const isSelected = selectedComponent?.code === item.code;
+
   return (
-    <div>
-      <div onClick={handleSelect}>
+    <div className={styles.configWrapper}>
+      <div onClick={handleSelect} className={classNames(styles.config, {
+        [styles.activeConfig]: isSelected,
+      })}>
         <JSONInput
-          placeholder={component}
-          style={{ labelColumn: { display: 'none' } }}
+          placeholder={clearJsonConfig(component)}
+          style={{ labelColumn: { display: 'none' }, body: { backgroundColor: 'unset' } }}
           onKeyPressUpdate={true}
+          confirmGood={false}
           onChange={handleComponentUpdate}
+          locale={locale}
         />
       </div>
-      {children}
+      <div className={styles.configChildren}>
+        {children}
+      </div>
     </div>
   );
 };

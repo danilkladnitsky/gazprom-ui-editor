@@ -3,9 +3,12 @@ import { HierarchyForm } from 'ui/shared/HierarchyForm';
 
 import { JsonFormItem } from '../JsonFormItem';
 
-export const JsonForm = () => {
+import styles from './JsonForm.module.scss';
 
+export const JsonForm = () => {
   return (
-    <HierarchyForm template={JsonFormItem} />
+    <div className={styles.form}>
+      <HierarchyForm template={JsonFormItem} />
+    </div>
   );
 };
