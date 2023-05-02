@@ -1,5 +1,5 @@
-import React, { ComponentType, useRef } from 'react';
-import { ReactZoomPanPinchRef, TransformComponent, TransformWrapper } from 'react-zoom-pan-pinch';
+import React, { ComponentType } from 'react';
+import { TransformComponent, TransformWrapper } from 'react-zoom-pan-pinch';
 import { ZoomPanel } from 'ui/components/ZoomPanel';
 
 import styles from './withZooming.module.scss';

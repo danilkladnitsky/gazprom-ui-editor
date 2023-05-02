@@ -14,7 +14,7 @@ export const Form = ({ item, children, onClick }: ViewFormItemProps<IForm>) => {
   };
 
   return (
-    <div className={styles.form}>
+    <div className={styles.form} id="form">
       <Stack spacing={2}>
         <Typography variant="h6" onClick={handleClick}>
           {item.name}

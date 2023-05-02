@@ -24,6 +24,7 @@ export const ZoomPanel = () => {
       zoomInstance.props.initialPositionY || 0,
       value,
     );
+
   };
 
   const resetZoom = () => {
