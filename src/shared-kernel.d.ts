@@ -1,4 +1,4 @@
-type LoadingStatus = "idle" | "loading" | "success" | "error";
+type LoadingStatus = 'idle' | 'loading' | 'success' | 'error';
 
 type FunctionsWithRes<F> = {
   [K in keyof F as K extends string ? `${K}Status` : never]?: LoadingStatus;
@@ -10,7 +10,7 @@ type JsonFile = Record<string, unknown>;
 
 type EntityId = string;
 
-type ComponentCode = "form" | "tabs" | "page" | "group" | "element";
+type ComponentCode = 'form' | 'tabs' | 'page' | 'group' | 'element';
 type ComponentName = string;
 type ComponentDescription = string;
 

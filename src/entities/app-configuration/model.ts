@@ -1,17 +1,17 @@
-import { create } from "zustand";
-import fileDownload from "js-file-download";
+import { create } from 'zustand';
+import { createJSONStorage, persist } from 'zustand/middleware';
+import { useComponentModel } from 'entities/component';
+import { Component } from 'entities/component/domain';
+import fileDownload from 'js-file-download';
 
-import { Component } from "entities/component/domain";
-import { SchemaTree, ConfigurationView, GuiMode } from "./domain";
-import { createJSONStorage, persist } from "zustand/middleware";
+import { ConfigurationView, GuiMode,SchemaTree } from './domain';
 import {
   deleteNode,
   fillTreeData,
   insertNodeByNeighbor,
   removeMetadata,
   swapTreeElements,
-} from "./utils";
-import { useComponentModel } from "entities/component";
+} from './utils';
 
 interface State {
   view: ConfigurationView;
@@ -38,7 +38,7 @@ export const useAppConfigurationModel = create(
   persist<ConfigurationModel>(
     (set, get) => ({
       view: ConfigurationView.GUI_VIEW,
-      guiMode: "drag-and-drop",
+      guiMode: 'drag-and-drop',
       configuration: null,
       changeView: (view) => set({ view }),
       changeGuiMode: (mode) => set({ guiMode: mode }),
@@ -49,11 +49,11 @@ export const useAppConfigurationModel = create(
         }
 
         const componentList = useComponentModel.getState().components;
-        const fileName = `config.json`;
+        const fileName = 'config.json';
 
         fileDownload(
           JSON.stringify(fillTreeData([data], componentList), removeMetadata),
-          fileName
+          fileName,
         );
       },
       updateConfiguration: (configuration) => set({ configuration }),
@@ -71,11 +71,11 @@ export const useAppConfigurationModel = create(
         });
       },
       generateAppConfig: (items: Component[]) => {
-        const root = items.find((i) => i.code === "form");
+        const root = items.find((i) => i.code === 'form');
 
         if (!root) {
           throw new Error(
-            "Нельзя сгенерировать конфигурацию без корневого элемента с кодом form"
+            'Нельзя сгенерировать конфигурацию без корневого элемента с кодом form',
           );
         }
 
@@ -84,31 +84,31 @@ export const useAppConfigurationModel = create(
         };
 
         const components = items
-          .filter((i) => i.code !== "form")
+          .filter((i) => i.code !== 'form')
           .map((i) => ({ id: i.id }));
 
         const tabsId = useComponentModel
           .getState()
-          .createComponent("tabs", { name: "Табы" });
+          .createComponent('tabs', { name: 'Табы' });
 
         const page1Id = useComponentModel
           .getState()
-          .createComponent("page", { name: "Паспортные данные" });
+          .createComponent('page', { name: 'Паспортные данные' });
         const page2Id = useComponentModel
           .getState()
-          .createComponent("page", { name: "О себе" });
+          .createComponent('page', { name: 'О себе' });
 
         const group1 = useComponentModel
           .getState()
-          .createComponent("group", { name: "Личные данные" });
+          .createComponent('group', { name: 'Личные данные' });
 
         const group2 = useComponentModel
           .getState()
-          .createComponent("group", { name: "Место жительства" });
+          .createComponent('group', { name: 'Место жительства' });
 
         const group3 = useComponentModel
           .getState()
-          .createComponent("group", { name: "Био" });
+          .createComponent('group', { name: 'Био' });
 
         const configuration = {
           ...rootComponent,
@@ -158,7 +158,7 @@ export const useAppConfigurationModel = create(
         const updatedConfig = swapTreeElements(
           configuration,
           firstId,
-          secondId
+          secondId,
         );
 
         set({ configuration: updatedConfig });
@@ -173,7 +173,7 @@ export const useAppConfigurationModel = create(
           configuration: insertNodeByNeighbor(
             configuration,
             componentId,
-            neighborId
+            neighborId,
           ),
         });
       },
@@ -189,8 +189,8 @@ export const useAppConfigurationModel = create(
       },
     }),
     {
-      name: "app-storage",
+      name: 'app-storage',
       storage: createJSONStorage(() => localStorage),
-    }
-  )
+    },
+  ),
 );

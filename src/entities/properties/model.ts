@@ -1,4 +1,4 @@
-export type ViewPropertyOptions = "CHECKBOX" | "SWITCH";
+export type ViewPropertyOptions = 'CHECKBOX' | 'SWITCH';
 
 type Properties = {
   minValue: number;
@@ -14,17 +14,17 @@ type Properties = {
   view: ViewPropertyOptions;
 };
 
-export type NumberProperty = Pick<Properties, "minValue" | "maxValue">;
-export type StringProperty = Pick<Properties, "mask">;
-export type DateProperty = Pick<Properties, "dateFormat">;
-export type CheckboxProperty = Pick<Properties, "isChecked">;
-export type TextareaProperty = Pick<Properties, "lineCount">;
+export type NumberProperty = Pick<Properties, 'minValue' | 'maxValue'>;
+export type StringProperty = Pick<Properties, 'mask'>;
+export type DateProperty = Pick<Properties, 'dateFormat'>;
+export type CheckboxProperty = Pick<Properties, 'isChecked'>;
+export type TextareaProperty = Pick<Properties, 'lineCount'>;
 export type DatePickerProperty = Pick<
   Properties,
-  "minDateValue" | "maxDateValue"
+  'minDateValue' | 'maxDateValue'
 >;
-export type FileProperty = Pick<Properties, "multiple">;
-export type BooleanProperty = Pick<Properties, "view">;
+export type FileProperty = Pick<Properties, 'multiple'>;
+export type BooleanProperty = Pick<Properties, 'view'>;
 
 export type Property =
   | NumberProperty

@@ -1,8 +1,9 @@
-import { create } from "zustand";
-import { persist, createJSONStorage } from "zustand/middleware";
+import { create } from 'zustand';
+import { createJSONStorage,persist } from 'zustand/middleware';
 
-import { generateIds } from "shared/utils/generateIds";
-import { InputParameter, Parameter } from "./domain";
+import { generateIds } from 'shared/utils/generateIds';
+
+import { InputParameter, Parameter } from './domain';
 
 interface ParameterState {
   parameters: Parameter[];
@@ -17,15 +18,15 @@ export const useParameterModel = create(
       selectedParameter: null,
       loadParameters: (parameters: InputParameter[]) => {
         const parametersWithId = generateIds<InputParameter>(
-          parameters
+          parameters,
         ) as Parameter[];
         set({ parameters: parametersWithId });
         return parametersWithId;
       },
     }),
     {
-      name: "parameter-storage",
+      name: 'parameter-storage',
       storage: createJSONStorage(() => localStorage),
-    }
-  )
+    },
+  ),
 );

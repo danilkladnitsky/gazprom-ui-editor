@@ -14,4 +14,4 @@ export type ComponentTree = {
   items?: ComponentTree[];
 };
 
-export type GuiMode = "edit" | "drag-and-drop";
+export type GuiMode = 'edit' | 'drag-and-drop';

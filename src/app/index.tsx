@@ -6,10 +6,9 @@ import { GlobalStyles } from '@mui/material';
 import { ThemeProvider } from '@mui/system';
 import { SnackbarProvider } from 'notistack';
 import { useAppStore } from 'store/appStore';
+import { appTheme, themeFonts } from 'ui/themes/AppTheme';
 import { ComponentSettings, ComponentsPanel, Configuration } from 'widgets';
 import { AppHeader } from 'widgets/AppHeader';
-
-import { appTheme, themeFonts } from 'ui/themes/AppTheme';
 
 import styles from './styles.module.scss';
 

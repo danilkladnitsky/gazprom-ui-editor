@@ -1,38 +1,38 @@
 [
   {
-    "code": "element",
-    "name": "Параметр 1 (NUMBER)",
-    "type": "NUMBER",
-    "id": 0
+    'code': 'element',
+    'name': 'Параметр 1 (NUMBER)',
+    'type': 'NUMBER',
+    'id': 0,
   },
   {
-    "code": "element",
-    "name": "Параметр 2 (STRING)",
-    "type": "STRING",
-    "id": 1
+    'code': 'element',
+    'name': 'Параметр 2 (STRING)',
+    'type': 'STRING',
+    'id': 1,
   },
   {
-    "code": "element",
-    "name": "Параметр 3 (BOOLEAN)",
-    "type": "BOOLEAN",
-    "id": 3
+    'code': 'element',
+    'name': 'Параметр 3 (BOOLEAN)',
+    'type': 'BOOLEAN',
+    'id': 3,
   },
   {
-    "code": "element",
-    "name": "Параметр 4 (INTEGER)",
-    "type": "INTEGER",
-    "id": 4
+    'code': 'element',
+    'name': 'Параметр 4 (INTEGER)',
+    'type': 'INTEGER',
+    'id': 4,
   },
   {
-    "code": "element",
-    "name": "Параметр 5 (FILE)",
-    "type": "FILE",
-    "id": 5
+    'code': 'element',
+    'name': 'Параметр 5 (FILE)',
+    'type': 'FILE',
+    'id': 5,
   },
   {
-    "code": "element",
-    "name": "Параметр 6 (REF)",
-    "type": "REF",
-    "id": 5
-  }
+    'code': 'element',
+    'name': 'Параметр 6 (REF)',
+    'type': 'REF',
+    'id': 5,
+  },
 ]

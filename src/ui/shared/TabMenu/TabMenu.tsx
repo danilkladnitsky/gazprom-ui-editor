@@ -1,8 +1,7 @@
-import React from "react";
+import React from 'react';
+import { Tab, Tabs } from '@mui/material';
 
-import { Tab, Tabs } from "@mui/material";
-
-import styles from "./styles.module.scss";
+import styles from './styles.module.scss';
 
 export type TabItem<V> = {
   value: V;

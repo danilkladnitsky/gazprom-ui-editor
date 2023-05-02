@@ -1,9 +1,10 @@
-import { Parameter } from "entities/parameter/domain";
-import { generateEntityId } from "shared/utils/generateIds";
-import { create } from "zustand";
-import { createJSONStorage, persist } from "zustand/middleware";
+import { create } from 'zustand';
+import { createJSONStorage, persist } from 'zustand/middleware';
+import { Parameter } from 'entities/parameter/domain';
 
-import { Component, ComponentForm, DatasourceComponent } from "./domain";
+import { generateEntityId } from 'shared/utils/generateIds';
+
+import { Component, ComponentForm, DatasourceComponent } from './domain';
 
 interface ComponentState {
   selectedComponent: Component | null;
@@ -35,11 +36,11 @@ export const useComponentModel = create(
       updateSelectedComponent: (selectedComponent: Component) =>
         set((state) => {
           const components = state.components.map((c) =>
-            c.id === selectedComponent.id ? selectedComponent : c
+            c.id === selectedComponent.id ? selectedComponent : c,
           );
 
           const currentComponent = components.find(
-            (c) => c.id === selectedComponent.id
+            (c) => c.id === selectedComponent.id,
           );
 
           const updatedComponent = {
@@ -53,16 +54,16 @@ export const useComponentModel = create(
         const components: DatasourceComponent[] = parameters.map((param) => ({
           dataSource: param,
           id: generateEntityId(),
-          code: "element",
+          code: 'element',
           name: `Компонент ${param.type}`,
           timestamp: Date.now(),
         }));
 
         // create root
         const rootComponent: ComponentForm = {
-          code: "form",
+          code: 'form',
           id: generateEntityId(),
-          name: "Форма",
+          name: 'Форма',
           timestamp: Date.now(),
         };
 
@@ -74,7 +75,7 @@ export const useComponentModel = create(
       },
       createComponent: (
         code: ComponentCode,
-        fields?: Omit<Component, "id">
+        fields?: Omit<Component, 'id'>,
       ): EntityId => {
         const newComponent = {
           code,
@@ -90,7 +91,7 @@ export const useComponentModel = create(
         set((state) => {
           const firstComponent = state.components.find((c) => c.id === firstId);
           const secondComponent = state.components.find(
-            (c) => c.id === secondId
+            (c) => c.id === secondId,
           );
           const components = state.components.map((c) => {
             if (c.id === firstId) {
@@ -122,8 +123,8 @@ export const useComponentModel = create(
       },
     }),
     {
-      name: "component-storage",
+      name: 'component-storage',
       storage: createJSONStorage(() => localStorage),
-    }
-  )
+    },
+  ),
 );

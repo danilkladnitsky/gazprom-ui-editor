@@ -1,4 +1,4 @@
-export type DragAndDropAlias = "app-form" | "form-list" | "component-list";
+export type DragAndDropAlias = 'app-form' | 'form-list' | 'component-list';
 
 export type DragItem<Item> = {
   alias: DragAndDropAlias;

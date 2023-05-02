@@ -1,8 +1,8 @@
-import { SchemaTree } from "./domain";
+import { SchemaTree } from './domain';
 
 export const findComponentById = (
   id: EntityId,
-  tree: SchemaTree
+  tree: SchemaTree,
 ): SchemaTree | false => {
   if (id === tree.id) {
     return tree;
