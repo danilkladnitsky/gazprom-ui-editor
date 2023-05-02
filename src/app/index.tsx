@@ -9,7 +9,7 @@ import { useAppStore } from 'store/appStore';
 import { ComponentSettings, ComponentsPanel, Configuration } from 'widgets';
 import { AppHeader } from 'widgets/AppHeader';
 
-import { appTheme, themeFonts } from 'shared/themes/AppTheme';
+import { appTheme, themeFonts } from 'ui/themes/AppTheme';
 
 import styles from './styles.module.scss';
 

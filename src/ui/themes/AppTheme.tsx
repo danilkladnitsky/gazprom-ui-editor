@@ -13,11 +13,6 @@ export const appTheme = createTheme({
         disableRipple: true,
       },
     },
-    MuiStack: {
-      defaultProps: {
-        useFlexGap: true,
-      },
-    },
   },
 });
 
